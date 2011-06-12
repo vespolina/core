@@ -19,6 +19,43 @@ class CartItem implements CartItemInterface
 
     public function __construct(CartInterface $cart)
     {
+        $this->attributes = array();
         $this->cart = $cart;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttribute($name)
+    {
+
+        if( array_key_exists($name, $this->attributes) )
+        {
+
+            return $this->attributes[$name];
+        }
+
+        return null;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttributes()
+    {
+
+        return $this->attributes;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function setAttribute($name, $value)
+    {
+
+        $this->attributes[$name] = $value;
+    }
+
 }

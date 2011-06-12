@@ -13,13 +13,15 @@ namespace Vespolina\CartBundle\Model;
 class Cart implements CartInterface
 {
     protected $items;
+    protected $name;
 
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($name)
     {
         $this->items = array();
+        $this->name = $name;
     }
 
     /**
@@ -28,6 +30,37 @@ class Cart implements CartInterface
     public function addItem(CartItemInterface $cartItem)
     {
         $this->items[] = $cartItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getId()
+    {
+
+        return $this->id;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getItem($index)
+    {
+          if( $index <= count($this->items) )
+        {
+
+            return $this->items[$index-1];
+        }
+    }
+          
+
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+
+        return $this->name;
     }
 
     /**

@@ -31,6 +31,29 @@ class CartCreateTest extends WebTestCase
 
         $cart = $cartService->createCart();
         
+        $cartItem1 = $cartService->createItem($cart);
+        $cartItem1->setAttribute('quantity', 10);
+
+        $product1 = array('id' => '123', '
+                        name' => 'dummy instance of a product');
+
+        $cartItem1->setAttribute('product', $product1);
+        $cartItem1->setAttribute('product.options.color', 'red');
+
+
+        $cartItem2 = $cartService->createItem($cart);
+        $cartItem2->setAttribute('quantity', 2);
+
+        $product2 = array('id' => '123', '
+                        name' => 'dummy instance of a product');
+
+        $cartItem2->setAttribute('product', $product2);
+
+        $testCartItem1 = $cart->getItem(1);
+
+        $this->assertEquals($testCartItem1->getAttribute('product.options.color'), 'red');
+
+
     }
 
 }

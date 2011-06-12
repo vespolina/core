@@ -13,5 +13,7 @@ use Vespolina\CartBundle\Model\CartInterface;
 
 interface CartItemInterface
 {
-
+    function getAttribute($name);
+    function getAttributes();
+    function setAttribute($name, $value);
 }

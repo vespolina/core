@@ -24,18 +24,32 @@ class CartService extends ContainerAware implements CartServiceInterface
         $this->carts = array();
     }
 
+    public function createItem(CartInterface $cart)
+    {
+        $itemBaseClass = 'Vespolina\CartBundle\Model\CartItem';
+
+        if ($itemBaseClass ) {
+
+            $cartItem = new $itemBaseClass($cart);
+            $cart->addItem($cartItem);
+
+            return $cartItem;
+        }
+    }
+
     /**
      * @inheritdoc
      */
     public function createCart($name = 'default')
     {
         $cartClass = 'Vespolina\CartBundle\Model\Cart';
-        $cart = new $cartClass();
+        $cart = new $cartClass($name);
         $this->carts[$name] = $cart;
         
         return $cart;
     }
 
+    
     /**
      * @inheritdoc
      */
