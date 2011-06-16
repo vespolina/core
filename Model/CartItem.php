@@ -9,53 +9,123 @@
 
 namespace Vespolina\CartBundle\Model;
 
+use \DateTime;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 
 class CartItem implements CartItemInterface
 {
     protected $cart;
+    protected $createdAt;
+    protected $merchandise;
+    protected $quantity;
     protected $status;
+    protected $updatedAt;
 
     public function __construct(CartInterface $cart)
     {
-        $this->attributes = array();
         $this->cart = $cart;
+        $this->options = array();
+       }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     /**
      * @inheritdoc
      */
-    public function getAttribute($name)
+    public function getMerchandise()
+    {
+        return $this->merchandise;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getOption($name)
     {
 
-        if( array_key_exists($name, $this->attributes) )
+        if( array_key_exists($name, $this->options) )
         {
 
-            return $this->attributes[$name];
+            return $this->options[$name];
         }
 
         return null;
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function getOptions()
+    {
 
+        return $this->options;
+    }
 
     /**
      * @inheritdoc
      */
-    public function getAttributes()
+    public function getQuantity()
     {
-
-        return $this->attributes;
+        return $this->quantity;
     }
-
 
     /**
      * @inheritdoc
      */
-    public function setAttribute($name, $value)
+    public function getUpdatedAt()
     {
-
-        $this->attributes[$name] = $value;
+        return $this->updatedAt;
     }
 
+    /**
+     * @inheritdoc
+     */
+    function setCreatedAt(DateTime $createdAt)
+    {
+
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    function setMerchandise($merchandise)
+    {
+
+        $this->merchandise = $merchandise;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setOption($name, $value)
+    {
+
+        $this->options[$name] = $value;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setQuantity($quantity)
+    {
+
+        $this->$quantity = $quantity;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    function setUpdatedAt(DateTime $updatedAt)
+    {
+
+        $this->updatedAt = $updatedAt;
+    }
 }

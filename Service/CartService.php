@@ -9,6 +9,7 @@
 
 namespace Vespolina\CartBundle\Service;
 
+use \DateTime;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -24,13 +25,19 @@ class CartService extends ContainerAware implements CartServiceInterface
         $this->carts = array();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function createItem(CartInterface $cart)
     {
         $itemBaseClass = 'Vespolina\CartBundle\Model\CartItem';
 
-        if ($itemBaseClass ) {
+        if ($itemBaseClass )
+        {
 
             $cartItem = new $itemBaseClass($cart);
+
+            $cartItem->setCreatedAt(new DateTime());
             $cart->addItem($cartItem);
 
             return $cartItem;
@@ -43,10 +50,17 @@ class CartService extends ContainerAware implements CartServiceInterface
     public function createCart($name = 'default')
     {
         $cartClass = 'Vespolina\CartBundle\Model\Cart';
-        $cart = new $cartClass($name);
-        $this->carts[$name] = $cart;
+
+        if ($cartClass )
+        {
+
+            $cart = new $cartClass($name);
+
+            $cart->setCreatedAt(new DateTime());
+            $this->carts[$name] = $cart;
         
-        return $cart;
+            return $cart;
+        }
     }
 
     

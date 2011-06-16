@@ -9,6 +9,7 @@
 
 namespace Vespolina\CartBundle\Model;
 
+use \DateTime;
 use Vespolina\CartBundle\Model\CartInterface;
 
 interface CartInterface
@@ -23,6 +24,11 @@ interface CartInterface
     function addItem(CartItemInterface $cartItem);
 
     /**
+     * Get the date when this cart was created
+     */
+    function getCreatedAt();
+
+    /**
      * Retrieve the uniquely identifying id for this cart
      */
     function getId();
@@ -33,15 +39,20 @@ interface CartInterface
     function getItem($index);
 
     /**
-     * Get name of the cart (useful in multi-cart environments)
-     */
-    function getName();
-
-    /**
      * Retrieve cart items
      *
      * @abstract
      * @return array of CartItemInterface compatible instances
      */
     function getItems();
+    
+    /**
+     * Get name of the cart (useful in multi-cart environments)
+     */
+    function getName();
+
+    /**
+     * Get the date when this cart was modified
+     */
+    function getUpdatedAt();
 }

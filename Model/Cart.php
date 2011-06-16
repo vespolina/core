@@ -9,12 +9,16 @@
 
 namespace Vespolina\CartBundle\Model;
 
+use \DateTime;
 
 class Cart implements CartInterface
 {
+    protected $createdAt;
     protected $items;
     protected $name;
-
+    protected $owner;
+    protected $updatedAt;
+    
     /**
      * Constructor
      */
@@ -30,6 +34,15 @@ class Cart implements CartInterface
     public function addItem(CartItemInterface $cartItem)
     {
         $this->items[] = $cartItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCreatedAt()
+    {
+
+        return $this->createdAt;
     }
 
     /**
@@ -53,7 +66,14 @@ class Cart implements CartInterface
         }
     }
           
-
+    /**
+     * @inheritdoc
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+    
     /**
      * @inheritdoc
      */
@@ -66,9 +86,43 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
-    public function getItems()
+    public function getOwner()
     {
-        return $this->items;
+
+        return $this->owner;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUpdatedAt()
+    {
+        $this->updatedAt = $this->updatedAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    function setCreatedAt(DateTime $createdAt)
+    {
+
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function setUpdatedAt(DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
 }

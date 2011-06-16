@@ -30,28 +30,32 @@ class CartCreateTest extends WebTestCase
         $cartService = $this->getKernel()->getContainer()->get('vespolina.cart');
 
         $cart = $cartService->createCart();
+        $cart->setOwner(array('name' => 'steve jobs'));
         
         $cartItem1 = $cartService->createItem($cart);
-        $cartItem1->setAttribute('quantity', 10);
+        $cartItem1->setQuantity(10);
 
-        $product1 = array('id' => '123', '
-                        name' => 'dummy instance of a product');
+        $merchandise1 = array('id' => '123', '
+                        name' => 'dummy instance of a product merchandise');
 
-        $cartItem1->setAttribute('product', $product1);
-        $cartItem1->setAttribute('product.options.color', 'red');
+        $cartItem1->setOption('color', 'red');
+        $cartItem1->setMerchandise($merchandise1);
 
 
         $cartItem2 = $cartService->createItem($cart);
-        $cartItem2->setAttribute('quantity', 2);
+        $cartItem2->setQuantity(2);
 
-        $product2 = array('id' => '123', '
-                        name' => 'dummy instance of a product');
+        $merchandise2 = array('id' => '123', '
+                        name' => 'dummy instance of a product merchandise');
 
-        $cartItem2->setAttribute('product', $product2);
+        $cartItem2->setMerchandise($merchandise2);
 
         $testCartItem1 = $cart->getItem(1);
 
-        $this->assertEquals($testCartItem1->getAttribute('product.options.color'), 'red');
+        $this->assertEquals($testCartItem1->getOption('color'), 'red');
+
+        $cartOwner = $cart->getOwner();
+        $this->assertEquals($cartOwner['name'], 'steve jobs');
 
 
     }
