@@ -2,16 +2,19 @@
 /**
  * (c) Vespolina Project http://www.vespolina-project.org
  *
- * (c) Daniel Kucharski <daniel@xerias.be>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
 namespace Vespolina\CartBundle\Model;
 
-use \DateTime;
 use Vespolina\CartBundle\Model\CartInterface;
 
+/**
+ * CartInterface is a generic interface for shopping cart
+ *
+ * @author Daniel Kucharski <daniel@xerias.be>
+ */
 interface CartInterface
 {
     /**
@@ -22,11 +25,6 @@ interface CartInterface
      * @return void
      */
     function addItem(CartItemInterface $cartItem);
-
-    /**
-     * Get the date when this cart was created
-     */
-    function getCreatedAt();
 
     /**
      * Retrieve the uniquely identifying id for this cart
@@ -52,7 +50,10 @@ interface CartInterface
     function getName();
 
     /**
-     * Get the date when this cart was modified
+     * Get cart owner
+     *
+     * @abstract
+     * @return void
      */
-    function getUpdatedAt();
+    function getOwner();
 }

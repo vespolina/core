@@ -2,88 +2,87 @@
 /**
  * (c) Vespolina Project http://www.vespolina-project.org
  *
- * (c) Daniel Kucharski <daniel@xerias.be>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
- */
+ */ 
  
 namespace Vespolina\CartBundle\Model;
 
-use \DateTime;
 use Vespolina\CartBundle\Model\CartInterface;
+use Vespolina\MerchandiseBundle\Model\MerchandiseInterface;
 
+/**
+ * CartItemInterface is a generic interface for shopping cart item
+ *
+ * @author Daniel Kucharski <daniel@xerias.be>
+ */
 interface CartItemInterface
 {
-    /**
-     * Get the date when this item was created
-     */
-    function getCreatedAt();
 
     /**
-     * Get the merchandise instance
+     * @abstract
+     *
+     * @return MerchandiseInterface merchandise
      */
     function getMerchandise();
 
     /**
-     * Get cart item option for a given name
+     * Get all merchandise options
      *
      * @abstract
-     * @param  $name
-     * @return string
+     * @return void
      */
-    function getOption($name);
+    function getMerchandiseOptions();
 
     /**
-     * Retrieve all options
+     * Get the cart status for this item
+     *
      * @abstract
-     * @return array()
+     * @return void
      */
-    function getOptions();
+    function getStatus();
 
     /**
-     * Get quantity
+     * Get the quantity
      *
      * @abstract
-     * @return integer
-     *
+     * @return void
      */
     function getQuantity();
 
     /**
-     * Get the date when this item was modified
-     */
-    function getUpdatedAt();
-
-    /**
-     * Set the date this item was created
-     */
-    function setCreatedAt(DateTime $createdAt);
-
-    /**
-     * Set the merchandise instance
-     */
-    function setMerchandise($merchandise);
-    
-    /**
-     * Set the date this item has been modified
-     */
-    function setUpdatedAt(DateTime $updatedAt);
-
-    /**
-     * Set a cart option by a given name and value
+     * Set the referenced merchandise
      *
      * @abstract
-     * @param  $name
-     * @param  $value
+     * @param $merchandise
      * @return void
      */
-    function setOption($name, $value);
+    function setMerchandise($merchandise);
 
     /**
-     * Set quantity
-     * 
+     * Set a merchandise option
+     *
      * @abstract
-     * @param  $quantity
+     * @param $name
+     * @param $value
+     * @return void
+     */
+    function setMerchandiseOption($name, $value);
+
+    /**
+     * Set the status of this item
+     *
+     * @abstract
+     * @param $status
+     * @return void
+     */
+    function setStatus($status);
+
+    /**
+     * Set the quantity
+     *
+     * @abstract
+     * @param $quantity
      * @return void
      */
     function setQuantity($quantity);

@@ -2,38 +2,32 @@
 /**
  * (c) Vespolina Project http://www.vespolina-project.org
  *
- * (c) Daniel Kucharski <daniel@xerias.be>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
 namespace Vespolina\CartBundle\Model;
 
-use \DateTime;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
-
+ 
+/**
+ * CartItem implements a basic cart item implementation
+ *
+ * @author Daniel Kucharski <daniel@xerias.be>
+ */
 class CartItem implements CartItemInterface
 {
     protected $cart;
-    protected $createdAt;
     protected $merchandise;
+    protected $merchandiseOptions;
     protected $quantity;
     protected $status;
-    protected $updatedAt;
 
     public function __construct(CartInterface $cart)
     {
         $this->cart = $cart;
-        $this->options = array();
-       }
-
-    /**
-     * @inheritdoc
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
+        $this->merchandiseOptions = array();
     }
 
     /**
@@ -41,31 +35,39 @@ class CartItem implements CartItemInterface
      */
     public function getMerchandise()
     {
+
         return $this->merchandise;
     }
 
     /**
      * @inheritdoc
      */
-    public function getOption($name)
+    public function getMerchandiseOption($name)
     {
 
-        if( array_key_exists($name, $this->options) )
+        if (array_key_exists($name, $this->merchandiseOptions))
         {
 
-            return $this->options[$name];
+            return $this->merchandiseOptions[$name];
         }
-
-        return null;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function getOptions()
+    public function getMerchandiseOptions()
     {
 
-        return $this->options;
+        return $this->merchandiseOptions;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getStatus()
+    {
+
+        return $this->status;
     }
 
     /**
@@ -73,30 +75,14 @@ class CartItem implements CartItemInterface
      */
     public function getQuantity()
     {
+
         return $this->quantity;
     }
 
     /**
      * @inheritdoc
      */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    function setCreatedAt(DateTime $createdAt)
-    {
-
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    function setMerchandise($merchandise)
+    public function setMerchandise($merchandise)
     {
 
         $this->merchandise = $merchandise;
@@ -105,10 +91,10 @@ class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    public function setOption($name, $value)
+    public function setMerchandiseOption($name, $value)
     {
 
-        $this->options[$name] = $value;
+        $this->merchandiseOptions[$name] = $value;
     }
 
     /**
@@ -117,15 +103,16 @@ class CartItem implements CartItemInterface
     public function setQuantity($quantity)
     {
 
-        $this->$quantity = $quantity;
+        $this->quantity = $quantity;
     }
-    
+
     /**
      * @inheritdoc
      */
-    function setUpdatedAt(DateTime $updatedAt)
+    public function setStatus($status)
     {
 
-        $this->updatedAt = $updatedAt;
+        $this->status = $status;
     }
+
 }

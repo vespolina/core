@@ -5,6 +5,8 @@ namespace Vespolina\CartBundle\Tests\Service;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Vespolina\CartBundle\Model\Cart;
 use Vespolina\CartBundle\Model\CartItem;
+use Vespolina\MerchandiseBundle\Model\Merchandise;
+
 
 class CartCreateTest extends WebTestCase
 {
@@ -35,24 +37,21 @@ class CartCreateTest extends WebTestCase
         $cartItem1 = $cartService->createItem($cart);
         $cartItem1->setQuantity(10);
 
-        $merchandise1 = array('id' => '123', '
-                        name' => 'dummy instance of a product merchandise');
-
-        $cartItem1->setOption('color', 'red');
+        $merchandise1 = new Merchandise();
+        $cartItem1->setMerchandiseOption('color', 'red');
         $cartItem1->setMerchandise($merchandise1);
 
 
         $cartItem2 = $cartService->createItem($cart);
         $cartItem2->setQuantity(2);
 
-        $merchandise2 = array('id' => '123', '
-                        name' => 'dummy instance of a product merchandise');
+        $merchandise2 = new Merchandise();
 
         $cartItem2->setMerchandise($merchandise2);
 
         $testCartItem1 = $cart->getItem(1);
 
-        $this->assertEquals($testCartItem1->getOption('color'), 'red');
+        $this->assertEquals($testCartItem1->getMerchandiseOption('color'), 'red');
 
         $cartOwner = $cart->getOwner();
         $this->assertEquals($cartOwner['name'], 'steve jobs');

@@ -2,23 +2,24 @@
 /**
  * (c) Vespolina Project http://www.vespolina-project.org
  *
- * (c) Daniel Kucharski <daniel@xerias.be>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
 namespace Vespolina\CartBundle\Model;
 
-use \DateTime;
-
+/** 
+ * Cart implements a basic cart implementation
+ *
+ * @author Daniel Kucharski <daniel@xerias.be>
+ */
 class Cart implements CartInterface
 {
-    protected $createdAt;
+
     protected $items;
     protected $name;
     protected $owner;
-    protected $updatedAt;
-    
+
     /**
      * Constructor
      */
@@ -39,15 +40,6 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
-    public function getCreatedAt()
-    {
-
-        return $this->createdAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getId()
     {
 
@@ -59,21 +51,13 @@ class Cart implements CartInterface
      */
     public function getItem($index)
     {
-          if( $index <= count($this->items) )
+        if ($index <= count($this->items))
         {
 
             return $this->items[$index-1];
         }
     }
-          
-    /**
-     * @inheritdoc
-     */
-    public function getItems()
-    {
-        return $this->items;
-    }
-    
+
     /**
      * @inheritdoc
      */
@@ -81,6 +65,15 @@ class Cart implements CartInterface
     {
 
         return $this->name;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getItems()
+    {
+
+        return $this->items;
     }
 
     /**
@@ -95,34 +88,9 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
-    public function getUpdatedAt()
-    {
-        $this->updatedAt = $this->updatedAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    function setCreatedAt(DateTime $createdAt)
-    {
-
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function setOwner($owner)
     {
+
         $this->owner = $owner;
     }
-    
-    /**
-     * @inheritdoc
-     */
-    public function setUpdatedAt(DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    }
-
 }
