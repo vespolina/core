@@ -2,18 +2,23 @@
 /**
  * (c) Vespolina Project http://www.vespolina-project.org
  *
- * (c) Daniel Kucharski <daniel@xerias.be>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
 namespace Vespolina\CartBundle\Model;
 
-
+/** 
+ * Cart implements a basic cart implementation
+ *
+ * @author Daniel Kucharski <daniel@xerias.be>
+ */
 class Cart implements CartInterface
 {
+
     protected $items;
     protected $name;
+    protected $owner;
 
     /**
      * Constructor
@@ -46,13 +51,12 @@ class Cart implements CartInterface
      */
     public function getItem($index)
     {
-          if( $index <= count($this->items) )
+        if ($index <= count($this->items))
         {
 
             return $this->items[$index-1];
         }
     }
-          
 
     /**
      * @inheritdoc
@@ -68,7 +72,25 @@ class Cart implements CartInterface
      */
     public function getItems()
     {
+
         return $this->items;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getOwner()
+    {
+
+        return $this->owner;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setOwner($owner)
+    {
+
+        $this->owner = $owner;
+    }
 }

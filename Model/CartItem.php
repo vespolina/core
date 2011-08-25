@@ -2,7 +2,6 @@
 /**
  * (c) Vespolina Project http://www.vespolina-project.org
  *
- * (c) Daniel Kucharski <daniel@xerias.be>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -11,51 +10,109 @@ namespace Vespolina\CartBundle\Model;
 
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
-
+ 
+/**
+ * CartItem implements a basic cart item implementation
+ *
+ * @author Daniel Kucharski <daniel@xerias.be>
+ */
 class CartItem implements CartItemInterface
 {
     protected $cart;
+    protected $merchandise;
+    protected $merchandiseOptions;
+    protected $quantity;
     protected $status;
 
     public function __construct(CartInterface $cart)
     {
-        $this->attributes = array();
         $this->cart = $cart;
+        $this->merchandiseOptions = array();
     }
 
     /**
      * @inheritdoc
      */
-    public function getAttribute($name)
+    public function getMerchandise()
     {
 
-        if( array_key_exists($name, $this->attributes) )
+        return $this->merchandise;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getMerchandiseOption($name)
+    {
+
+        if (array_key_exists($name, $this->merchandiseOptions))
         {
 
-            return $this->attributes[$name];
+            return $this->merchandiseOptions[$name];
         }
-
-        return null;
     }
-
 
     /**
      * @inheritdoc
      */
-    public function getAttributes()
+    public function getMerchandiseOptions()
     {
 
-        return $this->attributes;
+        return $this->merchandiseOptions;
     }
-
 
     /**
      * @inheritdoc
      */
-    public function setAttribute($name, $value)
+    public function getStatus()
     {
 
-        $this->attributes[$name] = $value;
+        return $this->status;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getQuantity()
+    {
+
+        return $this->quantity;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setMerchandise($merchandise)
+    {
+
+        $this->merchandise = $merchandise;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setMerchandiseOption($name, $value)
+    {
+
+        $this->merchandiseOptions[$name] = $value;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setQuantity($quantity)
+    {
+
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setStatus($status)
+    {
+
+        $this->status = $status;
     }
 
 }

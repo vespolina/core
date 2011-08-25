@@ -5,6 +5,8 @@ namespace Vespolina\CartBundle\Tests\Service;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Vespolina\CartBundle\Model\Cart;
 use Vespolina\CartBundle\Model\CartItem;
+use Vespolina\MerchandiseBundle\Model\Merchandise;
+
 
 class CartCreateTest extends WebTestCase
 {
@@ -17,12 +19,12 @@ class CartCreateTest extends WebTestCase
 
     public function getKernel(array $options = array())
     {
-        if (!$this->kernel) {
-            $this->kernel = $this->createKernel($options);
-            $this->kernel->boot();
+        if (!self::$kernel) {
+            self::$kernel = $this->createKernel($options);
+            self::$kernel->boot();
         }
 
-        return $this->kernel;
+        return self::$kernel;
     }
 
     public function testCreateCart()
@@ -30,28 +32,29 @@ class CartCreateTest extends WebTestCase
         $cartService = $this->getKernel()->getContainer()->get('vespolina.cart');
 
         $cart = $cartService->createCart();
+        $cart->setOwner(array('name' => 'steve jobs'));
         
         $cartItem1 = $cartService->createItem($cart);
-        $cartItem1->setAttribute('quantity', 10);
+        $cartItem1->setQuantity(10);
 
-        $product1 = array('id' => '123', '
-                        name' => 'dummy instance of a product');
-
-        $cartItem1->setAttribute('product', $product1);
-        $cartItem1->setAttribute('product.options.color', 'red');
+        $merchandise1 = new Merchandise();
+        $cartItem1->setMerchandiseOption('color', 'red');
+        $cartItem1->setMerchandise($merchandise1);
 
 
         $cartItem2 = $cartService->createItem($cart);
-        $cartItem2->setAttribute('quantity', 2);
+        $cartItem2->setQuantity(2);
 
-        $product2 = array('id' => '123', '
-                        name' => 'dummy instance of a product');
+        $merchandise2 = new Merchandise();
 
-        $cartItem2->setAttribute('product', $product2);
+        $cartItem2->setMerchandise($merchandise2);
 
         $testCartItem1 = $cart->getItem(1);
 
-        $this->assertEquals($testCartItem1->getAttribute('product.options.color'), 'red');
+        $this->assertEquals($testCartItem1->getMerchandiseOption('color'), 'red');
+
+        $cartOwner = $cart->getOwner();
+        $this->assertEquals($cartOwner['name'], 'steve jobs');
 
 
     }
