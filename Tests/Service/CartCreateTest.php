@@ -19,12 +19,12 @@ class CartCreateTest extends WebTestCase
 
     public function getKernel(array $options = array())
     {
-        if (!$this->kernel) {
-            $this->kernel = $this->createKernel($options);
-            $this->kernel->boot();
+        if (!self::$kernel) {
+            self::$kernel = $this->createKernel($options);
+            self::$kernel->boot();
         }
 
-        return $this->kernel;
+        return self::$kernel;
     }
 
     public function testCreateCart()
