@@ -21,7 +21,7 @@ class VespolinaCartExtension extends Extension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        foreach (array('service') as $basename) {
+        foreach (array('mongodb') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
     }

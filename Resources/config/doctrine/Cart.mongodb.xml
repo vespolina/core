@@ -4,21 +4,7 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <document name="Vespolina\OrderBundle\Document\SalesOrder">
-        <field name="id" id="true" />
-        <embed-many fieldName="items"
-                    field="items"
-                    targetDocument="Vespolina\OrderBundle\Document\SalesOrderItem"
-                    strategy="set"/>
-        <embed-one fieldName="fulfillmentAgreement"
-                    field="fulfillmentAgreement"
-                    targetDocument="Vespolina\OrderBundle\Document\FulfillmentAgreement"
-                   />
-        <embed-one fieldName="paymentAgreement"
-                            field="paymentAgreement"
-                            targetDocument="Vespolina\OrderBundle\Document\PaymentAgreement"
-                           />
-
+    <document name="Vespolina\CartBundle\Document\Cart" collection="vespolina_carts">
     </document>
 
 </doctrine-mongo-mapping>

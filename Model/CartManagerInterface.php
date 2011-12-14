@@ -7,11 +7,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\CartBundle\Service;
+namespace Vespolina\CartBundle\Model;
 
 use Vespolina\CartBundle\Model\CartInterface;
 
-interface CartServiceInterface
+interface CartManagerInterface
 {
     /**
      * Create a cart instance

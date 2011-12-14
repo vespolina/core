@@ -5,13 +5,13 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\OrderBundle\Document;
+namespace Vespolina\CartBundle\Document;
 
-use Vespolina\OrderBundle\Model\SalesOrder as AbstractSalesOrder;
+use Vespolina\CartBundle\Model\Cart as AbstractCart;
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-abstract class BaseSalesOrder extends AbstractSalesOrder
+abstract class BaseCart extends AbstractCart
 {
     protected $id;
 }

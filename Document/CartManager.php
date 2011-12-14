@@ -5,28 +5,28 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\OrderBundle\Document;
+namespace Vespolina\CartBundle\Document;
 
 use Symfony\Component\DependencyInjection\Container;
 
-use Vespolina\OrderBundle\Document\SalesOrder;
-use Vespolina\OrderBundle\Model\SalesOrderInterface;
-use Vespolina\OrderBundle\Model\SalesOrderItemInterface;
-use Vespolina\OrderBundle\Model\SalesOrderManager as BaseSalesOrderManager;
+use Vespolina\CartBundle\Document\Cart;
+use Vespolina\CartBundle\Model\CartInterface;
+use Vespolina\CartBundle\Model\CartItemInterface;
+use Vespolina\CartBundle\Model\CartManager as BaseCartManager;
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-class SalesOrderManager extends BaseSalesOrderManager
+class CartManager extends BaseCartManager
 {
     protected $dm;
     protected $primaryIdentifier;
-    protected $salesOrderRepo;
+    protected $cartRepo;
     
     public function __construct(Container $container)
     {
         $this->dm = $container->get('doctrine.odm.mongodb.default_document_manager');
-        $this->salesOrderRepo = $this->dm->getRepository('Vespolina\OrderBundle\Document\SalesOrder'); // TODO make configurable
+        $this->salesOrderRepo = $this->dm->getRepository('Vespolina\CartBundle\Document\Cart'); // TODO make configurable
 
         parent::__construct($container);
     }
@@ -34,27 +34,26 @@ class SalesOrderManager extends BaseSalesOrderManager
     /**
      * @inheritdoc
      */
-    public function createSalesOrder($salesOrderType = 'default')
+    public function createCart($cartType = 'default')
     {
         // TODO: this will be using factories to allow for a number of different types of SalesOrder classes
-        $salesOrder = new SalesOrder();
-        $this->init($salesOrder);
+        $cart = new Cart();
+        $this->init($cart);
 
-        return $salesOrder;
+        return $cart;
     }
 
+    public function createItem(CartInterface $cart)
+    {
+        $itemBaseClass = 'Vespolina\CartBundle\Document\CartItem';
 
-    /**
-     * @inheritdoc
-     */
-    public function createItem(SalesOrderInterface $salesOrder) {
+        if ($itemBaseClass ) {
 
-       $salesOrderItem = new SalesOrderItem();
-       $this->initItem($salesOrderItem);
+            $cartItem = new $itemBaseClass($cart);
+            $cart->addItem($cartItem);
 
-       $salesOrder->addItem($salesOrderItem);
-
-       return $salesOrderItem;
+            return $cartItem;
+        }
     }
 
 
@@ -63,22 +62,22 @@ class SalesOrderManager extends BaseSalesOrderManager
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        return $this->salesOrderRepo->findBy($criteria, $orderBy, $limit, $offset);
+        return $this->cartRepo->findBy($criteria, $orderBy, $limit, $offset);
     }
 
     /**
      * @inheritdoc
      */
-    public function findSalesOrderById($id)
+    public function findCartById($id)
     {
 
-        return $this->salesOrderRepo->find($id);
+        return $this->cartRepo->find($id);
     }
 
     /**
      * @inheritdoc
      */
-    public function findSalesOrderByIdentifier($name, $code)
+    public function findCartByIdentifier($name, $code)
     {
 
     }
@@ -86,9 +85,9 @@ class SalesOrderManager extends BaseSalesOrderManager
     /**
      * @inheritdoc
      */
-    public function updateSalesOrder(SalesOrderInterface $salesOrder, $andFlush = true)
+    public function updateCart(CartInterface $cart, $andFlush = true)
     {
-        $this->dm->persist($salesOrder);
+        $this->dm->persist($cart);
         if ($andFlush) {
             $this->dm->flush();
         }

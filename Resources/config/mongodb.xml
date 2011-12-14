@@ -5,14 +5,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     
     <parameters>
-        <parameter key="vespolina.cart.class">Vespolina\CartBundle\Model\CartManager</parameter>
+        <parameter key="vespolina.cart.class">Vespolina\CartBundle\Document\CartManager</parameter>
     </parameters>
 
     <services>
-        <service id="vespolina.cart" class="%vespolina.cart.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+        <service id="vespolina.cart_manager" class="%vespolina.cart.class%">
+            <argument type="service" id="service_container" />
         </service>
     </services>
 </container>

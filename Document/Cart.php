@@ -5,13 +5,13 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\OrderBundle\Document;
+namespace Vespolina\CartBundle\Document;
 
-use Vespolina\OrderBundle\Document\BaseSalesOrder;
+use Vespolina\CartBundle\Document\BaseCart;
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-class SalesOrder extends BaseSalesOrder
+class Cart extends BaseCart
 {
     public function __construct()
     {

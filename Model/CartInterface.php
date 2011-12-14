@@ -8,7 +8,10 @@
 
 namespace Vespolina\CartBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Vespolina\CartBundle\Model\CartInterface;
+use Vespolina\ProductBundle\Model\Option\OptionInterface;
 
 /**
  * CartInterface is a generic interface for shopping cart
@@ -25,11 +28,6 @@ interface CartInterface
      * @return void
      */
     function addItem(CartItemInterface $cartItem);
-
-    /**
-     * Retrieve the uniquely identifying id for this cart
-     */
-    function getId();
 
     /**
      * Get cart item for a given index
@@ -56,4 +54,8 @@ interface CartInterface
      * @return void
      */
     function getOwner();
+
+    function getState();
+
+    function setState($state);
 }

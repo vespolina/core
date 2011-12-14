@@ -3,10 +3,6 @@
 namespace Vespolina\CartBundle\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Vespolina\CartBundle\Model\Cart;
-use Vespolina\CartBundle\Model\CartItem;
-//use Vespolina\MerchandiseBundle\Model\Merchandise;
-use Vespolina\ProductBundle\Model\Option\Option;
 
 
 class CartCreateTest extends WebTestCase
@@ -38,19 +34,20 @@ class CartCreateTest extends WebTestCase
         $cartItem1 = $cartManager->createItem($cart);
         $cartItem1->setQuantity(10);
 
-        $product1 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Model\Product');
-
+        $product1 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
         $cartItem1->addOption('color', 'colorRed');
         $cartItem1->addOption('size', 'sizeXl');
 
         $cartItem1->setProduct($product1);
         $cartItem1->setQuantity(3);
+        $cartItem1->setState('init');
 
-        $product2 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Model\Product');
+        $product2 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
 
         $cartItem2 = $cartManager->createItem($cart);
         $cartItem2->setProduct($product2);
         $cartItem2->setQuantity(2);
+        $cartItem1->setState('init');
 
         $testCartItem1 = $cart->getItem(1);
 
@@ -58,6 +55,9 @@ class CartCreateTest extends WebTestCase
         $this->assertEquals($cartOwner['name'], 'steve jobs');
 
 
+        $cart->setState('saved_basket');
+
+        $cartManager->updateCart($cart);
     }
 
 }

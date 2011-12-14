@@ -4,18 +4,18 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <mapped-superclass name="Vespolina\OrderBundle\Document\BaseSalesOrderItem">
+    <mapped-superclass name="Vespolina\CartBundle\Document\BaseCartItem">
 
-        <field name="createdAt" fieldName="createdAt" type="date" />
-        <field name="customerComment" fieldName="customerComment" type="string" />
-        <field name="customerProductReference" fieldName="customerProductReference" type="string" />
-        <field name="itemNumber" fieldName="itemNumber" type="int" />
-        <field name="itemState" fieldName="itemState" type="string" />
+        <field name="product_id" fieldName="productId" type="string" />
 
-        <field name="orderedQuantity" fieldName="orderedQuantity" type="string" />
-        <field name="productName" fieldName="productName" type="string" />
-        <field name="updatedAt" fieldName="updatedAt" type="date" />
-        
+        <field name="state" fieldName="state" type="string" />
+
+        <field name="quantity" fieldName="quantity" type="string" />
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersistCartItem" />
+        </lifecycle-callbacks>
+
     </mapped-superclass>
 
 </doctrine-mongo-mapping>

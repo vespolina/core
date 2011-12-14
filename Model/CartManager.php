@@ -7,15 +7,16 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\CartBundle\Service;
+namespace Vespolina\CartBundle\Model;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 use Vespolina\CartBundle\Model\CartInterface;
-use Vespolina\CartBundle\Service\CartServiceInterface;
+use Vespolina\CartBundle\Model\CartItemInterface;
+use Vespolina\CartBundle\Model\CartManagerInterface;
 
-class CartService extends ContainerAware implements CartServiceInterface
+class CartManager extends ContainerAware implements CartManagerInterface
 {
     protected $carts;
 
@@ -24,18 +25,7 @@ class CartService extends ContainerAware implements CartServiceInterface
         $this->carts = array();
     }
 
-    public function createItem(CartInterface $cart)
-    {
-        $itemBaseClass = 'Vespolina\CartBundle\Model\CartItem';
 
-        if ($itemBaseClass ) {
-
-            $cartItem = new $itemBaseClass($cart);
-            $cart->addItem($cartItem);
-
-            return $cartItem;
-        }
-    }
 
     /**
      * @inheritdoc
@@ -49,6 +39,13 @@ class CartService extends ContainerAware implements CartServiceInterface
         return $cart;
     }
 
+    public function init(CartInterface $cart) {
+
+    }
+
+    public function initItem(CartItemInterface $cartItem) {
+
+    }
     
     /**
      * @inheritdoc

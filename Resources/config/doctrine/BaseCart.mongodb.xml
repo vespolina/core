@@ -4,16 +4,18 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <mapped-superclass name="Vespolina\OrderBundle\Document\BaseSalesOrder" collection="vespolina_sales_orders">
+    <mapped-superclass name="Vespolina\CartBundle\Document\BaseCart" collection="vespolina_carts">
+        <field name="id" id="true" />
 
         <field name="createdAt" fieldName="createdAt" type="date" />
-        <field name="customerId" fieldName="customerId" type="string" />
-        <field name="orderDate" fieldName="orderDate" type="date" />
-        <field name="orderState" fieldName="orderState" type="string" />
-        <field name="salesChannel" fieldName="salesChannel" type="string" />
-        <field name="type" fieldName="type" type="string" />
+        <field name="owner" fieldName="owner" type="string" />
+        <field name="state" fieldName="state" type="string" />
         <field name="updatedAt" fieldName="updatedAt" type="date" />
 
+        <embed-many fieldName="items"
+                    field="items"
+                    targetDocument="Vespolina\CartBundle\Document\CartItem"
+                    strategy="set"/>
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="incrementCreatedAt" />
             <lifecycle-callback type="preUpdate" method="incrementUpdatedAt" />
