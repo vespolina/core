@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mongo-mapping xmlns="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
+                        http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
+
+    <mapped-superclass name="Vespolina\OrderBundle\Document\BaseSalesOrder" collection="vespolina_sales_orders">
+
+        <field name="createdAt" fieldName="createdAt" type="date" />
+        <field name="customerId" fieldName="customerId" type="string" />
+        <field name="orderDate" fieldName="orderDate" type="date" />
+        <field name="orderState" fieldName="orderState" type="string" />
+        <field name="salesChannel" fieldName="salesChannel" type="string" />
+        <field name="type" fieldName="type" type="string" />
+        <field name="updatedAt" fieldName="updatedAt" type="date" />
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="incrementCreatedAt" />
+            <lifecycle-callback type="preUpdate" method="incrementUpdatedAt" />
+        </lifecycle-callbacks>
+
+    </mapped-superclass>
+
+</doctrine-mongo-mapping>
