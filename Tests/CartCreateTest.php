@@ -28,26 +28,32 @@ class CartCreateTest extends WebTestCase
     {
         $cartManager = $this->getKernel()->getContainer()->get('vespolina.cart_manager');
 
+        $product1 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
+        $product2 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
+
+
         $cart = $cartManager->createCart();
+
         $cart->setOwner(array('name' => 'steve jobs'));
+        $cart->setExpiresAt(new \DateTime('now + 2 days'));
+        $cart->setState('unprocessed'); //Cart is under full control of the user
         
-        $cartItem1 = $cartManager->createItem($cart);
+        $cartItem1 = $cartManager->createItem($product1);
         $cartItem1->setQuantity(10);
 
-        $product1 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
         $cartItem1->addOption('color', 'colorRed');
         $cartItem1->addOption('size', 'sizeXl');
 
-        $cartItem1->setProduct($product1);
         $cartItem1->setQuantity(3);
         $cartItem1->setState('init');
 
-        $product2 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
+        $cart->addItem($cartItem1);
 
-        $cartItem2 = $cartManager->createItem($cart);
-        $cartItem2->setProduct($product2);
+        $cartItem2 = $cartManager->createItem($product2);
         $cartItem2->setQuantity(2);
         $cartItem1->setState('init');
+
+        $cart->addItem($cartItem2);
 
         $testCartItem1 = $cart->getItem(1);
 

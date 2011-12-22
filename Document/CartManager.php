@@ -36,21 +36,20 @@ class CartManager extends BaseCartManager
      */
     public function createCart($cartType = 'default')
     {
-        // TODO: this will be using factories to allow for a number of different types of SalesOrder classes
+        // TODO: this will be using factories to allow for a number of different types of Cart classes
         $cart = new Cart();
         $this->init($cart);
 
         return $cart;
     }
 
-    public function createItem(CartInterface $cart)
+    public function createItem($product = null)
     {
         $itemBaseClass = 'Vespolina\CartBundle\Document\CartItem';
 
-        if ($itemBaseClass ) {
+        if ($itemBaseClass) {
 
-            $cartItem = new $itemBaseClass($cart);
-            $cart->addItem($cartItem);
+            $cartItem = new $itemBaseClass($product);
 
             return $cartItem;
         }

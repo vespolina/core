@@ -24,6 +24,14 @@ interface CartItemInterface
     function addOption($type, $value);
 
     /**
+     * Get the cart to which this item belongs
+     *
+     * @abstract
+     *
+     */
+    function getCart();
+
+    /**
      * @abstract
      *
      * @return ProductInterface product
@@ -54,6 +62,13 @@ interface CartItemInterface
      */
     function getQuantity();
 
+    /**
+     * Set the cart to which this item belongs to
+     *
+     * @abstract
+     * @param CartInterface $cart
+     */
+    function setCart(CartInterface $cart);
     /**
      * Set the referenced product
      *

@@ -8,6 +8,7 @@
 
 namespace Vespolina\CartBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 /** 
  * Cart implements a basic cart implementation
  *
@@ -17,6 +18,7 @@ class Cart implements CartInterface
 {
 
     protected $createdAt;
+    protected $expiresAt;
     protected $items;
     protected $name;
     protected $owner;
@@ -28,7 +30,7 @@ class Cart implements CartInterface
      */
     public function __construct($name)
     {
-        $this->items = array();
+        $this->items = new ArrayCollection();
         $this->name = $name;
     }
 
@@ -37,7 +39,28 @@ class Cart implements CartInterface
      */
     public function addItem(CartItemInterface $cartItem)
     {
+
+        $cartItem->setCart($this);
+
         $this->items[] = $cartItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCreatedAt()
+    {
+
+        return $this->createdAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getExpiresAt()
+    {
+
+        return $this->expiresAt;
     }
 
 
@@ -80,6 +103,16 @@ class Cart implements CartInterface
         return $this->owner;
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function getUpdatedAt()
+    {
+
+        return $this->updatedAt;
+    }
+
     /**
      * @inheritdoc
      */
@@ -106,6 +139,16 @@ class Cart implements CartInterface
     public function incrementUpdatedAt()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function setExpiresAt(\DateTime $expiresAt)
+    {
+
+        $this->expiresAt = $expiresAt;
     }
 
     /**

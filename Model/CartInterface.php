@@ -29,6 +29,10 @@ interface CartInterface
      */
     function addItem(CartItemInterface $cartItem);
 
+    function getCreatedAt();
+
+    function getExpiresAt();
+
     /**
      * Get cart item for a given index
      */
@@ -56,6 +60,10 @@ interface CartInterface
     function getOwner();
 
     function getState();
+
+    function getUpdatedAt();
+
+    function setExpiresAt(\DateTime $expiresAt);
 
     function setState($state);
 }

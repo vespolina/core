@@ -8,8 +8,9 @@
         <field name="id" id="true" />
 
         <field name="createdAt" fieldName="createdAt" type="date" />
-        <field name="owner" fieldName="owner" type="string" />
-        <field name="state" fieldName="state" type="string" />
+        <field name="expiresAt" fieldName="expiresAt" type="date" />
+        <field name="owner"     fieldName="owner" type="string" />
+        <field name="state"     fieldName="state" type="string" />
         <field name="updatedAt" fieldName="updatedAt" type="date" />
 
         <embed-many fieldName="items"

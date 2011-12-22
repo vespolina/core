@@ -29,9 +29,10 @@ class CartItem implements CartItemInterface
     protected $quantity;
     protected $state;
 
-    public function __construct(CartInterface $cart)
+    public function __construct($product = null)
     {
-        $this->cart = $cart;
+        $this->product = $product;
+        $this->options = new ArrayCollection();
     }
 
 
@@ -40,14 +41,18 @@ class CartItem implements CartItemInterface
      */
     public function addOption($type, $value)
     {
-        if (!$this->options instanceof Collection) {
-
-            $this->options = new ArrayCollection();
-        }
 
         $this->options[$type] = $value;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getCart()
+    {
+
+        return $this->cart;
+    }
     /**
      * @inheritdoc
      */
@@ -82,6 +87,15 @@ class CartItem implements CartItemInterface
     {
 
         return $this->quantity;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setCart(CartInterface $cart)
+    {
+
+        $this->cart = $cart;
     }
 
     /**
