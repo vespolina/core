@@ -8,6 +8,7 @@
 
 namespace Vespolina\CartBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 /** 
  * Cart implements a basic cart implementation
  *
@@ -16,16 +17,20 @@ namespace Vespolina\CartBundle\Model;
 class Cart implements CartInterface
 {
 
+    protected $createdAt;
+    protected $expiresAt;
     protected $items;
     protected $name;
     protected $owner;
+    protected $state;
+    protected $updatedAt;
 
     /**
      * Constructor
      */
     public function __construct($name)
     {
-        $this->items = array();
+        $this->items = new ArrayCollection();
         $this->name = $name;
     }
 
@@ -34,17 +39,30 @@ class Cart implements CartInterface
      */
     public function addItem(CartItemInterface $cartItem)
     {
+
+        $cartItem->setCart($this);
+
         $this->items[] = $cartItem;
     }
 
     /**
      * @inheritdoc
      */
-    public function getId()
+    public function getCreatedAt()
     {
 
-        return $this->id;
+        return $this->createdAt;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getExpiresAt()
+    {
+
+        return $this->expiresAt;
+    }
+
 
     /**
      * @inheritdoc
@@ -85,6 +103,54 @@ class Cart implements CartInterface
         return $this->owner;
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function getUpdatedAt()
+    {
+
+        return $this->updatedAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getState()
+    {
+
+        return $this->state;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function incrementCreatedAt()
+    {
+        if (null === $this->createdAt) {
+            $this->createdAt = new \DateTime();
+        }
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function incrementUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function setExpiresAt(\DateTime $expiresAt)
+    {
+
+        $this->expiresAt = $expiresAt;
+    }
+
     /**
      * @inheritdoc
      */
@@ -92,5 +158,14 @@ class Cart implements CartInterface
     {
 
         $this->owner = $owner;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setState($state)
+    {
+
+        $this->state = $state;
     }
 }

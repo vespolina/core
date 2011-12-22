@@ -10,6 +10,8 @@ namespace Vespolina\CartBundle\Model;
 
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\MerchandiseBundle\Model\MerchandiseInterface;
+use Vespolina\ProductBundle\Model\Option\OptionGroupInterface;
+use Vespolina\ProductBundle\Model\Option\OptionInterface;
 
 /**
  * CartItemInterface is a generic interface for shopping cart item
@@ -19,28 +21,38 @@ use Vespolina\MerchandiseBundle\Model\MerchandiseInterface;
 interface CartItemInterface
 {
 
+    function addOption($type, $value);
+
+    /**
+     * Get the cart to which this item belongs
+     *
+     * @abstract
+     *
+     */
+    function getCart();
+
     /**
      * @abstract
      *
-     * @return MerchandiseInterface merchandise
+     * @return ProductInterface product
      */
-    function getMerchandise();
+    function getProduct();
 
     /**
-     * Get all merchandise options
+     * Get all options
      *
      * @abstract
      * @return void
      */
-    function getMerchandiseOptions();
+    function getOptions();
 
     /**
-     * Get the cart status for this item
+     * Get the cart state for this item
      *
      * @abstract
      * @return void
      */
-    function getStatus();
+    function getState();
 
     /**
      * Get the quantity
@@ -51,32 +63,30 @@ interface CartItemInterface
     function getQuantity();
 
     /**
-     * Set the referenced merchandise
+     * Set the cart to which this item belongs to
      *
      * @abstract
-     * @param $merchandise
+     * @param CartInterface $cart
+     */
+    function setCart(CartInterface $cart);
+    /**
+     * Set the referenced product
+     *
+     * @abstract
+     * @param $product
      * @return void
      */
-    function setMerchandise($merchandise);
+    function setProduct($product);
+
 
     /**
-     * Set a merchandise option
+     * Set the state of this item
      *
      * @abstract
-     * @param $name
-     * @param $value
+     * @param $state
      * @return void
      */
-    function setMerchandiseOption($name, $value);
-
-    /**
-     * Set the status of this item
-     *
-     * @abstract
-     * @param $status
-     * @return void
-     */
-    function setStatus($status);
+    function setState($state);
 
     /**
      * Set the quantity

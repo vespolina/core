@@ -8,9 +8,13 @@
 
 namespace Vespolina\CartBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
- 
+use Vespolina\ProductBundle\Model\Option\OptionInterface;
+use Vespolina\ProductBundle\Model\Option\OptionGroupInterface;
 /**
  * CartItem implements a basic cart item implementation
  *
@@ -19,55 +23,61 @@ use Vespolina\CartBundle\Model\CartItemInterface;
 class CartItem implements CartItemInterface
 {
     protected $cart;
-    protected $merchandise;
-    protected $merchandiseOptions;
+    protected $options;
+    protected $product;
+    protected $productId;
     protected $quantity;
-    protected $status;
+    protected $state;
 
-    public function __construct(CartInterface $cart)
+    public function __construct($product = null)
     {
-        $this->cart = $cart;
-        $this->merchandiseOptions = array();
+        $this->product = $product;
+        $this->options = new ArrayCollection();
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function addOption($type, $value)
+    {
+
+        $this->options[$type] = $value;
     }
 
     /**
      * @inheritdoc
      */
-    public function getMerchandise()
+    public function getCart()
     {
 
-        return $this->merchandise;
+        return $this->cart;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function getOptions()
+    {
+
+        return $this->options;
     }
 
     /**
      * @inheritdoc
      */
-    public function getMerchandiseOption($name)
+    public function getProduct()
     {
 
-        if (array_key_exists($name, $this->merchandiseOptions))
-        {
-
-            return $this->merchandiseOptions[$name];
-        }
+        return $this->product;
     }
 
     /**
      * @inheritdoc
      */
-    public function getMerchandiseOptions()
+    public function getState()
     {
 
-        return $this->merchandiseOptions;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getStatus()
-    {
-
-        return $this->status;
+        return $this->state;
     }
 
     /**
@@ -82,19 +92,19 @@ class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    public function setMerchandise($merchandise)
+    public function setCart(CartInterface $cart)
     {
 
-        $this->merchandise = $merchandise;
+        $this->cart = $cart;
     }
 
     /**
      * @inheritdoc
      */
-    public function setMerchandiseOption($name, $value)
+    public function setProduct($product)
     {
 
-        $this->merchandiseOptions[$name] = $value;
+        $this->product = $product;
     }
 
     /**
@@ -109,10 +119,10 @@ class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    public function setStatus($status)
+    public function setState($state)
     {
 
-        $this->status = $status;
+        $this->state = $state;
     }
 
 }
