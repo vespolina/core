@@ -23,11 +23,33 @@ interface CartManagerInterface
     function createCart($name = 'default');
 
     /**
-     * Save the supplied cart
+     * Create a cart item
+     *
+     * @abstract
+     * @param null $product
+     * @return CartItemInterface
+     */
+    function createItem($product = null);
+
+
+    /**
+     * Find an open cart for the given cart owner
+     *
+     * @abstract
+     * @param $owner
+     * @param string $cartState
+     */
+    function findOpenCartByOwner($owner);
+
+
+    /**
+     * Save or update the supplied cart
      * 
      * @abstract
-     * @param \Vespolina\CartBundle\Model\CartInterface $document
+     * @param \Vespolina\CartBundle\Model\CartInterface $cart
+     * @param $andFlush
      * @return void
      */
-    function save(CartInterface $document);
+    function updateCart(CartInterface $cart, $andFlush = true);
+
 }

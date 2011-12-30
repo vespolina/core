@@ -3,6 +3,7 @@
 namespace Vespolina\CartBundle\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Vespolina\CartBundle\Model\Cart;
 
 
 class CartCreateTest extends WebTestCase
@@ -28,16 +29,17 @@ class CartCreateTest extends WebTestCase
     {
         $cartManager = $this->getKernel()->getContainer()->get('vespolina.cart_manager');
 
+        $customerId = '1248934893';
+
         $product1 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
         $product2 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
 
 
         $cart = $cartManager->createCart();
 
-        $cart->setOwner(array('name' => 'steve jobs'));
+        $cart->setOwner($customerId);
         $cart->setExpiresAt(new \DateTime('now + 2 days'));
-        $cart->setState('unprocessed'); //Cart is under full control of the user
-        
+
         $cartItem1 = $cartManager->createItem($product1);
         $cartItem1->setQuantity(10);
 
@@ -58,12 +60,26 @@ class CartCreateTest extends WebTestCase
         $testCartItem1 = $cart->getItem(1);
 
         $cartOwner = $cart->getOwner();
-        $this->assertEquals($cartOwner['name'], 'steve jobs');
+        $this->assertEquals($cartOwner, $customerId);
 
 
-        $cart->setState('saved_basket');
 
         $cartManager->updateCart($cart);
+
+
+
+        //Step two, find back the open cart
+        $aCart = $cartManager->findOpenCartByOwner($customerId);
+        $this->assertEquals(count($cart->getItems()), 2);
+
+        //...and close it
+        $aCart->setState(Cart::STATE_CLOSED);
+
+        $cartManager->updateCart($aCart, true);
+
+
+
+
     }
 
 }

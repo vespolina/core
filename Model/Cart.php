@@ -17,6 +17,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Cart implements CartInterface
 {
 
+    const STATE_OPEN = 'open';          //Available for change
+    const STATE_LOCKED = 'locked';      //Locked for processing
+    const STATE_CLOSED = 'closed';      //Closed after processing
+    const STATE_EXPIRED = 'expired';    //Unprocessed and expired
+
     protected $createdAt;
     protected $expiresAt;
     protected $items;

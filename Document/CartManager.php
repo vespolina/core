@@ -23,10 +23,12 @@ class CartManager extends BaseCartManager
     protected $primaryIdentifier;
     protected $cartRepo;
     
-    public function __construct(Container $container)
+    public function __construct(Container $container, $cartClass = 'Vespolina\CartBundle\Document\Cart')
     {
         $this->dm = $container->get('doctrine.odm.mongodb.default_document_manager');
-        $this->salesOrderRepo = $this->dm->getRepository('Vespolina\CartBundle\Document\Cart'); // TODO make configurable
+
+        $this->cartClass = $cartClass;
+        $this->cartRepo = $this->dm->getRepository($this->cartClass);
 
         parent::__construct($container);
     }
@@ -55,6 +57,19 @@ class CartManager extends BaseCartManager
         }
     }
 
+    public function findOpenCartByOwner($owner)
+    {
+
+        if ($owner) {
+
+            return $this->dm->createQueryBuilder($this->cartClass)
+                        ->field('owner')->equals($owner)
+                        ->field('state')->equals(Cart::STATE_OPEN)
+                        ->getQuery()
+                        ->getSingleResult();
+        }
+
+    }
 
     /**
      * @inheritdoc
@@ -79,6 +94,7 @@ class CartManager extends BaseCartManager
     public function findCartByIdentifier($name, $code)
     {
 
+           return;
     }
 
     /**
