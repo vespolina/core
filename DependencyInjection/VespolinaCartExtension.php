@@ -19,10 +19,38 @@ class VespolinaCartExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
+        $processor = new Processor();
+        $configuration = new Configuration();
+
+        $config = $processor->processConfiguration($configuration, $configs);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        foreach (array('mongodb') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
+        if (!in_array(strtolower($config['db_driver']), array('mongodb'))) {
+            throw new \InvalidArgumentException(sprintf('Invalid db driver "%s".', $config['db_driver']));
+        }
+        $loader->load(sprintf('%s.xml', $config['db_driver']));
+
+        if (isset($config['cart'])) {
+            $this->configureCart($config['cart'], $container);
+        }
+
+        if (isset($config['cart_item'])) {
+            $this->configureCartItem($config['cart_item'], $container);
+        }
+    }
+
+    protected function configureCart(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['class'])) {
+            $container->setParameter('vespolina.cart.model.cart.class', $config['class']);
+        }
+    }
+
+    protected function configureCartItem(array $config, ContainerBuilder $container)
+    {
+        if (isset($config['class'])) {
+            $container->setParameter('vespolina.cart.model.cart_item.class', $config['class']);
         }
     }
 }

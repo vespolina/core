@@ -19,16 +19,17 @@ use Vespolina\CartBundle\Model\CartManager as BaseCartManager;
  */
 class CartManager extends BaseCartManager
 {
+    protected $cartClass;
+    protected $cartRepo;
     protected $dm;
     protected $primaryIdentifier;
-    protected $cartRepo;
 
-    public function __construct(Container $container)
+    public function __construct(DocumentManager $dm, $cartClass, $cartItemClass)
     {
-        $this->dm = $container->get('doctrine.odm.mongodb.default_document_manager');
-        $this->salesOrderRepo = $this->dm->getRepository('Vespolina\CartBundle\Document\Cart'); // TODO make configurable
+        $this->dm = $dm;
+        $this->salesOrderRepo = $this->dm->getRepository($cartClass);
 
-        parent::__construct($container);
+        parent::__construct($cartClass);
     }
 
     /**
@@ -43,16 +44,11 @@ class CartManager extends BaseCartManager
         return $cart;
     }
 
-    public function createItem($product = null)
+    public function createItem($product)
     {
-        $itemBaseClass = 'Vespolina\CartBundle\Document\CartItem';
+       $cartItem = new $this->cartItemClass($product);
 
-        if ($itemBaseClass) {
-
-            $cartItem = new $itemBaseClass($product);
-
-            return $cartItem;
-        }
+       return $cartItem;
     }
 
     /**
@@ -68,7 +64,6 @@ class CartManager extends BaseCartManager
      */
     public function findCartById($id)
     {
-
         return $this->cartRepo->find($id);
     }
 

@@ -16,12 +16,16 @@ use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManagerInterface;
 
-class CartManager extends ContainerAware implements CartManagerInterface
+abstract class CartManager implements CartManagerInterface
 {
+    protected $cartClass;
+    protected $cartItemClass;
     protected $carts;
 
-    function __construct()
+    function __construct($cartClass, $cartItemClass)
     {
+        $this->cartClass = $cartClass;
+        $this->cartItemClass = $cartItemClass;
         $this->carts = array();
     }
 
@@ -30,8 +34,7 @@ class CartManager extends ContainerAware implements CartManagerInterface
      */
     public function createCart($name = 'default')
     {
-        $cartClass = 'Vespolina\CartBundle\Model\Cart';
-        $cart = new $cartClass($name);
+        $cart = new $this->cartClass($name);
         $this->carts[$name] = $cart;
 
         return $cart;
