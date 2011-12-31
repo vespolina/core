@@ -24,6 +24,7 @@ class Cart implements CartInterface
 
     protected $createdAt;
     protected $expiresAt;
+    protected $followUp;
     protected $items;
     protected $name;
     protected $owner;
@@ -53,6 +54,15 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
+    public function clearItems()
+    {
+
+        $this->items->clear();
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getCreatedAt()
     {
 
@@ -68,6 +78,14 @@ class Cart implements CartInterface
         return $this->expiresAt;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getFollowUp()
+    {
+
+        return $this->followUp;
+    }
 
     /**
      * @inheritdoc
@@ -154,6 +172,15 @@ class Cart implements CartInterface
     {
 
         $this->expiresAt = $expiresAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setFollowUp($followUp)
+    {
+
+        $this->followUp = $followUp;
     }
 
     /**

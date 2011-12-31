@@ -12,6 +12,12 @@
 
         <field name="quantity" fieldName="quantity" type="string" />
 
+        <embed-many fieldName="options"
+                    field="options"
+                    targetDocument="Vespolina\CartBundle\Document\Option"
+                    strategy="set"/>
+
+
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersistCartItem" />
         </lifecycle-callbacks>

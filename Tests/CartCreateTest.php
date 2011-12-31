@@ -43,8 +43,8 @@ class CartCreateTest extends WebTestCase
         $cartItem1 = $cartManager->createItem($product1);
         $cartItem1->setQuantity(10);
 
-        $cartItem1->addOption('color', 'colorRed');
-        $cartItem1->addOption('size', 'sizeXl');
+        $cartItem1->addOption($cartManager->createOption('color', 'colorRed'));
+        $cartItem1->addOption($cartManager->createOption('size', 'sizeXl'));
 
         $cartItem1->setQuantity(3);
         $cartItem1->setState('init');
@@ -61,21 +61,29 @@ class CartCreateTest extends WebTestCase
 
         $cartOwner = $cart->getOwner();
         $this->assertEquals($cartOwner, $customerId);
-
-
-
         $cartManager->updateCart($cart);
 
 
 
         //Step two, find back the open cart
         $aCart = $cartManager->findOpenCartByOwner($customerId);
-        $this->assertEquals(count($cart->getItems()), 2);
+        $this->assertEquals(count($aCart->getItems()), 2);
+
+        $aCartItem1 = $aCart->getItem(1);
+
+        $this->assertEquals($aCartItem1->getOption('color')->getValue(), 'colorRed');
+
 
         //...and close it
+        $aCart->setFollowUp('sales_order_12093488');
         $aCart->setState(Cart::STATE_CLOSED);
 
         $cartManager->updateCart($aCart, true);
+
+
+
+        $aCart->clearItems();
+        $this->assertEquals($aCart->getItems()->count(), 0);
 
 
 

@@ -31,6 +31,14 @@ interface CartManagerInterface
      */
     function createItem($product = null);
 
+    /**
+     * Create a cart option
+     *
+     * @abstract
+     * @param $type
+     * @param $value
+     */
+    function createOption($type, $value);
 
     /**
      * Find an open cart for the given cart owner
