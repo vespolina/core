@@ -7,9 +7,8 @@
     <mapped-superclass name="Vespolina\CartBundle\Document\BaseCartItem">
 
         <field name="productId" fieldName="productId" type="string" />
-
+        <field name="description" fieldName="description" type="string" />
         <field name="state" fieldName="state" type="string" />
-
         <field name="quantity" fieldName="quantity" type="string" />
 
         <embed-many fieldName="options"

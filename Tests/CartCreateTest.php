@@ -32,7 +32,9 @@ class CartCreateTest extends WebTestCase
         $customerId = '1248934893';
 
         $product1 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
+        $product1->setName('Ipad 2 64GB');
         $product2 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
+        $product2->setName('Iphone 4S 64GB');
 
 
         $cart = $cartManager->createCart();
@@ -50,6 +52,8 @@ class CartCreateTest extends WebTestCase
         $cartItem1->setState('init');
 
         $cart->addItem($cartItem1);
+
+        $this->assertEquals($cartItem1->getDescription(), 'Ipad 2 64GB');
 
         $cartItem2 = $cartManager->createItem($product2);
         $cartItem2->setQuantity(2);

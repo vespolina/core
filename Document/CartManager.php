@@ -53,6 +53,11 @@ class CartManager extends BaseCartManager
 
             $cartItem = new $itemClass($product);
 
+            //Default cart item description to the product name
+            if ($product) {
+
+                $cartItem->setDescription($product->getName());
+            }
             return $cartItem;
         }
     }

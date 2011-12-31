@@ -23,6 +23,7 @@ use Vespolina\CartBundle\Model\Option\OptionInterface;
 class CartItem implements CartItemInterface
 {
     protected $cart;
+    protected $description;
     protected $options;
     protected $product;
     protected $productId;
@@ -54,6 +55,14 @@ class CartItem implements CartItemInterface
         return $this->cart;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getDescription()
+    {
+
+        return $this->description;
+    }
     /**
      * @inheritdoc
      */
@@ -118,10 +127,19 @@ class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
+    public function setDescription($description)
+    {
+
+        $this->description = $description;
+    }
+    /**
+     * @inheritdoc
+     */
     public function setProduct($product)
     {
 
         $this->product = $product;
+
     }
 
     /**
