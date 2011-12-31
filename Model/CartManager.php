@@ -25,8 +25,6 @@ class CartManager extends ContainerAware implements CartManagerInterface
         $this->carts = array();
     }
 
-
-
     /**
      * @inheritdoc
      */
@@ -35,18 +33,20 @@ class CartManager extends ContainerAware implements CartManagerInterface
         $cartClass = 'Vespolina\CartBundle\Model\Cart';
         $cart = new $cartClass($name);
         $this->carts[$name] = $cart;
-        
+
         return $cart;
     }
 
-    public function init(CartInterface $cart) {
+    public function init(CartInterface $cart)
+    {
 
     }
 
-    public function initItem(CartItemInterface $cartItem) {
+    public function initItem(CartItemInterface $cartItem)
+    {
 
     }
-    
+
     /**
      * @inheritdoc
      */

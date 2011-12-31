@@ -4,8 +4,8 @@
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
- */ 
- 
+ */
+
 namespace Vespolina\CartBundle\Model;
 
 use Vespolina\CartBundle\Model\CartInterface;
@@ -20,7 +20,6 @@ use Vespolina\ProductBundle\Model\Option\OptionInterface;
  */
 interface CartItemInterface
 {
-
     function addOption($type, $value);
 
     /**
@@ -69,6 +68,7 @@ interface CartItemInterface
      * @param CartInterface $cart
      */
     function setCart(CartInterface $cart);
+
     /**
      * Set the referenced product
      *
@@ -77,7 +77,6 @@ interface CartItemInterface
      * @return void
      */
     function setProduct($product);
-
 
     /**
      * Set the state of this item

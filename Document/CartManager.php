@@ -22,7 +22,7 @@ class CartManager extends BaseCartManager
     protected $dm;
     protected $primaryIdentifier;
     protected $cartRepo;
-    
+
     public function __construct(Container $container)
     {
         $this->dm = $container->get('doctrine.odm.mongodb.default_document_manager');
@@ -54,7 +54,6 @@ class CartManager extends BaseCartManager
             return $cartItem;
         }
     }
-
 
     /**
      * @inheritdoc
