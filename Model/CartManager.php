@@ -23,9 +23,30 @@ abstract class CartManager implements CartManagerInterface
 
     function __construct($cartClass, $cartItemClass)
     {
-
         $this->cartClass = $cartClass;
         $this->cartItemClass = $cartItemClass;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createCart($cartType = 'default')
+    {
+        $cart = new $this->cartClass();
+        $this->initCart($cart);
+
+        return $cart;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createItem($product = null)
+    {
+        $cartItem = new $this->cartItemClass($product);
+        $this->initCartItem($cartItem);
+
+        return $cartItem;
     }
 
     public function initCart(CartInterface $cart)

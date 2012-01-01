@@ -35,36 +35,6 @@ class CartManager extends BaseCartManager
         parent::__construct($cartClass, $cartItemClass);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function createCart($cartType = 'default')
-    {
-        if ($this->cartClass) {
-
-            $cart = new $this->cartClass();
-            $this->initCart($cart);
-
-            return $cart;
-        }
-
-
-    }
-
-    public function createItem($product = null)
-    {
-
-        if ($this->cartItemClass) {
-
-            $cartItem = new $this->cartItemClass($product);
-
-            $this->initCartItem($cartItem);
-
-
-            return $cartItem;
-        }
-    }
-
     public function createOption($type, $value)
     {
         $optionClass = 'Vespolina\CartBundle\Document\Option';
