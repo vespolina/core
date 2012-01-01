@@ -9,6 +9,7 @@
 
 namespace Vespolina\CartBundle\Model;
 
+use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 
@@ -27,10 +28,10 @@ interface CartManagerInterface
      * Create a cart item
      *
      * @abstract
-     * @param null $product
+     * @param Vespolina\CartBundle\Model\CartableItemInterface $cartableItem
      * @return CartItemInterface
      */
-    function createItem($product = null);
+    function createItem(CartableItemInterface $cartableItem = null);
 
     /**
      * Create a cart option
@@ -55,7 +56,7 @@ interface CartManagerInterface
     function initCartItem(CartItemInterface $cartItem);
     /**
      * Save or update the supplied cart
-     * 
+     *
      * @abstract
      * @param \Vespolina\CartBundle\Model\CartInterface $cart
      * @param $andFlush

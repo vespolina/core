@@ -12,6 +12,7 @@ namespace Vespolina\CartBundle\Model;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManagerInterface;
@@ -41,9 +42,9 @@ abstract class CartManager implements CartManagerInterface
     /**
      * @inheritdoc
      */
-    public function createItem($product = null)
+    public function createItem(CartableItemInterface $cartableItem = null)
     {
-        $cartItem = new $this->cartItemClass($product);
+        $cartItem = new $this->cartItemClass($cartableItem);
         $this->initCartItem($cartItem);
 
         return $cartItem;
