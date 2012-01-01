@@ -9,7 +9,7 @@
 namespace Vespolina\CartBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-/** 
+/**
  * Cart implements a basic cart implementation
  *
  * @author Daniel Kucharski <daniel@xerias.be>
@@ -45,7 +45,6 @@ class Cart implements CartInterface
      */
     public function addItem(CartItemInterface $cartItem)
     {
-
         $cartItem->setCart($this);
 
         $this->items[] = $cartItem;
@@ -65,7 +64,6 @@ class Cart implements CartInterface
      */
     public function getCreatedAt()
     {
-
         return $this->createdAt;
     }
 
@@ -74,7 +72,6 @@ class Cart implements CartInterface
      */
     public function getExpiresAt()
     {
-
         return $this->expiresAt;
     }
 
@@ -92,8 +89,7 @@ class Cart implements CartInterface
      */
     public function getItem($index)
     {
-        if ($index <= count($this->items))
-        {
+        if ($index <= count($this->items)) {
 
             return $this->items[$index-1];
         }
@@ -104,7 +100,6 @@ class Cart implements CartInterface
      */
     public function getName()
     {
-
         return $this->name;
     }
 
@@ -113,7 +108,6 @@ class Cart implements CartInterface
      */
     public function getItems()
     {
-
         return $this->items;
     }
 
@@ -122,17 +116,14 @@ class Cart implements CartInterface
      */
     public function getOwner()
     {
-
         return $this->owner;
     }
-
 
     /**
      * @inheritdoc
      */
     public function getUpdatedAt()
     {
-
         return $this->updatedAt;
     }
 
@@ -141,7 +132,6 @@ class Cart implements CartInterface
      */
     public function getState()
     {
-
         return $this->state;
     }
 
@@ -163,7 +153,6 @@ class Cart implements CartInterface
     {
         $this->updatedAt = new \DateTime();
     }
-
 
     /**
      * @inheritdoc
@@ -197,7 +186,6 @@ class Cart implements CartInterface
      */
     public function setState($state)
     {
-
         $this->state = $state;
     }
 }

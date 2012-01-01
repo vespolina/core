@@ -36,7 +36,6 @@ class CartItem implements CartItemInterface
         $this->options = new ArrayCollection();
     }
 
-
     /**
      * @inheritdoc
      */
@@ -51,7 +50,6 @@ class CartItem implements CartItemInterface
      */
     public function getCart()
     {
-
         return $this->cart;
     }
 
@@ -84,7 +82,6 @@ class CartItem implements CartItemInterface
      */
     public function getOptions()
     {
-
         return $this->options;
     }
 
@@ -93,7 +90,6 @@ class CartItem implements CartItemInterface
      */
     public function getProduct()
     {
-
         return $this->product;
     }
 
@@ -111,7 +107,6 @@ class CartItem implements CartItemInterface
      */
     public function getQuantity()
     {
-
         return $this->quantity;
     }
 
@@ -120,7 +115,6 @@ class CartItem implements CartItemInterface
      */
     public function setCart(CartInterface $cart)
     {
-
         $this->cart = $cart;
     }
 
@@ -137,7 +131,6 @@ class CartItem implements CartItemInterface
      */
     public function setProduct($product)
     {
-
         $this->product = $product;
 
     }
@@ -147,7 +140,6 @@ class CartItem implements CartItemInterface
      */
     public function setQuantity($quantity)
     {
-
         $this->quantity = $quantity;
     }
 
@@ -156,8 +148,6 @@ class CartItem implements CartItemInterface
      */
     public function setState($state)
     {
-
         $this->state = $state;
     }
-
 }

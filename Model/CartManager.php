@@ -16,23 +16,31 @@ use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManagerInterface;
 
-abstract class CartManager extends ContainerAware implements CartManagerInterface
+abstract class CartManager implements CartManagerInterface
 {
+    protected $cartClass;
+    protected $cartItemClass;
 
-    function __construct()
+    function __construct($cartClass, $cartItemClass)
     {
+
+        $this->cartClass = $cartClass;
+        $this->cartItemClass = $cartItemClass;
     }
 
-
-    public function init(CartInterface $cart) {
-
+    public function initCart(CartInterface $cart)
+    {
         //Set default state (for now we set it to "open")
         $cart->setState(Cart::STATE_OPEN);
     }
 
-    public function initItem(CartItemInterface $cartItem) {
+    public function initCartItem(CartItemInterface $cartItem)
+    {
+        //Default cart item description to the product name
+        if ($product = $cartItem->getProduct()) {
 
+            $cartItem->setDescription($product->getName());
+        }
     }
-    
 
 }

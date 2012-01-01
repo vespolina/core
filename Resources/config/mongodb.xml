@@ -3,14 +3,19 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    
+
     <parameters>
-        <parameter key="vespolina.cart.class">Vespolina\CartBundle\Document\CartManager</parameter>
+        <parameter key="vespolina.cart.cart_manager.class">Vespolina\CartBundle\Document\CartManager</parameter>
+        <parameter key="vespolina.cart.model.cart.class">Vespolina\CartBundle\Document\Cart</parameter>
+        <parameter key="vespolina.cart.model.cart_item.class">Vespolina\CartBundle\Document\CartItem</parameter>
     </parameters>
 
     <services>
-        <service id="vespolina.cart_manager" class="%vespolina.cart.class%">
-            <argument type="service" id="service_container" />
+        <service id="vespolina.cart.cart_manager" class="%vespolina.cart.cart_manager.class%">
+            <argument type="service" id="doctrine.odm.mongodb.default_document_manager" />
+            <argument>%vespolina.cart.model.cart.class%</argument>
+            <argument>%vespolina.cart.model.cart_item.class%</argument>
         </service>
+        <service id="vespolina.cart_manager" alias="vespolina.cart.cart_manager" />
     </services>
 </container>

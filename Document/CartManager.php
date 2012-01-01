@@ -8,6 +8,7 @@
 namespace Vespolina\CartBundle\Document;
 
 use Symfony\Component\DependencyInjection\Container;
+use Doctrine\ODM\MongoDB\DocumentManager;
 
 use Vespolina\CartBundle\Document\Cart;
 use Vespolina\CartBundle\Model\CartInterface;
@@ -19,18 +20,19 @@ use Vespolina\CartBundle\Model\CartManager as BaseCartManager;
  */
 class CartManager extends BaseCartManager
 {
+    protected $cartClass;
+    protected $cartRepo;
     protected $dm;
     protected $primaryIdentifier;
-    protected $cartRepo;
-    
-    public function __construct(Container $container, $cartClass = 'Vespolina\CartBundle\Document\Cart')
+
+    public function __construct(DocumentManager $dm, $cartClass, $cartItemClass)
     {
-        $this->dm = $container->get('doctrine.odm.mongodb.default_document_manager');
+        $this->dm = $dm;
 
         $this->cartClass = $cartClass;
-        $this->cartRepo = $this->dm->getRepository($this->cartClass);
+        $this->cartRepo = $this->dm->getRepository($cartClass);
 
-        parent::__construct($container);
+        parent::__construct($cartClass, $cartItemClass);
     }
 
     /**
@@ -38,26 +40,27 @@ class CartManager extends BaseCartManager
      */
     public function createCart($cartType = 'default')
     {
-        // TODO: this will be using factories to allow for a number of different types of Cart classes
-        $cart = new Cart();
-        $this->init($cart);
+        if ($this->cartClass) {
 
-        return $cart;
+            $cart = new $this->cartClass();
+            $this->initCart($cart);
+
+            return $cart;
+        }
+
+
     }
 
     public function createItem($product = null)
     {
-        $itemClass = 'Vespolina\CartBundle\Document\CartItem';
 
-        if ($itemClass) {
+        if ($this->cartItemClass) {
 
-            $cartItem = new $itemClass($product);
+            $cartItem = new $this->cartItemClass($product);
 
-            //Default cart item description to the product name
-            if ($product) {
+            $this->initCartItem($cartItem);
 
-                $cartItem->setDescription($product->getName());
-            }
+
             return $cartItem;
         }
     }
@@ -106,7 +109,6 @@ class CartManager extends BaseCartManager
      */
     public function findCartById($id)
     {
-
         return $this->cartRepo->find($id);
     }
 

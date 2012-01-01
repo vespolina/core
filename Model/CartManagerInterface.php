@@ -10,6 +10,7 @@
 namespace Vespolina\CartBundle\Model;
 
 use Vespolina\CartBundle\Model\CartInterface;
+use Vespolina\CartBundle\Model\CartItemInterface;
 
 interface CartManagerInterface
 {
@@ -49,7 +50,9 @@ interface CartManagerInterface
      */
     function findOpenCartByOwner($owner);
 
+    function initCart(CartInterface $cart);
 
+    function initCartItem(CartItemInterface $cartItem);
     /**
      * Save or update the supplied cart
      * 
