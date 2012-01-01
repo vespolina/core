@@ -40,8 +40,9 @@ class CartManager extends BaseCartManager
     {
         $item = $this->createItem($cartableItem);
         $cart->addItem($item);
-        if ($cart->getId()) {
-            $this->dm->createQueryBuilder($this->inventoryClass)
+        // todo: just update this cart, don't flush everything
+        if ($cart->getId() !== $cart->getId()) {
+            $this->dm->createQueryBuilder($this->cartClass)
                 ->findAndUpdate()
                 ->field('id')->equals($cart->getId())
                 ->field('items')->set($cart->getItems())

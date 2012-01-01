@@ -26,7 +26,7 @@ class CartManagerTest extends TestCase
         $this->cartMgr->addItemToCart($cart, $cartable);
 
         $items = $cart->getItems();
-        $this->assert(1, $items->count());
+        $this->assertSame(1, $items->count());
         $item = $items->current();
         $this->assertSame($cartable, $item->getCartableItem());
     }
@@ -52,7 +52,7 @@ class CartManagerTest extends TestCase
     protected function persistNewCart($name = null)
     {
         $cart = $this->cartMgr->createCart($name);
-        $this->cartMgr->updateProduct($cart);
+        $this->cartMgr->updateCart($cart);
 
         return $cart;
     }
@@ -61,8 +61,8 @@ class CartManagerTest extends TestCase
     {
         $cartable = new Cartable();
         $cartable->setName($name);
-        $this->cartMgr->persist($cartable);
-        $this->cartMgr->flush();
+        $this->dm->persist($cartable);
+        $this->dm->flush();
         return $cartable;
     }
 }

@@ -17,5 +17,10 @@ namespace Vespolina\CartBundle\Model;
  */
 interface CartableItemInterface
 {
-
+    /**
+     * Return the name of the CartableItem
+     *
+     * @return string name
+     */
+    function getName();
 }

@@ -9,15 +9,16 @@ namespace Vespolina\CartBundle\Tests\Fixtures\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
+use Vespolina\CartBundle\Document\BaseCart;
 use Vespolina\CartBundle\Model\CartableItemInterface;
 
 /**
  * @author Richard Shank <develop@zestic.com>
  */
 /**
- * @ODM\Document(collection="vespolina_cartable")
+ * @ODM\Document(collection="vespolina_cart")
  */
-class Cartable implements CartableItemInterface
+class Cart extends BaseCart
 {
     /** @ODM\Id */
     protected $id;
@@ -25,18 +26,16 @@ class Cartable implements CartableItemInterface
     /** @ODM\String */
     protected $name;
 
+    /** @ODM\EmbedMany(targetDocument="Vespolina\CartBundle\Tests\Fixtures\Document\CartItem", strategy="set") */
+    protected $items;
+
+    public function __construct($name)
+    {
+        parent::__construct($name);
+    }
+
     public function getId()
     {
         return $this->id;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getName()
-    {
-        return $this->name;
     }
 }
