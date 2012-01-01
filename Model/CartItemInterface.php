@@ -18,7 +18,6 @@ use Vespolina\CartBundle\Model\Option\OptionInterface;
  */
 interface CartItemInterface
 {
-
     /**
      * Add a cart option
      *
@@ -36,11 +35,13 @@ interface CartItemInterface
     function getCart();
 
     /**
+     * Return the cartable item in the cart
+     *
      * @abstract
      *
-     * @return ProductInterface product
+     * @return Vespolina\CartBundle\Model\CartableItemInterface
      */
-    function getProduct();
+    function getCartableItem();
 
     /**
      * Get all options

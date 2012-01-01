@@ -33,7 +33,7 @@ abstract class CartManager implements CartManagerInterface
      */
     public function createCart($cartType = 'default')
     {
-        $cart = new $this->cartClass();
+        $cart = new $this->cartClass($cartType);
         $this->initCart($cart);
 
         return $cart;
@@ -59,9 +59,9 @@ abstract class CartManager implements CartManagerInterface
     public function initCartItem(CartItemInterface $cartItem)
     {
         //Default cart item description to the product name
-        if ($product = $cartItem->getProduct()) {
+        if ($cartableItem = $cartItem->getCartableItem()) {
 
-            $cartItem->setDescription($product->getName());
+            $cartItem->setDescription($cartableItem->getName());
         }
     }
 
