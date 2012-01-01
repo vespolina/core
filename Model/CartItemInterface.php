@@ -9,9 +9,7 @@
 namespace Vespolina\CartBundle\Model;
 
 use Vespolina\CartBundle\Model\CartInterface;
-use Vespolina\MerchandiseBundle\Model\MerchandiseInterface;
-use Vespolina\ProductBundle\Model\Option\OptionGroupInterface;
-use Vespolina\ProductBundle\Model\Option\OptionInterface;
+use Vespolina\CartBundle\Model\Option\OptionInterface;
 
 /**
  * CartItemInterface is a generic interface for shopping cart item
@@ -20,7 +18,14 @@ use Vespolina\ProductBundle\Model\Option\OptionInterface;
  */
 interface CartItemInterface
 {
-    function addOption($type, $value);
+
+    /**
+     * Add a cart option
+     *
+     * @abstract
+     * @param Option\OptionInterface $option
+     */
+    function addOption(OptionInterface $option);
 
     /**
      * Get the cart to which this item belongs

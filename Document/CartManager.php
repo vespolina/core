@@ -8,6 +8,7 @@
 namespace Vespolina\CartBundle\Document;
 
 use Symfony\Component\DependencyInjection\Container;
+use Doctrine\ODM\MongoDB\DocumentManager;
 
 use Vespolina\CartBundle\Document\Cart;
 use Vespolina\CartBundle\Model\CartInterface;
@@ -27,9 +28,11 @@ class CartManager extends BaseCartManager
     public function __construct(DocumentManager $dm, $cartClass, $cartItemClass)
     {
         $this->dm = $dm;
-        $this->salesOrderRepo = $this->dm->getRepository($cartClass);
 
-        parent::__construct($cartClass);
+        $this->cartClass = $cartClass;
+        $this->cartRepo = $this->dm->getRepository($cartClass);
+
+        parent::__construct($cartClass, $cartItemClass);
     }
 
     /**
@@ -37,18 +40,60 @@ class CartManager extends BaseCartManager
      */
     public function createCart($cartType = 'default')
     {
-        // TODO: this will be using factories to allow for a number of different types of Cart classes
-        $cart = new Cart();
-        $this->init($cart);
+        if ($this->cartClass) {
 
-        return $cart;
+            $cart = new $this->cartClass();
+            $this->initCart($cart);
+
+            return $cart;
+        }
+
+
     }
 
-    public function createItem($product)
+    public function createItem($product = null)
     {
-       $cartItem = new $this->cartItemClass($product);
 
-       return $cartItem;
+        if ($this->cartItemClass) {
+
+            $cartItem = new $this->cartItemClass($product);
+
+            $this->initCartItem($cartItem);
+
+
+            return $cartItem;
+        }
+    }
+
+    public function createOption($type, $value)
+    {
+        $optionClass = 'Vespolina\CartBundle\Document\Option';
+
+        if ($optionClass) {
+
+            $option = new $optionClass;
+
+            $option->setType($type);
+            $option->setValue($value);
+
+            return $option;
+        }
+
+
+    }
+
+    public function findOpenCartByOwner($owner)
+    {
+
+        if ($owner) {
+
+            return $this->dm->createQueryBuilder($this->cartClass)
+                        ->field('owner')->equals($owner)
+                        ->field('state')->equals(Cart::STATE_OPEN)
+                        ->getQuery()
+                        ->getSingleResult();
+        }
+
     }
 
     /**
@@ -73,6 +118,7 @@ class CartManager extends BaseCartManager
     public function findCartByIdentifier($name, $code)
     {
 
+           return;
     }
 
     /**

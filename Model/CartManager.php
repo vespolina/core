@@ -20,40 +20,27 @@ abstract class CartManager implements CartManagerInterface
 {
     protected $cartClass;
     protected $cartItemClass;
-    protected $carts;
 
     function __construct($cartClass, $cartItemClass)
     {
+
         $this->cartClass = $cartClass;
         $this->cartItemClass = $cartItemClass;
-        $this->carts = array();
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function createCart($name = 'default')
+    public function initCart(CartInterface $cart)
     {
-        $cart = new $this->cartClass($name);
-        $this->carts[$name] = $cart;
-
-        return $cart;
+        //Set default state (for now we set it to "open")
+        $cart->setState(Cart::STATE_OPEN);
     }
 
-    public function init(CartInterface $cart)
+    public function initCartItem(CartItemInterface $cartItem)
     {
+        //Default cart item description to the product name
+        if ($product = $cartItem->getProduct()) {
 
+            $cartItem->setDescription($product->getName());
+        }
     }
 
-    public function initItem(CartItemInterface $cartItem)
-    {
-
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function save(CartInterface $cart)
-    {
-    }
 }

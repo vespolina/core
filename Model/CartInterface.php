@@ -29,9 +29,38 @@ interface CartInterface
      */
     function addItem(CartItemInterface $cartItem);
 
+    /**
+     * Remove all items
+     *
+     * @abstract
+     *
+     */
+    function clearItems();
+
+    /**
+     * Get the time when the cart was created
+     *
+     * @abstract
+     *
+     */
     function getCreatedAt();
 
+    /**
+     * Get the time when the cart will expire
+     *
+     * @abstract
+     *
+     */
     function getExpiresAt();
+
+    /**
+     * Get an id to the follow up entity for the cart.
+     * Eg.  this could be the sales order id
+     *
+     * @abstract
+     *
+     */
+    function getFollowUp();
 
     /**
      * Get cart item for a given index
@@ -62,6 +91,9 @@ interface CartInterface
     function getState();
 
     function getUpdatedAt();
+
+    function setFollowUp($followUp);
+
 
     function setExpiresAt(\DateTime $expiresAt);
 

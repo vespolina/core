@@ -9,6 +9,7 @@
 
         <field name="createdAt" fieldName="createdAt" type="date" />
         <field name="expiresAt" fieldName="expiresAt" type="date" />
+        <field name="followUp"  fieldName="followUp" type="string" />
         <field name="owner"     fieldName="owner" type="string" />
         <field name="state"     fieldName="state" type="string" />
         <field name="updatedAt" fieldName="updatedAt" type="date" />
@@ -16,7 +17,9 @@
         <embed-many fieldName="items"
                     field="items"
                     targetDocument="Vespolina\CartBundle\Document\CartItem"
-                    strategy="set"/>
+                    strategy="set">
+        </embed-many>
+
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="incrementCreatedAt" />
             <lifecycle-callback type="preUpdate" method="incrementUpdatedAt" />

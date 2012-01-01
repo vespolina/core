@@ -10,6 +10,7 @@
 namespace Vespolina\CartBundle\Model;
 
 use Vespolina\CartBundle\Model\CartInterface;
+use Vespolina\CartBundle\Model\CartItemInterface;
 
 interface CartManagerInterface
 {
@@ -23,11 +24,43 @@ interface CartManagerInterface
     function createCart($name = 'default');
 
     /**
-     * Save the supplied cart
+     * Create a cart item
+     *
+     * @abstract
+     * @param null $product
+     * @return CartItemInterface
+     */
+    function createItem($product = null);
+
+    /**
+     * Create a cart option
+     *
+     * @abstract
+     * @param $type
+     * @param $value
+     */
+    function createOption($type, $value);
+
+    /**
+     * Find an open cart for the given cart owner
+     *
+     * @abstract
+     * @param $owner
+     * @param string $cartState
+     */
+    function findOpenCartByOwner($owner);
+
+    function initCart(CartInterface $cart);
+
+    function initCartItem(CartItemInterface $cartItem);
+    /**
+     * Save or update the supplied cart
      * 
      * @abstract
-     * @param \Vespolina\CartBundle\Model\CartInterface $document
+     * @param \Vespolina\CartBundle\Model\CartInterface $cart
+     * @param $andFlush
      * @return void
      */
-    function save(CartInterface $document);
+    function updateCart(CartInterface $cart, $andFlush = true);
+
 }

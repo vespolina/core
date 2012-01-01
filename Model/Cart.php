@@ -16,8 +16,15 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Cart implements CartInterface
 {
+
+    const STATE_OPEN = 'open';          //Available for change
+    const STATE_LOCKED = 'locked';      //Locked for processing
+    const STATE_CLOSED = 'closed';      //Closed after processing
+    const STATE_EXPIRED = 'expired';    //Unprocessed and expired
+
     protected $createdAt;
     protected $expiresAt;
+    protected $followUp;
     protected $items;
     protected $name;
     protected $owner;
@@ -46,6 +53,15 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
+    public function clearItems()
+    {
+
+        $this->items->clear();
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -59,6 +75,14 @@ class Cart implements CartInterface
         return $this->expiresAt;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getFollowUp()
+    {
+
+        return $this->followUp;
+    }
 
     /**
      * @inheritdoc
@@ -137,6 +161,15 @@ class Cart implements CartInterface
     {
 
         $this->expiresAt = $expiresAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setFollowUp($followUp)
+    {
+
+        $this->followUp = $followUp;
     }
 
     /**
