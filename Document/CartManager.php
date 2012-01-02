@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\Container;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 use Vespolina\CartBundle\Document\Cart;
+use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManager as BaseCartManager;
@@ -35,33 +36,21 @@ class CartManager extends BaseCartManager
         parent::__construct($cartClass, $cartItemClass);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function createCart($cartType = 'default')
+    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
     {
-        if ($this->cartClass) {
-
-            $cart = new $this->cartClass();
-            $this->initCart($cart);
-
-            return $cart;
-        }
-
-
-    }
-
-    public function createItem($product = null)
-    {
-
-        if ($this->cartItemClass) {
-
-            $cartItem = new $this->cartItemClass($product);
-
-            $this->initCartItem($cartItem);
-
-
-            return $cartItem;
+        $item = $this->createItem($cartableItem);
+        $cart->addItem($item);
+        // todo: just update this cart, don't flush everything
+        if ($cart->getId() !== $cart->getId()) {
+            $this->dm->createQueryBuilder($this->cartClass)
+                ->findAndUpdate()
+                ->field('id')->equals($cart->getId())
+                ->field('items')->set($cart->getItems())
+                ->getQuery()
+                ->execute()
+            ;
+        } else {
+            $this->updateCart($cart);
         }
     }
 
@@ -78,8 +67,6 @@ class CartManager extends BaseCartManager
 
             return $option;
         }
-
-
     }
 
     public function findOpenCartByOwner($owner)

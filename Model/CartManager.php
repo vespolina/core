@@ -12,6 +12,7 @@ namespace Vespolina\CartBundle\Model;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManagerInterface;
@@ -23,9 +24,30 @@ abstract class CartManager implements CartManagerInterface
 
     function __construct($cartClass, $cartItemClass)
     {
-
         $this->cartClass = $cartClass;
         $this->cartItemClass = $cartItemClass;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createCart($cartType = 'default')
+    {
+        $cart = new $this->cartClass($cartType);
+        $this->initCart($cart);
+
+        return $cart;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createItem(CartableItemInterface $cartableItem = null)
+    {
+        $cartItem = new $this->cartItemClass($cartableItem);
+        $this->initCartItem($cartItem);
+
+        return $cartItem;
     }
 
     public function initCart(CartInterface $cart)
@@ -37,9 +59,9 @@ abstract class CartManager implements CartManagerInterface
     public function initCartItem(CartItemInterface $cartItem)
     {
         //Default cart item description to the product name
-        if ($product = $cartItem->getProduct()) {
+        if ($cartableItem = $cartItem->getCartableItem()) {
 
-            $cartItem->setDescription($product->getName());
+            $cartItem->setDescription($cartableItem->getName());
         }
     }
 

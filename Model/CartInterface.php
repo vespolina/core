@@ -22,7 +22,7 @@ interface CartInterface
 {
     /**
      * Add item to cart
-     * 
+     *
      * @abstract
      * @param CartItemInterface $cartItem
      * @return void
@@ -74,7 +74,7 @@ interface CartInterface
      * @return array of CartItemInterface compatible instances
      */
     function getItems();
-    
+
     /**
      * Get name of the cart (useful in multi-cart environments)
      */
