@@ -3,7 +3,7 @@
 namespace Vespolina\CartBundle\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Vespolina\CartBundle\Model\Cart;
+use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 
 
 class CartCreateTest extends WebTestCase
@@ -31,9 +31,9 @@ class CartCreateTest extends WebTestCase
 
         $customerId = '1248934893';
 
-        $product1 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
+        $product1 = new Cartable();
         $product1->setName('Ipad 2 64GB');
-        $product2 = $this->getMockForAbstractClass('Vespolina\ProductBundle\Document\BaseProduct');
+        $product2 = new Cartable();
         $product2->setName('Iphone 4S 64GB');
 
 

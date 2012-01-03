@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Vespolina\CartBundle\Entity\Cart" table="cart">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="createdAt" fieldName="createdAt"   type="date" />
+        <field name="expiresAt" fieldName="expiresAt"   type="date"     nullable="true"/>
+        <field name="followUp"  fieldName="followUp"    type="string"   nullable="true"/>
+        <field name="owner"     fieldName="owner"       type="string"/>
+        <field name="state"     fieldName="state"       type="string"/>
+        <field name="updatedAt" fieldName="updatedAt"   type="date"     nullable="true"/>
+
+        <!-- <one-to-many field="items" target-entity="Vespolina\CartBundle\Entity\CartItem" mapped-by="cart" cascade="persist"/> -->
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="incrementCreatedAt" />
+            <lifecycle-callback type="preUpdate" method="incrementUpdatedAt" />
+        </lifecycle-callbacks>
+    </entity>
+
+</doctrine-mapping>

@@ -20,7 +20,7 @@ use Vespolina\CartBundle\Model\Option\OptionInterface;
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-class CartItem implements CartItemInterface
+abstract class CartItem implements CartItemInterface
 {
     protected $cart;
     protected $cartableItem;
