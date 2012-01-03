@@ -9,7 +9,7 @@
         <field name="cartableItemId" fieldName="cartableItemId" type="string" nullable="true"/>
         <field name="description" fieldName="description" type="string" nullable="true"/>
         <field name="state" fieldName="state" type="string" />
-        <field name="options" fieldName="options" type="hash" />
+        <field name="options" fieldName="options" type="hash" nullable="true" />
         <field name="quantity" fieldName="quantity" type="string" />
 
         <lifecycle-callbacks>

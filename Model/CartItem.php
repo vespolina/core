@@ -32,7 +32,8 @@ abstract class CartItem implements CartItemInterface
     public function __construct($cartableItem = null)
     {
         $this->cartableItem = $cartableItem;
-        $this->options = new ArrayCollection();
+        //$this->options = new ArrayCollection();
+        $this->options = array();
     }
 
     /**
@@ -65,7 +66,10 @@ abstract class CartItem implements CartItemInterface
     public function getOption($type)
     {
 
-        return $this->options->get($type);
+        if (array_key_exists($type, $this->options)) {
+
+            return $this->options[$type];
+        }
     }
 
     /**
