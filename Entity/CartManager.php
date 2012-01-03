@@ -56,7 +56,7 @@ class CartManager extends BaseCartManager
 
     public function createOption($type, $value)
     {
-        $optionClass = 'Vespolina\CartBundle\Document\Option';
+        $optionClass = 'Vespolina\CartBundle\Entity\Option';
 
         if ($optionClass) {
 

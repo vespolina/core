@@ -42,6 +42,9 @@ abstract class CartItem implements CartItemInterface
     public function addOption(OptionInterface $option)
     {
         $this->options[$option->getType()] = $option;
+
+        $option->setCartItem($this);
+
     }
 
     /**

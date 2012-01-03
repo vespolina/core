@@ -13,7 +13,7 @@ use Vespolina\CartBundle\Model\Option\Option as AbstractOption;
  */
 class Option extends AbstractOption
 {
-    protected $cartItem;
+
     protected $id;
 
 }

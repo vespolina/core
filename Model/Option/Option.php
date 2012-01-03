@@ -7,16 +7,27 @@
  */
 namespace Vespolina\CartBundle\Model\Option;
 
+use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\Option\OptionInterface;
 
 /**
+ * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard D Shank <develop@zestic.com>
  */
 abstract class Option implements OptionInterface
 {
 
+    protected $cartItem;
     protected $type;
     protected $value;
+
+    /*
+     * @inheritdoc
+     */
+    public function setCartItem(CartItemInterface $cartItem)
+    {
+        $this->cartItem = $cartItem;
+    }
 
     /*
      * @inheritdoc
@@ -25,6 +36,7 @@ abstract class Option implements OptionInterface
     {
         $this->value = $value;
     }
+
     /*
      * @inheritdoc
      */

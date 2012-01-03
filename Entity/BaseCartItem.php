@@ -13,6 +13,9 @@ use Vespolina\CartBundle\Model\CartItem as AbstractCartItem;
  */
 abstract class BaseCartItem extends AbstractCartItem
 {
+
+    protected $cartableItemId;
+
     public function prePersistCartItem()
     {
         if ($this->cartableItem) {
