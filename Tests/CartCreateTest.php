@@ -5,6 +5,7 @@ namespace Vespolina\CartBundle\Tests\Service;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 
+use Vespolina\CartBundle\Model\Cart;
 
 class CartCreateTest extends WebTestCase
 {
@@ -32,9 +33,12 @@ class CartCreateTest extends WebTestCase
         $customerId = '1248934893';
 
         $product1 = new Cartable();
-        $product1->setName('Ipad 2 64GB');
+        $product1->setName('Ipad 2');
+        $product1->setId('IPAD2-2011');
+
         $product2 = new Cartable();
-        $product2->setName('Iphone 4S 64GB');
+        $product2->setName('Iphone 4S');
+        $product2->setId('IPHONE-4S-2011');
 
 
         $cart = $cartManager->createCart();
@@ -45,15 +49,16 @@ class CartCreateTest extends WebTestCase
         $cartItem1 = $cartManager->createItem($product1);
         $cartItem1->setQuantity(10);
 
-        $cartItem1->addOption($cartManager->createOption('color', 'colorRed'));
-        $cartItem1->addOption($cartManager->createOption('size', 'sizeXl'));
+        $cartItem1->addOption($cartManager->createOption('color', 'white'));
+        $cartItem1->addOption($cartManager->createOption('connectivity', 'WIFI+3G'));
+        $cartItem1->addOption($cartManager->createOption('size', '64GB'));
 
         $cartItem1->setQuantity(3);
         $cartItem1->setState('init');
 
         $cart->addItem($cartItem1);
 
-        $this->assertEquals($cartItem1->getDescription(), 'Ipad 2 64GB');
+        $this->assertEquals($cartItem1->getDescription(), $product1->getName());
 
         $cartItem2 = $cartManager->createItem($product2);
         $cartItem2->setQuantity(2);
@@ -75,7 +80,8 @@ class CartCreateTest extends WebTestCase
 
         $aCartItem1 = $aCart->getItem(1);
 
-        $this->assertEquals($aCartItem1->getOption('color')->getValue(), 'colorRed');
+        //$this->assertEquals($aCartItem1->getCartableItem()->getId() == $product1->getId());
+        $this->assertEquals($aCartItem1->getOption('color')->getValue(), 'white');
 
 
         //...and close it

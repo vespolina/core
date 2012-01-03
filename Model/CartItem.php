@@ -128,14 +128,6 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    public function setProduct($product)
-    {
-        $this->product = $product;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;

@@ -75,14 +75,6 @@ interface CartItemInterface
      */
     function setCart(CartInterface $cart);
 
-    /**
-     * Set the referenced product
-     *
-     * @abstract
-     * @param $product
-     * @return void
-     */
-    function setProduct($product);
 
     /**
      * Set the state of this item

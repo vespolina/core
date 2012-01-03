@@ -13,10 +13,20 @@ namespace Vespolina\CartBundle\Model;
 /**
  * CartableItemInterface is a generic interface for using a product or service as a cart item
  *
+ * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
 interface CartableItemInterface
 {
+
+    /**
+     * Return the id of the CartableItem
+     *
+     * @return int id
+     */
+    function getId();
+
+
     /**
      * Return the name of the CartableItem
      *

@@ -6,7 +6,7 @@
 
     <mapped-superclass name="Vespolina\CartBundle\Document\BaseCartItem">
 
-        <field name="productId" fieldName="productId" type="string" nullable="true"/>
+        <field name="cartableItemId" fieldName="cartableItemId" type="string" nullable="true"/>
         <field name="description" fieldName="description" type="string" nullable="true"/>
         <field name="state" fieldName="state" type="string" />
         <field name="quantity" fieldName="quantity" type="string" />
