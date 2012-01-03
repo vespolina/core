@@ -5,5 +5,12 @@
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
     <embedded-document name="Vespolina\CartBundle\Document\CartItem">
+
+        <reference-one fieldName="cartableItem" field="cartableItem" />
+
+        <embed-many fieldName="options"
+                    field="options"
+                    targetDocument="Vespolina\CartBundle\Document\Option"
+                    strategy="set"/>
     </embedded-document>
 </doctrine-mongo-mapping>

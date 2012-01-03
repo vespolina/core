@@ -5,6 +5,12 @@
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
     <document name="Vespolina\CartBundle\Document\Cart" collection="vespolina_carts">
+        <field name="id" id="true" />
+
+        <embed-many fieldName="items"
+                    field="items"
+                    targetDocument="Application\Vespolina\CartBundle\Document\CartItem"
+                />
     </document>
 
 </doctrine-mongo-mapping>
