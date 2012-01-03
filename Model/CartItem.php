@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\Collection;
 
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
-use Vespolina\CartBundle\Model\Option\OptionInterface;
 
 /**
  * CartItem implements a basic cart item implementation
@@ -39,12 +38,9 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    public function addOption(OptionInterface $option)
+    public function addOption($type, $value)
     {
-        $this->options[$option->getType()] = $option;
-
-        $option->setCartItem($this);
-
+        $this->options[$type] = $value;
     }
 
     /**
@@ -69,14 +65,7 @@ abstract class CartItem implements CartItemInterface
     public function getOption($type)
     {
 
-        //TODO: increase performance
-
-        foreach($this->getOptions() as $option) {
-
-            if ($option->getType() == $type )
-
-                return $option;
-        }
+        return $this->options->get($type);
     }
 
     /**

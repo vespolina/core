@@ -54,21 +54,6 @@ class CartManager extends BaseCartManager
         }
     }
 
-    public function createOption($type, $value)
-    {
-        $optionClass = 'Vespolina\CartBundle\Document\Option';
-
-        if ($optionClass) {
-
-            $option = new $optionClass;
-
-            $option->setType($type);
-            $option->setValue($value);
-
-            return $option;
-        }
-    }
-
     public function findOpenCartByOwner($owner)
     {
 

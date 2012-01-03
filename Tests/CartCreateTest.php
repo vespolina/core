@@ -49,9 +49,9 @@ class CartCreateTest extends WebTestCase
         $cartItem1 = $cartManager->createItem($product1);
         $cartItem1->setQuantity(10);
 
-        $cartItem1->addOption($cartManager->createOption('color', 'white'));
-        $cartItem1->addOption($cartManager->createOption('connectivity', 'WIFI+3G'));
-        $cartItem1->addOption($cartManager->createOption('size', '64GB'));
+        $cartItem1->addOption('color', 'white');
+        $cartItem1->addOption('connectivity', 'WIFI+3G');
+        $cartItem1->addOption('size', '64GB');
 
         $cartItem1->setQuantity(3);
         $cartItem1->setState('init');
@@ -81,7 +81,7 @@ class CartCreateTest extends WebTestCase
         $aCartItem1 = $aCart->getItem(1);
 
         //$this->assertEquals($aCartItem1->getCartableItem()->getId() == $product1->getId());
-        $this->assertEquals($aCartItem1->getOption('color')->getValue(), 'white');
+        $this->assertEquals($aCartItem1->getOption('color'), 'white');
 
 
         //...and close it
