@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Vespolina\CartBundle\Entity\CartItem" table="cart_item">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="cartableItemId"    fieldName="cartableItemId"  type="string" nullable="true"/>
+        <field name="description"       fieldName="description"     type="string" nullable="true"/>
+        <field name="state"             fieldName="state"           type="string" nullable="true"/>
+        <!--<field name="options"           fieldName="options"         type="string" nullable="true"/>-->
+        <field name="quantity"          fieldName="quantity"        type="string" />
+
+        <many-to-one field="cart" target-entity="Vespolina\CartBundle\Entity\Cart" inversed-by="cartItems">
+              <join-column name="cartId" referenced-column-name="id" />
+          </many-to-one>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="prePersistCartItem" />
+        </lifecycle-callbacks>
+
+    </entity>
+
+</doctrine-mapping>

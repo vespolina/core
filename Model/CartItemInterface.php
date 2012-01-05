@@ -22,9 +22,11 @@ interface CartItemInterface
      * Add a cart option
      *
      * @abstract
-     * @param Option\OptionInterface $option
+     * @param $type
+     * @param $value
+     *
      */
-    function addOption(OptionInterface $option);
+    function addOption($type, $value);
 
     /**
      * Get the cart to which this item belongs
@@ -75,14 +77,6 @@ interface CartItemInterface
      */
     function setCart(CartInterface $cart);
 
-    /**
-     * Set the referenced product
-     *
-     * @abstract
-     * @param $product
-     * @return void
-     */
-    function setProduct($product);
 
     /**
      * Set the state of this item

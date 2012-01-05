@@ -5,12 +5,14 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\CartBundle\Document;
+namespace Vespolina\CartBundle\Entity;
 
-use Vespolina\CartBundle\Model\Option\Option as AbstractOption;
+use Vespolina\CartBundle\Entity\BaseCartItem;
 /**
- * @author Richard D Shank <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@xerias.be>
  */
-class Option extends AbstractOption
+class CartItem extends BaseCartItem
 {
+
+    protected $id;
 }

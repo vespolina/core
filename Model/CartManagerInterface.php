@@ -34,15 +34,6 @@ interface CartManagerInterface
     function createItem(CartableItemInterface $cartableItem = null);
 
     /**
-     * Create a cart option
-     *
-     * @abstract
-     * @param $type
-     * @param $value
-     */
-    function createOption($type, $value);
-
-    /**
      * Find an open cart for the given cart owner
      *
      * @abstract

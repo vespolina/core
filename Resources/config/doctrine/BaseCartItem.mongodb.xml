@@ -8,6 +8,7 @@
 
         <field name="description" fieldName="description" type="string" />
         <field name="state" fieldName="state" type="string" />
+        <field name="options" fieldName="options" type="hash" nullable="true" />
         <field name="quantity" fieldName="quantity" type="string" />
 
         <lifecycle-callbacks>

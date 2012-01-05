@@ -5,12 +5,12 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\CartBundle\Document;
+namespace Vespolina\CartBundle\Entity;
 
 use Symfony\Component\DependencyInjection\Container;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManager;
 
-use Vespolina\CartBundle\Document\Cart;
+use Vespolina\CartBundle\Entity\Cart;
 use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
@@ -23,15 +23,15 @@ class CartManager extends BaseCartManager
 {
     protected $cartClass;
     protected $cartRepo;
-    protected $dm;
+    protected $em;
     protected $primaryIdentifier;
 
-    public function __construct(DocumentManager $dm, $cartClass, $cartItemClass)
+    public function __construct(EntityManager $em, $cartClass, $cartItemClass)
     {
-        $this->dm = $dm;
+        $this->em = $em;
 
         $this->cartClass = $cartClass;
-        $this->cartRepo = $this->dm->getRepository($cartClass);
+        $this->cartRepo = $this->em->getRepository($cartClass);
 
         parent::__construct($cartClass, $cartItemClass);
     }
@@ -42,7 +42,7 @@ class CartManager extends BaseCartManager
         $cart->addItem($item);
         // todo: just update this cart, don't flush everything
         if ($cart->getId() !== $cart->getId()) {
-            $this->dm->createQueryBuilder($this->cartClass)
+            $this->em->createQueryBuilder($this->cartClass)
                 ->findAndUpdate()
                 ->field('id')->equals($cart->getId())
                 ->field('items')->set($cart->getItems())
@@ -59,11 +59,16 @@ class CartManager extends BaseCartManager
 
         if ($owner) {
 
-            return $this->dm->createQueryBuilder($this->cartClass)
-                        ->field('owner')->equals($owner)
-                        ->field('state')->equals(Cart::STATE_OPEN)
-                        ->getQuery()
-                        ->getSingleResult();
+            $q = $this->em->createQueryBuilder($this->cartClass)
+                            ->select('c')
+                            ->from('Vespolina\CartBundle\Entity\Cart', 'c')
+                            ->where('c.owner = ?1')
+                            ->andWhere('c.state = ?2')
+                            ->getQuery();
+            $q->setMaxResults(1);   //Temp
+            $q->setParameters(array(1 => $owner, 2 => Cart::STATE_OPEN));
+
+            return $q->getSingleResult();
         }
 
     }
@@ -98,9 +103,9 @@ class CartManager extends BaseCartManager
      */
     public function updateCart(CartInterface $cart, $andFlush = true)
     {
-        $this->dm->persist($cart);
+        $this->em->persist($cart);
         if ($andFlush) {
-            $this->dm->flush();
+            $this->em->flush();
         }
     }
 }

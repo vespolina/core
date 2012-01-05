@@ -13,14 +13,13 @@ use Doctrine\Common\Collections\Collection;
 
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
-use Vespolina\CartBundle\Model\Option\OptionInterface;
 
 /**
  * CartItem implements a basic cart item implementation
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-class CartItem implements CartItemInterface
+abstract class CartItem implements CartItemInterface
 {
     protected $cart;
     protected $cartableItem;
@@ -33,15 +32,16 @@ class CartItem implements CartItemInterface
     public function __construct($cartableItem = null)
     {
         $this->cartableItem = $cartableItem;
-        $this->options = new ArrayCollection();
+        //$this->options = new ArrayCollection();
+        $this->options = array();
     }
 
     /**
      * @inheritdoc
      */
-    public function addOption(OptionInterface $option)
+    public function addOption($type, $value)
     {
-        $this->options[$option->getType()] = $option;
+        $this->options[$type] = $value;
     }
 
     /**
@@ -66,13 +66,9 @@ class CartItem implements CartItemInterface
     public function getOption($type)
     {
 
-        //TODO: increase performance
+        if (array_key_exists($type, $this->options)) {
 
-        foreach($this->getOptions() as $option) {
-
-            if ($option->getType() == $type )
-
-                return $option;
+            return $this->options[$type];
         }
     }
 
@@ -123,14 +119,6 @@ class CartItem implements CartItemInterface
     public function setDescription($description)
     {
         $this->description = $description;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setProduct($product)
-    {
-        $this->product = $product;
     }
 
     /**
