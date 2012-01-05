@@ -30,6 +30,7 @@ class VespolinaCartExtension extends Extension
             throw new \InvalidArgumentException(sprintf('Invalid db driver "%s".', $config['db_driver']));
         }
         $loader->load(sprintf('%s.xml', $config['db_driver']));
+        $loader->load('cart.xml');
 
         if (isset($config['cart'])) {
             $this->configureCart($config['cart'], $container);
