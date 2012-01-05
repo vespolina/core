@@ -14,4 +14,9 @@ use Vespolina\CartBundle\Model\Cart as AbstractCart;
 abstract class BaseCart extends AbstractCart
 {
     protected $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 }

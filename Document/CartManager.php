@@ -52,20 +52,16 @@ class CartManager extends BaseCartManager
         } else {
             $this->updateCart($cart);
         }
+        return $item;
     }
 
     public function findOpenCartByOwner($owner)
     {
-
-        if ($owner) {
-
-            return $this->dm->createQueryBuilder($this->cartClass)
-                        ->field('owner')->equals($owner)
-                        ->field('state')->equals(Cart::STATE_OPEN)
-                        ->getQuery()
-                        ->getSingleResult();
-        }
-
+        return $this->dm->createQueryBuilder($this->cartClass)
+                    ->field('owner')->equals($owner)
+                    ->field('state')->equals(Cart::STATE_OPEN)
+                    ->getQuery()
+                    ->getSingleResult();
     }
 
     /**
@@ -89,8 +85,7 @@ class CartManager extends BaseCartManager
      */
     public function findCartByIdentifier($name, $code)
     {
-
-           return;
+        return;
     }
 
     /**
