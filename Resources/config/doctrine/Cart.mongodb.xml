@@ -10,7 +10,10 @@
         <embed-many fieldName="items"
                     field="items"
                     targetDocument="Application\Vespolina\CartBundle\Document\CartItem"
-                />
+        />
+        <reference-one fieldName="cartableItem"
+                       field="cartableItem"
+        />
     </document>
 
 </doctrine-mongo-mapping>
