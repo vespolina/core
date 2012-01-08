@@ -39,8 +39,14 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    public function addOption($type, $value)
+    public function addOption($type, $value = null)
     {
+        if (is_array($type)) {
+            $key = key($type);
+            $value = $type[$key];
+            $type = $key;
+        }
+
         $this->options[$type] = $value;
     }
 
@@ -57,15 +63,14 @@ abstract class CartItem implements CartItemInterface
      */
     public function getDescription()
     {
-
         return $this->description;
     }
+
     /**
      * @inheritdoc
      */
     public function getOption($type)
     {
-
         if (array_key_exists($type, $this->options)) {
 
             return $this->options[$type];
@@ -93,7 +98,6 @@ abstract class CartItem implements CartItemInterface
      */
     public function getState()
     {
-
         return $this->state;
     }
 
