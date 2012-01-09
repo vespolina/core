@@ -1,6 +1,6 @@
 <?php
 /**
- * (c) Vespolina Project http://www.vespolina-project.org
+ * (c)  2012 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -18,6 +18,7 @@ use Vespolina\CartBundle\Model\CartItemInterface;
  * CartItem implements a basic cart item implementation
  *
  * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Richard Shank <develop@zestic.com>
  */
 abstract class CartItem implements CartItemInterface
 {
@@ -25,6 +26,7 @@ abstract class CartItem implements CartItemInterface
     protected $cartableItem;
     protected $description;
     protected $options;
+    protected $price;
     protected $productId;
     protected $quantity;
     protected $state;
@@ -34,14 +36,22 @@ abstract class CartItem implements CartItemInterface
         $this->cartableItem = $cartableItem;
         //$this->options = new ArrayCollection();
         $this->options = array();
+        $this->quantity = 1;
     }
 
     /**
      * @inheritdoc
      */
-    public function addOption($type, $value)
+    public function addOption($type, $value = null)
     {
+        if (is_array($type)) {
+            $key = key($type);
+            $value = $type[$key];
+            $type = $key;
+        }
+
         $this->options[$type] = $value;
+        $this->calculatePrice();
     }
 
     /**
@@ -57,15 +67,14 @@ abstract class CartItem implements CartItemInterface
      */
     public function getDescription()
     {
-
         return $this->description;
     }
+
     /**
      * @inheritdoc
      */
     public function getOption($type)
     {
-
         if (array_key_exists($type, $this->options)) {
 
             return $this->options[$type];
@@ -93,7 +102,6 @@ abstract class CartItem implements CartItemInterface
      */
     public function getState()
     {
-
         return $this->state;
     }
 
@@ -127,6 +135,7 @@ abstract class CartItem implements CartItemInterface
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+        $this->calculatePrice();
     }
 
     /**
@@ -135,5 +144,32 @@ abstract class CartItem implements CartItemInterface
     public function setState($state)
     {
         $this->state = $state;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPrice()
+    {
+        $this->calculatePrice();
+        return $this->price;
+    }
+
+    protected function calculatePrice()
+    {
+        $price = $this->cartableItem->getPrice();
+        foreach($this->options as $option) {
+            $productOption = $this->cartableItem->getOptionPrice($option);
+            $price += $productOption->getUpcharge();
+        }
+        $this->price = $price * $this->quantity;
     }
 }

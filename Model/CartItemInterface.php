@@ -9,7 +9,6 @@
 namespace Vespolina\CartBundle\Model;
 
 use Vespolina\CartBundle\Model\CartInterface;
-use Vespolina\CartBundle\Model\Option\OptionInterface;
 
 /**
  * CartItemInterface is a generic interface for shopping cart item
@@ -19,20 +18,17 @@ use Vespolina\CartBundle\Model\Option\OptionInterface;
 interface CartItemInterface
 {
     /**
-     * Add a cart option
+     * Add a option for the cartable item
      *
-     * @abstract
-     * @param $type
-     * @param $value
-     *
+     * @param $type string or array with [$type] = $value
+     * @param $value or null if array
      */
-    function addOption($type, $value);
+    function addOption($type, $value = null);
 
     /**
      * Get the cart to which this item belongs
      *
-     * @abstract
-     *
+     * @return Vespolina\CartBundle\Model\CartInterface
      */
     function getCart();
 
@@ -95,4 +91,18 @@ interface CartItemInterface
      * @return void
      */
     function setQuantity($quantity);
+
+    /**
+     * Set the price of the cart item
+     *
+     * @param $price
+     */
+    function setPrice($price);
+
+    /**
+     * Return the price of the cart item
+     *
+     * @return price
+     */
+    function getPrice();
 }

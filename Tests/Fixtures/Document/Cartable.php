@@ -25,6 +25,7 @@ class Cartable implements CartableItemInterface
     /** @ODM\String */
     protected $name;
 
+    protected $price;
 
     public function setId($id)
     {
@@ -44,5 +45,15 @@ class Cartable implements CartableItemInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
     }
 }
