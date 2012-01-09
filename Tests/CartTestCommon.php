@@ -30,7 +30,7 @@ abstract class CartTestCommon extends WebTestCase
 
     protected function createCartItem($cartableItem)
     {
-        $cartItem = $this->getMock('Vespolina\CartBundle\Model\Cart', array(), array($cartableItem));
+        $cartItem = $this->getMockForAbstractClass('Vespolina\CartBundle\Model\CartItem', array($cartableItem));
         $cartItem->setDescription($cartableItem->getName());
 
         return $cartItem;
@@ -43,5 +43,13 @@ abstract class CartTestCommon extends WebTestCase
         $cartable->setPrice($price);
 
         return $cartable;
+    }
+
+    protected function addItemToCart($cart, $cartableItem)
+    {
+        $item = $this->createCartItem($cartableItem);
+        $cart->addItem($item);
+
+        return $item;
     }
 }

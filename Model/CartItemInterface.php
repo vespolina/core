@@ -91,4 +91,18 @@ interface CartItemInterface
      * @return void
      */
     function setQuantity($quantity);
+
+    /**
+     * Set the price of the cart item
+     *
+     * @param $price
+     */
+    function setPrice($price);
+
+    /**
+     * Return the price of the cart item
+     *
+     * @return price
+     */
+    function getPrice();
 }
