@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Cart implements CartInterface
 {
-
     const STATE_OPEN = 'open';          //Available for change
     const STATE_LOCKED = 'locked';      //Locked for processing
     const STATE_CLOSED = 'closed';      //Closed after processing
@@ -29,6 +28,8 @@ class Cart implements CartInterface
     protected $name;
     protected $owner;
     protected $state;
+    protected $subTotal;
+    protected $total;
     protected $updatedAt;
 
     /**
@@ -46,7 +47,6 @@ class Cart implements CartInterface
     public function addItem(CartItemInterface $cartItem)
     {
         $cartItem->setCart($this);
-
         $this->items[] = $cartItem;
     }
 
@@ -55,7 +55,6 @@ class Cart implements CartInterface
      */
     public function clearItems()
     {
-
         $this->items->clear();
     }
 
@@ -80,7 +79,6 @@ class Cart implements CartInterface
      */
     public function getFollowUp()
     {
-
         return $this->followUp;
     }
 
@@ -159,7 +157,6 @@ class Cart implements CartInterface
      */
     public function setExpiresAt(\DateTime $expiresAt)
     {
-
         $this->expiresAt = $expiresAt;
     }
 
@@ -168,7 +165,6 @@ class Cart implements CartInterface
      */
     public function setFollowUp($followUp)
     {
-
         $this->followUp = $followUp;
     }
 
@@ -177,7 +173,6 @@ class Cart implements CartInterface
      */
     public function setOwner($owner)
     {
-
         $this->owner = $owner;
     }
 
@@ -187,5 +182,36 @@ class Cart implements CartInterface
     public function setState($state)
     {
         $this->state = $state;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSubTotal()
+    {
+        $this->calculateTotal();
+        return $this->subTotal;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTotal()
+    {
+        $this->calculateTotal();
+        return $this->total;
+    }
+
+    protected function calculateTotal()
+    {
+        $subTotal = 0;
+        foreach ($this->items as $item) {
+            $subTotal += $item->getPrice();
+        }
+        // todo: extra rows like shipping and taxes
+        $extraRows = 0;
+        $total = $subTotal + $extraRows;
+        $this->subTotal = $subTotal;
+        $this->total = $total;
     }
 }

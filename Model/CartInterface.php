@@ -98,4 +98,18 @@ interface CartInterface
     function setExpiresAt(\DateTime $expiresAt);
 
     function setState($state);
+
+    /**
+     * Return the sub total of the items in the cart
+     *
+     * @return price
+     */
+    function getSubTotal();
+
+    /**
+     * Return the grand total of the items in the cart
+     *
+     * @return price
+     */
+    function getTotal();
 }

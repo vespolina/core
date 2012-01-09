@@ -33,6 +33,6 @@ class CartTest extends CartTestCommon
         $this->assertSame(7, $cart->getSubTotal());
         $this->assertSame(7, $cart->getTotal());
 
-        // todo: add taxes, discount, and shipping type itesm
+        // todo: add taxes, discount, and shipping type item
     }
 }

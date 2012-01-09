@@ -19,7 +19,7 @@ abstract class CartTestCommon extends WebTestCase
 {
     protected function createCart($name)
     {
-        $cart = $this->getMock('Vespolina\CartBundle\Model\Cart', array(), array($name));
+        $cart = $this->getMockForAbstractClass('Vespolina\CartBundle\Model\Cart', array($name));
 
         $sp = new \ReflectionProperty('Vespolina\CartBundle\Model\Cart', 'state');
         $sp->setAccessible(true);
