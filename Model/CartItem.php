@@ -149,6 +149,14 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getPrice()
     {
         $this->calculatePrice();
