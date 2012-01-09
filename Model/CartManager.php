@@ -61,7 +61,7 @@ abstract class CartManager implements CartManagerInterface
         //Default cart item description to the product name
         if ($cartableItem = $cartItem->getCartableItem()) {
 
-            $cartItem->setDescription($cartableItem->getName());
+            $cartItem->setName($cartableItem->getName());
         }
     }
 

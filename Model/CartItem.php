@@ -25,6 +25,7 @@ abstract class CartItem implements CartItemInterface
     protected $cart;
     protected $cartableItem;
     protected $description;
+    protected $name;
     protected $options;
     protected $price;
     protected $productId;
@@ -60,14 +61,6 @@ abstract class CartItem implements CartItemInterface
     public function getCart()
     {
         return $this->cart;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
@@ -132,6 +125,14 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
@@ -171,5 +172,21 @@ abstract class CartItem implements CartItemInterface
             $price += $productOption->getUpcharge();
         }
         $this->price = $price * $this->quantity;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

@@ -73,7 +73,6 @@ interface CartItemInterface
      */
     function setCart(CartInterface $cart);
 
-
     /**
      * Set the state of this item
      *
@@ -105,4 +104,18 @@ interface CartItemInterface
      * @return price
      */
     function getPrice();
+
+    /**
+     * Set the name of the cart item
+     *
+     * @param string $name
+     */
+    public function setName($name);
+
+    /**
+     * Return the name of the cart item
+     *
+     * @return string
+     */
+    public function getName();
 }
