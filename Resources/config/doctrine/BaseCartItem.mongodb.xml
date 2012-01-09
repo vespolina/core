@@ -6,16 +6,10 @@
 
     <mapped-superclass name="Vespolina\CartBundle\Document\BaseCartItem">
 
-        <field name="productId" fieldName="productId" type="string" />
         <field name="description" fieldName="description" type="string" />
         <field name="state" fieldName="state" type="string" />
+        <field name="options" fieldName="options" type="hash" nullable="true" />
         <field name="quantity" fieldName="quantity" type="string" />
-
-        <embed-many fieldName="options"
-                    field="options"
-                    targetDocument="Vespolina\CartBundle\Document\Option"
-                    strategy="set"/>
-
 
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersistCartItem" />
