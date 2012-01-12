@@ -25,7 +25,7 @@ abstract class CartItem implements CartItemInterface
     protected $cart;
     protected $cartableItem;
     protected $description;
-    protected $isSubscription;
+    protected $isRecurring;
     protected $name;
     protected $options;
     protected $price;
@@ -37,7 +37,7 @@ abstract class CartItem implements CartItemInterface
     {
         $this->cartableItem = $cartableItem;
         //$this->options = new ArrayCollection();
-        $this->isSubscription = false;
+        $this->$isRecurring = false;
         $this->options = array();
         $this->quantity = 1;
     }
@@ -185,9 +185,9 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    function isSubscription()
+    function isRecurring()
     {
-        return $this->isSubscription;
+        return $this->isRecurring;
     }
 
     protected function calculatePrice()

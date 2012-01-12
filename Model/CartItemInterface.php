@@ -121,9 +121,9 @@ interface CartItemInterface
     function getName();
 
     /**
-     * Return if this cart item is a subscription
+     * Return if this cart item is recurring
      *
      * @return boolean
      */
-    function isSubscription();
+    function isRecurring();
 }
