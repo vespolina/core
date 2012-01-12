@@ -1,6 +1,6 @@
 <?php
 /**
- * (c)  2012 Vespolina Project http://www.vespolina-project.org
+ * (c) 2012 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -25,6 +25,7 @@ abstract class CartItem implements CartItemInterface
     protected $cart;
     protected $cartableItem;
     protected $description;
+    protected $isSubscription;
     protected $name;
     protected $options;
     protected $price;
@@ -36,6 +37,7 @@ abstract class CartItem implements CartItemInterface
     {
         $this->cartableItem = $cartableItem;
         //$this->options = new ArrayCollection();
+        $this->isSubscription = false;
         $this->options = array();
         $this->quantity = 1;
     }
@@ -164,16 +166,6 @@ abstract class CartItem implements CartItemInterface
         return $this->price;
     }
 
-    protected function calculatePrice()
-    {
-        $price = $this->cartableItem->getPrice();
-        foreach($this->options as $key => $option) {
-            $productOption = $this->cartableItem->getOptionSet($option);
-            $price += $productOption->getUpcharge();
-        }
-        $this->price = $price * $this->quantity;
-    }
-
     /**
      * @inheritdoc
      */
@@ -188,5 +180,23 @@ abstract class CartItem implements CartItemInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    function isSubscription()
+    {
+        return $this->isSubscription;
+    }
+
+    protected function calculatePrice()
+    {
+        $price = $this->cartableItem->getPrice();
+        foreach($this->options as $key => $option) {
+            $productOption = $this->cartableItem->getOptionSet($option);
+            $price += $productOption->getUpcharge();
+        }
+        $this->price = $price * $this->quantity;
     }
 }
