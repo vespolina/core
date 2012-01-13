@@ -35,4 +35,25 @@ class CartTest extends CartTestCommon
 
         // todo: add taxes, discount, and shipping type item
     }
+
+    public function testRemoveItemFromCart()
+    {
+        $cart = $this->createCart('testCart');
+        $cartable1 = $this->createCartableItem('cartable1', 1);
+        $item = $this->addItemToCart($cart, $cartable1);
+        $item->setQuantity(3);
+
+        $this->assertSame(3, $cart->getSubTotal());
+        $this->assertSame(3, $cart->getTotal());
+
+        $this->removeItemFromCart($cart, $item);
+
+        $this->assertSame(0, $cart->getSubTotal());
+        $this->assertSame(0, $cart->getTotal());
+    }
+
+    public function testRemovesOneUnitOfItemFromCart()
+    {
+        $this->markTestIncomplete('We have removed item completely but not by quantity, next step is to write method to remove quantity');
+    }
 }

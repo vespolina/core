@@ -37,7 +37,7 @@ abstract class CartItem implements CartItemInterface
     {
         $this->cartableItem = $cartableItem;
         //$this->options = new ArrayCollection();
-        $this->$isRecurring = false;
+        $this->isRecurring = false;
         $this->options = array();
         $this->quantity = 1;
     }
@@ -194,8 +194,10 @@ abstract class CartItem implements CartItemInterface
     {
         $price = $this->cartableItem->getPrice();
         foreach($this->options as $key => $option) {
-            $productOption = $this->cartableItem->getOptionSet($option);
-            $price += $productOption->getUpcharge();
+            //$productOption = $this->cartableItem->getOptionSet($option);
+            // @ todo: uncomment this line above when we fix the product type for item in cart
+            //$price += $productOption->getUpcharge();
+            $price = 1;
         }
         $this->price = $price * $this->quantity;
     }

@@ -30,6 +30,15 @@ interface CartInterface
     function addItem(CartItemInterface $cartItem);
 
     /**
+     * Removes item to cart
+     *
+     * @abstract
+     * @param CartItemInterface $cartItem
+     * @return void
+     */
+    function removeItem(CartItemInterface $cartItem);
+
+    /**
      * Remove all items
      *
      * @abstract
