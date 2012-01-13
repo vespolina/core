@@ -52,4 +52,12 @@ abstract class CartTestCommon extends WebTestCase
 
         return $item;
     }
+
+    protected function removeItemFromCart($cart, $cartItem)
+    {
+        $item = $cartItem;
+        $cart->removeItem($item);
+
+        return $item;
+    }
 }

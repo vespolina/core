@@ -53,6 +53,20 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
+    public function removeItem(CartItemInterface $cartItem)
+    {
+        foreach ($this->getItems() as $key => $itemToCompare)
+        {
+            if ($itemToCompare == $cartItem) {
+                unset($this->items[$key]);
+                break;
+            };
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function clearItems()
     {
         $this->items->clear();
