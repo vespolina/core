@@ -1,6 +1,6 @@
 <?php
 /**
- * (c) Vespolina Project http://www.vespolina-project.org
+ * (c) 2011-2012 Vespolina Project http://www.vespolina-project.org
  *
  * (c) Daniel Kucharski <daniel@xerias.be>
  * This source file is subject to the MIT license that is bundled
@@ -17,15 +17,20 @@ use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManagerInterface;
 
+/**
+ * @author Richard Shank <develop@zestic.com>
+ */
 abstract class CartManager implements CartManagerInterface
 {
     protected $cartClass;
     protected $cartItemClass;
+    protected $recurringInterface;
 
-    function __construct($cartClass, $cartItemClass)
+    function __construct($cartClass, $cartItemClass, $recurringInterface = 'Vespolina\ProductBundle\Model\RecurringInterface')
     {
         $this->cartClass = $cartClass;
         $this->cartItemClass = $cartItemClass;
+        $this->recurringInterface = $recurringInterface;
     }
 
     /**
@@ -60,9 +65,13 @@ abstract class CartManager implements CartManagerInterface
     {
         //Default cart item description to the product name
         if ($cartableItem = $cartItem->getCartableItem()) {
-
             $cartItem->setName($cartableItem->getName());
+            if ($cartableItem instanceof $this->recurringInterface) {
+                $rp = new \ReflectionProperty($cartableItem, 'isRecurring');
+                $rp->setAccessable(true);
+                $rp->setValue($cartableItem, true);
+                $rp->setAccessable(false); 
+            }
         }
     }
-
 }
