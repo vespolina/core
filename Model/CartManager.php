@@ -67,7 +67,7 @@ abstract class CartManager implements CartManagerInterface
         if ($cartableItem = $cartItem->getCartableItem()) {
             $cartItem->setName($cartableItem->getName());
             if ($cartableItem instanceof $this->recurringInterface) {
-                $rp = new \ReflectionProperty($cartableItem, 'isRecurring');
+                $rp = new \ReflectionProperty($cartItem, 'isRecurring');
                 $rp->setAccessable(true);
                 $rp->setValue($cartableItem, true);
                 $rp->setAccessable(false); 
