@@ -19,7 +19,7 @@ class PartialsController extends ContainerAware
 {
     public function cartAction($id)
     {
-        $cart = $this->container->get('vepolina.cart_manager')->findCartById($id);
+        $cart = $this->container->get('vespolina.cart_manager')->findCartById($id);
         return $this->container->get('templating')->renderResponse('VespolinaCartBundle:Partials:cart.html.'.$this->getEngine(), array(
             'cart' => $cart,
         ));
