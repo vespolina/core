@@ -7,9 +7,11 @@
     <mapped-superclass name="Vespolina\CartBundle\Document\BaseCartItem">
 
         <field name="description" fieldName="description" type="string" />
-        <field name="state" fieldName="state" type="string" />
-        <field name="quantity" fieldName="quantity" type="string" />
         <field name="isRecurring" fieldName="isRecurring" type="boolean" />
+        <field name="name"        fieldName="name"        type="string" />
+        <field name="options"     fieldName="options"     type="string" />
+        <field name="quantity"    fieldName="quantity"    type="string" />
+        <field name="state"       fieldName="state"       type="string" />
 
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersistCartItem" />
