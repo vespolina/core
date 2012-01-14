@@ -193,11 +193,9 @@ abstract class CartItem implements CartItemInterface
     protected function calculatePrice()
     {
         $price = $this->cartableItem->getPrice();
-        foreach($this->options as $key => $option) {
-            //$productOption = $this->cartableItem->getOptionSet($option);
-            // @ todo: uncomment this line above when we fix the product type for item in cart
-            //$price += $productOption->getUpcharge();
-            $price = 1;
+        foreach($this->options as $option) {
+            $productOption = $this->cartableItem->getOptionSet($option);
+            $price += $productOption->getUpcharge();
         }
         $this->price = $price * $this->quantity;
     }
