@@ -59,6 +59,7 @@ class Cart implements CartInterface
         {
             if ($itemToCompare == $cartItem) {
                 unset($this->items[$key]);
+                $this->calculateTotal();
                 break;
             };
         }
