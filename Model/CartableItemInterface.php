@@ -24,11 +24,11 @@ interface CartableItemInterface
     function getId();
 
     /**
-     * Return the name of the CartableItem
+     * Return the name of the CartableItem that will be displayed in the cart
      *
      * @return string name
      */
-    function getName();
+    function getCartName();
 
     /**
      * Return the price of the item
