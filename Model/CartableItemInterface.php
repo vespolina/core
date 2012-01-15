@@ -31,13 +31,6 @@ interface CartableItemInterface
     function getName();
 
     /**
-     * Set the price of the item
-     *
-     * @param $price
-     */
-    function setPrice($price);
-
-    /**
      * Return the price of the item
      *
      * @return price
