@@ -28,7 +28,7 @@ interface CartableItemInterface
      *
      * @return string name
      */
-    function getCartName();
+    function getCartableName();
 
     /**
      * Return the price of the item
