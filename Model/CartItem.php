@@ -162,7 +162,6 @@ abstract class CartItem implements CartItemInterface
      */
     public function getPrice()
     {
-        $this->calculatePrice();
         return $this->price;
     }
 
