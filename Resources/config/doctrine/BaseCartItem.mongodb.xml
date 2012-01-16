@@ -9,7 +9,7 @@
         <field name="description" fieldName="description" type="string" />
         <field name="isRecurring" fieldName="isRecurring" type="boolean" />
         <field name="name"        fieldName="name"        type="string" />
-        <field name="options"     fieldName="options"     type="string" />
+        <field name="options"     fieldName="options"     type="hash" />
         <field name="quantity"    fieldName="quantity"    type="string" />
         <field name="state"       fieldName="state"       type="string" />
 
