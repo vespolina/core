@@ -7,7 +7,7 @@
  */
 namespace Vespolina\CartBundle\Tests\Document;
 
-use Symfony\Bundle\DoctrineMongoDBBundle\Tests\TestCase;
+use Doctrine\Bundle\MongoDBBundle\Tests\TestCase;
 
 use Vespolina\CartBundle\Document\CartManager;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
