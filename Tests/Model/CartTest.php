@@ -56,4 +56,12 @@ class CartTest extends CartTestCommon
     {
         $this->markTestIncomplete('We have removed item completely but not by quantity, next step is to write method to remove quantity');
     }
+
+    public function testGetRecurringItems()
+    {
+        $cart = $this->buildLoadedCart('recurringTest', 2, 3);
+        $this->assertSame(3, count($cart->getRecurringItems()));
+        $this->assertSame(2, count($cart->getNonRecurringItems()));
+    }
+
 }

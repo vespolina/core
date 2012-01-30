@@ -56,4 +56,9 @@ class Cartable implements CartableItemInterface
     {
         return $this->price;
     }
+
+    public function getCartableName()
+    {
+        return $this->name;
+    }
 }
