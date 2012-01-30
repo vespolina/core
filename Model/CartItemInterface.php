@@ -86,25 +86,33 @@ interface CartItemInterface
     /**
      * Set the quantity
      *
-     * @abstract
      * @param $quantity
      * @return void
      */
     function setQuantity($quantity);
 
     /**
-     * Set the price of the cart item
+     * Return the total price of the cart item, (unit price + option upcharges) * quantity
      *
-     * @param $price
-     */
-    function setPrice($price);
-
-    /**
-     * Return the price of the cart item
+     * @param boolean $refresh - if true recalculates the total
      *
      * @return price
      */
-    function getPrice();
+    function getTotalPrice($refresh = false);
+
+    /**
+     * Set the unit price of the cart item
+     *
+     * @param $price
+     */
+    function setUnitPrice($price);
+
+    /**
+     * Return the unit price of the cart item
+     *
+     * @return price
+     */
+    function getUnitPrice();
 
     /**
      * Set the name of the cart item

@@ -28,18 +28,19 @@ abstract class CartItem implements CartItemInterface
     protected $isRecurring;
     protected $name;
     protected $options;
-    protected $price;
     protected $productId;
     protected $quantity;
     protected $state;
+    protected $totalPrice;
+    protected $unitPrice;
 
     public function __construct($cartableItem = null)
     {
         $this->cartableItem = $cartableItem;
-        //$this->options = new ArrayCollection();
         $this->isRecurring = false;
         $this->options = array();
         $this->quantity = 1;
+        $this->calculatePrice();
     }
 
     /**
@@ -152,17 +153,32 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    public function setPrice($price)
+    public function getTotalPrice($refresh = false)
     {
-        $this->price = $price;
+        if ($refresh) {
+            $this->calculatePrice();
+        }
+        return $this->totalPrice;
     }
 
     /**
      * @inheritdoc
      */
-    public function getPrice()
+    public function setUnitPrice($unitPrice)
     {
-        return $this->price;
+        $this->unitPrice = $unitPrice;
+        $this->calculatePrice();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUnitPrice()
+    {
+        if ($this->unitPrice) {
+            return $this->unitPrice;
+        }
+        return $this->cartableItem->getPrice();
     }
 
     /**
@@ -191,11 +207,11 @@ abstract class CartItem implements CartItemInterface
 
     protected function calculatePrice()
     {
-        $price = $this->cartableItem->getPrice();
+        $price = $this->getUnitPrice();
         foreach($this->options as $type => $value) {
             $productOption = $this->cartableItem->getOptionSet(array($type => $value));
             $price += $productOption->getUpcharge();
         }
-        $this->price = $price * $this->quantity;
+        $this->totalPrice = $price * $this->quantity;
     }
 }

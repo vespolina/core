@@ -10,9 +10,10 @@
         <field name="isRecurring" fieldName="isRecurring" type="boolean" />
         <field name="name"        fieldName="name"        type="string" />
         <field name="options"     fieldName="options"     type="hash" />
-        <field name="price"       fieldName="price"       type="string" />
         <field name="quantity"    fieldName="quantity"    type="string" />
         <field name="state"       fieldName="state"       type="string" />
+        <field name="totalPrice"  fieldName="totalPrice"  type="string" /> <!-- todo: should move out of here, goes in application level mapping -->
+        <field name="unitPrice"   fieldName="unitPrice"   type="string" /> <!-- todo: should move out of here, goes in application level mapping -->
 
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="prePersistCartItem" />
