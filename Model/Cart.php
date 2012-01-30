@@ -221,7 +221,7 @@ class Cart implements CartInterface
     {
         $subTotal = 0;
         foreach ($this->items as $item) {
-            $subTotal += $item->getPrice();
+            $subTotal += $item->getTotalPrice();
         }
         // todo: extra rows like shipping and taxes
         $extraRows = 0;
