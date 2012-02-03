@@ -144,7 +144,14 @@ class Cart implements CartInterface
      */
     public function getNonRecurringItems()
     {
+        $nonRecurringItems = array();
+        foreach ($this->items as $item) {
+            if (!$item->isRecurring()) {
+                $nonRecurringItems[] = $item;
+            }
+        }
 
+        return $nonRecurringItems;
     }
 
     /**
