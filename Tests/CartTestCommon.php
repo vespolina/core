@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Vespolina\CartBundle\Model\Cart;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 use Vespolina\CartBundle\Tests\Fixtures\Document\RecurringCartable;
+use Vespolina\ProductBundle\Model\RecurringInterface; // todo move to cart bundle
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -30,12 +31,13 @@ abstract class CartTestCommon extends WebTestCase
         return $cart;
     }
 
-    protected function createCartItem($cartableItem, $isRecurring = false)
+    protected function createCartItem($cartableItem)
     {
+        // todo: this should handle recurring interface
         $cartItem = $this->getMockForAbstractClass('Vespolina\CartBundle\Model\CartItem', array($cartableItem));
         $cartItem->setDescription($cartableItem->getName());
 
-        if ($isRecurring) {
+        if ($cartableItem instanceof RecurringInterface) {
             $irp = new \ReflectionProperty('Vespolina\CartBundle\Model\CartItem', 'isRecurring');
             $irp->setAccessible(true);
             $irp->setValue($cartItem, true);
@@ -95,7 +97,7 @@ abstract class CartTestCommon extends WebTestCase
             $this->addItemToCart($cart, $cartItem);
         }
         for ($i = 0; $i < $recurringItems ; $i++) {
-            $cartItem = $this->createCartableItem('recurring-'.$itemNames[$i], $i+1);
+            $cartItem = $this->createRecurringCartableItem('recurring-'.$itemNames[$i], $i+1);
             $this->addItemToCart($cart, $cartItem);
         }
 

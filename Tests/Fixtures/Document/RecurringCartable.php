@@ -11,6 +11,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\ProductBundle\Model\RecurringInterface;
+use Vespolina\ProductBundle\Model\RecurInterface;
 
 /**
  * @author Richard Shank <develop@zestic.com>
@@ -30,7 +31,7 @@ class RecurringCartable extends Cartable implements RecurringInterface
         return $this->recur;
     }
 
-    public function setRecur($recur)
+    public function setRecur(RecurInterface $recur)
     {
         $this->recur = $recur;
     }
