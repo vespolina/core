@@ -127,6 +127,36 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
+    public function getRecurringItems()
+    {
+        $recurringItems = array();
+        foreach ($this->items as $item) {
+            if ($item->isRecurring()) {
+                $recurringItems[] = $item;
+            }
+        }
+
+        return $recurringItems;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getNonRecurringItems()
+    {
+        $nonRecurringItems = array();
+        foreach ($this->items as $item) {
+            if (!$item->isRecurring()) {
+                $nonRecurringItems[] = $item;
+            }
+        }
+
+        return $nonRecurringItems;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getOwner()
     {
         return $this->owner;

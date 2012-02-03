@@ -59,8 +59,8 @@ class CartTest extends CartTestCommon
 
     public function testGetRecurringItems()
     {
-        $cart = $this->buildLoadedCart('recurringTest', 2, 3);
-        $this->assertSame(3, count($cart->getRecurringItems()));
+        $cart = $this->buildLoadedCart('recurringTest', 2, 4);
+        $this->assertSame(4, count($cart->getRecurringItems()));
         $this->assertSame(2, count($cart->getNonRecurringItems()));
     }
 
