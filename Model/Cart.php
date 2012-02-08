@@ -224,14 +224,6 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
-    public function setState($state)
-    {
-        $this->state = $state;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getSubTotal()
     {
         $this->calculateTotal();

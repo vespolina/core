@@ -128,8 +128,6 @@ interface CartInterface
 
     function setExpiresAt(\DateTime $expiresAt);
 
-    function setState($state);
-
     /**
      * Return the sub total of the items in the cart
      *

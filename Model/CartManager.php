@@ -58,7 +58,7 @@ abstract class CartManager implements CartManagerInterface
     public function initCart(CartInterface $cart)
     {
         //Set default state (for now we set it to "open")
-        $cart->setState(Cart::STATE_OPEN);
+        $this->setCartState($cart, Cart::STATE_OPEN);
     }
 
     public function initCartItem(CartItemInterface $cartItem)
@@ -70,8 +70,20 @@ abstract class CartManager implements CartManagerInterface
                 $rp = new \ReflectionProperty($cartItem, 'isRecurring');
                 $rp->setAccessible(true);
                 $rp->setValue($cartItem, true);
-                $rp->setAccessible(false); 
+                $rp->setAccessible(false);
             }
+        }
+    }
+
+    public function setCartState(CartInterface $cart, $state, $flush = true)
+    {
+        $rp = new \ReflectionProperty($cart, 'state');
+        $rp->setAccessible(true);
+        $rp->setValue($cart, $state);
+        $rp->setAccessible(false);
+
+        if ($flush) {
+            $this->updateCart($cart);
         }
     }
 }

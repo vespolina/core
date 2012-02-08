@@ -45,6 +45,15 @@ interface CartManagerInterface
     function initCart(CartInterface $cart);
 
     function initCartItem(CartItemInterface $cartItem);
+
+    /**
+     * Manually set the state of the cart
+     *
+     * @param CartInterface $cart
+     * @param $state
+     */
+    function setCartState(CartInterface $cart, $state);
+
     /**
      * Save or update the supplied cart
      *

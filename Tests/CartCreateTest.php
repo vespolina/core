@@ -40,7 +40,6 @@ class CartCreateTest extends WebTestCase
         $product2->setName('Iphone 4S');
         $product2->setId('IPHONE-4S-2011');
 
-
         $cart = $cartManager->createCart();
 
         $cart->setOwner($customerId);
@@ -72,8 +71,6 @@ class CartCreateTest extends WebTestCase
         $this->assertEquals($cartOwner, $customerId);
         $cartManager->updateCart($cart);
 
-
-
         //Step two, find back the open cart
         $aCart = $cartManager->findOpenCartByOwner($customerId);
         $this->assertEquals(count($aCart->getItems()), 2);
@@ -83,21 +80,13 @@ class CartCreateTest extends WebTestCase
         //$this->assertEquals($aCartItem1->getCartableItem()->getId() == $product1->getId());
         $this->assertEquals($aCartItem1->getOption('color'), 'white');
 
-
         //...and close it
         $aCart->setFollowUp('sales_order_12093488');
-        $aCart->setState(Cart::STATE_CLOSED);
+        $cartManager->setCartState($aCart, Cart::STATE_CLOSED);
 
         $cartManager->updateCart($aCart, true);
 
-
-
         $aCart->clearItems();
         $this->assertEquals($aCart->getItems()->count(), 0);
-
-
-
-
     }
-
 }

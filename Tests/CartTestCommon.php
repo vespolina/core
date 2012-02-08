@@ -19,7 +19,7 @@ use Vespolina\ProductBundle\Model\RecurringInterface; // todo move to cart bundl
  */
 abstract class CartTestCommon extends WebTestCase
 {
-    protected function createCart($name)
+    protected function createCart($name = 'default')
     {
         $cart = $this->getMockForAbstractClass('Vespolina\CartBundle\Model\Cart', array($name));
 
