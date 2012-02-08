@@ -83,6 +83,18 @@ class CartManager extends BaseCartManager
     /**
      * @inheritdoc
      */
+    public function findOpenCartById($id)
+    {
+        return $this->dm->createQueryBuilder($this->cartClass)
+            ->field('_id')->equals(new \MongoId($id))
+            ->field('state')->equals(Cart::STATE_OPEN)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function findCartByIdentifier($name, $code)
     {
         return;
