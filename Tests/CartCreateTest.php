@@ -57,7 +57,7 @@ class CartCreateTest extends WebTestCase
 
         $cart->addItem($cartItem1);
 
-        $this->assertEquals($cartItem1->getDescription(), $product1->getName());
+        $this->assertEquals($cartItem1->getName(), $product1->getName());
 
         $cartItem2 = $cartManager->createItem($product2);
         $cartItem2->setQuantity(2);

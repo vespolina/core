@@ -27,6 +27,8 @@ class Cartable implements CartableItemInterface
 
     protected $price;
 
+    protected $optionSet;
+
     public function setId($id)
     {
         $this->id = $id;
@@ -60,5 +62,10 @@ class Cartable implements CartableItemInterface
     public function getCartableName()
     {
         return $this->name;
+    }
+
+    public function getOptionSet()
+    {
+        return $this->optionSet;
     }
 }

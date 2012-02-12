@@ -209,8 +209,10 @@ abstract class CartItem implements CartItemInterface
     {
         $price = $this->getUnitPrice();
         foreach($this->options as $type => $value) {
-            $productOption = $this->cartableItem->getOptionSet(array($type => $value));
-            $price += $productOption->getUpcharge();
+
+            if ($productOption = $this->cartableItem->getOptionSet(array($type => $value))) {
+                $price += $productOption->getUpcharge();
+            }
         }
         $this->totalPrice = $price * $this->quantity;
     }
