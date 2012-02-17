@@ -2,7 +2,6 @@
 /**
  * (c) 2011-2012 Vespolina Project http://www.vespolina-project.org
  *
- * (c) Daniel Kucharski <daniel@xerias.be>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
@@ -18,18 +17,23 @@ use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManagerInterface;
 
 /**
+ * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
 abstract class CartManager implements CartManagerInterface
 {
     protected $cartClass;
     protected $cartItemClass;
+    protected $pricingProvider;
+    protected $pricingProviderClass;
+
     protected $recurringInterface;
 
-    function __construct($cartClass, $cartItemClass, $recurringInterface = 'Vespolina\ProductBundle\Model\RecurringInterface')
+    function __construct($cartClass, $cartItemClass, $pricingProviderClass, $recurringInterface = 'Vespolina\ProductBundle\Model\RecurringInterface')
     {
         $this->cartClass = $cartClass;
         $this->cartItemClass = $cartItemClass;
+        $this->pricingProviderClass = $pricingProviderClass;
         $this->recurringInterface = $recurringInterface;
     }
 
@@ -55,6 +59,16 @@ abstract class CartManager implements CartManagerInterface
         return $cartItem;
     }
 
+    public function getPricingProvider()
+    {
+        if (!$this->pricingProvider && $this->pricingProviderClass) {
+
+            $this->pricingProvider = new $this->pricingProviderClass();
+        }
+
+        return $this->pricingProviderClass;
+    }
+
     public function initCart(CartInterface $cart)
     {
         //Set default state (for now we set it to "open")
@@ -73,6 +87,18 @@ abstract class CartManager implements CartManagerInterface
                 $rp->setAccessible(false);
             }
         }
+    }
+
+    public function determinePrices(CartInterface $cart)
+    {
+
+        if ($pricingProvider = $this->getPricingProvider()) {
+
+            $pricingContextContainer = $pricingProvider->createPricingContextContainer();
+            $pricingProvider->determineCartPrices($cart, $pricingContextContainer, true);
+        }
+
+
     }
 
     public function setCartState(CartInterface $cart, $state, $flush = true)

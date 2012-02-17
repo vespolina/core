@@ -73,6 +73,7 @@ class CartCreateTest extends WebTestCase
 
         //Step two, find back the open cart
         $aCart = $cartManager->findOpenCartByOwner($customerId);
+        $c = $aCart->getItems();
         $this->assertEquals(count($aCart->getItems()), 2);
 
         $aCartItem1 = $aCart->getItem(1);

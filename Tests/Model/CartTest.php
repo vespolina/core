@@ -23,12 +23,16 @@ class CartTest extends CartTestCommon
         $cartable1 = $this->createCartableItem('cartable1', 1);
         $this->addItemToCart($cart, $cartable1);
 
+        $this->getPricingProvider()->determineCartPrices($cart);
+
         $this->assertSame(1, $cart->getSubTotal());
         $this->assertSame(1, $cart->getTotal());
 
-        $cartable1 = $this->createCartableItem('cartable1', 2);
-        $item = $this->addItemToCart($cart, $cartable1);
+        $cartable2 = $this->createCartableItem('cartable2', 2);
+        $item = $this->addItemToCart($cart, $cartable2);
         $item->setQuantity(3);
+
+        $this->getPricingProvider()->determineCartPrices($cart);
 
         $this->assertSame(7, $cart->getSubTotal());
         $this->assertSame(7, $cart->getTotal());
@@ -43,10 +47,14 @@ class CartTest extends CartTestCommon
         $item = $this->addItemToCart($cart, $cartable1);
         $item->setQuantity(3);
 
+        $this->getPricingProvider()->determineCartPrices($cart);
+
         $this->assertSame(3, $cart->getSubTotal());
         $this->assertSame(3, $cart->getTotal());
 
         $this->removeItemFromCart($cart, $item);
+
+        $this->getPricingProvider()->determineCartPrices($cart);
 
         $this->assertSame(0, $cart->getSubTotal());
         $this->assertSame(0, $cart->getTotal());
@@ -54,7 +62,9 @@ class CartTest extends CartTestCommon
 
     public function testRemovesOneUnitOfItemFromCart()
     {
-        $this->markTestIncomplete('We have removed item completely but not by quantity, next step is to write method to remove quantity');
+        $this->markTestSkipped();
+
+        //$this->markTestIncomplete('We have removed item completely but not by quantity, next step is to write method to remove quantity');
     }
 
     public function testGetRecurringItems()

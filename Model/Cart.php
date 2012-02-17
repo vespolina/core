@@ -59,7 +59,6 @@ class Cart implements CartInterface
         {
             if ($itemToCompare == $cartItem) {
                 unset($this->items[$key]);
-                $this->calculateTotal();
                 break;
             };
         }
@@ -224,9 +223,24 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
+    public function setSubTotal($subTotal)
+    {
+        $this->subTotal = $subTotal;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getSubTotal()
     {
-        $this->calculateTotal();
         return $this->subTotal;
     }
 
@@ -235,20 +249,8 @@ class Cart implements CartInterface
      */
     public function getTotal()
     {
-        $this->calculateTotal();
         return $this->total;
     }
 
-    protected function calculateTotal()
-    {
-        $subTotal = 0;
-        foreach ($this->items as $item) {
-            $subTotal += $item->getTotalPrice();
-        }
-        // todo: extra rows like shipping and taxes
-        $extraRows = 0;
-        $total = $subTotal + $extraRows;
-        $this->subTotal = $subTotal;
-        $this->total = $total;
-    }
+
 }

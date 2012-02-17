@@ -8,24 +8,35 @@
 
 namespace Vespolina\CartBundle\Pricing;
 
+use Vespolina\CartBundle\Model\CartInterface;
+use Vespolina\CartBundle\Model\CartItemInterface;
 
 interface CartPricingProviderInterface
 {
     /**
-     * Create a cart instance
+     * Create a pricing context container which holds 'global variables' used while computing all prices
      *
      * @abstract
-     * @param string $name Name of the cart
-     * @return void
+     *
      */
-    function createCart($name = 'default');
+    function createPricingContextContainer();
 
     /**
-     * Create a cart item
+     * Determine cart and (optionally) item levle prices
      *
      * @abstract
-     * @param Vespolina\CartBundle\Model\CartableItemInterface $cartableItem
-     * @return CartItemInterface
+     * @param \Vespolina\CartBundle\Model\CartInterface $cart
+     * @param $pricingContextContainer
+     * @param $determineItemPrices
      */
-    function createItem(CartableItemInterface $cartableItem = null);
+    function determineCartPrices(CartInterface $cart, $pricingContextContainer = null, $determineItemPrices = true);
+
+    /**
+     * @abstract
+     * @param \Vespolina\CartBundle\Model\CartInterface $cart
+     * @param \Vespolina\CartBundle\Model\CartItemInterface $cartItem
+     * @param $pricingContextContainer
+     */
+    function determineCartItemPrices(CartInterface $cart, CartItemInterface $cartItem, $pricingContextContainer = null);
+
 }

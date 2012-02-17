@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="vespolina.cart.cart_manager.class">Vespolina\CartBundle\Document\CartManager</parameter>
+        <parameter key="vespolina.cart.pricing_provider.class">Vespolina\CartBundle\Pricing\CartPricingProvider</parameter>
         <parameter key="vespolina.cart.model.cart.class">Vespolina\CartBundle\Document\Cart</parameter>
         <parameter key="vespolina.cart.model.cart_item.class">Vespolina\CartBundle\Document\CartItem</parameter>
     </parameters>
@@ -15,6 +16,7 @@
             <argument type="service" id="doctrine.odm.mongodb.default_document_manager" />
             <argument>%vespolina.cart.model.cart.class%</argument>
             <argument>%vespolina.cart.model.cart_item.class%</argument>
+            <argument>%vespolina.cart.pricing_provider.class%</argument>
         </service>
         <service id="vespolina.cart_manager" alias="vespolina.cart.cart_manager" />
     </services>

@@ -10,6 +10,7 @@ namespace Vespolina\CartBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 use Vespolina\CartBundle\Model\Cart;
+use Vespolina\CartBundle\Pricing\CartPricingProvider;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 use Vespolina\CartBundle\Tests\Fixtures\Document\RecurringCartable;
 use Vespolina\ProductBundle\Model\RecurringInterface; // todo move to cart bundle
@@ -19,6 +20,9 @@ use Vespolina\ProductBundle\Model\RecurringInterface; // todo move to cart bundl
  */
 abstract class CartTestCommon extends WebTestCase
 {
+
+    protected $pricingProvider;
+
     protected function createCart($name = 'default')
     {
         $cart = $this->getMockForAbstractClass('Vespolina\CartBundle\Model\Cart', array($name));
@@ -71,6 +75,17 @@ abstract class CartTestCommon extends WebTestCase
         $cart->addItem($item);
 
         return $item;
+    }
+
+    protected function getPricingProvider()
+    {
+
+        if (!$this->pricingProvider) {
+
+            $this->pricingProvider = new CartPricingProvider();
+        }
+
+        return $this->pricingProvider;
     }
 
     protected function removeItemFromCart($cart, $cartItem)

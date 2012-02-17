@@ -155,9 +155,6 @@ abstract class CartItem implements CartItemInterface
      */
     public function getTotalPrice($refresh = false)
     {
-        if ($refresh) {
-            $this->calculatePrice();
-        }
         return $this->totalPrice;
     }
 
@@ -167,7 +164,14 @@ abstract class CartItem implements CartItemInterface
     public function setUnitPrice($unitPrice)
     {
         $this->unitPrice = $unitPrice;
-        $this->calculatePrice();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
     }
 
     /**
