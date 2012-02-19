@@ -15,57 +15,142 @@ use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
 
 /**
- * @author Daniel Kucharski <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Richard Shank <develop@zestic.com>
  */
 class CartPricingProvider implements CartPricingProviderInterface
 {
+    protected $fulfillmentPricingEnabled;
+    protected $taxPricingEnabled;
 
-    public function createPricingContextContainer()
+    public function __construct()
     {
-        $pricingContextContainer = new ArrayCollection();
-
-        return $pricingContextContainer;
+        $this->fulfillmentPricingEnabled = true;
+        $this->taxDeterminationEnabled = true;
     }
 
-    public function determineCartPrices(CartInterface $cart, $pricingContextContainer = null, $determineItemPrices = true) {
+    public function createPricingContext()
+    {
+        $context = new ArrayCollection();
 
-        if (!$pricingContextContainer) {
-            $pricingContextContainer = $this->createPricingContextContainer();
+        return $context;
+    }
 
-            $pricingContextContainer['total'] = 0;
-            $pricingContextContainer['subTotal'] = 0;
+    public function determineCartPrices(CartInterface $cart, $pricingContext = null, $determineItemPrices = true)
+    {
+
+        if (!$pricingContext) {
+            $pricingContext = $this->createPricingContext();
+
+            $pricingContext['total'] = 0;
+            $pricingContext['subTotal'] = 0;
         }
 
         foreach ($cart->getItems() as $cartItem) {
 
             if ($determineItemPrices) {
 
-                $this->determineCartItemPrices($cart, $cartItem, $pricingContextContainer);
+                $this->determineCartItemPrices($cartItem, $pricingContext);
             }
 
-            $this->sumItemPrices($cartItem, $pricingContextContainer);
+            //Sum item level totals into the pricing context
+            $this->sumItemPrices($cartItem, $pricingContext);
         }
 
-        $cart->setSubTotal($pricingContextContainer['subTotal']);
-        $cart->setTotal($pricingContextContainer['total']);
+        //Determine header level fulfillment costs (eg. one shot tax)
+        if ($this->fulfillmentPricingEnabled) {
 
+            $this->determineCartFulfillmentPrices($cart, $pricingContext);
+        }
+
+          //Determine header level tax (eg. one shot tax)
+        if ($this->taxPricingEnabled) {
+
+            $this->determineCartTaxes($cart, $pricingContext);
+        }
+
+        $cart->setSubTotal($pricingContext['subTotal']);
+        $cart->setTotal($pricingContext['total']);
 
     }
 
-    public function determineCartItemPrices(CartInterface $cart, CartItemInterface $cartItem, $pricingContextContainer = null) {
+    public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext = null) {
 
-        if (!$pricingContextContainer) {
-            $pricingContextContainer = $this->createPricingContextContainer();
+        if (!$pricingContext) {
+            $pricingContext = $this->createPricingContext();
         }
 
-        $totalPrice = $cartItem->getQuantity() * $cartItem->getUnitPrice();
+        $unitPrice = $cartItem->getUnitPrice();
+        $upCharge = 0;
+
+        //Add additional upcharges for a chosen product option
+        $upCharge = $this->determineCartItemUpCharge($cartItem, $pricingContext);
+
+        //Determine item level taxes such as VAT or sales tax
+        if ($this->taxPricingEnabled) {
+
+            $this->determineCartItemTaxes($cartItem, $pricingContext);
+        }
+
+        //Calculate fulfillment costs (eg. shipping, packaging cost)
+        if ($this->fulfillmentPricingEnabled) {
+
+            $this->determineCartItemFulfillmentPrices($cartItem, $pricingContext);
+        }
+
+        //Calculate item level totals
+        $totalPrice = ( $cartItem->getQuantity() * $cartItem->getUnitPrice() ) + $upCharge;
+
         $cartItem->setTotalPrice($totalPrice);
     }
 
-    public function sumItemPrices(CartItemInterface $cartItem, $pricingContextContainer) {
+    public function determineCartItemFulfillmentPrices(CartItemInterface $cartItem, $pricingContext)
+    {
 
-        $pricingContextContainer['subTotal'] += $cartItem->getTotalPrice();
-        $pricingContextContainer['total'] += $cartItem->getTotalPrice();
+        /** Todo: Check what it costs to fulfill $cartItem->getCartable()
+         *  - shipping
+         *  - handling
+         *  - packaging
+         *  - additional fees
+         */
+
+    }
+
+    public function determineCartItemUpCharge(CartItemInterface $cartItem, $pricingContext)
+    {
+        $upCharge = 0;
+
+        foreach($cartItem->getOptions() as $type => $value) {
+
+            if ($productOption = $cartItem->getCartableItem()->getOptionSet(array($type => $value))) {
+                $upCharge += $productOption->getUpcharge();
+            }
+        }
+
+        return $upCharge;
+    }
+
+    public function determineCartItemTaxes(CartItemInterface $cartItem, $pricingContext)
+    {
+
+    }
+
+    public function determineCartFulfillmentPrices(CartInterface $cart, $pricingContext)
+    {
+        //Additional fulfillment to be applied not related to cart item taxes
+        // eg. fixed fulfillment fee
+    }
+
+    public function determineCartTaxes(CartInterface $cart, $pricingContext)
+    {
+        //Additional taxes to be applied not related to cart item taxes
+    }
+
+    public function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
+    {
+
+        $pricingContext['subTotal'] += $cartItem->getTotalPrice(); //todo
+        $pricingContext['total'] += $cartItem->getTotalPrice();
 
 
     }

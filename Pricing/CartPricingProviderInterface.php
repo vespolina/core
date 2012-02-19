@@ -14,29 +14,28 @@ use Vespolina\CartBundle\Model\CartItemInterface;
 interface CartPricingProviderInterface
 {
     /**
-     * Create a pricing context container which holds 'global variables' used while computing all prices
+     * Create a pricing context container which holds 'global variables' used for computing all prices
      *
      * @abstract
      *
      */
-    function createPricingContextContainer();
+    function createPricingContext();
 
     /**
      * Determine cart and (optionally) item levle prices
      *
      * @abstract
      * @param \Vespolina\CartBundle\Model\CartInterface $cart
-     * @param $pricingContextContainer
+     * @param $pricingContext
      * @param $determineItemPrices
      */
-    function determineCartPrices(CartInterface $cart, $pricingContextContainer = null, $determineItemPrices = true);
+    function determineCartPrices(CartInterface $cart, $pricingContext = null, $determineItemPrices = true);
 
     /**
      * @abstract
-     * @param \Vespolina\CartBundle\Model\CartInterface $cart
      * @param \Vespolina\CartBundle\Model\CartItemInterface $cartItem
-     * @param $pricingContextContainer
+     * @param $pricingContext
      */
-    function determineCartItemPrices(CartInterface $cart, CartItemInterface $cartItem, $pricingContextContainer = null);
+    function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext = null);
 
 }

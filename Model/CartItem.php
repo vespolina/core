@@ -40,7 +40,6 @@ abstract class CartItem implements CartItemInterface
         $this->isRecurring = false;
         $this->options = array();
         $this->quantity = 1;
-        $this->calculatePrice();
     }
 
     /**
@@ -55,7 +54,6 @@ abstract class CartItem implements CartItemInterface
         }
 
         $this->options[$type] = $value;
-        $this->calculatePrice();
     }
 
     /**
@@ -139,7 +137,6 @@ abstract class CartItem implements CartItemInterface
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
-        $this->calculatePrice();
     }
 
     /**
@@ -209,15 +206,4 @@ abstract class CartItem implements CartItemInterface
         return $this->isRecurring;
     }
 
-    protected function calculatePrice()
-    {
-        $price = $this->getUnitPrice();
-        foreach($this->options as $type => $value) {
-
-            if ($productOption = $this->cartableItem->getOptionSet(array($type => $value))) {
-                $price += $productOption->getUpcharge();
-            }
-        }
-        $this->totalPrice = $price * $this->quantity;
-    }
 }

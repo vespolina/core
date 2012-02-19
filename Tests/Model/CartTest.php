@@ -62,7 +62,6 @@ class CartTest extends CartTestCommon
 
     public function testRemovesOneUnitOfItemFromCart()
     {
-        $this->markTestSkipped();
 
         //$this->markTestIncomplete('We have removed item completely but not by quantity, next step is to write method to remove quantity');
     }
