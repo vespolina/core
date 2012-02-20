@@ -104,7 +104,7 @@ class CartPricingProvider implements CartPricingProviderInterface
         $cartItem->setTotalPrice($totalPrice);
     }
 
-    public function determineCartItemFulfillmentPrices(CartItemInterface $cartItem, $pricingContext)
+    protected function determineCartItemFulfillmentPrices(CartItemInterface $cartItem, $pricingContext)
     {
 
         /** Todo: Check what it costs to fulfill $cartItem->getCartable()
@@ -116,7 +116,7 @@ class CartPricingProvider implements CartPricingProviderInterface
 
     }
 
-    public function determineCartItemUpCharge(CartItemInterface $cartItem, $pricingContext)
+    protected function determineCartItemUpCharge(CartItemInterface $cartItem, $pricingContext)
     {
         $upCharge = 0;
 
@@ -130,23 +130,23 @@ class CartPricingProvider implements CartPricingProviderInterface
         return $upCharge;
     }
 
-    public function determineCartItemTaxes(CartItemInterface $cartItem, $pricingContext)
+    protected function determineCartItemTaxes(CartItemInterface $cartItem, $pricingContext)
     {
 
     }
 
-    public function determineCartFulfillmentPrices(CartInterface $cart, $pricingContext)
+    protected function determineCartFulfillmentPrices(CartInterface $cart, $pricingContext)
     {
         //Additional fulfillment to be applied not related to cart item taxes
         // eg. fixed fulfillment fee
     }
 
-    public function determineCartTaxes(CartInterface $cart, $pricingContext)
+    protected function determineCartTaxes(CartInterface $cart, $pricingContext)
     {
         //Additional taxes to be applied not related to cart item taxes
     }
 
-    public function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
+    protected function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
 
         $pricingContext['subTotal'] += $cartItem->getTotalPrice(); //todo

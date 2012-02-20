@@ -101,15 +101,11 @@ abstract class CartManager implements CartManagerInterface
 
     }
 
-    public function setCartState(CartInterface $cart, $state, $flush = true)
+    public function setCartState(CartInterface $cart, $state)
     {
         $rp = new \ReflectionProperty($cart, 'state');
         $rp->setAccessible(true);
         $rp->setValue($cart, $state);
         $rp->setAccessible(false);
-
-        if ($flush) {
-            $this->updateCart($cart);
-        }
     }
 }

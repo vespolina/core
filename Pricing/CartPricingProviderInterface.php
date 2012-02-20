@@ -11,10 +11,14 @@ namespace Vespolina\CartBundle\Pricing;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 
+/**
+ * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Richard Shank <develop@zestic.com>
+ */
 interface CartPricingProviderInterface
 {
     /**
-     * Create a pricing context container which holds 'global variables' used for computing all prices
+     * Create a pricing context  which holds 'global variables' used while computing prices
      *
      * @abstract
      *
@@ -22,7 +26,7 @@ interface CartPricingProviderInterface
     function createPricingContext();
 
     /**
-     * Determine cart and (optionally) item levle prices
+     * Determine cart and (optionally) item level prices
      *
      * @abstract
      * @param \Vespolina\CartBundle\Model\CartInterface $cart
@@ -37,5 +41,7 @@ interface CartPricingProviderInterface
      * @param $pricingContext
      */
     function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext = null);
+
+
 
 }
