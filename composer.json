@@ -21,11 +21,11 @@
         "doctrine/orm": "master-dev",
         "doctrine/dbal": "2.1.5",
         "doctrine/mongodb": "master-dev",
-        "doctrine/mongodb-odm": "master-dev",
+        "doctrine/mongodb-odm": "master-dev"
    },
     "suggest": {
         "symfony/doctrine-bundle": "*",
-        "symfony/mongodb-odm-bundle": "*",
+        "symfony/mongodb-odm-bundle": "*"
     },
     "autoload": {
         "psr-0": { "Vespolina\\CartBundle": "" }
