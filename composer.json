@@ -16,12 +16,12 @@
         "symfony/symfony": "dev-master",
         "symfony/framework-bundle": "2.*",
         "symfony/security-bundle": "2.*",
-        "doctrine/doctrine-bundle": "master-dev",
-        "doctrine/common": "master-dev",
-        "doctrine/orm": "master-dev",
+        "doctrine/doctrine-bundle": "dev-master",
+        "doctrine/common": "dev-master",
+        "doctrine/orm": "dev-master",
         "doctrine/dbal": "2.1.5",
-        "doctrine/mongodb": "master-dev",
-        "doctrine/mongodb-odm": "master-dev"
+        "doctrine/mongodb": "dev-master",
+        "doctrine/mongodb-odm": "dev-master"
    },
     "suggest": {
         "symfony/doctrine-bundle": "*",
