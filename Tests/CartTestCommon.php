@@ -74,6 +74,7 @@ abstract class CartTestCommon extends WebTestCase
         $item = $this->createCartItem($cartableItem);
         $cart->addItem($item);
 
+        $this->getPricingProvider()->determineCartPrices($cart);
         return $item;
     }
 
@@ -92,6 +93,8 @@ abstract class CartTestCommon extends WebTestCase
     {
         $item = $cartItem;
         $cart->removeItem($item);
+
+        $this->getPricingProvider()->determineCartPrices($cart);
 
         return $item;
     }
@@ -115,6 +118,8 @@ abstract class CartTestCommon extends WebTestCase
             $cartItem = $this->createRecurringCartableItem('recurring-'.$itemNames[$i], $i+1);
             $this->addItemToCart($cart, $cartItem);
         }
+
+        $this->getPricingProvider()->determineCartPrices($cart);
 
         return $cart;
     }

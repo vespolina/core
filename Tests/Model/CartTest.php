@@ -7,7 +7,7 @@
  */
 namespace Vespolina\CartBundle\Tests\Model;
 
-use Symfony\Bundle\DoctrineMongoDBBundle\Tests\TestCase;
+use Doctrine\Bundle\MongoDBBundle\Tests\TestCase;
 
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 use Vespolina\CartBundle\Tests\CartTestCommon;
@@ -22,8 +22,6 @@ class CartTest extends CartTestCommon
         $cart = $this->createCart('testCart');
         $cartable1 = $this->createCartableItem('cartable1', 1);
         $this->addItemToCart($cart, $cartable1);
-
-        $this->getPricingProvider()->determineCartPrices($cart);
 
         $this->assertSame(1, $cart->getSubTotal());
         $this->assertSame(1, $cart->getTotal());

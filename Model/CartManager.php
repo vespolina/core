@@ -15,6 +15,7 @@ use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManagerInterface;
+use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
 
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
@@ -25,15 +26,13 @@ abstract class CartManager implements CartManagerInterface
     protected $cartClass;
     protected $cartItemClass;
     protected $pricingProvider;
-    protected $pricingProviderClass;
-
     protected $recurringInterface;
 
-    function __construct($cartClass, $cartItemClass, $pricingProviderClass, $recurringInterface = 'Vespolina\ProductBundle\Model\RecurringInterface')
+    function __construct(CartPricingProviderInterface $pricingProvider, $cartClass, $cartItemClass, $recurringInterface = 'Vespolina\ProductBundle\Model\RecurringInterface')
     {
         $this->cartClass = $cartClass;
         $this->cartItemClass = $cartItemClass;
-        $this->pricingProviderClass = $pricingProviderClass;
+        $this->pricingProvider = $pricingProvider;
         $this->recurringInterface = $recurringInterface;
     }
 
@@ -61,12 +60,7 @@ abstract class CartManager implements CartManagerInterface
 
     public function getPricingProvider()
     {
-        if (!$this->pricingProvider && $this->pricingProviderClass) {
-
-            $this->pricingProvider = new $this->pricingProviderClass();
-        }
-
-        return $this->pricingProviderClass;
+        return $this->pricingProvider;
     }
 
     public function initCart(CartInterface $cart)
@@ -94,7 +88,7 @@ abstract class CartManager implements CartManagerInterface
 
         if ($pricingProvider = $this->getPricingProvider()) {
 
-            $pricingContextContainer = $pricingProvider->createPricingContextContainer();
+            $pricingContextContainer = $pricingProvider->createPricingContext();
             $pricingProvider->determineCartPrices($cart, $pricingContextContainer, true);
         }
 

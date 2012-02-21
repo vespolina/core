@@ -36,9 +36,9 @@ class CartManagerTest extends TestCase
         $this->dm = self::createTestDocumentManager();
         $this->cartMgr = new CartManager(
             $this->dm,
+            new \Vespolina\CartBundle\Pricing\CartPricingProvider(),
             '\Vespolina\CartBundle\Tests\Fixtures\Document\Cart',
-            '\Vespolina\CartBundle\Tests\Fixtures\Document\CartItem',
-            '\Vespolina\CartBundle\Pricing\CartPricingProvider'
+            '\Vespolina\CartBundle\Tests\Fixtures\Document\CartItem'
         );
     }
 
