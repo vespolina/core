@@ -69,8 +69,8 @@ class CartPricingProvider implements CartPricingProviderInterface
             $this->determineCartTaxes($cart, $pricingContext);
         }
 
-        $cart->setSubTotal($pricingContext['subTotal']);
-        $cart->setTotal($pricingContext['total']);
+        $cart->setPrice('subTotal', $pricingContext['subTotal']);
+        $cart->setPrice('total', $pricingContext['total']);
 
     }
 
@@ -101,7 +101,8 @@ class CartPricingProvider implements CartPricingProviderInterface
         //Calculate item level totals
         $totalPrice = ( $cartItem->getQuantity() * $cartItem->getUnitPrice() ) + $upCharge;
 
-        $cartItem->setTotalPrice($totalPrice);
+        $cartItem->setPrice('subTotal', $totalPrice);
+        $cartItem->setPrice('total', $totalPrice);
     }
 
     protected function determineCartItemFulfillmentPrices(CartItemInterface $cartItem, $pricingContext)
@@ -149,8 +150,8 @@ class CartPricingProvider implements CartPricingProviderInterface
     protected function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
 
-        $pricingContext['subTotal'] += $cartItem->getTotalPrice(); //todo
-        $pricingContext['total'] += $cartItem->getTotalPrice();
+        $pricingContext['subTotal'] += $cartItem->getPrice('subTotal'); //todo
+        $pricingContext['total'] += $cartItem->getPrice('total');
 
 
     }

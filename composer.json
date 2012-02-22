@@ -15,9 +15,9 @@
         "php": ">=5.3.2",
         "symfony/symfony": "dev-master",
         "doctrine/dbal": "dev-master",
-        "doctrine/doctrine-bundle": "dev-master",
-        "doctrine/common": "dev-master",
         "doctrine/orm": "dev-master",
+        "doctrine/common": "dev-master",
+        "doctrine/doctrine-bundle": "dev-master",
         "doctrine/mongodb": "dev-master",
         "doctrine/mongodb-odm": "dev-master"
    },

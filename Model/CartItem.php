@@ -29,6 +29,7 @@ abstract class CartItem implements CartItemInterface
     protected $name;
     protected $options;
     protected $productId;
+    protected $prices;
     protected $quantity;
     protected $state;
     protected $totalPrice;
@@ -39,6 +40,7 @@ abstract class CartItem implements CartItemInterface
         $this->cartableItem = $cartableItem;
         $this->isRecurring = false;
         $this->options = array();
+        $this->prices = array();
         $this->quantity = 1;
     }
 
@@ -81,6 +83,15 @@ abstract class CartItem implements CartItemInterface
     public function getOptions()
     {
         return $this->options;
+    }
+
+
+    public function getPrice($name)
+    {
+        if (array_key_exists($name, $this->prices)) {
+
+            return $this->prices[$name];
+        }
     }
 
     /**
@@ -131,6 +142,11 @@ abstract class CartItem implements CartItemInterface
         return $this->description;
     }
 
+    public function setPrice($name, $price)
+    {
+        $this->prices[$name] = $price;
+    }
+
     /**
      * @inheritdoc
      */
@@ -152,7 +168,8 @@ abstract class CartItem implements CartItemInterface
      */
     public function getTotalPrice($refresh = false)
     {
-        return $this->totalPrice;
+
+        return $this->getPrice('total');
     }
 
     /**
@@ -160,7 +177,7 @@ abstract class CartItem implements CartItemInterface
      */
     public function setUnitPrice($unitPrice)
     {
-        $this->unitPrice = $unitPrice;
+        $this->setPrice('unitPrice', $unitPrice);
     }
 
     /**
@@ -168,7 +185,7 @@ abstract class CartItem implements CartItemInterface
      */
     public function setTotalPrice($totalPrice)
     {
-        $this->totalPrice = $totalPrice;
+        $this->setPrice('total', $totalPrice);
     }
 
     /**
@@ -176,9 +193,11 @@ abstract class CartItem implements CartItemInterface
      */
     public function getUnitPrice()
     {
-        if ($this->unitPrice) {
-            return $this->unitPrice;
+        if ($unitPrice = $this->getPrice('unitPrice')) {
+
+            return $unitPrice;
         }
+
         return $this->cartableItem->getPrice();
     }
 

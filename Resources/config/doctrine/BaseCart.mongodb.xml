@@ -13,7 +13,7 @@
         <field name="state"     fieldName="state" type="string" />
         <field name="updatedAt" fieldName="updatedAt" type="date" />
 
-        <field name="total" fieldName="total" type="float" />
+        <field name="prices" fieldName="prices" type="hash" />
 
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="incrementCreatedAt" />
