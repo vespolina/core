@@ -28,7 +28,7 @@ abstract class CartManager implements CartManagerInterface
     protected $pricingProvider;
     protected $recurringInterface;
 
-    function __construct(CartPricingProviderInterface $pricingProvider, $cartClass, $cartItemClass, $recurringInterface = 'Vespolina\ProductBundle\Model\RecurringInterface')
+    function __construct(CartPricingProviderInterface $pricingProvider =  null, $cartClass, $cartItemClass, $recurringInterface = 'Vespolina\ProductBundle\Model\RecurringInterface')
     {
         $this->cartClass = $cartClass;
         $this->cartItemClass = $cartItemClass;

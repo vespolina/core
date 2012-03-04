@@ -28,7 +28,7 @@ class CartManager extends BaseCartManager
     protected $dm;
     protected $primaryIdentifier;
 
-    public function __construct(DocumentManager $dm, CartPricingProviderInterface $pricingProvider, $cartClass, $cartItemClass)
+    public function __construct(DocumentManager $dm, CartPricingProviderInterface $pricingProvider = null, $cartClass, $cartItemClass)
     {
         $this->dm = $dm;
 
