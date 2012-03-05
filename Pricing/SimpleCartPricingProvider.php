@@ -18,7 +18,7 @@ use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-class CartPricingProvider implements CartPricingProviderInterface
+class SimpleCartPricingProvider implements CartPricingProviderInterface
 {
     protected $fulfillmentPricingEnabled;
     protected $taxPricingEnabled;

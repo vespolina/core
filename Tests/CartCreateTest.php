@@ -3,11 +3,12 @@
 namespace Vespolina\CartBundle\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Vespolina\CartBundle\Tests\CartTestCommon;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 
 use Vespolina\CartBundle\Model\Cart;
 
-class CartCreateTest extends WebTestCase
+class CartCreateTest extends CartTestCommon
 {
     protected $client;
 
@@ -84,6 +85,8 @@ class CartCreateTest extends WebTestCase
         $this->assertEquals(count($aCart->getItems()), 2);
 
         $aCartItem1 = $aCart->getItem(1);
+
+        $this->assertEquals($aCartItem1->getPrice('unitPrice'), 499);
 
         $this->assertEquals($aCartItem1->getOption('color'), 'white');
 

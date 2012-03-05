@@ -128,6 +128,14 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
+    public function getPrices()
+    {
+        return $this->prices;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getRecurringItems()
     {
         $recurringItems = array();

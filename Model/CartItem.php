@@ -94,6 +94,11 @@ abstract class CartItem implements CartItemInterface
         }
     }
 
+    public function getPrices()
+    {
+        return $this->prices;
+    }
+
     /**
      * @inheritdoc
      */

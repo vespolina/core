@@ -10,12 +10,13 @@ namespace Vespolina\CartBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 use Vespolina\CartBundle\Model\Cart;
-use Vespolina\CartBundle\Pricing\CartPricingProvider;
+use Vespolina\CartBundle\Pricing\SimpleCartPricingProvider;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 use Vespolina\CartBundle\Tests\Fixtures\Document\RecurringCartable;
 use Vespolina\ProductBundle\Model\RecurringInterface; // todo move to cart bundle
 
 /**
+ * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard D Shank <develop@zestic.com>
  */
 abstract class CartTestCommon extends WebTestCase
@@ -83,7 +84,7 @@ abstract class CartTestCommon extends WebTestCase
 
         if (!$this->pricingProvider) {
 
-            $this->pricingProvider = new CartPricingProvider();
+            $this->pricingProvider = new SimpleCartPricingProvider();
         }
 
         return $this->pricingProvider;
