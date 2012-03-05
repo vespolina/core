@@ -19,7 +19,7 @@
         "doctrine/mongodb-odm": "dev-master"
    },
     "suggest": {
-        "doctrine/dbal": "dev-master",
+        "doctrine/dbal": "dev-master"
     },
     "autoload": {
         "psr-0": { "Vespolina\\CartBundle": "" }
