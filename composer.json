@@ -12,12 +12,11 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2",
+        "php": ">=5.3.2"
     },
     "suggest": {
         "symfony/doctrine-bundle": "*",
-        "symfony/mongodb-odm-bundle": "*",
-        "doctrine/couchdb-odm-bundle": "*"
+        "symfony/mongodb-odm-bundle": "*"
     },
     "autoload": {
         "psr-0": { "Vespolina\\CartBundle": "" }
