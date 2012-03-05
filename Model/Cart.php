@@ -27,6 +27,7 @@ class Cart implements CartInterface
     protected $items;
     protected $name;
     protected $owner;
+    protected $prices;
     protected $state;
     protected $subTotal;
     protected $total;
@@ -39,6 +40,7 @@ class Cart implements CartInterface
     {
         $this->items = new ArrayCollection();
         $this->name = $name;
+        $this->prices = array();
     }
 
     /**
@@ -59,7 +61,6 @@ class Cart implements CartInterface
         {
             if ($itemToCompare == $cartItem) {
                 unset($this->items[$key]);
-                $this->calculateTotal();
                 break;
             };
         }
@@ -127,6 +128,14 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
+    public function getPrices()
+    {
+        return $this->prices;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getRecurringItems()
     {
         $recurringItems = array();
@@ -160,6 +169,14 @@ class Cart implements CartInterface
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    public function getPrice($name)
+    {
+        if (array_key_exists($name, $this->prices)) {
+
+            return $this->prices[$name];
+        }
     }
 
     /**
@@ -221,13 +238,34 @@ class Cart implements CartInterface
         $this->owner = $owner;
     }
 
+    public function setPrice($name, $price)
+    {
+        $this->prices[$name] = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSubTotal($subTotal)
+    {
+
+        $this->setPrice('subTotal', $subTotal);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setTotal($total)
+    {
+        $this->setPrice('total', $total);
+    }
+
     /**
      * @inheritdoc
      */
     public function getSubTotal()
     {
-        $this->calculateTotal();
-        return $this->subTotal;
+        return $this->getPrice('subTotal');
     }
 
     /**
@@ -235,20 +273,8 @@ class Cart implements CartInterface
      */
     public function getTotal()
     {
-        $this->calculateTotal();
-        return $this->total;
+        return $this->getPrice('total');
     }
 
-    protected function calculateTotal()
-    {
-        $subTotal = 0;
-        foreach ($this->items as $item) {
-            $subTotal += $item->getTotalPrice();
-        }
-        // todo: extra rows like shipping and taxes
-        $extraRows = 0;
-        $total = $subTotal + $extraRows;
-        $this->subTotal = $subTotal;
-        $this->total = $total;
-    }
+
 }

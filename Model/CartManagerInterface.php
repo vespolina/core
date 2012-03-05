@@ -42,8 +42,19 @@ interface CartManagerInterface
      */
     function findOpenCartByOwner($owner);
 
+    /**
+     * Initialize a new cart.  Eg. setting the initial state
+     *
+     * @abstract
+     * @param CartInterface $cart
+     */
     function initCart(CartInterface $cart);
 
+    /**
+     * Initialize a new cart item.  Eg. setting the initial item state
+     * @abstract
+     * @param CartItemInterface $cartItem
+     */
     function initCartItem(CartItemInterface $cartItem);
 
     /**

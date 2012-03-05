@@ -12,6 +12,7 @@
         <field name="expiresAt" fieldName="expiresAt"   type="date"     nullable="true"/>
         <field name="followUp"  fieldName="followUp"    type="string"   nullable="true"/>
         <field name="owner"     fieldName="owner"       type="string"/>
+        <field name="prices"    fieldName="prices"      type="array" />
         <field name="state"     fieldName="state"       type="string"   />
         <field name="updatedAt" fieldName="updatedAt"   type="date"     nullable="true"/>
 

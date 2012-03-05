@@ -15,6 +15,8 @@ use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManager as BaseCartManager;
+use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
+
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
@@ -26,22 +28,26 @@ class CartManager extends BaseCartManager
     protected $dm;
     protected $primaryIdentifier;
 
-    public function __construct(DocumentManager $dm, $cartClass, $cartItemClass)
+    public function __construct(DocumentManager $dm, CartPricingProviderInterface $pricingProvider = null, $cartClass, $cartItemClass)
     {
         $this->dm = $dm;
 
         $this->cartClass = $cartClass;
         $this->cartRepo = $this->dm->getRepository($cartClass);
 
-        parent::__construct($cartClass, $cartItemClass);
+        parent::__construct($pricingProvider, $cartClass, $cartItemClass);
     }
 
-    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
+    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem, $flush = true)
     {
         $item = $this->createItem($cartableItem);
         $cart->addItem($item);
+
+        //Update prices
+        $this->determinePrices($cart);
+
         // todo: just update this cart, don't flush everything
-        if ($cart->getId() !== $cart->getId()) {
+        if ($flush && ($cart->getId() !== $cart->getId())) {
             $this->dm->createQueryBuilder($this->cartClass)
                 ->findAndUpdate()
                 ->field('id')->equals($cart->getId())

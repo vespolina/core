@@ -26,14 +26,14 @@ class CartManager extends BaseCartManager
     protected $em;
     protected $primaryIdentifier;
 
-    public function __construct(EntityManager $em, $cartClass, $cartItemClass)
+    public function __construct(EntityManager $em, CartPricingProviderInterface $pricingProvider = null, $cartClass, $cartItemClass)
     {
         $this->em = $em;
 
         $this->cartClass = $cartClass;
         $this->cartRepo = $this->em->getRepository($cartClass);
 
-        parent::__construct($cartClass, $cartItemClass);
+        parent::__construct($pricingProvider, $cartClass, $cartItemClass);
     }
 
     public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)

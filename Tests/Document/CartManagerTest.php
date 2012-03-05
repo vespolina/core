@@ -10,6 +10,7 @@ namespace Vespolina\CartBundle\Tests\Document;
 use Doctrine\Bundle\MongoDBBundle\Tests\TestCase;
 
 use Vespolina\CartBundle\Document\CartManager;
+use Vespolina\CartBundle\Tests\CartTestCommon;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 
 /**
@@ -36,6 +37,7 @@ class CartManagerTest extends TestCase
         $this->dm = self::createTestDocumentManager();
         $this->cartMgr = new CartManager(
             $this->dm,
+            new \Vespolina\CartBundle\Pricing\SimpleCartPricingProvider(),
             '\Vespolina\CartBundle\Tests\Fixtures\Document\Cart',
             '\Vespolina\CartBundle\Tests\Fixtures\Document\CartItem'
         );

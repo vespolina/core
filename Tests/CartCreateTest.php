@@ -3,11 +3,12 @@
 namespace Vespolina\CartBundle\Tests\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Vespolina\CartBundle\Tests\CartTestCommon;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 
 use Vespolina\CartBundle\Model\Cart;
 
-class CartCreateTest extends WebTestCase
+class CartCreateTest extends CartTestCommon
 {
     protected $client;
 
@@ -47,6 +48,7 @@ class CartCreateTest extends WebTestCase
 
         $cartItem1 = $cartManager->createItem($product1);
         $cartItem1->setQuantity(10);
+        $cartItem1->setUnitPrice(499);
 
         $cartItem1->addOption('color', 'white');
         $cartItem1->addOption('connectivity', 'WIFI+3G');
@@ -61,6 +63,8 @@ class CartCreateTest extends WebTestCase
 
         $cartItem2 = $cartManager->createItem($product2);
         $cartItem2->setQuantity(2);
+        $cartItem2->setUnitPrice(699);
+
         $cartItem1->setState('init');
 
         $cart->addItem($cartItem2);
@@ -69,6 +73,11 @@ class CartCreateTest extends WebTestCase
 
         $cartOwner = $cart->getOwner();
         $this->assertEquals($cartOwner, $customerId);
+
+
+        //Calculate prices
+        $cartManager->determinePrices($cart);
+
         $cartManager->updateCart($cart);
 
         //Step two, find back the open cart
@@ -77,7 +86,8 @@ class CartCreateTest extends WebTestCase
 
         $aCartItem1 = $aCart->getItem(1);
 
-        //$this->assertEquals($aCartItem1->getCartableItem()->getId() == $product1->getId());
+        $this->assertEquals($aCartItem1->getPrice('unitPrice'), 499);
+
         $this->assertEquals($aCartItem1->getOption('color'), 'white');
 
         //...and close it

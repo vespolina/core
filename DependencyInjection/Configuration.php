@@ -28,6 +28,12 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('db_driver')->cannotBeOverwritten()->isRequired()->cannotBeEmpty()->end()
+                ->arrayNode('pricing_provider')
+                    ->children()
+                        ->scalarNode('class')->end()
+                        ->scalarNode('enabled')->end()
+                    ->end()
+                ->end()
             ->end();
 
         $this->addCartSection($rootNode);

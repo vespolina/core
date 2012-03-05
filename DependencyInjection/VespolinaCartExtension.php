@@ -39,6 +39,11 @@ class VespolinaCartExtension extends Extension
         if (isset($config['cart_item'])) {
             $this->configureCartItem($config['cart_item'], $container);
         }
+
+        if (isset($config['pricing_provider'])) {
+            $this->configureCartPricingProvider($config['pricing_provider'], $container);
+        }
+
     }
 
     protected function configureCart(array $config, ContainerBuilder $container)
@@ -53,5 +58,26 @@ class VespolinaCartExtension extends Extension
         if (isset($config['class'])) {
             $container->setParameter('vespolina.cart.model.cart_item.class', $config['class']);
         }
+    }
+
+    protected function configureCartPricingProvider(array $config, ContainerBuilder $container)
+    {
+
+
+        if (isset($config['enabled']) && !$config['enabled']) {
+
+            $this->disablePricing($container);
+
+        }
+
+        if (isset($config['class'])) {
+            $container->setParameter('vespolina.cart.pricing_provider.class', $config['class']);
+        }
+    }
+
+    protected function disablePricing($container)
+    {
+        $cartManagerDefinition = $container->findDefinition('vespolina.cart.cart_manager');
+        $cartManagerDefinition->replaceArgument(1, null);
     }
 }
