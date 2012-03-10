@@ -56,7 +56,7 @@ abstract class CartTestCommon extends WebTestCase
     {
         $cartable = new Cartable();
         $cartable->setName($name);
-        $cartable->setPrice($price);
+        $cartable->setPrice('unitPrice', $price);
 
         return $cartable;
     }
@@ -65,7 +65,7 @@ abstract class CartTestCommon extends WebTestCase
     {
         $cartable = new RecurringCartable();
         $cartable->setName($name);
-        $cartable->setPrice($price);
+        $cartable->setPrice('unitPrice', $price);
 
         return $cartable;
     }

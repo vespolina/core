@@ -12,6 +12,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Vespolina\CartBundle\Model\CartableItemInterface;
 
 /**
+ * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
 /**
@@ -19,15 +20,23 @@ use Vespolina\CartBundle\Model\CartableItemInterface;
  */
 class Cartable implements CartableItemInterface
 {
+
+
     /** @ODM\Id */
     protected $id;
 
     /** @ODM\String */
     protected $name;
 
-    protected $price;
+    protected $prices;
 
     protected $optionSet;
+
+    public function __construct()
+   {
+       $this->prices = array();
+   }
+
 
     public function setId($id)
     {
@@ -49,14 +58,17 @@ class Cartable implements CartableItemInterface
         return $this->name;
     }
 
-    public function setPrice($price)
+    public function setPrice($name, $price)
     {
-        $this->price = $price;
+        $this->prices[$name] = $price;
     }
 
-    public function getPrice()
+    public function getPrice($name)
     {
-        return $this->price;
+        if (array_key_exists($name, $this->prices)) {
+
+            return $this->prices[$name];
+        }
     }
 
     public function getCartableName()

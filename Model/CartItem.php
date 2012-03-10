@@ -203,7 +203,7 @@ abstract class CartItem implements CartItemInterface
             return $unitPrice;
         }
 
-        return $this->cartableItem->getPrice();
+        return $this->cartableItem->getPrice('unitPrice');
     }
 
     /**
