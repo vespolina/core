@@ -19,5 +19,8 @@
             <argument>%vespolina.cart.model.cart_item.class%</argument>
         </service>
         <service id="vespolina.cart_manager" alias="vespolina.cart.cart_manager" />
+
+        <service id="vespolina.cart.pricing_provider" class="%vespolina.cart.pricing_provider.class%">
+        </service>
     </services>
 </container>
