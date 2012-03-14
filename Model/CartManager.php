@@ -86,8 +86,7 @@ abstract class CartManager implements CartManagerInterface
     public function determinePrices(CartInterface $cart)
     {
         $pricingProvider = $this->getPricingProvider();
-        $pricingContextContainer = $pricingProvider->createPricingContext();
-        $pricingProvider->determineCartPrices($cart, $pricingContextContainer, true);
+        $pricingProvider->determineCartPrices($cart, null, true);
     }
 
     public function setCartState(CartInterface $cart, $state)
