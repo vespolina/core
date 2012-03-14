@@ -43,6 +43,20 @@ interface CartItemInterface
     function getCartableItem();
 
     /**
+     * Set a payment instruction for this item
+     *
+     * @param $paymentInstruction
+     */
+    function setPaymentInstruction($paymentInstruction);
+
+    /**
+     * Return the payment instruction for this cart item, if there is one
+     *
+     * @return payment instruction or null
+     */
+    function getPaymentInstruction();
+
+    /**
      * Get all options
      *
      * @abstract

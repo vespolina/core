@@ -70,6 +70,20 @@ interface CartInterface
     function getItems();
 
     /**
+     * Set a payment instruction for the cart
+     *
+     * @param $paymentInstruction
+     */
+    function setPaymentInstruction($paymentInstruction);
+
+    /**
+     * Return the payment instruction the cart
+     *
+     * @return payment instruction
+     */
+    function getPaymentInstruction();
+
+    /**
      * Return only the recurring items in the cart
      *
      * @return array of Vespolina\CartBundle\Model\CartItemInterface
