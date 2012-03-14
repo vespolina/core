@@ -15,7 +15,7 @@ class CartHandlerFactoryPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $factory = $container->getDefinition('vespolina.cart.price_provider');
+        $factory = $container->getDefinition('vespolina.cart.pricing_provider');
         foreach ($container->findTaggedServiceIds('vespolina.cart_handler') as $id => $attr) {
             $factory->addMethodCall('addCartHandler', array(new Reference($id)));
         }
