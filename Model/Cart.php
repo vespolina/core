@@ -46,29 +46,6 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
-    public function addItem(CartItemInterface $cartItem)
-    {
-        $cartItem->setCart($this);
-        $this->items[] = $cartItem;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function removeItem(CartItemInterface $cartItem)
-    {
-        foreach ($this->getItems() as $key => $itemToCompare)
-        {
-            if ($itemToCompare == $cartItem) {
-                unset($this->items[$key]);
-                break;
-            };
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function clearItems()
     {
         $this->items->clear();
@@ -276,5 +253,27 @@ class Cart implements CartInterface
         return $this->getPrice('total');
     }
 
+    /**
+     * @inheritdoc
+     */
+    protected function addItem(CartItemInterface $cartItem)
+    {
+        $cartItem->setCart($this);
+        $this->items[] = $cartItem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function removeItem(CartItemInterface $cartItem)
+    {
+        foreach ($this->getItems() as $key => $itemToCompare)
+        {
+            if ($itemToCompare == $cartItem) {
+                unset($this->items[$key]);
+                break;
+            };
+        }
+    }
 
 }

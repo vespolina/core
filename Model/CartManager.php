@@ -97,4 +97,19 @@ abstract class CartManager implements CartManagerInterface
         $rp->setValue($cart, $state);
         $rp->setAccessible(false);
     }
+
+    protected function doAddItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
+    {
+        $item = $this->createItem($cartableItem);
+
+        // add item to cart
+        $rm = new \ReflectionMethod($cart, 'addItem');
+        $rm->setAccessible(true);
+        $rm->invokeArgs($cart, array($item));
+        $rm->setAccessible(false);
+
+        $this->determinePrices($cart);
+
+        return $item;
+    }
 }
