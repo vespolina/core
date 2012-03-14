@@ -23,24 +23,6 @@ use Vespolina\ProductBundle\Model\Option\OptionInterface;
 interface CartInterface
 {
     /**
-     * Add item to cart
-     *
-     * @abstract
-     * @param Vespolina\CartBundle\Model\CartItemInterface $cartItem
-     * @return void
-     */
-    function addItem(CartItemInterface $cartItem);
-
-    /**
-     * Removes item to cart
-     *
-     * @abstract
-     * @param Vespolina\CartBundle\Model\CartItemInterface $cartItem
-     * @return void
-     */
-    function removeItem(CartItemInterface $cartItem);
-
-    /**
      * Remove all items
      *
      * @abstract
