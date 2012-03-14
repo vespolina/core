@@ -31,9 +31,9 @@ interface CartableItemInterface
     function getCartableName();
 
     /**
-     * Return the price of the item
+     * Return the pricing informaton for the item
      *
-     * @return price
+     * @return mixed
      */
-    function getPrice($name);
+    function getPricing($name);
 }
