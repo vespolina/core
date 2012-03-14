@@ -85,14 +85,8 @@ abstract class CartManager implements CartManagerInterface
 
     public function determinePrices(CartInterface $cart)
     {
-
-        if ($pricingProvider = $this->getPricingProvider()) {
-
-            $pricingContextContainer = $pricingProvider->createPricingContext();
-            $pricingProvider->determineCartPrices($cart, $pricingContextContainer, true);
-        }
-
-
+        $pricingProvider = $this->getPricingProvider();
+        $pricingProvider->determineCartPrices($cart, null, true);
     }
 
     public function setCartState(CartInterface $cart, $state)
@@ -101,5 +95,20 @@ abstract class CartManager implements CartManagerInterface
         $rp->setAccessible(true);
         $rp->setValue($cart, $state);
         $rp->setAccessible(false);
+    }
+
+    protected function doAddItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
+    {
+        $item = $this->createItem($cartableItem);
+
+        // add item to cart
+        $rm = new \ReflectionMethod($cart, 'addItem');
+        $rm->setAccessible(true);
+        $rm->invokeArgs($cart, array($item));
+        $rm->setAccessible(false);
+
+        $this->determinePrices($cart);
+
+        return $item;
     }
 }
