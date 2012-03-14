@@ -23,7 +23,7 @@ interface CartPricingProviderInterface
      *
      * @param \Vespolina\CartBundle\Handler\CartHandlerInterface $handler
      */
-    function addHandler(CartHandlerInterface $handler);
+    function addCartHandler(CartHandlerInterface $handler);
 
     /**
      * Create a pricing context which holds 'global variables' used while computing prices
