@@ -8,6 +8,7 @@
 
 namespace Vespolina\CartBundle\Pricing;
 
+use Vespolina\CartBundle\Handler\CartHandlerInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 
@@ -18,10 +19,18 @@ use Vespolina\CartBundle\Model\CartItemInterface;
 interface CartPricingProviderInterface
 {
     /**
-     * Create a pricing context  which holds 'global variables' used while computing prices
+     * Add a cart handler for a product to the pricing provider
+     *
+     * @param \Vespolina\CartBundle\Handler\CartHandlerInterface $handler
+     */
+    function addHandler(CartHandlerInterface $handler);
+
+    /**
+     * Create a pricing context which holds 'global variables' used while computing prices
      *
      * @abstract
      *
+     * @return
      */
     function createPricingContext();
 
