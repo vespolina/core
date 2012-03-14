@@ -89,7 +89,6 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
 
     protected function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
-
         $pricingContext['subTotal'] += $cartItem->getPrice('subTotal'); //todo
         $pricingContext['total'] += $cartItem->getPrice('total');
     }
