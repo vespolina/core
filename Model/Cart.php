@@ -1,6 +1,6 @@
 <?php
 /**
- * (c) Vespolina Project http://www.vespolina-project.org
+ * (c) 2011-2012 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Cart implements a basic cart implementation
  *
  * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Richard Shank <develop@zestic.com>
  */
 class Cart implements CartInterface
 {
@@ -27,6 +28,7 @@ class Cart implements CartInterface
     protected $items;
     protected $name;
     protected $owner;
+    protected $paymentInstruction;
     protected $prices;
     protected $state;
     protected $subTotal;
@@ -100,6 +102,16 @@ class Cart implements CartInterface
     public function getItems()
     {
         return $this->items;
+    }
+
+    public function setPaymentInstruction($paymentInstruction)
+    {
+        $this->paymentInstruction = $paymentInstruction;
+    }
+
+    public function getPaymentInstruction()
+    {
+        return $this->paymentInstruction;
     }
 
     /**

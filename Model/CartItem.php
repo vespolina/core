@@ -28,6 +28,7 @@ abstract class CartItem implements CartItemInterface
     protected $isRecurring;
     protected $name;
     protected $options;
+    protected $paymentInstruction;
     protected $productId;
     protected $prices;
     protected $quantity;
@@ -147,6 +148,16 @@ abstract class CartItem implements CartItemInterface
         return $this->description;
     }
 
+    public function setPaymentInstruction($paymentInstruction)
+    {
+        $this->paymentInstruction = $paymentInstruction;
+    }
+
+    public function getPaymentInstruction()
+    {
+        return $this->paymentInstruction;
+    }
+
     public function setPrice($name, $price)
     {
         $this->prices[$name] = $price;
@@ -173,7 +184,6 @@ abstract class CartItem implements CartItemInterface
      */
     public function getTotalPrice($refresh = false)
     {
-
         return $this->getPrice('total');
     }
 
