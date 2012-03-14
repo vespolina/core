@@ -35,5 +35,5 @@ interface CartableItemInterface
      *
      * @return mixed
      */
-    function getPricing($name);
+    function getPricing();
 }
