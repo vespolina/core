@@ -56,7 +56,7 @@ class DefaultCartHandler extends  AbstractCartHandler
         $cartItem->setPrice('total', $totalPrice);
     }
 
-    public function getType()
+    public function getTypes()
     {
         return 'default';
     }
