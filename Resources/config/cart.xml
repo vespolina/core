@@ -6,6 +6,12 @@
 
     <parameters>
         <parameter key="vespolina_cart.template.engine">twig</parameter>
+        <parameter key="vespolina.cart_handler.default.class">Vespolina\CartBundle\Handler\DefaultCartHandler</parameter>
     </parameters>
 
+    <services>
+        <service id="vespolina.cart_handler.default" class="%vespolina.cart_handler.default.class%">
+            <tag name="vespolina.cart_handler" />
+        </service>
+    </services>
 </container>
