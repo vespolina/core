@@ -22,8 +22,10 @@ abstract class AbstractCartPricingProvider implements CartPricingProviderInterfa
 
     public function addCartHandler(CartHandlerInterface $handler)
     {
-        $type = $handler->getType();
-        $this->handlers[$type] = $handler;
+        $types = (array)$handler->getTypes();
+        foreach ($types as $type) {
+            $this->handlers[$type] = $handler;
+        }
     }
 
     protected function getCartHandler(CartItemInterface $cartItem)
