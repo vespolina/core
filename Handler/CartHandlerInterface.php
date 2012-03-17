@@ -14,5 +14,5 @@ interface CartHandlerInterface
 {
     function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext);
 
-    function getType();
+    function getTypes();
 }
