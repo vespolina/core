@@ -33,9 +33,10 @@ class CartCreateTest extends CartTestCommon
 
         $customerId = '1248934893';
 
-        $product1 = new Cartable();
-        $product1->setName('Ipad 2');
-        $product1->setId('IPAD2-2011');
+
+
+
+        $product1 = $this->createProduct('Ipad 2', 'IPAD-2011', 499);
 
         $product2 = new Cartable();
         $product2->setName('Iphone 4S');
@@ -46,9 +47,10 @@ class CartCreateTest extends CartTestCommon
         $cart->setOwner($customerId);
         $cart->setExpiresAt(new \DateTime('now + 2 days'));
 
-        $cartItem1 = $cartManager->createItem($product1);
+
+        $cartItem1 = $cartManager->addItemToCart($cart, $product1);
         $cartItem1->setQuantity(10);
-        $cartItem1->setUnitPrice(499);
+        $cartItem1->getPricingSet()->set('unitPrice', 499);
 
         $cartItem1->addOption('color', 'white');
         $cartItem1->addOption('connectivity', 'WIFI+3G');
@@ -57,17 +59,15 @@ class CartCreateTest extends CartTestCommon
         $cartItem1->setQuantity(3);
         $cartItem1->setState('init');
 
-        $cart->addItem($cartItem1);
-
         $this->assertEquals($cartItem1->getName(), $product1->getName());
 
-        $cartItem2 = $cartManager->createItem($product2);
+        $cartItem2 = $cartManager->addItemToCart($cart, $product2);
         $cartItem2->setQuantity(2);
-        $cartItem2->setUnitPrice(699);
+        $cartItem2->getPricingSet()->set('unitPrice', 699);
+
 
         $cartItem1->setState('init');
 
-        $cart->addItem($cartItem2);
 
         $testCartItem1 = $cart->getItem(1);
 
@@ -86,7 +86,7 @@ class CartCreateTest extends CartTestCommon
 
         $aCartItem1 = $aCart->getItem(1);
 
-        $this->assertEquals($aCartItem1->getPrice('unitPrice'), 499);
+        $this->assertEquals($aCartItem1->getPricingSet()->get('unitPrice'), 499);
 
         $this->assertEquals($aCartItem1->getOption('color'), 'white');
 
@@ -98,5 +98,16 @@ class CartCreateTest extends CartTestCommon
 
         $aCart->clearItems();
         $this->assertEquals($aCart->getItems()->count(), 0);
+    }
+
+    protected function createProduct($name, $id, $unitPrice)
+    {
+        $product = new Cartable();
+        $product->setName($name);
+        $product->setId($id);
+
+        $product->setPricing(array('unitPrice' => $unitPrice));
+
+        return $product;
     }
 }

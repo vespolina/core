@@ -83,6 +83,14 @@ interface CartInterface
      */
     function getPaymentInstruction();
 
+
+    /**
+     * Return the pricing informaton for the item
+     *
+     * @return mixed
+     */
+    function getPricingSet();
+
     /**
      * Return only the recurring items in the cart
      *
@@ -124,17 +132,12 @@ interface CartInterface
 
     function setExpiresAt(\DateTime $expiresAt);
 
-    /**
-     * Return the sub total of the items in the cart
-     *
-     * @return price
-     */
-    function getSubTotal();
 
     /**
-     * Return the grand total of the items in the cart
+     * Set pricing information
      *
-     * @return price
+     * @abstract
+     * @param $pricing
      */
-    function getTotal();
+    function setPricingSet($pricing);
 }

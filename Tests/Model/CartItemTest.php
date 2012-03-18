@@ -23,12 +23,12 @@ class CartItemTest extends CartTestCommon
         $item = $this->createCartItem($cartable1);
 
         $this->getPricingProvider()->determineCartItemPrices($item);
-        $this->assertSame(1, $item->getTotalPrice(), 'the price should be set cart item');
+        $this->assertSame(1, $item->getPricingSet()->get('total'), 'the price should be set cart item');
 
         $item->setQuantity(3);
 
         $this->getPricingProvider()->determineCartItemPrices($item);
 
-        $this->assertSame(3, $item->getTotalPrice(), 'the price should change with a change in quantity');
+        $this->assertSame(3, $item->getPricingSet()->get('total'), 'the price should change with a change in quantity');
     }
 }

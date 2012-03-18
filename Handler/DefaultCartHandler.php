@@ -27,11 +27,10 @@ class DefaultCartHandler extends  AbstractCartHandler
 
     public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
-        if (!$pricingContext) {
-            $pricingContext = $this->createPricingContext();
-        }
 
-        $unitPrice = $cartItem->getUnitPrice();
+        $pricing = $cartItem->getCartableItem()->getPricing();
+
+        $unitPrice = $pricing['unitPrice'];
         $upCharge = 0;
 
         //Add additional upcharges for a chosen product option
@@ -46,14 +45,17 @@ class DefaultCartHandler extends  AbstractCartHandler
         //Calculate fulfillment costs (eg. shipping, packaging cost)
         if ($this->fulfillmentPricingEnabled) {
 
-            $this->determineCartItemFulfillmentPrices($cartItem, $pricingContext);
+            //$this->determineCartItemFulfillmentPrices($cartItem, $pricingContext);
         }
 
         //Calculate item level totals
-        $totalPrice = ( $cartItem->getQuantity() * $cartItem->getUnitPrice() ) + $upCharge;
+        $totalPrice = ( $cartItem->getQuantity() * $unitPrice ) + $upCharge;
 
-        $cartItem->setPrice('subTotal', $totalPrice);
-        $cartItem->setPrice('total', $totalPrice);
+        $pricingSet = $cartItem->getPricingSet();
+
+        $pricingSet->set('upcharge', $upCharge);
+        $pricingSet->set('total', $totalPrice);
+
     }
 
     public function getType()

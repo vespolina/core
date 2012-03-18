@@ -36,4 +36,12 @@ interface CartableItemInterface
      * @return mixed
      */
     function getPricing();
+
+    /**
+     * Set pricing information
+     *
+     * @abstract
+     * @param $pricing
+     */
+    function setPricing($pricing);
 }

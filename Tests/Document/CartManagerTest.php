@@ -34,10 +34,14 @@ class CartManagerTest extends TestCase
 
     public function setup()
     {
+
+        $pricingProvider = new \Vespolina\CartBundle\Pricing\SimpleCartPricingProvider();
+        $pricingProvider->addCartHandler(new \Vespolina\CartBundle\Handler\DefaultCartHandler());
+
         $this->dm = self::createTestDocumentManager();
         $this->cartMgr = new CartManager(
             $this->dm,
-            new \Vespolina\CartBundle\Pricing\SimpleCartPricingProvider(),
+            $pricingProvider,
             '\Vespolina\CartBundle\Tests\Fixtures\Document\Cart',
             '\Vespolina\CartBundle\Tests\Fixtures\Document\CartItem'
         );

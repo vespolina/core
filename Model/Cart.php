@@ -29,10 +29,8 @@ class Cart implements CartInterface
     protected $name;
     protected $owner;
     protected $paymentInstruction;
-    protected $prices;
+    protected $pricingSet;
     protected $state;
-    protected $subTotal;
-    protected $total;
     protected $updatedAt;
 
     /**
@@ -42,7 +40,6 @@ class Cart implements CartInterface
     {
         $this->items = new ArrayCollection();
         $this->name = $name;
-        $this->prices = array();
     }
 
     /**
@@ -117,9 +114,9 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
-    public function getPrices()
+    public function getPricingSet()
     {
-        return $this->prices;
+        return $this->pricingSet;
     }
 
     /**
@@ -158,14 +155,6 @@ class Cart implements CartInterface
     public function getOwner()
     {
         return $this->owner;
-    }
-
-    public function getPrice($name)
-    {
-        if (array_key_exists($name, $this->prices)) {
-
-            return $this->prices[$name];
-        }
     }
 
     /**
@@ -235,34 +224,10 @@ class Cart implements CartInterface
     /**
      * @inheritdoc
      */
-    public function setSubTotal($subTotal)
+    public function setPricingSet($pricingSet)
     {
 
-        $this->setPrice('subTotal', $subTotal);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setTotal($total)
-    {
-        $this->setPrice('total', $total);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getSubTotal()
-    {
-        return $this->getPrice('subTotal');
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getTotal()
-    {
-        return $this->getPrice('total');
+        $this->pricingSet = $pricingSet;
     }
 
     /**

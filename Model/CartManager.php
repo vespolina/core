@@ -67,6 +67,9 @@ abstract class CartManager implements CartManagerInterface
     {
         //Set default state (for now we set it to "open")
         $this->setCartState($cart, Cart::STATE_OPEN);
+
+        //Create the pricing set to hold cart level pricing data
+        $this->setCartPricingSet($cart, $this->pricingProvider->createPricingSet());
     }
 
     public function initCartItem(CartItemInterface $cartItem)
@@ -74,6 +77,12 @@ abstract class CartManager implements CartManagerInterface
         //Default cart item description to the product name
         if ($cartableItem = $cartItem->getCartableItem()) {
             $cartItem->setName($cartableItem->getCartableName());
+
+            $rpPricingSet = new \ReflectionProperty($cartItem, 'pricingSet');
+            $rpPricingSet->setAccessible(true);
+            $rpPricingSet->setValue($cartItem, $this->getPricingProvider()->createPricingSet());
+            $rpPricingSet->setAccessible(false);
+
             if ($cartableItem instanceof $this->recurringInterface) {
                 $rp = new \ReflectionProperty($cartItem, 'isRecurring');
                 $rp->setAccessible(true);
@@ -87,6 +96,14 @@ abstract class CartManager implements CartManagerInterface
     {
         $pricingProvider = $this->getPricingProvider();
         $pricingProvider->determineCartPrices($cart, null, true);
+    }
+
+    public function setCartPricingSet(CartInterface $cart, $pricingSet)
+    {
+        $rp = new \ReflectionProperty($cart, 'pricingSet');
+        $rp->setAccessible(true);
+        $rp->setValue($cart, $pricingSet);
+        $rp->setAccessible(false);
     }
 
     public function setCartState(CartInterface $cart, $state)

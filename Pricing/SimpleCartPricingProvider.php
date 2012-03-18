@@ -43,10 +43,10 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
         if (!$pricingContext) {
             $pricingContext = $this->createPricingContext();
             $pricingContext['total'] = 0;
-            $pricingContext['subTotal'] = 0;
         }
 
         foreach ($cart->getItems() as $cartItem) {
+
             if ($determineItemPrices) {
                 $this->determineCartItemPrices($cartItem, $pricingContext);
             }
@@ -65,14 +65,19 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
             $this->determineCartTaxes($cart, $pricingContext);
         }
 
-        $cart->setPrice('subTotal', $pricingContext['subTotal']);
-        $cart->setPrice('total', $pricingContext['total']);
+        $cartPricingSet = $cart->getPricingSet();
+        $cartPricingSet->set('total', $pricingContext['total']);
     }
 
     // the code that was here is at https://gist.github.com/2035304 in case it is needed for a handler
     public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext = null)
     {
+        if (!$pricingContext) {
+            $pricingContext = $this->createPricingContext();
+        }
+
         $handler = $this->getCartHandler($cartItem);
+
         $handler->determineCartItemPrices($cartItem, $pricingContext);
     }
 
@@ -89,7 +94,6 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
 
     protected function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
-        $pricingContext['subTotal'] += $cartItem->getPrice('subTotal'); //todo
-        $pricingContext['total'] += $cartItem->getPrice('total');
+        $pricingContext['total'] += $cartItem->getPricingSet()->get('total');
     }
 }

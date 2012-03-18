@@ -30,11 +30,9 @@ abstract class CartItem implements CartItemInterface
     protected $options;
     protected $paymentInstruction;
     protected $productId;
-    protected $prices;
+    protected $pricingSet;
     protected $quantity;
     protected $state;
-    protected $totalPrice;
-    protected $unitPrice;
 
     public function __construct($cartableItem = null)
     {
@@ -87,17 +85,9 @@ abstract class CartItem implements CartItemInterface
     }
 
 
-    public function getPrice($name)
+    public function getPricingSet()
     {
-        if (array_key_exists($name, $this->prices)) {
-
-            return $this->prices[$name];
-        }
-    }
-
-    public function getPrices()
-    {
-        return $this->prices;
+        return $this->pricingSet;
     }
 
     /**
@@ -158,9 +148,9 @@ abstract class CartItem implements CartItemInterface
         return $this->paymentInstruction;
     }
 
-    public function setPrice($name, $price)
+    public function setPricingSet($pricingSet)
     {
-        $this->prices[$name] = $price;
+        $this->pricingSet = $pricingSet;
     }
 
     /**
@@ -177,43 +167,6 @@ abstract class CartItem implements CartItemInterface
     public function setState($state)
     {
         $this->state = $state;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getTotalPrice($refresh = false)
-    {
-        return $this->getPrice('total');
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setUnitPrice($unitPrice)
-    {
-        $this->setPrice('unitPrice', $unitPrice);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setTotalPrice($totalPrice)
-    {
-        $this->setPrice('total', $totalPrice);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getUnitPrice()
-    {
-        if ($unitPrice = $this->getPrice('unitPrice')) {
-
-            return $unitPrice;
-        }
-
-        return $this->cartableItem->getPrice('unitPrice');
     }
 
     /**

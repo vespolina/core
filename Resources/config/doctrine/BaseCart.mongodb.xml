@@ -13,9 +13,10 @@
         <field name="state"     fieldName="state" type="string" />
         <field name="updatedAt" fieldName="updatedAt" type="date" />
 
-        <field name="prices" fieldName="prices" type="hash" />
+        <field name="pricingSetData" fieldName="pricingSetData" type="hash" />
 
         <lifecycle-callbacks>
+            <lifecycle-callback type="postLoad" method="postLoadCart" />
             <lifecycle-callback type="prePersist" method="incrementCreatedAt" />
             <lifecycle-callback type="preUpdate" method="incrementUpdatedAt" />
         </lifecycle-callbacks>

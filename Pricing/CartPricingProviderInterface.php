@@ -18,6 +18,15 @@ use Vespolina\CartBundle\Model\CartItemInterface;
  */
 interface CartPricingProviderInterface
 {
+
+    /**
+     * Create a pricing set
+     *
+     * @abstract
+     *
+     */
+    function createPricingSet();
+
     /**
      * Add a cart handler for a product to the pricing provider
      *
