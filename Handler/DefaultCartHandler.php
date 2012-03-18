@@ -22,7 +22,7 @@ class DefaultCartHandler extends  AbstractCartHandler
     public function __construct()
     {
         $this->fulfillmentPricingEnabled = true;
-        $this->taxDeterminationEnabled = true;
+        $this->taxPricingEnabled = true;
     }
 
     public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext)
