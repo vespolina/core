@@ -58,7 +58,7 @@ class DefaultCartHandler extends  AbstractCartHandler
 
     }
 
-    public function getType()
+    public function getTypes()
     {
         return 'default';
     }
