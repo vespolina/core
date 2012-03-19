@@ -15,6 +15,8 @@ use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManager as BaseCartManager;
+use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
+
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
@@ -38,8 +40,8 @@ class CartManager extends BaseCartManager
 
     public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
     {
-        $item = $this->createItem($cartableItem);
-        $cart->addItem($item);
+        $item = $this->doAddItemToCart($cart, $cartableItem);
+
         // todo: just update this cart, don't flush everything
         if ($cart->getId() !== $cart->getId()) {
             $this->em->createQueryBuilder($this->cartClass)

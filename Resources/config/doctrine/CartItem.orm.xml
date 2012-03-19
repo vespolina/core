@@ -11,7 +11,7 @@
 
         <field name="cartableItemId"    fieldName="cartableItemId"  type="string"   nullable="true"/>
         <field name="description"       fieldName="description"     type="string"   nullable="true"/>
-        <field name="prices"            fieldName="prices"          type="array"    nullable="true"/>
+        <field name="pricingSetData"    fieldName="pricingSetData"  type="array"    nullable="true"/>
         <field name="state"             fieldName="state"           type="string"   nullable="true"/>
         <field name="options"           fieldName="options"         type="array"    nullable="true"/>
         <field name="quantity"          fieldName="quantity"        type="string" />

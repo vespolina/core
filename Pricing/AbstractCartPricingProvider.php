@@ -11,6 +11,7 @@ namespace Vespolina\CartBundle\Pricing;
 use Vespolina\CartBundle\Handler\CartHandlerInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
+use Vespolina\CartBundle\Pricing\PricingSet;
 
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
@@ -19,6 +20,11 @@ use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
 abstract class AbstractCartPricingProvider implements CartPricingProviderInterface
 {
     protected $handlers;
+
+    public function createPricingSet()
+    {
+        return new PricingSet();
+    }
 
     public function addCartHandler(CartHandlerInterface $handler)
     {
@@ -32,7 +38,9 @@ abstract class AbstractCartPricingProvider implements CartPricingProviderInterfa
     {
         $type = $cartItem->getCartableItem()->getType();
         if (!isset($this->handlers[$type])) {
-            throw new \Exception(sprintf('Unknown handler for type %s', $type));
+
+            //Fall back to the default handler
+            return $this->handlers['default'];
         }
 
         return $this->handlers[$type];

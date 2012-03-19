@@ -14,4 +14,21 @@ use Vespolina\CartBundle\Model\Cart as AbstractCart;
 abstract class BaseCart extends AbstractCart
 {
     protected $id;
+    protected $pricingSetData;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function postLoadCart()
+    {
+        $this->pricingSet = new PricingSet();
+        $this->pricingSet->setAll($this->pricingSetData);
+    }
+
+    public function prePersistCart()
+    {
+        $this->pricingSetData = $this->pricingSet->all();
+    }
 }

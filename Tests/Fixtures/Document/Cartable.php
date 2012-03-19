@@ -28,9 +28,11 @@ class Cartable implements CartableItemInterface
     /** @ODM\String */
     protected $name;
 
-    protected $prices;
+    protected $pricing;
 
     protected $optionSet;
+
+    protected $type;
 
     public function __construct()
    {
@@ -58,17 +60,15 @@ class Cartable implements CartableItemInterface
         return $this->name;
     }
 
-    public function setPrice($name, $price)
+    public function setPricing($pricing)
     {
-        $this->prices[$name] = $price;
+        $this->pricing = $pricing;
     }
 
-    public function getPrice($name)
+    public function getPricing()
     {
-        if (array_key_exists($name, $this->prices)) {
 
-            return $this->prices[$name];
-        }
+        return $this->pricing;
     }
 
     public function getCartableName()
@@ -79,5 +79,15 @@ class Cartable implements CartableItemInterface
     public function getOptionSet()
     {
         return $this->optionSet;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }

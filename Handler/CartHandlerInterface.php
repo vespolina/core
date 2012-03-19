@@ -12,6 +12,8 @@ use Vespolina\CartBundle\Model\CartItemInterface;
 
 interface CartHandlerInterface
 {
+    function createPricingSet();
+
     function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext);
 
     function getTypes();

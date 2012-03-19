@@ -65,6 +65,12 @@ interface CartItemInterface
     function getOptions();
 
     /**
+     * Get the pricing info for this cart item
+     * @abstract
+     * @return mixed
+     */
+    function getPricingSet();
+    /**
      * Get the cart state for this item
      *
      * @abstract
@@ -104,36 +110,14 @@ interface CartItemInterface
      * @return void
      */
     function setQuantity($quantity);
-
-    /**
-     * Return the total price of the cart item, (unit price + option upcharges) * quantity
-     *
-     * @param boolean $refresh - if true recalculates the total
-     *
-     * @return price
-     */
-    function getTotalPrice($refresh = false);
-
-    /**
-     * Set the unit price of the cart item
-     *
-     * @param $price
-     */
-    function setUnitPrice($price);
-
-    /**
-     * Return the unit price of the cart item
-     *
-     * @return price
-     */
-    function getUnitPrice();
-
     /**
      * Set the name of the cart item
      *
      * @param string $name
      */
     function setName($name);
+
+    function setPricingSet($pricingSet);
 
     /**
      * Return the name of the cart item

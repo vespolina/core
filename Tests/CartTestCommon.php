@@ -10,9 +10,11 @@ namespace Vespolina\CartBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 use Vespolina\CartBundle\Model\Cart;
+use Vespolina\CartBundle\Handler\DefaultCartHandler;
 use Vespolina\CartBundle\Pricing\SimpleCartPricingProvider;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 use Vespolina\CartBundle\Tests\Fixtures\Document\RecurringCartable;
+
 use Vespolina\ProductBundle\Model\RecurringInterface; // todo move to cart bundle
 
 /**
@@ -33,6 +35,10 @@ abstract class CartTestCommon extends WebTestCase
         $sp->setValue($cart, Cart::STATE_OPEN);
         $sp->setAccessible(false);
 
+        $pr = new \ReflectionProperty('Vespolina\CartBundle\Model\Cart', 'pricingSet');
+        $pr->setAccessible(true);
+        $pr->setValue($cart, $this->getPricingProvider()->createPricingSet());
+        $pr->setAccessible(false);
         return $cart;
     }
 
@@ -49,6 +55,12 @@ abstract class CartTestCommon extends WebTestCase
             $irp->setAccessible(false);
         }
 
+        //Pricing
+        $prrp = new \ReflectionProperty('Vespolina\CartBundle\Model\CartItem', 'pricingSet');
+        $prrp->setAccessible(true);
+        $prrp->setValue($cartItem, $this->getPricingProvider()->createPricingSet());
+        $prrp->setAccessible(false);
+
         return $cartItem;
     }
 
@@ -56,7 +68,7 @@ abstract class CartTestCommon extends WebTestCase
     {
         $cartable = new Cartable();
         $cartable->setName($name);
-        $cartable->setPrice('unitPrice', $price);
+        $cartable->setPricing(array('unitPrice' => $price));
 
         return $cartable;
     }
@@ -72,11 +84,19 @@ abstract class CartTestCommon extends WebTestCase
 
     protected function addItemToCart($cart, $cartableItem)
     {
-        $item = $this->createCartItem($cartableItem);
-        $cart->addItem($item);
+        $cartItem = $this->createCartItem($cartableItem);
+        $rm = new \ReflectionMethod($cart, 'addItem');
+        $rm->setAccessible(true);
+        $rm->invokeArgs($cart, array($cartItem));
+        $rm->setAccessible(false);
+
+        $prrp = new \ReflectionProperty('Vespolina\CartBundle\Model\CartItem', 'pricingSet');
+        $prrp->setAccessible(true);
+        $prrp->setValue($cartItem, $this->getPricingProvider()->createPricingSet());
+        $prrp->setAccessible(false);
 
         $this->getPricingProvider()->determineCartPrices($cart);
-        return $item;
+        return $cartItem;
     }
 
     protected function getPricingProvider()
@@ -85,6 +105,8 @@ abstract class CartTestCommon extends WebTestCase
         if (!$this->pricingProvider) {
 
             $this->pricingProvider = new SimpleCartPricingProvider();
+
+            $this->pricingProvider->addCartHandler(new DefaultCartHandler());
         }
 
         return $this->pricingProvider;
@@ -93,9 +115,10 @@ abstract class CartTestCommon extends WebTestCase
     protected function removeItemFromCart($cart, $cartItem)
     {
         $item = $cartItem;
-        $cart->removeItem($item);
-
-        $this->getPricingProvider()->determineCartPrices($cart);
+        $rm = new \ReflectionMethod($cart, 'removeItem');
+        $rm->setAccessible(true);
+        $rm->invokeArgs($cart, array($cartItem));
+        $rm->setAccessible(false);
 
         return $item;
     }
