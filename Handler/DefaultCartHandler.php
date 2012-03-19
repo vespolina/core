@@ -38,7 +38,7 @@ class DefaultCartHandler extends  AbstractCartHandler
         $upCharge = $this->determineCartItemUpCharge($cartItem, $pricingContext);
 
         //Determine item level taxes such as VAT or sales tax
-        if ($this->taxDeterminationEnabled) {
+        if ($this->taxPricingEnabled) {
 
             $this->determineCartItemTaxes($cartItem, $pricingContext);
         }
