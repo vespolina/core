@@ -77,7 +77,7 @@ abstract class CartManager implements CartManagerInterface
         //Default cart item description to the product name
         if ($cartableItem = $cartItem->getCartableItem()) {
             $cartItem->setName($cartableItem->getCartableName());
-
+            $cartItem->setDescription($cartItem->getName());
             $rpPricingSet = new \ReflectionProperty($cartItem, 'pricingSet');
             $rpPricingSet->setAccessible(true);
             $rpPricingSet->setValue($cartItem, $this->getPricingProvider()->createPricingSet());
@@ -92,10 +92,10 @@ abstract class CartManager implements CartManagerInterface
         }
     }
 
-    public function determinePrices(CartInterface $cart)
+    public function determinePrices(CartInterface $cart, $determineItemPrices = true)
     {
         $pricingProvider = $this->getPricingProvider();
-        $pricingProvider->determineCartPrices($cart, null, true);
+        $pricingProvider->determineCartPrices($cart, null, $determineItemPrices);
     }
 
     public function setCartPricingSet(CartInterface $cart, $pricingSet)

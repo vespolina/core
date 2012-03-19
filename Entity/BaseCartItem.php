@@ -15,14 +15,20 @@ abstract class BaseCartItem extends AbstractCartItem
 {
 
     protected $cartableItemId;
+    protected $pricingSetData;
 
     public function prePersistCartItem()
     {
         if ($this->cartableItem) {
             $this->cartableItemId = $this->cartableItem->getId();
         }
-
-
-
+        $this->pricingSetData = $this->pricingSet->all();
     }
+
+    public function postLoadCart()
+    {
+        $this->pricingSet = new PricingSet();
+        $this->pricingSet->setAll($this->pricingSetData);
+    }
+
 }

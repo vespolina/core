@@ -9,10 +9,11 @@
 namespace Vespolina\CartBundle\Handler;
 
 use Vespolina\CartBundle\Handler\AbstractCartHandler;
+use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 
 /**
- * DefaultHanlder for the cart
+ * DefaultHandler for the cart
  */
 class DefaultCartHandler extends  AbstractCartHandler
 {
@@ -37,7 +38,7 @@ class DefaultCartHandler extends  AbstractCartHandler
         $upCharge = $this->determineCartItemUpCharge($cartItem, $pricingContext);
 
         //Determine item level taxes such as VAT or sales tax
-        if ($this->taxPricingEnabled) {
+        if ($this->taxDeterminationEnabled) {
 
             $this->determineCartItemTaxes($cartItem, $pricingContext);
         }
@@ -90,8 +91,6 @@ class DefaultCartHandler extends  AbstractCartHandler
 
     protected function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
-
-        $pricingContext['subTotal'] += $cartItem->getPrice('subTotal'); //todo
         $pricingContext['total'] += $cartItem->getPrice('total');
     }
 }
