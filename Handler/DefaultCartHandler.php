@@ -31,7 +31,7 @@ class DefaultCartHandler extends  AbstractCartHandler
 
         $pricing = $cartItem->getCartableItem()->getPricing();
 
-        $unitPrice = $pricing['unitPrice'];
+        $unitPrice = $pricing['unitPriceTotal'];
         $upCharge = 0;
 
         //Add additional upcharges for a chosen product option
@@ -80,6 +80,7 @@ class DefaultCartHandler extends  AbstractCartHandler
 
     protected function determineCartItemTaxes(CartItemInterface $cartItem, $pricingContext)
     {
+
 
     }
 

@@ -25,7 +25,7 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
     protected $fulfillmentPricingEnabled;
     protected $taxPricingEnabled;
 
-    public function __construct()
+    public function __construct(TaxationManagerInterface)
     {
         $this->fulfillmentPricingEnabled = true;
         $this->taxDeterminationEnabled = true;
