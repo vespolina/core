@@ -41,19 +41,8 @@ class CartManager extends BaseCartManager
     public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem, $flush = true)
     {
         $item = $this->doAddItemToCart($cart, $cartableItem);
+        $this->updateCart($cart, $flush);
 
-        // todo: just update this cart, don't flush everything
-        if ($flush && ($cart->getId() !== $cart->getId())) {
-            $this->dm->createQueryBuilder($this->cartClass)
-                ->findAndUpdate()
-                ->field('id')->equals($cart->getId())
-                ->field('items')->set($cart->getItems())
-                ->getQuery()
-                ->execute()
-            ;
-        } else {
-            $this->updateCart($cart);
-        }
         return $item;
     }
 
@@ -109,7 +98,7 @@ class CartManager extends BaseCartManager
     {
         $this->dm->persist($cart);
         if ($andFlush) {
-            $this->dm->flush();
+            $this->dm->flush($cart);
         }
     }
 }
