@@ -7,8 +7,8 @@
     <parameters>
         <parameter key="vespolina.cart.cart_manager.class">Vespolina\CartBundle\Document\CartManager</parameter>
         <parameter key="vespolina.cart.pricing_provider.class">Vespolina\CartBundle\Pricing\SimpleCartPricingProvider</parameter>
-        <parameter key="vespolina.cart.model.cart.class">Vespolina\CartBundle\Document\Cart</parameter>
-        <parameter key="vespolina.cart.model.cart_item.class">Vespolina\CartBundle\Document\CartItem</parameter>
+        <parameter key="vespolina.cart.model.cart.class">Application\Vespolina\CartBundle\Document\Cart</parameter>
+        <parameter key="vespolina.cart.model.cart_item.class">Application\Vespolina\CartBundle\Document\CartItem</parameter>
     </parameters>
 
     <services>

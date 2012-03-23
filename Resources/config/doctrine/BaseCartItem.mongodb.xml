@@ -6,19 +6,18 @@
 
     <mapped-superclass name="Vespolina\CartBundle\Document\BaseCartItem">
 
-        <field name="description" fieldName="description" type="string" />
-        <field name="isRecurring" fieldName="isRecurring" type="boolean" />
-        <field name="name"        fieldName="name"        type="string" />
-        <field name="options"     fieldName="options"     type="hash" />
-        <field name="pricingSetData"  fieldName="pricingSetData"  type="hash" />
-        <field name="quantity"    fieldName="quantity"    type="string" />
-        <field name="state"       fieldName="state"       type="string" />
+        <field name="description"    fieldName="description"    type="string" />
+        <field name="isRecurring"    fieldName="isRecurring"    type="boolean" />
+        <field name="name"           fieldName="name"           type="string" />
+        <field name="options"        fieldName="options"        type="hash" />
+        <field name="pricingSetData" fieldName="pricingSetData" type="hash" />
+        <field name="quantity"       fieldName="quantity"       type="string" />
+        <field name="state"          fieldName="state"          type="string" />
 
         <lifecycle-callbacks>
-            <lifecycle-callback type="postLoad" method="postLoadCartItem" />
+            <lifecycle-callback type="postLoad"   method="postLoadCartItem" />
             <lifecycle-callback type="prePersist" method="prePersistCartItem" />
         </lifecycle-callbacks>
 
     </mapped-superclass>
-
 </doctrine-mongo-mapping>
