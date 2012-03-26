@@ -1,8 +1,23 @@
-
 <table>
+    <thead>
+        <tr>
+            <td>Qty</td><td>Product</td><td>Price</td><td>&nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
     {% for item in cart.items %}
-    <tr>
-        <td>{{ item.name }}</td><td>{{ item.price }}</td>
-    </tr>
-    {% enfor %}
+        <tr>
+            <td>{{ item.quantity }}</td><td>{{ item.name }}</td><td>{{ item.totalPrice }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">Your cart is empty.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">Grand Total</td><td>{{ cart.totalPrice }}</td>
+        </tr>
+    </tfoot>
 </table>
