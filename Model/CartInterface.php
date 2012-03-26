@@ -140,4 +140,18 @@ interface CartInterface
      * @param $pricing
      */
     function setPricingSet($pricing);
+
+    /**
+     * Set the total price for the cart, if the pricing set is calculated it should be set from there
+     *
+     * @param $totalPrice
+     */
+    function setTotalPrice($totalPrice);
+
+    /**
+     * Return the total price for the cart
+     *
+     * @return string
+     */
+    function getTotalPrice();
 }

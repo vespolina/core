@@ -12,6 +12,7 @@
         <field name="owner"          fieldName="owner"          type="string" />
         <field name="pricingSetData" fieldName="pricingSetData" type="hash" />
         <field name="state"          fieldName="state"          type="string" />
+        <field name="totalPrice"     fieldName="totalPrice"     type="string" />
         <field name="updatedAt"      fieldName="updatedAt"      type="date" />
 
         <lifecycle-callbacks>
