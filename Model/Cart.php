@@ -31,6 +31,7 @@ class Cart implements CartInterface
     protected $paymentInstruction;
     protected $pricingSet;
     protected $state;
+    protected $totalPrice;
     protected $updatedAt;
 
     /**
@@ -230,6 +231,16 @@ class Cart implements CartInterface
         $this->pricingSet = $pricingSet;
     }
 
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+    }
+
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
+    }
+
     /**
      * @inheritdoc
      */
@@ -252,5 +263,4 @@ class Cart implements CartInterface
             };
         }
     }
-
 }

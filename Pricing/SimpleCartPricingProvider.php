@@ -67,6 +67,7 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
 
         $cartPricingSet = $cart->getPricingSet();
         $cartPricingSet->set('total', $pricingContext['total']);
+        $cart->setTotalPrice($pricingContext['total']);
     }
 
     // the code that was here is at https://gist.github.com/2035304 in case it is needed for a handler
