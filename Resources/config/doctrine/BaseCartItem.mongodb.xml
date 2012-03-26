@@ -13,6 +13,7 @@
         <field name="pricingSetData" fieldName="pricingSetData" type="hash" />
         <field name="quantity"       fieldName="quantity"       type="string" />
         <field name="state"          fieldName="state"          type="string" />
+        <field name="totalPrice"     fieldName="totalPrice"     type="string" />
 
         <lifecycle-callbacks>
             <lifecycle-callback type="postLoad"   method="postLoadCartItem" />
