@@ -33,6 +33,7 @@ abstract class CartItem implements CartItemInterface
     protected $pricingSet;
     protected $quantity;
     protected $state;
+    protected $totalPrice;
 
     public function __construct($cartableItem = null)
     {
@@ -188,9 +189,18 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    function isRecurring()
+    public function isRecurring()
     {
         return $this->isRecurring;
     }
 
+    public function setTotalPrice($totalPrice)
+    {
+        $this->totalPrice = $totalPrice;
+    }
+
+    public function getTotalPrice()
+    {
+        return $this->totalPrice;
+    }
 }

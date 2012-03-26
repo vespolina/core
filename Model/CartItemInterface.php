@@ -127,6 +127,21 @@ interface CartItemInterface
     function getName();
 
     /**
+     * Set the total price for this item in the cart, if the pricing set is calculated it should be set from there
+     *
+     * @param string $totalPrice
+     */
+
+    function setTotalPrice($totalPrice);
+
+    /**
+     * Get the total price for this item
+     *
+     * @return string
+     */
+    function getTotalPrice();
+
+    /**
      * Return if this cart item is recurring
      *
      * @return boolean

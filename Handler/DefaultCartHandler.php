@@ -57,6 +57,8 @@ class DefaultCartHandler extends  AbstractCartHandler
         $pricingSet->set('upcharge', $upCharge);
         $pricingSet->set('total', $totalPrice);
 
+        // set the total price in the cart item
+        $cartItem->setTotalPrice($totalPrice);
     }
 
     public function getTypes()
