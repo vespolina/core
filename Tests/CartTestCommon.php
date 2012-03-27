@@ -23,7 +23,6 @@ use Vespolina\ProductBundle\Model\RecurringInterface; // todo move to cart bundl
  */
 abstract class CartTestCommon extends WebTestCase
 {
-
     protected $pricingProvider;
 
     protected function createCart($name = 'default')
@@ -101,7 +100,6 @@ abstract class CartTestCommon extends WebTestCase
 
     protected function getPricingProvider()
     {
-
         if (!$this->pricingProvider) {
 
             $this->pricingProvider = new SimpleCartPricingProvider();

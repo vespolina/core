@@ -38,14 +38,6 @@ class CartManager extends BaseCartManager
         parent::__construct($pricingProvider, $cartClass, $cartItemClass);
     }
 
-    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem, $flush = true)
-    {
-        $item = $this->doAddItemToCart($cart, $cartableItem);
-        $this->updateCart($cart, $flush);
-
-        return $item;
-    }
-
     public function findOpenCartByOwner($owner)
     {
         return $this->dm->createQueryBuilder($this->cartClass)

@@ -32,9 +32,30 @@ class CartManagerTest extends TestCase
         $this->assertSame($cartable, $item->getCartableItem());
     }
 
+    public function testFindItemInCart()
+    {
+        $cart = $this->persistNewCart();
+        $cartable = $this->persistNewCartable('product');
+        $addedItem = $this->cartMgr->addItemToCart($cart, $cartable);
+
+        $item = $this->cartMgr->findItemInCart($cart, $cartable);
+
+        $this->assertSame($item, $addedItem);
+    }
+
+    public function testRemoveItemFromCart()
+    {
+        $cart = $this->persistNewCart();
+        $cartable = $this->persistNewCartable('product');
+        $this->cartMgr->addItemToCart($cart, $cartable);
+        $this->cartMgr->removeItemFromCart($cart, $cartable);
+
+        $items = $cart->getItems();
+        $this->assertSame(0, $items->count());
+    }
+
     public function setup()
     {
-
         $pricingProvider = new \Vespolina\CartBundle\Pricing\SimpleCartPricingProvider();
         $pricingProvider->addCartHandler(new \Vespolina\CartBundle\Handler\DefaultCartHandler());
 

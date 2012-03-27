@@ -132,7 +132,6 @@ interface CartInterface
 
     function setExpiresAt(\DateTime $expiresAt);
 
-
     /**
      * Set pricing information
      *
