@@ -80,11 +80,11 @@ abstract class CartManager implements CartManagerInterface
 
     public function initCart(CartInterface $cart)
     {
-        //Set default state (for now we set it to "open")
-        $this->setCartState($cart, Cart::STATE_OPEN);
-
-        //Create the pricing set to hold cart level pricing data
+        // Create the pricing set to hold cart level pricing data
         $this->setCartPricingSet($cart, $this->pricingProvider->createPricingSet());
+
+        // Set default state (for now we set it to "open"), do this last since it will persist the cart
+        $this->setCartState($cart, Cart::STATE_OPEN);
     }
 
     public function initCartItem(CartItemInterface $cartItem)
@@ -127,6 +127,8 @@ abstract class CartManager implements CartManagerInterface
         $rp->setAccessible(true);
         $rp->setValue($cart, $state);
         $rp->setAccessible(false);
+
+        $this->updateCart($cart);
     }
 
     public function findItemInCart(CartInterface $cart, CartableItemInterface $cartableItem)
