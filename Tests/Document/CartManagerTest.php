@@ -60,14 +60,18 @@ class CartManagerTest extends TestCase
     {
         $owner = new Person('person');
 
+        $this->dm->persist($owner);
+        $this->dm->flush();
+
         $cart = $this->cartMgr->createCart();
         $cart->setOwner($owner);
         $this->cartMgr->updateCart($cart);
 
         $ownersCart = $this->cartMgr->findOpenCartByOwner($owner);
-        $this->assertSame($cart, $ownersCart);
+        $this->assertSame($cart->getId(), $ownersCart->getId());
 
         $this->cartMgr->setCartState($cart, Cart::STATE_CLOSED);
+        $ressult = $this->cartMgr->findOpenCartByOwner($owner);
         $this->assertNull($this->cartMgr->findOpenCartByOwner($owner));
 
         return $cart;

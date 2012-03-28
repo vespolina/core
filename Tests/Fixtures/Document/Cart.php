@@ -29,6 +29,12 @@ class Cart extends BaseCart
     /** @ODM\EmbedMany(targetDocument="Vespolina\CartBundle\Tests\Fixtures\Document\CartItem", strategy="set") */
     protected $items;
 
+    /** @ODM\ReferenceOne(targetDocument="Vespolina\CartBundle\Tests\Fixtures\Document\Person") */
+    protected $owner;
+
+    /** @ODM\String */
+    protected $state;
+
     public function __construct($name)
     {
         parent::__construct($name);
