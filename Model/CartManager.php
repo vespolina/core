@@ -28,12 +28,27 @@ abstract class CartManager implements CartManagerInterface
     protected $pricingProvider;
     protected $recurringInterface;
 
+    // todo: $recurringInterface should be handled in a handler
     function __construct(CartPricingProviderInterface $pricingProvider, $cartClass, $cartItemClass, $recurringInterface = 'Vespolina\ProductSubscriptionBundle\Model\RecurringInterface')
     {
         $this->cartClass = $cartClass;
         $this->cartItemClass = $cartItemClass;
         $this->pricingProvider = $pricingProvider;
         $this->recurringInterface = $recurringInterface;
+    }
+
+    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem, $flush = true)
+    {
+        $item = $this->doAddItemToCart($cart, $cartableItem);
+        $this->updateCart($cart, $flush);
+
+        return $item;
+    }
+
+    public function removeItemFromCart(CartInterface $cart, CartableItemInterface $cartableItem, $flush = true)
+    {
+        $this->doRemoveItemFromCart($cart, $cartableItem);
+        $this->updateCart($cart, $flush);
     }
 
     /**
@@ -65,11 +80,11 @@ abstract class CartManager implements CartManagerInterface
 
     public function initCart(CartInterface $cart)
     {
-        //Set default state (for now we set it to "open")
-        $this->setCartState($cart, Cart::STATE_OPEN);
-
-        //Create the pricing set to hold cart level pricing data
+        // Create the pricing set to hold cart level pricing data
         $this->setCartPricingSet($cart, $this->pricingProvider->createPricingSet());
+
+        // Set default state (for now we set it to "open"), do this last since it will persist the cart
+        $this->setCartState($cart, Cart::STATE_OPEN);
     }
 
     public function initCartItem(CartItemInterface $cartItem)
@@ -112,20 +127,50 @@ abstract class CartManager implements CartManagerInterface
         $rp->setAccessible(true);
         $rp->setValue($cart, $state);
         $rp->setAccessible(false);
+
+        $this->updateCart($cart);
+    }
+
+    public function findItemInCart(CartInterface $cart, CartableItemInterface $cartableItem)
+    {
+        foreach ($cart->getItems() as $item)
+        {
+            if ($item->getCartableItem() == $cartableItem) {
+                return $item;
+            };
+        }
+
+        return null;
     }
 
     protected function doAddItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
     {
-        $item = $this->createItem($cartableItem);
+        if ($item = $this->findItemInCart($cart, $cartableItem)) {
+            // todo: if an item is already in the cart, increase the quantity
+        } else {
+            $item = $this->createItem($cartableItem);
+
+            // add item to cart
+            $rm = new \ReflectionMethod($cart, 'addItem');
+            $rm->setAccessible(true);
+            $rm->invokeArgs($cart, array($item));
+            $rm->setAccessible(false);
+        }
+        $this->determinePrices($cart);
+
+        return $item;
+    }
+
+    protected function doRemoveItemFromCart(CartInterface $cart, CartableItemInterface $cartableItem)
+    {
+        $item = $this->findItemInCart($cart, $cartableItem);
 
         // add item to cart
-        $rm = new \ReflectionMethod($cart, 'addItem');
+        $rm = new \ReflectionMethod($cart, 'removeItem');
         $rm->setAccessible(true);
         $rm->invokeArgs($cart, array($item));
         $rm->setAccessible(false);
 
         $this->determinePrices($cart);
-
-        return $item;
     }
 }
