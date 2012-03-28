@@ -10,8 +10,10 @@ namespace Vespolina\CartBundle\Tests\Document;
 use Doctrine\Bundle\MongoDBBundle\Tests\TestCase;
 
 use Vespolina\CartBundle\Document\CartManager;
+use Vespolina\CartBundle\Pricing\SimpleCartPricingProvider;
 use Vespolina\CartBundle\Tests\CartTestCommon;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
+use Vespolina\CartBundle\Tests\Fixtures\Document\Person;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -54,9 +56,26 @@ class CartManagerTest extends TestCase
         $this->assertSame(0, $items->count());
     }
 
+    public function testFindOpenCartByOwner()
+    {
+        $owner = new Person('person');
+
+        $cart = $this->cartMgr->createCart();
+        $cart->setOwner($owner);
+        $this->cartMgr->updateCart($cart);
+
+        $ownersCart = $this->cartMgr->findOpenCartByOwner($owner);
+        $this->assertSame($cart, $ownersCart);
+
+        $this->cartMgr->setCartState($cart, Cart::STATE_CLOSED);
+        $this->assertNull($this->cartMgr->findOpenCartByOwner($owner));
+
+        return $cart;
+    }
+
     public function setup()
     {
-        $pricingProvider = new \Vespolina\CartBundle\Pricing\SimpleCartPricingProvider();
+        $pricingProvider = new SimpleCartPricingProvider();
         $pricingProvider->addCartHandler(new \Vespolina\CartBundle\Handler\DefaultCartHandler());
 
         $this->dm = self::createTestDocumentManager();
