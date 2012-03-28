@@ -12,6 +12,7 @@ use Doctrine\Bundle\MongoDBBundle\Tests\TestCase;
 use Vespolina\CartBundle\Document\CartManager;
 use Vespolina\CartBundle\Pricing\SimpleCartPricingProvider;
 use Vespolina\CartBundle\Tests\CartTestCommon;
+use Vespolina\CartBundle\Tests\Fixtures\Document\Cart;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Person;
 
@@ -21,6 +22,20 @@ use Vespolina\CartBundle\Tests\Fixtures\Document\Person;
 class CartManagerTest extends TestCase
 {
     protected $cartMgr;
+
+
+    public function testSetCartState()
+    {
+        $cart = $this->createCart();
+
+        $this->cartMgr->setCartState($cart, 'open');
+        $persistedCart = $this->cartMgr->findCartById($cart->getId());
+        $this->assertSame('open', $persistedCart->getState());
+
+        $this->cartMgr->setCartState($cart, 'close');
+        $persistedCart = $this->cartMgr->findCartById($cart->getId());
+        $this->assertSame('close', $persistedCart->getState());
+    }
 
     public function testAddItemToCart()
     {
