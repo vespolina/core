@@ -1,15 +1,14 @@
 <?php
 /**
- * (c) Vespolina Project http://www.vespolina-project.org
+ * (c) 2011-2012 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 namespace Vespolina\CartBundle\Document;
 
-use Symfony\Component\DependencyInjection\Container;
 use Doctrine\ODM\MongoDB\DocumentManager;
-
+use Symfony\Component\DependencyInjection\Container;
 use Vespolina\CartBundle\Document\Cart;
 use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
@@ -41,7 +40,7 @@ class CartManager extends BaseCartManager
     public function findOpenCartByOwner($owner)
     {
         return $this->dm->createQueryBuilder($this->cartClass)
-                    ->field('owner')->equals($owner)
+                    ->field('owner.$id')->equals(new \MongoId($owner->getId()))
                     ->field('state')->equals(Cart::STATE_OPEN)
                     ->getQuery()
                     ->getSingleResult();
