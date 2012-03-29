@@ -8,7 +8,7 @@
 namespace Vespolina\CartBundle\Document;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Vespolina\CartBundle\Document\Cart;
 use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
@@ -26,13 +26,15 @@ class CartManager extends BaseCartManager
     protected $cartRepo;
     protected $dm;
     protected $primaryIdentifier;
+    protected $session;
 
-    public function __construct(DocumentManager $dm, CartPricingProviderInterface $pricingProvider = null, $cartClass, $cartItemClass)
+    public function __construct(DocumentManager $dm, Session $session, CartPricingProviderInterface $pricingProvider = null, $cartClass, $cartItemClass)
     {
         $this->dm = $dm;
 
         $this->cartClass = $cartClass;
         $this->cartRepo = $this->dm->getRepository($cartClass);
+        $this->session = $session;
 
         parent::__construct($pricingProvider, $cartClass, $cartItemClass);
     }
@@ -80,6 +82,22 @@ class CartManager extends BaseCartManager
     public function findCartByIdentifier($name, $code)
     {
         return;
+    }
+
+    public function getActiveCart($owner)
+    {
+        if ($cart = $this->session->get('vespolina_cart')) {
+            return $cart;
+        }
+
+        if (!$cart = $this->findOpenCartByOwner($owner)) {
+            $cart = $this->createCart();
+            $cart->setOwner($owner);
+            $this->updateCart($cart);
+        }
+        $this->session->set('vespolina_cart', $cart);
+
+        return $cart;
     }
 
     /**
