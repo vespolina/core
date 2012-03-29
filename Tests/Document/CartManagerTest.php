@@ -87,14 +87,12 @@ class CartManagerTest extends TestCase
         $this->assertSame($cart->getId(), $ownersCart->getId());
 
         $this->cartMgr->setCartState($cart, Cart::STATE_CLOSED);
-        $ressult = $this->cartMgr->findOpenCartByOwner($owner);
         $this->assertNull($this->cartMgr->findOpenCartByOwner($owner));
 
         return $cart;
     }
 
-
-    public function testGetActiveCart()
+    public function testGetActiveCartForOwner()
     {
         $owner = new Person('person');
 
@@ -118,6 +116,29 @@ class CartManagerTest extends TestCase
         $thirdPassCart = $this->cartMgr->getActiveCart($owner);
         $this->assertSame($firstPassCart->getId(), $thirdPassCart->getId());
         $this->assertSame(1, $persistedCarts->count(), 'there should only be one cart in the db');
+        $this->assertSame($thirdPassCart, $session->get('vespolina_cart'), 'the new cart should have been set for the session');
+    }
+
+
+    public function testGetActiveCartWithoutOwner()
+    {
+        $session = $this->container->get('session');
+        // not really a test, but it does make sure we start empty
+        $this->assertNull($session->get('vespolina_cart'));
+
+        $firstPassCart = $this->cartMgr->getActiveCart();
+        $persistedCarts = $this->cartMgr->findBy(array());
+        $this->assertSame(1, $persistedCarts->count(), 'there should only be one cart in the db');
+        $this->assertSame($firstPassCart, $session->get('vespolina_cart'), 'the new cart should have been set for the session');
+
+        $secondPassCart = $this->cartMgr->getActiveCart();
+        $this->assertSame($firstPassCart->getId(), $secondPassCart->getId());
+        $this->assertSame(1, $persistedCarts->count(), 'there should only be one cart in the db');
+
+        $session->clear('vespolina_cart');
+        $thirdPassCart = $this->cartMgr->getActiveCart();
+        $this->assertNotSame($firstPassCart->getId(), $thirdPassCart->getId());
+        $this->assertSame(2, $persistedCarts->count(), 'there is a left over cart, this should probably be handled');
         $this->assertSame($thirdPassCart, $session->get('vespolina_cart'), 'the new cart should have been set for the session');
     }
 

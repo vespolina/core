@@ -84,13 +84,16 @@ class CartManager extends BaseCartManager
         return;
     }
 
-    public function getActiveCart($owner)
+    public function getActiveCart($owner = null)
     {
         if ($cart = $this->session->get('vespolina_cart')) {
             return $cart;
         }
 
-        if (!$cart = $this->findOpenCartByOwner($owner)) {
+        if (!$owner) {
+            $cart = $this->createCart();
+            $this->updateCart($cart);
+        } elseif (!$cart = $this->findOpenCartByOwner($owner)) {
             $cart = $this->createCart();
             $cart->setOwner($owner);
             $this->updateCart($cart);
