@@ -89,6 +89,7 @@ abstract class CartManager implements CartManagerInterface
 
     public function initCartItem(CartItemInterface $cartItem)
     {
+        // todo: this should be moved into a handler
         //Default cart item description to the product name
         if ($cartableItem = $cartItem->getCartableItem()) {
             $cartItem->setName($cartableItem->getCartableName());
@@ -97,7 +98,7 @@ abstract class CartManager implements CartManagerInterface
             $rpPricingSet->setAccessible(true);
             $rpPricingSet->setValue($cartItem, $this->getPricingProvider()->createPricingSet());
             $rpPricingSet->setAccessible(false);
-
+            // todo: especially this damn thing, and get the Interface out of the __construct
             if ($cartableItem instanceof $this->recurringInterface) {
                 $rp = new \ReflectionProperty($cartItem, 'isRecurring');
                 $rp->setAccessible(true);
@@ -111,6 +112,7 @@ abstract class CartManager implements CartManagerInterface
     {
         $pricingProvider = $this->getPricingProvider();
         $pricingProvider->determineCartPrices($cart, null, $determineItemPrices);
+        $this->updateCart($cart);
     }
 
     public function setCartPricingSet(CartInterface $cart, $pricingSet)
@@ -143,19 +145,33 @@ abstract class CartManager implements CartManagerInterface
         return null;
     }
 
+    public function setItemQuantity(CartItemInterface $cartItem, $quantity)
+    {
+        // add item to cart
+        $rm = new \ReflectionMethod($cartItem, 'setQuantity');
+        $rm->setAccessible(true);
+        $rm->invokeArgs($cartItem, array($quantity));
+        $rm->setAccessible(false);
+
+        $this->determinePrices($cartItem->getCart());
+    }
+
     protected function doAddItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
     {
-        if ($item = $this->findItemInCart($cart, $cartableItem)) {
-            // todo: if an item is already in the cart, increase the quantity
-        } else {
-            $item = $this->createItem($cartableItem);
+        if ($cartItem = $this->findItemInCart($cart, $cartableItem)) {
+            $quantity = $cartItem->getQuantity() + 1;
+            $this->setItemQuantity($cartItem, $quantity);
 
-            // add item to cart
-            $rm = new \ReflectionMethod($cart, 'addItem');
-            $rm->setAccessible(true);
-            $rm->invokeArgs($cart, array($item));
-            $rm->setAccessible(false);
+            return $cartItem;
         }
+
+        $item = $this->createItem($cartableItem);
+
+        // add item to cart
+        $rm = new \ReflectionMethod($cart, 'addItem');
+        $rm->setAccessible(true);
+        $rm->invokeArgs($cart, array($item));
+        $rm->setAccessible(false);
         $this->determinePrices($cart);
 
         return $item;

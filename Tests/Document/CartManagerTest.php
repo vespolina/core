@@ -38,6 +38,32 @@ class CartManagerTest extends TestCase
 //        $this->assertSame('close', $persistedCart->getState());
     }
 
+    public function testFindItemInCart()
+    {
+        $cart = $this->persistNewCart();
+        $cartable = $this->persistNewCartable('product');
+        $addedItem = $this->cartMgr->addItemToCart($cart, $cartable);
+
+        $item = $this->cartMgr->findItemInCart($cart, $cartable);
+
+        $this->assertSame($item, $addedItem);
+    }
+
+    public function testSetItemQuantity()
+    {
+        $cart = $this->persistNewCart();
+        $cartable = $this->persistNewCartable('product');
+        $item = $this->cartMgr->addItemToCart($cart, $cartable);
+
+        $this->assertSame(1, $item->getQuantity());
+
+        $this->cartMgr->setItemQuantity($item, 4);
+        $this->assertSame(4, $item->getQuantity());
+
+        $this->cartMgr->setItemQuantity($item, 2);
+        $this->assertSame(2, $item->getQuantity());
+    }
+
     public function testAddItemToCart()
     {
         $cart = $this->persistNewCart();
@@ -48,17 +74,12 @@ class CartManagerTest extends TestCase
         $this->assertSame(1, $items->count());
         $item = $items->current();
         $this->assertSame($cartable, $item->getCartableItem());
-    }
+        $this->assertSame(1, $item->getQuantity());
 
-    public function testFindItemInCart()
-    {
-        $cart = $this->persistNewCart();
-        $cartable = $this->persistNewCartable('product');
-        $addedItem = $this->cartMgr->addItemToCart($cart, $cartable);
-
-        $item = $this->cartMgr->findItemInCart($cart, $cartable);
-
-        $this->assertSame($item, $addedItem);
+        $existingItem = $this->cartMgr->addItemToCart($cart, $cartable);
+        $items = $cart->getItems();
+        $this->assertSame(1, $items->count());
+        $this->assertSame(2, $existingItem->getQuantity());
     }
 
     public function testRemoveItemFromCart()
