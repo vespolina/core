@@ -7,7 +7,7 @@
     <tbody>
     {% for item in cart.items %}
         <tr>
-            <td>{{ item.quantity }}</td><td>{{ item.name }}</td><td>{{ item.totalPrice }}</td>
+            <td>{{ item.quantity }}</td><td>{{ item.name }}</td><td>{{ item.totalPrice }}</td><td><a class="btn" href="{{ path('vespolina_cart_remove_cartable', {'cartableId': item.cartableItem.id}) }}">Remove</a></td>
         </tr>
     {% else %}
         <tr>
