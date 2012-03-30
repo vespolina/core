@@ -83,7 +83,7 @@ abstract class CartManager implements CartManagerInterface
         // Create the pricing set to hold cart level pricing data
         $this->setCartPricingSet($cart, $this->pricingProvider->createPricingSet());
 
-        // Set default state (for now we set it to "open"), do this last since it will persist the cart
+        // Set default state (for now we set it to "open"), do this last since it will persist and flush the cart
         $this->setCartState($cart, Cart::STATE_OPEN);
     }
 
