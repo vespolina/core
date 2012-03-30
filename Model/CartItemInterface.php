@@ -95,22 +95,6 @@ interface CartItemInterface
     function setCart(CartInterface $cart);
 
     /**
-     * Set the state of this item
-     *
-     * @abstract
-     * @param $state
-     * @return void
-     */
-    function setState($state);
-
-    /**
-     * Set the quantity
-     *
-     * @param $quantity
-     * @return void
-     */
-    function setQuantity($quantity);
-    /**
      * Set the name of the cart item
      *
      * @param string $name
