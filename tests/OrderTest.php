@@ -20,19 +20,19 @@ class OrderTest extends \PHPUnit_Framework_TestCase
 
         $item = new Item();
         $order->addItem($item);
-        $this->assertType('array', $order->getItems());
         $this->assertContains($item, $order->getItems());
-        $this->assertSame(1, count($order->getItems()));
+        $this->assertCount(1, $order->getItems());
+        $this->assertSame($order, $item->getParent(), 'the order should be set in the item');
 
         $items = array();
         $items[] = new Item();
         $items[] = new Item();
         $order->mergeItems($items);
-        $this->assertSame(3, $order->getItems());
+        $this->assertCount(3, $order->getItems());
 
         $order->removeItem($item);
         $this->assertNotContains($item, $order->getItems());
-        $this->assertSame(2, $order->getItems());
+        $this->assertCount(2, $order->getItems());
 
         $order->clearItems();
         $this->assertEmpty($order->getItems());
@@ -40,7 +40,6 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $order->addItem($item);
         $order->setItems($items);
         $this->assertNotContains($item, $order->getItems(), 'this should have been removed on setting a new array of items');
-        $this->assertSame(2, $order->getItems());
-
+        $this->assertCount(2, $order->getItems());
     }
 }
