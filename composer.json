@@ -2,7 +2,7 @@
     "name": "vespolina/entity",
     "type": "entities",
     "description": "Common entities use in the various Vespolina bundles, but not specific to Vespolina",
-    "keywords": ["stripe"],
+    "keywords": ["ecommerce"],
     "homepage": "https://github.com/vespolina/VespolinaEntity",
     "license": "MIT",
     "require": {
