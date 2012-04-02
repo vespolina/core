@@ -6,7 +6,7 @@
     "homepage": "https://github.com/vespolina/VespolinaEntity",
     "license": "MIT",
     "require": {
-        "php": ">=5.3.2",
+        "php": ">=5.3.2"
     },
     "autoload": {
         "psr-0": { "Vespolina\\Entity": "" }
