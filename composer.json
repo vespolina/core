@@ -9,8 +9,7 @@
         "php": ">=5.3.2"
     },
     "autoload": {
-        "psr-0": { "Vespolina\\Entity": "" }
+        "psr-0": { "Vespolina\\Entity": "lib/" }
     },
-
     "target-dir": "Vespolina/Entity"
 }
