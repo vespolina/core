@@ -17,5 +17,21 @@ use Vespolina\Entity\ItemInterface;
  */
 class Item implements ItemInterface
 {
+    protected $parent;
 
+    /**
+     * @inheritdoc
+     */
+    function setParent(OrderInterface $parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
 }

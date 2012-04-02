@@ -11,7 +11,7 @@ namespace Vespolina\Entity;
 use Vespolina\Entity\ItemInterface;
 
 /**
- * OrderInterface is a generic interface for shopping cart or sales order
+ * Order is a base class for shopping cart or sales order
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
@@ -38,7 +38,7 @@ class Order implements OrderInterface
      */
     public function clearItems()
     {
-        $this->items->clear();
+        $this->items = array();
     }
 
     /**
@@ -54,7 +54,7 @@ class Order implements OrderInterface
      */
     public function mergeItems(array $items)
     {
-        $this->items = array($this->items, $items);
+        $this->items = array_merge($this->items, $items);
     }
 
     /**
@@ -82,6 +82,14 @@ class Order implements OrderInterface
     /**
      * @inheritdoc
      */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getName()
     {
         return $this->name;
@@ -93,6 +101,14 @@ class Order implements OrderInterface
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
     }
 
     /**

@@ -29,6 +29,7 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $items[] = new Item();
         $order->mergeItems($items);
         $this->assertCount(3, $order->getItems());
+        $this->assertContains($item, $order->getItems());
 
         $order->removeItem($item);
         $this->assertNotContains($item, $order->getItems());

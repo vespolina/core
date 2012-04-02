@@ -8,6 +8,8 @@
 
 namespace Vespolina\Entity;
 
+use Vespolina\Entity\OrderInterface;
+
 /**
  * ItemInterface is an interface for items in an order
  *
@@ -15,5 +17,18 @@ namespace Vespolina\Entity;
  */
 interface ItemInterface
 {
+    /**
+     * Set the parent order for this item
+     *
+     * @param Vespolina\Entity\OrderInterface $parent
+     */
+    function setParent(OrderInterface $parent);
+
+    /**
+     * Return the order where this items belongs
+     *
+     * @return Vespolina\Entity\OrderInterface
+     */
+    function getParent();
 
 }
