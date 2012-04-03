@@ -10,6 +10,5 @@
     },
     "autoload": {
         "psr-0": { "Vespolina\\Entity": "lib/" }
-    },
-    "target-dir": "Vespolina/Entity"
+    }
 }
