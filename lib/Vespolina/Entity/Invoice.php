@@ -9,6 +9,7 @@
 namespace Vespolina\Entity;
 
 use Vespolina\Entity\InvoiceInterface;
+use Vespolina\Entity\OrderInterface;
 
 /**
  * Invoice for an order
@@ -17,5 +18,21 @@ use Vespolina\Entity\InvoiceInterface;
  */
 class Invoice implements InvoiceInterface
 {
+    private $order;
 
+    /**
+     * @inherit
+     */
+    public function setOrder(OrderInterface $order)
+    {
+        $this->order = $order;
+    }
+
+    /**
+     * @inherit
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
 }
