@@ -5,7 +5,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\ProductBundle\Model\Feature;
+namespace Vespolina\Entity;
 
 /**
  * @author Richard D Shank <develop@zestic.com>

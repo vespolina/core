@@ -1,18 +1,18 @@
 <?php
 /**
- * (c) 2012 Vespolina Project http://www.vespolina-project.org
+ * (c) 2011-2012 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\ProductBundle\Model\Feature;
+namespace Vespolina\Entity;
 
-use Vespolina\ProductBundle\Model\Feature\FeatureInterface;
+use Vespolina\Entity\FeatureInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
  */
-abstract class Feature implements FeatureInterface
+class Feature implements FeatureInterface
 {
     protected $name;
     protected $searchTerm;
