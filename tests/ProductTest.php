@@ -30,7 +30,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($feature2, $product->getFeature('feature2'));
 
         $product->removeFeature($feature2);
-        $this->assertCount(1, $product->getFeatures());
+        $this->assertCount(1, $product->getFeatures(), 'remove by feature');
         $this->assertNull($product->getFeature('feature2'));
 
         $feature3 = new Feature();
@@ -50,6 +50,12 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($product->getFeature('feature1'));
         $this->assertSame($feature2, $product->getFeature('feature2'));
         $this->assertSame($feature3, $product->getFeature('feature3'));
+
+
+        $product->removeFeature('feature3');
+        $this->assertCount(1, $product->getFeatures(), 'feature should be removed by type');
+        $product->removeFeature('nada');
+        $this->assertCount(1, $product->getFeatures());
 
         $product->clearFeatures();
         $this->assertEmpty($product->getFeatures());

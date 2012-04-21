@@ -53,7 +53,8 @@ class Product implements ProductInterface
      */
     public function addFeature(FeatureInterface $feature)
     {
-        $this->features[] = $feature;
+        $type = $feature->getType();
+        $this->features[$type] = $feature;
     }
 
     /**
@@ -61,7 +62,17 @@ class Product implements ProductInterface
      */
     public function addFeatures(array $features)
     {
+        foreach($features as $feature) {
+            $this->addFeature($feature);
+        }
+    }
 
+    /**
+     * @inheritdoc
+     */
+    public function clearFeatures()
+    {
+        $this->features = array();
     }
 
     /**
@@ -77,11 +88,8 @@ class Product implements ProductInterface
      */
     public function getFeature($type)
     {
-        foreach ($this->features as $feature) {
-            if ($feature->getType() == $type) {
-
-                return $feature;
-            }
+        if (isset($this->features[$type])) {
+            return $this->features[$type];
         }
 
         return null;
@@ -90,9 +98,12 @@ class Product implements ProductInterface
     /**
      * @inheritdoc
      */
-    function removeFeature($type)
+    function removeFeature($feature)
     {
-
+        if ($feature instanceof FeatureInterface) {
+            $feature = $feature->getType();
+        }
+            unset($this->features[$feature]);
     }
 
     /**
@@ -101,7 +112,7 @@ class Product implements ProductInterface
     public function setFeatures($features)
     {
         $this->features = array();
-        foreach($features as $feature) {
+        foreach ($features as $feature) {
             $this->addFeature($feature);
         }
     }

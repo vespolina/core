@@ -48,6 +48,11 @@ interface ProductInterface
     function addFeatures(array $features);
 
     /**
+     * Remove all features from the product
+     */
+    function clearFeatures();
+
+    /**
      * Return the features of the product
      *
      * @return Vespolina\Entity\FeatureInterface
