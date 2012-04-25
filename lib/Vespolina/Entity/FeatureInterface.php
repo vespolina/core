@@ -17,40 +17,40 @@ interface FeatureInterface
      *
      * @param $name
      */
-    public function setName($name);
+    function setName($name);
 
     /**
      * Get the name of this feature
      *
      * @return string name of node
      */
-    public function getName();
+    function getName();
 
     /**
      * Set the search term for this feature
      *
      * @param $term
      */
-    public function setSearchTerm($term);
+    function setSearchTerm($term);
 
     /**
      * Return the search term for this feature
      *
      * @return string term
      */
-    public function getSearchTerm();
+    function getSearchTerm();
 
     /**
      * Set the type of feature. ie: title, studio, rated
      *
      * @param $type
      */
-    public function setType($type);
+    function setType($type);
 
     /**
      * Return the type of feature
      *
      * @return string type
      */
-    public function getType();
+    function getType();
 }
