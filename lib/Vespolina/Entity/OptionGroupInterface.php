@@ -17,12 +17,19 @@ interface OptionGroupInterface
      *
      * @param Vespolina\Entity\OptionInterface $option
      */
-    public function addOption(OptionInterface $option);
+    function addOption(OptionInterface $option);
+
+    /**
+     * Add an array of OptionInterface objects to the option group
+     *
+     * @param array $options
+     */
+    function addOptions(array $options);
 
     /**
      * Clear all options from this product options
      */
-    public function clearOptions();
+    function clearOptions();
 
     /**
      * Return a specific option by value
@@ -31,7 +38,7 @@ interface OptionGroupInterface
      *
      * @return Vespolina\Entity\OptionInterface
      */
-    public function getOption($value);
+    function getOption($value);
 
     /**
      * Return a specific option by the name
@@ -40,40 +47,40 @@ interface OptionGroupInterface
      *
      * @return Vespolina\Entity\OptionInterface or null
      */
-    public function getOptionByDisplay($display);
+    function getOptionByDisplay($display);
 
     /**
      * Return all the options for this type
      *
      * @return array of Vespolina\Entity\OptionInterface
      */
-    public function getOptions();
+    function getOptions();
 
     /**
      * Add a collection of options
      *
      * @param array $options
      */
-    public function setOptions($options);
+    function setOptions($options);
 
     /**
      * Remove a option from this product options set
      *
      * @param OptionInterface $option
      */
-    public function removeOption(OptionInterface $option);
+    function removeOption(OptionInterface $option);
 
     /**
      * Set the name of the option group
      *
      * @param string $name
      */
-    public function setName($name);
+    function setName($name);
 
     /**
      * Return the name of the option group
      *
      * @return string $name
      */
-    public function getName();
+    function getName();
 }

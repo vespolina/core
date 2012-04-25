@@ -16,7 +16,7 @@ use Vespolina\Entity\OptionGroup;
  */
 class OptionGroupTest extends \PHPUnit_Framework_TestCase
 {
-    public function testProductOptions()
+    public function testAddOptions()
     {
         $colorRed = $this->createOption('red', 'color', 'colorRed');
 
@@ -68,6 +68,35 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
         // DO NOT SET THE NAME IN THE GROUP!
         $this->setExpectedException('UnexpectedValueException', 'The OptionGroup must have the name set or the Option must have the group type set');
         $og->addOption($noTypeBlue);
+    }
+
+    public function testHandleOptions()
+    {
+        $og = new OptionGroup();
+        $colorRed = $this->createOption('red', 'color', 'colorRed');
+
+        $og->addOption($colorRed);
+        $this->assertCount(1, $og->getOptions());
+        $this->assertSame($colorRed, $og->getOption('colorRed'));
+
+        $og->clearOptions();
+        $this->assertEmpty($og->getOptions());
+
+        $colorBlue = $this->createOption('blue', 'color', 'colorBlue');
+        $options = array($colorRed, $colorBlue);
+
+        $og->setOptions($options);
+        $this->assertCount(2, $og->getOptions());
+
+        $og->removeOption($colorBlue);
+        $this->assertCount(1, $og->getOptions());
+        $this->assertNull($og->getOption('colorBlue'));
+
+        $colorGreen = $this->createOption('green', 'color', 'colorGreen');
+        $options = array($colorGreen, $colorBlue);
+
+        $og->addOptions($options);
+        $this->assertCount(3, $og->getOptions());
     }
 
     protected function createOption($display, $type, $value)

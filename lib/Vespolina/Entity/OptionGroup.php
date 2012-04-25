@@ -46,6 +46,16 @@ class OptionGroup implements OptionGroupInterface
         $this->options[$value] = $option;
     }
 
+    /*
+     * @inheritdoc
+     */
+    public function addOptions(array $options)
+    {
+        foreach ($options as $option) {
+            $this->addOption($option);
+        }
+    }
+
     /**
      * @inheritdoc
      */
