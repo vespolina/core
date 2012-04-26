@@ -9,7 +9,10 @@
 namespace Vespolina\Entity\Tests;
 
 use Vespolina\Entity\Feature;
+use Vespolina\Entity\Option;
+use Vespolina\Entity\OptionGroup;
 use Vespolina\Entity\Product;
+use Vespolina\Entity\Identifier\SKUIdentifier;
 
 class ProductTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,6 +62,43 @@ class ProductTest extends \PHPUnit_Framework_TestCase
 
         $product->clearFeatures();
         $this->assertEmpty($product->getFeatures());
+    }
 
+    public function testOptionMatrix()
+    {
+        $product = new Product();
+
+        $colorGroup = new OptionGroup();
+        $colorBlue = $this->createOption('blue', 'color', 'colorBlue');
+        $colorGreen = $this->createOption('green', 'color', 'colorGreen');
+        $colorRed = $this->createOption('red', 'color', 'colorRed');
+        $colorGroup->addOption($colorBlue);
+        $colorGroup->addOption($colorGreen);
+        $colorGroup->addOption($colorRed);
+
+        $materialGroup = new OptionGroup();
+        $materialCotton = $this->createOption('cotton', 'material', 'materialCotton');
+        $materialSmall = $this->createOption('polyester', 'material', 'materialSmall');
+        $materialGroup->addOption($materialCotton);
+        $materialGroup->addOption($materialSmall);
+
+        $sizeGroup = new OptionGroup();
+        $sizeLarge = $this->createOption('large', 'size', 'sizeLarge');
+        $sizeSmall = $this->createOption('small', 'size', 'sizeSmall');
+        $sizeGroup->addOption($sizeLarge);
+        $sizeGroup->addOption($sizeSmall);
+
+        
+    }
+
+    protected function createOption($display, $type, $value)
+    {
+        $option = new Option();
+
+        $option->setType($type);
+        $option->setDisplay($display);
+        $option->setValue($value);
+
+        return $option;
     }
 }
