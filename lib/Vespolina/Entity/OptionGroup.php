@@ -111,7 +111,7 @@ class OptionGroup implements OptionGroupInterface
     {
         $value = $option->getValue();
         if (isset($this->options[$value])) {
-                unset($this->options[$value]);
+            unset($this->options[$value]);
         }
     }
 

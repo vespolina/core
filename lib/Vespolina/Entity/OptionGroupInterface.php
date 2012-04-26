@@ -66,7 +66,7 @@ interface OptionGroupInterface
     /**
      * Remove a option from this product options set
      *
-     * @param OptionInterface $option
+     * @param Vespolina\Entity\OptionInterface $option
      */
     function removeOption(OptionInterface $option);
 
