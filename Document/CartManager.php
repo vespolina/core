@@ -8,7 +8,7 @@
 namespace Vespolina\CartBundle\Document;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Vespolina\CartBundle\Document\Cart;
 use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
