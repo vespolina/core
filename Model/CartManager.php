@@ -37,10 +37,10 @@ abstract class CartManager implements CartManagerInterface
         $this->recurringInterface = $recurringInterface;
     }
 
-    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem, $flush = true)
+    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
     {
         $item = $this->doAddItemToCart($cart, $cartableItem);
-        $this->updateCart($cart, $flush);
+        $this->updateCart($cart);
 
         return $item;
     }
