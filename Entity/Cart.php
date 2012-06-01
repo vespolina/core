@@ -13,7 +13,4 @@ use Vespolina\CartBundle\Entity\BaseCart;
  */
 class Cart extends BaseCart
 {
-    public function __construct()
-    {
-    }
 }
