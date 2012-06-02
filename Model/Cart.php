@@ -266,6 +266,6 @@ class Cart implements CartInterface
 
     public function isEmpty()
     {
-        return $this->getItems()->count() == 0;
+        return $this->getItems()->isEmpty();
     }
 }

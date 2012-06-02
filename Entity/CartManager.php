@@ -16,6 +16,7 @@ use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Model\CartManager as BaseCartManager;
 use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
@@ -27,13 +28,15 @@ class CartManager extends BaseCartManager
     protected $cartRepo;
     protected $em;
     protected $primaryIdentifier;
+    protected $session;
 
-    public function __construct(EntityManager $em, CartPricingProviderInterface $pricingProvider = null, $cartClass, $cartItemClass)
+    public function __construct(EntityManager $em, Session $session, CartPricingProviderInterface $pricingProvider = null, $cartClass, $cartItemClass)
     {
         $this->em = $em;
 
         $this->cartClass = $cartClass;
         $this->cartRepo = $this->em->getRepository($cartClass);
+        $this->session = $session;
 
         parent::__construct($pricingProvider, $cartClass, $cartItemClass);
     }
@@ -109,5 +112,23 @@ class CartManager extends BaseCartManager
         if ($andFlush) {
             $this->em->flush();
         }
+    }
+
+    public function getActiveCart($owner = null)
+    {
+        if ($cart = $this->session->get('vespolina_cart')) {
+            return $cart;
+        }
+        if (!$owner) {
+            $cart = $this->createCart();
+            $this->updateCart($cart);
+        } elseif (!$cart = $this->findOpenCartByOwner($owner)) {
+            $cart = $this->createCart();
+            $cart->setOwner($owner);
+            $this->updateCart();
+        }
+        $this->session->set('vespolina_cart', $cart);
+
+        return $cart;
     }
 }
