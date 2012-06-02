@@ -1,4 +1,5 @@
-<table>
+{% block cart_items %}
+<table class="table table-striped table-condensed">
     <thead>
         <tr>
             <td>Qty</td><td>Product</td><td>Price</td><td>&nbsp;</td>
@@ -21,3 +22,13 @@
         </tr>
     </tfoot>
 </table>
+{% endblock %}
+
+{% block cart_actions %}
+{% if not cart.isEmpty %}
+    <a class="btn" href="{{ path('vespolina_store_cart_checkout') }}">
+        Checkout
+    </a>
+{% endif %}
+{% endblock %}
+
