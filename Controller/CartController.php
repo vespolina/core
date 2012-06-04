@@ -23,7 +23,12 @@ class CartController extends ContainerAware
         $cartable = $this->findCartableById($cartableId);
 
         $cart = $this->getCart($cartId);
+
+        try{
+
         $this->container->get('vespolina.cart_manager')->addItemToCart($cart, $cartable);
+
+        }catch(\Exception $e) {}    //Dirty temporary hack
 
         return new RedirectResponse($this->container->get('router')->generate('vespolina_cart_show', array('cartId' => $cartId)));
     }
