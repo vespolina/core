@@ -25,9 +25,7 @@ class CartController extends ContainerAware
         $cart = $this->getCart($cartId);
 
         try{
-
-        $this->container->get('vespolina.cart_manager')->addItemToCart($cart, $cartable);
-
+            $this->container->get('vespolina.cart_manager')->addItemToCart($cart, $cartable);
         }catch(\Exception $e) {}    //Dirty temporary hack
 
         return new RedirectResponse($this->container->get('router')->generate('vespolina_cart_show', array('cartId' => $cartId)));
@@ -38,8 +36,10 @@ class CartController extends ContainerAware
         $cart = $this->getCart($cartId);
         $cartable = $this->findCartableById($cartableId);
 
-        $this->container->get('vespolina.cart_manager')->removeItemFromCart($cart, $cartable);
-
+        try{
+            $this->container->get('vespolina.cart_manager')->removeItemFromCart($cart, $cartable);
+        }catch(\Exception $e) {}    //Dirty temporary hack
+    
         return new RedirectResponse($this->container->get('router')->generate('vespolina_cart_show', array('cartId' => $cartId)));
     }
 
