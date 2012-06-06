@@ -44,6 +44,11 @@ abstract class CartItem implements CartItemInterface
         $this->quantity = 1;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * @inheritdoc
      */

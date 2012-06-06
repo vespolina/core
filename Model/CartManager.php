@@ -37,9 +37,9 @@ abstract class CartManager implements CartManagerInterface
         $this->recurringInterface = $recurringInterface;
     }
 
-    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
+    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem, $quantity = null)
     {
-        $item = $this->doAddItemToCart($cart, $cartableItem);
+        $item = $this->doAddItemToCart($cart, $cartableItem, $quantity);
         $this->updateCart($cart);
 
         return $item;
@@ -156,10 +156,15 @@ abstract class CartManager implements CartManagerInterface
         $this->determinePrices($cartItem->getCart());
     }
 
-    protected function doAddItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
+    protected function doAddItemToCart(CartInterface $cart, CartableItemInterface $cartableItem, $quantity = null)
     {
         if ($cartItem = $this->findItemInCart($cart, $cartableItem)) {
-            $quantity = $cartItem->getQuantity() + 1;
+
+            if (null == $quantity) {
+                $quantity = $cartItem->getQuantity() + 1;
+            } else {
+                $quantity = $quantity;
+            }
             $this->setItemQuantity($cartItem, $quantity);
 
             return $cartItem;
