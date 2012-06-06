@@ -56,6 +56,8 @@ class CartController extends ContainerAware
                     $this->container->get('vespolina.cart_manager')->addItemToCart ($cart, $cartableItem, $item['quantity']);
                 }
             }
+
+            $this->container->get('vespolina.cart_manager')->determinePrices($cart);
         }
 
         return new RedirectResponse($this->container->get('router')->generate('vespolina_cart_show' ));
