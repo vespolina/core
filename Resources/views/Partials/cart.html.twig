@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        <form action="{{ path('vespolina_cart_update', { cartId: cart.id })}}" method="POST" {{ form_enctype(form)}}
+        <form action="{{ path('vespolina_cart_update', { cartId: cart.id })}}" method="POST" {{ form_enctype(form)}}>
             {% for item in form.items %}
                 <tr>
                     <td>{{ item.vars.value.name }}</td>

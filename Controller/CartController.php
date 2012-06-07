@@ -52,8 +52,8 @@ class CartController extends ContainerAware
                 if ($item['quantity'] < 1)
                 {
                     $this->container->get('vespolina.cart_manager')->removeItemFromCart ($cart, $cartableItem);
-                } else {
-                    $this->container->get('vespolina.cart_manager')->addItemToCart ($cart, $cartableItem, $item['quantity']);
+                } elseif ($cartItem = $this->container->get('vespolina.cart_manager')->findItemInCart($cart, $cartableItem)) {
+                    $this->container->get('vespolina.cart_manager')->setItemQuantity($cartItem, $item['quantity']);
                 }
             }
 
