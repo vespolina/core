@@ -41,9 +41,9 @@ class CartManager extends BaseCartManager
         parent::__construct($pricingProvider, $cartClass, $cartItemClass);
     }
 
-    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
+    public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem, $quantity = null)
     {
-        $item = $this->doAddItemToCart($cart, $cartableItem);
+        $item = $this->doAddItemToCart($cart, $cartableItem, $quantity);
 
         // todo: just update this cart, don't flush everything
         if ($cart->getId() !== $cart->getId()) {

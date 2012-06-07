@@ -80,7 +80,7 @@ class Cart implements CartInterface
      */
     public function getItem($index)
     {
-        if ($index <= count($this->items)) {
+        if ($index <= count($this->getItems())) {
 
             return $this->items[$index-1];
         }
@@ -126,7 +126,7 @@ class Cart implements CartInterface
     public function getRecurringItems()
     {
         $recurringItems = array();
-        foreach ($this->items as $item) {
+        foreach ($this->getItems() as $item) {
             if ($item->isRecurring()) {
                 $recurringItems[] = $item;
             }
@@ -141,7 +141,7 @@ class Cart implements CartInterface
     public function getNonRecurringItems()
     {
         $nonRecurringItems = array();
-        foreach ($this->items as $item) {
+        foreach ($this->getItems() as $item) {
             if (!$item->isRecurring()) {
                 $nonRecurringItems[] = $item;
             }

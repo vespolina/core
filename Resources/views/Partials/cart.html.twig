@@ -1,34 +1,50 @@
-{% block cart_items %}
-<table class="table table-striped table-condensed">
+<h2>My Cart</h2>
+<table class="table table-striped">
     <thead>
         <tr>
-            <td>Qty</td><td>Product</td><td>Price</td><td>&nbsp;</td>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
-    {% for item in cart.items %}
-        <tr>
-            <td>{{ item.quantity }}</td><td>{{ item.name }}</td><td>{{ item.totalPrice }}</td><td><a class="btn" href="{{ path('vespolina_cart_remove_cartable', {'cartableId': item.cartableItem.id}) }}">Remove</a></td>
-        </tr>
-    {% else %}
-        <tr>
-            <td colspan="3">Your cart is empty.</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="2">Grand Total</td><td>{{ cart.totalPrice }}</td>
-        </tr>
-    </tfoot>
-</table>
-{% endblock %}
+        <form action="{{ path('vespolina_cart_update', { cartId: cart.id })}}" method="POST" {{ form_enctype(form)}}>
+            {% for item in form.items %}
+                <tr>
+                    <td>{{ item.vars.value.name }}</td>
+                    <td>
+                        {{ form_widget(item.quantity, { 'attr': { 'class': 'span1'}}) }}
+                        {{ form_widget(item.cartableItem.id) }}
+                    </td>
+                    <td>{{ item.vars.value.totalPrice | price_format(store.defaultCurrency)}}</td>
+                    <td><a href="{{ path('vespolina_cart_remove_cartable', {'cartableId': item.vars.value.cartableItem.id}) }}"><i class="icon-trash"></i></a></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Your cart is empty.</td>
+                </tr>
+            {% endfor %}
 
-{% block cart_actions %}
-{% if not cart.isEmpty %}
-    <a class="btn" href="{{ path('vespolina_store_cart_checkout') }}">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-primary">Update Cart</button></td>
+            </tr>
+            {{ form_rest(form) }}
+        </form>
+
+    </tbody>
+</table>
+
+<div class="well span3 offset6">
+<center>
+    <strong>Grand Total</strong> {{ cart.totalPrice | price_format(store.defaultCurrency) }}<br/>
+    <br/>
+    <a href="{{ path('vespolina_store_cart_checkout')}}" class="btn btn-success">
+        <i class="icon-shopping-cart icon-white"></i>
         Checkout
     </a>
-{% endif %}
-{% endblock %}
-
+    </center>
+</div>
