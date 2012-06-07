@@ -15,7 +15,7 @@ class Cart extends AbstractType
     public function getDefaultOptions()
     {
         return array(
-            'data_class' => 'Vespolina\CartBundle\Entity\Cart',
+            'data_class' => 'Vespolina\CartBundle\Model\Cart',
         );
     }
 

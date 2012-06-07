@@ -16,7 +16,7 @@ class CartItem extends AbstractType
     public function getDefaultOptions()
     {
         return array(
-            'data_class' => 'Vespolina\CartBundle\Entity\CartItem',
+            'data_class' => 'Vespolina\CartBundle\Model\CartItem',
             'cascade_validation' => true,
         );
     }
