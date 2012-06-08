@@ -1,5 +1,5 @@
 {
-    "name": "vespolina/entity",
+    "name": "vespolina/core",
     "type": "entities",
     "description": "Core code for the various Vespolina bundles, but not specific to Vespolina",
     "keywords": ["ecommerce"],
