@@ -1,0 +1,17 @@
+{% if cart.isEmpty %}
+    <a href="{{ path('vespolina_cart_show')}}"><i class="icon-shopping-cart"></i>Cart <span class="badge">0</span></a>
+{% else %}
+    <a href="{{ path('vespolina_cart_show')}}" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-shopping-cart icon-white"></i>Cart <span class="badge">{{ cart.items.count }}<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+    {% for item in cart.items %}
+        <li><a href="{{ path('vespolina_product_detail', { 'slug': item.cartableItem.slug}) }}">({{ item.quantity }})  {{ item.name }}  -  {{ item.totalPrice | price_format(store.defaultCurrency) }}</a>
+    {% endfor %}
+        <li class="divider"></li>
+        <li>
+            <a class="v-nav-checkout" href="{{ path('vespolina_store_cart_checkout') }}">
+                Grand Total {{ totalPrice | price_format(store.defaultCurrency) }}<br/>
+                <button class="btn btn-primary">Checkout Now</button>
+            </a>
+        <li>
+    </ul>
+{% endif %}

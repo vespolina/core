@@ -12,13 +12,40 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Form\Cart as CartForm;
+use Vespolina\StoreBundle\Controller\AbstractController;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
  */
 
-class CartController extends ContainerAware
+class DefaultController extends AbstractController
 {
+    public function quickInspectionAction()
+    {
+
+        $cartManager = $this->container->get('vespolina.cart_manager');
+        $cart = $this->getCart();
+
+        $cartManager->determinePrices($cart);   //Todo: pricing determination should only done once instead on every request
+
+        $totalPrice = $cart->getPricingSet()->get('total');
+
+        return $this->render('VespolinaCartBundle:Default:quickInspection.html.twig', array('cart' => $cart, 'totalPrice' => $totalPrice ));
+    }
+
+    public function navBarAction()
+    {
+
+        $cartManager = $this->container->get('vespolina.cart_manager');
+        $cart = $this->getCart();
+
+        $cartManager->determinePrices($cart);   //Todo: pricing determination should only done once instead on every request
+
+        $totalPrice = $cart->getPricingSet()->get('total');
+
+        return $this->render('VespolinaCartBundle:Default:navBar.html.twig', array('cart' => $cart, 'totalPrice' => $totalPrice ));
+    }
+
     public function addToCartAction($cartableId, $cartId = null)
     {
         $cartable = $this->findCartableById($cartableId);
@@ -40,7 +67,7 @@ class CartController extends ContainerAware
         try{
             $this->container->get('vespolina.cart_manager')->removeItemFromCart($cart, $cartable);
         }catch(\Exception $e) {}    //Dirty temporary hack
-    
+
         return new RedirectResponse($this->container->get('router')->generate('vespolina_cart_show', array('cartId' => $cartId)));
     }
 
@@ -74,7 +101,7 @@ class CartController extends ContainerAware
         $cart = $this->getCart($cartId);
         $form = $this->container->get('form.factory')->create(new CartForm(), $cart);
 
-        $template = $this->container->get('templating')->render(sprintf('VespolinaCartBundle:Cart:show.html.%s', $this->getEngine()), array('cart' => $cart, 'form' => $form->createView()));
+        $template = $this->container->get('templating')->render(sprintf('VespolinaCartBundle:Default:show.html.%s', $this->getEngine()), array('cart' => $cart, 'form' => $form->createView()));
 
         return new Response($template);
     }

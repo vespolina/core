@@ -1,0 +1,16 @@
+<div class="v-cart-quick-inspection">
+    {% if cart.isEmpty %}
+        Cart is empty
+    {% else %}
+        <b>{{ totalPrice | price_format(store.defaultCurrency) }}</b> -
+        <b>{{ cart.items.count }}</b> item(s)
+    <a class="btn btn-success" href="{{ path('vespolina_cart_show') }}">
+        Show Cart
+    </a>
+    <a class="" href="{{ path('vespolina_store_cart_checkout') }}">
+        Checkout
+    </a>
+
+    {% endif %}
+
+</div>
