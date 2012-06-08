@@ -6,8 +6,6 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity\Tests;
-
 use Vespolina\Entity\Order;
 use Vespolina\Entity\Item;
 

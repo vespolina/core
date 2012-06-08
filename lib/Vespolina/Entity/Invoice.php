@@ -18,6 +18,7 @@ use Vespolina\Entity\OrderInterface;
  */
 class Invoice implements InvoiceInterface
 {
+    private $dueDate;
     private $order;
 
     /**

@@ -18,24 +18,24 @@ interface IdentifierInterface
      * @param (optional) $code
      * @return boolean
      */
-    public function checkDigit($code = null);
+    function checkDigit($code = null);
 
     /**
      * Set the code for this identifier
      *
      * @param $code
      */
-    public function setCode($code);
+    function setCode($code);
 
     /**
      * Return the code for this identifier
      *
      * @return code
      */
-    public function getCode();
+    function getCode();
 
     /**
      * Return the name of the identifier
      */
-    public function getName();
+    function getName();
 }
