@@ -11,8 +11,8 @@ namespace Vespolina\Entity;
 use Vespolina\Entity\IdentifierInterface;
 use Vespolina\Entity\FeatureInterface;
 use Vespolina\ProductBundle\Model\Identifier\ProductIdentifierSetInterface;
-use Vespolina\ProductBundle\Model\Option\OptionInterface;
-use Vespolina\ProductBundle\Model\Option\OptionGroupInterface;
+use Vespolina\Entity\OptionInterface;
+use Vespolina\Entity\OptionGroupInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -28,7 +28,7 @@ class Product implements ProductInterface
 
     protected $description;
     protected $name;
-    protected $options;
+    protected $optionGroups;
     protected $slug;
     protected $type;
 
