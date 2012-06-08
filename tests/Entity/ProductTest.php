@@ -6,8 +6,6 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity\Tests;
-
 use Vespolina\Entity\Feature;
 use Vespolina\Entity\Option;
 use Vespolina\Entity\OptionGroup;
@@ -88,7 +86,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $sizeGroup->addOption($sizeLarge);
         $sizeGroup->addOption($sizeSmall);
 
-        
+
     }
 
     protected function createOption($display, $type, $value)
