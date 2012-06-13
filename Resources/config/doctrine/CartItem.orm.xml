@@ -9,12 +9,12 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="cartableItemId"    fieldName="cartableItemId"  type="string"   nullable="true"/>
-        <field name="description"       fieldName="description"     type="string"   nullable="true"/>
-        <field name="pricingSetData"    fieldName="pricingSetData"  type="array"    nullable="true"/>
-        <field name="state"             fieldName="state"           type="string"   nullable="true"/>
-        <field name="options"           fieldName="options"         type="array"    nullable="true"/>
-        <field name="quantity"          fieldName="quantity"        type="string" />
+        <field name="cartableItemId" column="cartable_item_id" type="string"   nullable="true"/>
+        <field name="description"    column="description"      type="string"   nullable="true"/>
+        <field name="pricingSetData" column="pricing_set_data" type="array"    nullable="true"/>
+        <field name="state"          column="state"            type="string"   nullable="true"/>
+        <field name="options"        column="options"          type="array"    nullable="true"/>
+        <field name="quantity"       column="quantity"         type="string" />
 
         <many-to-one field="cart" target-entity="Vespolina\CartBundle\Entity\Cart" inversed-by="cartItems">
               <join-column name="cartId" referenced-column-name="id" />
