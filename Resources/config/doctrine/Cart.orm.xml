@@ -8,13 +8,13 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id>
-        <field name="createdAt" fieldName="createdAt"   type="date" />
-        <field name="expiresAt" fieldName="expiresAt"   type="date"     nullable="true"/>
-        <field name="followUp"  fieldName="followUp"    type="string"   nullable="true"/>
-        <field name="owner"     fieldName="owner"       type="string"   nullable="true"/>
-        <field name="pricingSetData"    fieldName="pricingSetData"  type="array"    nullable="true"/>
-        <field name="state"     fieldName="state"       type="string"   />
-        <field name="updatedAt" fieldName="updatedAt"   type="date"     nullable="true"/>
+        <field name="createdAt"      column="created_at"       type="date" />
+        <field name="expiresAt"      column="expires_at"       type="date"   nullable="true"/>
+        <field name="followUp"       column="follow_up"        type="string" nullable="true"/>
+        <field name="owner"          column="owner"            type="string" nullable="true"/>
+        <field name="pricingSetData" column="pricing_set_data" type="array"  nullable="true"/>
+        <field name="state"          column="state"            type="string" />
+        <field name="updatedAt"      column="updatedAt"        type="date"   nullable="true"/>
 
         <one-to-many field="items" target-entity="Vespolina\CartBundle\Entity\CartItem" mapped-by="cart">
             <cascade>
@@ -24,7 +24,7 @@
 
         <lifecycle-callbacks>
             <lifecycle-callback type="prePersist" method="incrementCreatedAt" />
-            <lifecycle-callback type="preUpdate" method="incrementUpdatedAt" />
+            <lifecycle-callback type="preUpdate"  method="incrementUpdatedAt" />
         </lifecycle-callbacks>
     </entity>
 
