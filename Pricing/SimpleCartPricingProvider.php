@@ -23,12 +23,10 @@ use Vespolina\CartBundle\Pricing\AbstractCartPricingProvider;
 class SimpleCartPricingProvider extends AbstractCartPricingProvider
 {
     protected $fulfillmentPricingEnabled;
-    protected $taxPricingEnabled;
 
     public function __construct()
     {
         $this->fulfillmentPricingEnabled = true;
-        $this->taxDeterminationEnabled = true;
     }
 
     public function createPricingContext()
@@ -43,6 +41,12 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
         if (!$pricingContext) {
             $pricingContext = $this->createPricingContext();
             $pricingContext['total'] = 0;
+        }
+
+        //If a taxation manager exists let's prepare the pricing context for taxation purposes
+        if (null != $this->taxationManager) {
+
+            $this->preparePricingContextForTaxation($pricingContext);
         }
 
         foreach ($cart->getItems() as $cartItem) {
@@ -61,7 +65,7 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
         }
 
         // Determine header level tax (eg. one shot tax)
-        if ($this->taxPricingEnabled) {
+        if (null != $this->taxationManager) {
             $this->determineCartTaxes($cart, $pricingContext);
         }
 
@@ -91,6 +95,35 @@ class SimpleCartPricingProvider extends AbstractCartPricingProvider
     protected function determineCartTaxes(CartInterface $cart, $pricingContext)
     {
         //Additional taxes to be applied not related to cart item taxes
+    }
+
+    protected function preparePricingContextForTaxation($pricingContext)
+    {
+        //Find out if the tax zone was supplied
+        $taxZone = $pricingContext->get('taxZone');
+
+        if (null == $taxZone) {
+
+            //Check if a fulfillment address was explicitly set
+            $address = $pricingContext->get('fulfillmentAddress');
+
+            if (null == $address) {
+
+                //We we don't have a fulfillment address, we use now the customer's info
+                $customer = $pricingContext->get('customer');
+
+                if (null != $customer) {
+                    $address = $customer->getAddresses()->first();  //Todo: should use delivery address
+                }
+            }
+
+            if (null != $address) {
+
+                //So we have an address, lookup the tax zone
+                $taxZone =  $this->taxationManager->findTaxZoneByAddress($address);
+                $pricingContext->set('taxZone', $taxZone);
+            }
+        }
     }
 
     protected function sumItemPrices(CartItemInterface $cartItem, $pricingContext)

@@ -18,6 +18,9 @@
             <argument type="service" id="vespolina.cart.pricing_provider" />
             <argument>%vespolina.cart.model.cart.class%</argument>
             <argument>%vespolina.cart.model.cart_item.class%</argument>
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher"/>
+            </call>
         </service>
 
         <service id="vespolina.cart_manager" alias="vespolina.cart.cart_manager" />

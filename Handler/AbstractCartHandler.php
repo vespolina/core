@@ -17,6 +17,7 @@ use Vespolina\CartBundle\Pricing\PricingSet;
  */
 abstract class AbstractCartHandler implements CartHandlerInterface
 {
+    protected $taxationManager;
 
     public function createPricingSet()
     {
@@ -26,5 +27,10 @@ abstract class AbstractCartHandler implements CartHandlerInterface
     public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
         throw new \Exception("Sorry determineCartItemPrices() doesn't have default functionality in place");
+    }
+
+    public function setTaxationManager($taxationManager)
+    {
+        $this->taxationManager = $taxationManager;
     }
 }

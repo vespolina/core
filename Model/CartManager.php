@@ -11,6 +11,8 @@ namespace Vespolina\CartBundle\Model;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+use Vespolina\CartBundle\CartEvents;
+use Vespolina\CartBundle\Event\CartEvent;
 use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
@@ -25,6 +27,7 @@ abstract class CartManager implements CartManagerInterface
 {
     protected $cartClass;
     protected $cartItemClass;
+    protected $dispatcher;
     protected $pricingProvider;
     protected $recurringInterface;
 
@@ -36,19 +39,15 @@ abstract class CartManager implements CartManagerInterface
         $this->pricingProvider = $pricingProvider;
         $this->recurringInterface = $recurringInterface;
     }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function addItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
     {
         $item = $this->doAddItemToCart($cart, $cartableItem);
-        $this->updateCart($cart);
 
         return $item;
-    }
-
-    public function removeItemFromCart(CartInterface $cart, CartableItemInterface $cartableItem, $flush = true)
-    {
-        $this->doRemoveItemFromCart($cart, $cartableItem);
-        $this->updateCart($cart, $flush);
     }
 
     /**
@@ -73,11 +72,37 @@ abstract class CartManager implements CartManagerInterface
         return $cartItem;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function determinePrices(CartInterface $cart, $determineItemPrices = true)
+    {
+        $pricingProvider = $this->getPricingProvider();
+        $pricingProvider->determineCartPrices($cart, null, $determineItemPrices);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function finishCart(CartInterface $cart)
+    {
+        if (null != $this->dispatcher) {
+
+            $this->dispatcher->dispatch(CartEvents::CART_FINISHED,  new CartEvent($cart));
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getPricingProvider()
     {
         return $this->pricingProvider;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function initCart(CartInterface $cart)
     {
         // Create the pricing set to hold cart level pricing data
@@ -108,13 +133,6 @@ abstract class CartManager implements CartManagerInterface
         }
     }
 
-    public function determinePrices(CartInterface $cart, $determineItemPrices = true)
-    {
-        $pricingProvider = $this->getPricingProvider();
-        $pricingProvider->determineCartPrices($cart, null, $determineItemPrices);
-        $this->updateCart($cart);
-    }
-
     public function setCartPricingSet(CartInterface $cart, $pricingSet)
     {
         $rp = new \ReflectionProperty($cart, 'pricingSet');
@@ -123,14 +141,17 @@ abstract class CartManager implements CartManagerInterface
         $rp->setAccessible(false);
     }
 
+    public function setEventDispatcher($dispatcher) {
+
+        $this->dispatcher = $dispatcher;
+    }
+
     public function setCartState(CartInterface $cart, $state)
     {
         $rp = new \ReflectionProperty($cart, 'state');
         $rp->setAccessible(true);
         $rp->setValue($cart, $state);
         $rp->setAccessible(false);
-
-        $this->updateCart($cart);
     }
 
     public function findItemInCart(CartInterface $cart, CartableItemInterface $cartableItem)
@@ -145,6 +166,11 @@ abstract class CartManager implements CartManagerInterface
         return null;
     }
 
+    public function removeItemFromCart(CartInterface $cart, CartableItemInterface $cartableItem, $flush = true)
+    {
+        $this->doRemoveItemFromCart($cart, $cartableItem);
+    }
+
     public function setItemQuantity(CartItemInterface $cartItem, $quantity)
     {
         // add item to cart
@@ -152,8 +178,6 @@ abstract class CartManager implements CartManagerInterface
         $rm->setAccessible(true);
         $rm->invokeArgs($cartItem, array($quantity));
         $rm->setAccessible(false);
-
-        $this->determinePrices($cartItem->getCart());
     }
 
     protected function doAddItemToCart(CartInterface $cart, CartableItemInterface $cartableItem)
@@ -172,7 +196,6 @@ abstract class CartManager implements CartManagerInterface
         $rm->setAccessible(true);
         $rm->invokeArgs($cart, array($item));
         $rm->setAccessible(false);
-        $this->determinePrices($cart);
 
         return $item;
     }
@@ -186,7 +209,5 @@ abstract class CartManager implements CartManagerInterface
         $rm->setAccessible(true);
         $rm->invokeArgs($cart, array($item));
         $rm->setAccessible(false);
-
-        $this->determinePrices($cart);
     }
 }

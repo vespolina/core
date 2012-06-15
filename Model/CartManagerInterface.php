@@ -34,6 +34,17 @@ interface CartManagerInterface
     function createItem(CartableItemInterface $cartableItem = null);
 
     /**
+     *
+     * Calculate prices for a given cart.
+     *
+     * @abstract
+     * @param CartInterface $cart
+     * @param bool $determineItemPrices
+     * @return void
+     */
+
+    function determinePrices(CartInterface $cart, $determineItemPrices = true);
+    /**
      * Find an open cart for the given cart owner
      *
      * @abstract
@@ -41,6 +52,15 @@ interface CartManagerInterface
      * @param string $cartState
      */
     function findOpenCartByOwner($owner);
+
+    /**
+     * Hint the manager that no further manipulations will be performed on the cart anymore
+     *
+     * @abstract
+     * @param CartInterface $cart
+     * @return mixed
+     */
+    function finishCart(CartInterface $cart);
 
     /**
      * Initialize a new cart.  Eg. setting the initial state

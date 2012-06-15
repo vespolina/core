@@ -37,12 +37,6 @@ class DefaultCartHandler extends  AbstractCartHandler
         //Add additional upcharges for a chosen product option
         $upCharge = $this->determineCartItemUpCharge($cartItem, $pricingContext);
 
-        //Determine item level taxes such as VAT or sales tax
-        if ($this->taxPricingEnabled) {
-
-            $this->determineCartItemTaxes($cartItem, $pricingContext);
-        }
-
         //Calculate fulfillment costs (eg. shipping, packaging cost)
         if ($this->fulfillmentPricingEnabled) {
 
@@ -56,6 +50,20 @@ class DefaultCartHandler extends  AbstractCartHandler
 
         $pricingSet->set('upcharge', $upCharge);
         $pricingSet->set('total', $totalPrice);
+
+        //Determine item level taxes
+        if (null != $this->taxationManager) {
+
+            $pricingSet->set('total', $totalPrice);
+            $this->determineCartItemTaxes(
+                    $cartItem,
+                    array('total' => $totalPrice),
+                    $pricingSet,
+                    $pricingContext);
+
+            $totalWithTax = $totalPrice + $pricingContext->get('totalTax');
+            $pricingSet->set('totalWithTax', $totalWithTax);
+        }
 
         // set the total price in the cart item
         $cartItem->setTotalPrice($totalPrice);
@@ -80,10 +88,30 @@ class DefaultCartHandler extends  AbstractCartHandler
         return $upCharge;
     }
 
-    protected function determineCartItemTaxes(CartItemInterface $cartItem, $pricingContext)
+    protected function determineCartItemTaxes(CartItemInterface $cartItem, $prices, $cartItemPricingSet, $pricingContext)
     {
 
+        $rate = 0;
+        $taxes = array();
 
+        //Here we currently assume that all cart items use the default tax zone
+        $taxZone = $pricingContext->get('taxZone');
+
+        if (null != $taxZone) {
+
+            $rate = $taxZone->getDefaultRate();
+        }
+
+        foreach($prices as $name => $value) {
+
+            $taxValue = $$rate * $value / 100;
+            $taxes[$name] = $taxValue;
+
+            $cartItemPricingSet->set($name . 'Tax', $taxValue);
+            $pricingContext->set($name . 'Tax', $taxValue);
+        }
+
+        return $taxes;
     }
 
     protected function determineCartFulfillmentPrices(CartInterface $cart, $pricingContext)

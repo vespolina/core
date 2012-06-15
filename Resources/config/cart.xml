@@ -13,5 +13,11 @@
         <service id="vespolina.cart_handler.default" class="%vespolina.cart_handler.default.class%">
             <tag name="vespolina.cart_handler" />
         </service>
+
+        <!-- events -->
+        <service id="vespolina.cart.listener.cart" class="Vespolina\CartBundle\EventListener\CartListener">
+            <tag name="kernel.event_listener" event="vespolina_cart.cart_finished" method="onFinishCart" />
+            <argument type="service" id="service_container" />
+        </service>
     </services>
 </container>

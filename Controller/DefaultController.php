@@ -26,8 +26,6 @@ class DefaultController extends AbstractController
         $cartManager = $this->container->get('vespolina.cart_manager');
         $cart = $this->getCart();
 
-        $cartManager->determinePrices($cart);   //Todo: pricing determination should only done once instead on every request
-
         $totalPrice = $cart->getPricingSet()->get('total');
 
         return $this->render('VespolinaCartBundle:Default:quickInspection.html.twig', array('cart' => $cart, 'totalPrice' => $totalPrice ));
@@ -39,8 +37,6 @@ class DefaultController extends AbstractController
         $cartManager = $this->container->get('vespolina.cart_manager');
         $cart = $this->getCart();
 
-        $cartManager->determinePrices($cart);   //Todo: pricing determination should only done once instead on every request
-
         $totalPrice = $cart->getPricingSet()->get('total');
 
         return $this->render('VespolinaCartBundle:Default:navBar.html.twig', array('cart' => $cart, 'totalPrice' => $totalPrice ));
@@ -49,7 +45,6 @@ class DefaultController extends AbstractController
     public function addToCartAction($cartableId, $cartId = null)
     {
         $cartable = $this->findCartableById($cartableId);
-
         $cart = $this->getCart($cartId);
 
         try{
@@ -66,6 +61,8 @@ class DefaultController extends AbstractController
 
         try{
             $this->container->get('vespolina.cart_manager')->removeItemFromCart($cart, $cartable);
+            $this->finishCart($cart);
+
         }catch(\Exception $e) {}    //Dirty temporary hack
 
         return new RedirectResponse($this->container->get('router')->generate('vespolina_cart_show', array('cartId' => $cartId)));
@@ -89,11 +86,10 @@ class DefaultController extends AbstractController
                 }
             }
 
-            $this->container->get('vespolina.cart_manager')->determinePrices($cart);
+            $this->finishCart($cart);
         }
 
         return new RedirectResponse($this->container->get('router')->generate('vespolina_cart_show' ));
-
     }
 
     public function showAction($cartId = null)
@@ -118,6 +114,12 @@ class DefaultController extends AbstractController
         } else {
             return $this->container->get('vespolina.cart_manager')->getActiveCart();
         }
+    }
+
+    protected function finishCart(CartInterface $cart)
+    {
+        $this->container->get('vespolina.cart_manager')->finishCart($cart);
+        $this->container->get('vespolina.cart_manager')->updateCart($cart);
     }
 
     protected function getEngine()

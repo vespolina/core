@@ -20,6 +20,7 @@ use Vespolina\CartBundle\Pricing\PricingSet;
 abstract class AbstractCartPricingProvider implements CartPricingProviderInterface
 {
     protected $handlers;
+    protected $taxationManager;
 
     public function createPricingSet()
     {
@@ -32,6 +33,12 @@ abstract class AbstractCartPricingProvider implements CartPricingProviderInterfa
         foreach ($types as $type) {
             $this->handlers[$type] = $handler;
         }
+        $handler->setTaxationManager($this->taxationManager);
+    }
+
+    public function setTaxationManager($taxationManager)
+    {
+        $this->taxationManager = $taxationManager;
     }
 
     protected function getCartHandler(CartItemInterface $cartItem)
