@@ -1,6 +1,6 @@
 <?php
 
-namespace Vespolina\CartBundle\Tests\Service;
+namespace Vespolina\CartBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Vespolina\CartBundle\Tests\CartTestCommon;
@@ -33,9 +33,6 @@ class CartCreateTest extends CartTestCommon
 
         $customerId = '1248934893';
 
-
-
-
         $product1 = $this->createProduct('Ipad 2', 'IPAD-2011', 499);
 
         $product2 = new Cartable();
@@ -49,25 +46,23 @@ class CartCreateTest extends CartTestCommon
 
 
         $cartItem1 = $cartManager->addItemToCart($cart, $product1);
-        $cartItem1->setQuantity(10);
+        $cartManager->setItemQuantity($cartItem1, 10);
         $cartItem1->getPricingSet()->set('unitPrice', 499);
 
         $cartItem1->addOption('color', 'white');
         $cartItem1->addOption('connectivity', 'WIFI+3G');
         $cartItem1->addOption('size', '64GB');
 
-        $cartItem1->setQuantity(3);
-        $cartItem1->setState('init');
+        $cartManager->setItemQuantity($cartItem1, 3);
+        $cartManager->setCartItemState($cartItem1, 'init');
 
         $this->assertEquals($cartItem1->getName(), $product1->getName());
 
         $cartItem2 = $cartManager->addItemToCart($cart, $product2);
-        $cartItem2->setQuantity(2);
+        $cartManager->setItemQuantity($cartItem2, 2);
+
         $cartItem2->getPricingSet()->set('unitPrice', 699);
-
-
-        $cartItem1->setState('init');
-
+        $cartManager->setCartItemState($cartItem2, 'init');
 
         $testCartItem1 = $cart->getItem(1);
 
@@ -86,8 +81,7 @@ class CartCreateTest extends CartTestCommon
 
         $aCartItem1 = $aCart->getItem(1);
 
-        $this->assertEquals($aCartItem1->getPricingSet()->get('unitPrice'), 499);
-
+        $this->assertEquals($aCartItem1->getPricingSet()->get('unitPriceTotal'), 499);
         $this->assertEquals($aCartItem1->getOption('color'), 'white');
 
         //...and close it
@@ -98,15 +92,16 @@ class CartCreateTest extends CartTestCommon
 
         $aCart->clearItems();
         $this->assertEquals($aCart->getItems()->count(), 0);
+
     }
 
-    protected function createProduct($name, $id, $unitPrice)
+    protected function createProduct($name, $id, $unitPriceTotal)
     {
         $product = new Cartable();
         $product->setName($name);
         $product->setId($id);
 
-        $product->setPricing(array('unitPrice' => $unitPrice));
+        $product->setPricing(array('unitPriceTotal' => $unitPriceTotal));
 
         return $product;
     }

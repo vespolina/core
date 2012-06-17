@@ -49,6 +49,7 @@ class DefaultController extends AbstractController
 
         try{
             $this->container->get('vespolina.cart_manager')->addItemToCart($cart, $cartable);
+            $this->finishCart($cart);
         }catch(\Exception $e) {}    //Dirty temporary hack
 
         return new RedirectResponse($this->container->get('router')->generate('vespolina_cart_show', array('cartId' => $cartId)));
@@ -86,6 +87,8 @@ class DefaultController extends AbstractController
                 }
             }
 
+            //Finish cart is only called when all required cart updates have been performed.
+            //It assures amongst that prices are only recalculated once for the entire cart
             $this->finishCart($cart);
         }
 

@@ -39,7 +39,7 @@ abstract class CartManager implements CartManagerInterface
         $this->pricingProvider = $pricingProvider;
         $this->recurringInterface = $recurringInterface;
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -144,6 +144,14 @@ abstract class CartManager implements CartManagerInterface
     public function setEventDispatcher($dispatcher) {
 
         $this->dispatcher = $dispatcher;
+    }
+
+    public function setCartItemState(CartItemInterface $cartItem, $state)
+    {
+        $rp = new \ReflectionProperty($cartItem, 'state');
+        $rp->setAccessible(true);
+        $rp->setValue($cartItem, $state);
+        $rp->setAccessible(false);
     }
 
     public function setCartState(CartInterface $cart, $state)
