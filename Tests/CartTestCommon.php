@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 use Vespolina\CartBundle\Model\Cart;
 use Vespolina\CartBundle\Handler\DefaultCartHandler;
-use Vespolina\CartBundle\Pricing\SimpleCartPricingProvider;
+use Vespolina\CartBundle\Pricing\DefaultCartPricingProvider;
 use Vespolina\CartBundle\Tests\Fixtures\Document\Cartable;
 use Vespolina\CartBundle\Tests\Fixtures\Document\RecurringCartable;
 
@@ -102,7 +102,7 @@ abstract class CartTestCommon extends WebTestCase
     {
         if (!$this->pricingProvider) {
 
-            $this->pricingProvider = new SimpleCartPricingProvider();
+            $this->pricingProvider = new DefaultCartPricingProvider();
 
             $this->pricingProvider->addCartHandler(new DefaultCartHandler());
         }

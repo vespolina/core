@@ -28,14 +28,13 @@ class DefaultCartHandler extends  AbstractCartHandler
 
     public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
-
         $pricing = $cartItem->getCartableItem()->getPricing();
-
-        $unitPrice = $pricing['unitPriceTotal'];
-        $upCharge = 0;
+        $pricingSet = $cartItem->getPricingSet();
+        $unitNett = $pricing['unitPriceTotal'];
+        $upChargeNett = 0;
 
         //Add additional upcharges for a chosen product option
-        $upCharge = $this->determineCartItemUpCharge($cartItem, $pricingContext);
+        $upChargeNett = $this->determineCartItemUpCharge($cartItem, $pricingContext);
 
         //Calculate fulfillment costs (eg. shipping, packaging cost)
         if ($this->fulfillmentPricingEnabled) {
@@ -43,30 +42,24 @@ class DefaultCartHandler extends  AbstractCartHandler
             //$this->determineCartItemFulfillmentPrices($cartItem, $pricingContext);
         }
 
-        //Calculate item level totals
-        $totalPrice = ( $cartItem->getQuantity() * $unitPrice ) + $upCharge;
+        $totalNett = ( $cartItem->getQuantity() * $unitNett ) + $upChargeNett;
+        $pricingSet->set('upchargeNett', $upChargeNett);
+        $pricingSet->set('totalNett', $totalNett);
 
-        $pricingSet = $cartItem->getPricingSet();
-
-        $pricingSet->set('upcharge', $upCharge);
-        $pricingSet->set('total', $totalPrice);
 
         //Determine item level taxes
         if (null != $this->taxationManager) {
 
-            $pricingSet->set('total', $totalPrice);
             $this->determineCartItemTaxes(
                     $cartItem,
-                    array('total' => $totalPrice),
+                    array('totalNett' => $totalNett),
                     $pricingSet,
                     $pricingContext);
-
-            $totalWithTax = $totalPrice + $pricingContext->get('totalTax');
-            $pricingSet->set('totalWithTax', $totalWithTax);
         }
 
+        $pricingSet->set('totalGross', $pricingContext['totalNett'] + $pricingContext['totalTax']);
         // set the total price in the cart item
-        $cartItem->setTotalPrice($totalPrice);
+        $cartItem->setTotalPrice($totalNett);   //Todo: remove
     }
 
     public function getTypes()
@@ -88,31 +81,30 @@ class DefaultCartHandler extends  AbstractCartHandler
         return $upCharge;
     }
 
-    protected function determineCartItemTaxes(CartItemInterface $cartItem, $prices, $cartItemPricingSet, $pricingContext)
+    protected function determineCartItemTaxes(CartItemInterface $cartItem, array $pricesToBeTaxed, $cartItemPricingSet, $pricingContext)
     {
 
         $rate = 0;
         $taxes = array();
+        $totalTax = 0;
 
-        //Here we currently assume that all cart items use the default tax zone
+        //We currently assume that all cart items use the default tax zone and associated tax rate
         $taxZone = $pricingContext->get('taxZone');
 
         if (null != $taxZone) {
-
             $rate = $taxZone->getDefaultRate();
         }
 
-        foreach($prices as $name => $value) {
+        //Each price which should be taxed is aggregated into one value, for instance shipment tax + sales tax
+        //This is especially true for flat rate taxes, but insufficient for mixed tax rates
+        foreach($pricesToBeTaxed as $name => $value) {
 
-            $taxValue = $$rate * $value / 100;
-            $taxes[$name] = $taxValue;
-
-            $cartItemPricingSet->set($name . 'Tax', $taxValue);
-            $pricingContext->set($name . 'Tax', $taxValue);
+            $taxValue = $rate * $value / 100;
+            $totalTax += $taxValue;
         }
 
-        return $taxes;
-    }
+        $cartItemPricingSet->set('totalTax', $totalTax);
+  }
 
     protected function determineCartFulfillmentPrices(CartInterface $cart, $pricingContext)
     {
@@ -122,6 +114,7 @@ class DefaultCartHandler extends  AbstractCartHandler
 
     protected function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
-        $pricingContext['total'] += $cartItem->getPrice('total');
+        return null;
+        //$pricingContext['total'] += $cartItem->getPrice('total');
     }
 }

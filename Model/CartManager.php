@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 use Vespolina\CartBundle\CartEvents;
 use Vespolina\CartBundle\Event\CartEvent;
+use Vespolina\CartBundle\Event\CartPricingEvent;
 use Vespolina\CartBundle\Model\CartableItemInterface;
 use Vespolina\CartBundle\Model\CartInterface;
 use Vespolina\CartBundle\Model\CartItemInterface;
@@ -78,7 +79,14 @@ abstract class CartManager implements CartManagerInterface
     public function determinePrices(CartInterface $cart, $determineItemPrices = true)
     {
         $pricingProvider = $this->getPricingProvider();
-        $pricingProvider->determineCartPrices($cart, null, $determineItemPrices);
+        $pricingContext = $pricingProvider->createPricingContext();
+
+        //Init the pricing context container and have it filled if required through the event dispatcher
+        if (null != $this->dispatcher) {
+            $this->dispatcher->dispatch(CartEvents::CART_INIT_PRICING_CONTEXT,  new CartPricingEvent($cart, $pricingContext));
+        }
+
+        $pricingProvider->determineCartPrices($cart, $pricingContext, $determineItemPrices);
     }
 
     /**
@@ -87,7 +95,6 @@ abstract class CartManager implements CartManagerInterface
     public function finishCart(CartInterface $cart)
     {
         if (null != $this->dispatcher) {
-
             $this->dispatcher->dispatch(CartEvents::CART_FINISHED,  new CartEvent($cart));
         }
     }

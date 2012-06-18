@@ -22,6 +22,11 @@ abstract class AbstractCartPricingProvider implements CartPricingProviderInterfa
     protected $handlers;
     protected $taxationManager;
 
+    public function __construct()
+    {
+        $this->handlers = array();
+    }
+
     public function createPricingSet()
     {
         return new PricingSet();
@@ -33,6 +38,7 @@ abstract class AbstractCartPricingProvider implements CartPricingProviderInterfa
         foreach ($types as $type) {
             $this->handlers[$type] = $handler;
         }
+
         $handler->setTaxationManager($this->taxationManager);
     }
 

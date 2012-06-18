@@ -19,6 +19,11 @@ class PricingSet implements PricingSetInterface
         $this->pricingElements = array();
     }
 
+    public function __get($name)
+    {
+        return $this->get($name);
+    }
+
     public function get($name)
     {
         if (!isset($this->pricingElements[$name])) {
