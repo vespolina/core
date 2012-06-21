@@ -117,6 +117,11 @@ abstract class CartManager implements CartManagerInterface
 
         // Set default state (for now we set it to "open"), do this last since it will persist and flush the cart
         $this->setCartState($cart, Cart::STATE_OPEN);
+
+        //Delegate further initialization of the cart to those concerned
+        if (null != $this->dispatcher) {
+            $this->dispatcher->dispatch(CartEvents::CART_INIT,  new CartEvent($cart));
+        }
     }
 
     public function initCartItem(CartItemInterface $cartItem)

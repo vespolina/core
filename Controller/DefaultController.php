@@ -26,7 +26,7 @@ class DefaultController extends AbstractController
         $cartManager = $this->container->get('vespolina.cart_manager');
         $cart = $this->getCart();
 
-        $totalPrice = $cart->getPricingSet()->get('totalGroszs');
+        $totalPrice = $cart->getPricingSet()->get('totalGross');
 
         return $this->render('VespolinaCartBundle:Default:quickInspection.html.twig', array('cart' => $cart, 'totalPrice' => $totalPrice ));
     }

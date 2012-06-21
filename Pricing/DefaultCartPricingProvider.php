@@ -43,8 +43,10 @@ class DefaultCartPricingProvider extends AbstractCartPricingProvider
             $pricingContext['totalGross'] = 0;
 
         }
-        //If a taxation manager exists let's prepare the pricing context for taxation purposes
-        if (null != $this->taxationManager) {
+        //Check if the cart has taxation enabled
+        $taxationEnabled = $cart->getAttribute('taxation_enabled');
+
+        if ($taxationEnabled) {
 
             $pricingContext['totalTax'] = 0;
             $this->preparePricingContextForTaxation($pricingContext);
@@ -69,7 +71,7 @@ class DefaultCartPricingProvider extends AbstractCartPricingProvider
         $cartPricingSet->set('totalNett', $pricingContext['totalNett']);
 
         // Determine header level tax (eg. one shot tax)
-        if (null != $this->taxationManager) {
+        if ($taxationEnabled) {
 
             $this->determineCartTaxes($cart, $pricingContext);
             $totalGross =  $pricingContext['totalNett'] +  $pricingContext['totalTax'];
@@ -81,15 +83,10 @@ class DefaultCartPricingProvider extends AbstractCartPricingProvider
         $cartPricingSet->set('totalGross', $totalGross);
         $cart->setTotalPrice($pricingContext['totalNett']); //Todo: remove
 
-
     }
 
-    public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext = null)
+    public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext)
     {
-
-        if (null == $pricingContext) {
-            $pricingContext = $this->createPricingContext();
-        }
 
         $handler = $this->getCartHandler($cartItem);
         $handler->determineCartItemPrices($cartItem, $pricingContext);

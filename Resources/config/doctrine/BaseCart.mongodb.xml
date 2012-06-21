@@ -4,7 +4,7 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <mapped-superclass name="Vespolina\CartBundle\Document\BaseCart" collection="vespolina_carts">
+    <mapped-superclass name="Vespolina\CartBundle\Document\BaseCart" collection="vespolina_cart">
 
         <field name="createdAt"      fieldName="createdAt"      type="date" />
         <field name="expiresAt"      fieldName="expiresAt"      type="date" />
@@ -14,6 +14,7 @@
         <field name="state"          fieldName="state"          type="string" />
         <field name="totalPrice"     fieldName="totalPrice"     type="string" />
         <field name="updatedAt"      fieldName="updatedAt"      type="date" />
+        <field name="attributes"      fieldName="attributes"    type="hash" strategy="set" />
 
         <lifecycle-callbacks>
             <lifecycle-callback type="postLoad"   method="postLoadCart" />

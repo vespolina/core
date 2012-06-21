@@ -22,6 +22,7 @@ class Cart implements CartInterface
     const STATE_CLOSED = 'closed';      //Closed after processing
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
 
+    protected $attributes;
     protected $createdAt;
     protected $expiresAt;
     protected $followUp;
@@ -39,8 +40,14 @@ class Cart implements CartInterface
      */
     public function __construct($name)
     {
+        $this->attributes = array();
         $this->items = new ArrayCollection();
         $this->name = $name;
+    }
+
+    public function addAttribute($name, $value) {
+
+        $this->attributes[$name] = $value;
     }
 
     /**
@@ -49,6 +56,13 @@ class Cart implements CartInterface
     public function clearItems()
     {
         $this->items->clear();
+    }
+
+    public function getAttribute($name) {
+
+        if (array_key_exists($name, $this->attributes)) {
+            return $this->attributes[$name];
+        }
     }
 
     /**
@@ -267,5 +281,15 @@ class Cart implements CartInterface
     public function isEmpty()
     {
         return $this->getItems()->isEmpty();
+    }
+
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 }

@@ -26,11 +26,9 @@ class PricingSet implements PricingSetInterface
 
     public function get($name)
     {
-        if (!isset($this->pricingElements[$name])) {
-            throw new \InvalidArgumentException(sprintf('There is no data with key "%s".', $name));
+        if (array_key_exists($name, $this->pricingElements)) {
+            return $this->pricingElements[$name];
         }
-
-        return $this->pricingElements[$name];
     }
 
     public function set($name, $value)

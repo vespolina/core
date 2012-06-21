@@ -41,10 +41,10 @@
 <div class="well span3 offset6">
 <center>
     <strong>Grand Total</strong> {{ cart.pricingSet.get('totalGross') | price_format(store.defaultCurrency) }}<br/>
-    <br/>
-    {% if cart.pricingSet.get('totalTax') is defined %}
-    <strong>Tax</strong> {{ cart.pricingSet.get('totalTax') | price_format(store.defaultCurrency) }}<br/>
+    {% if cart.getAttribute('taxation_enabled') == true %}
+    Tax {{ cart.pricingSet.get('totalTax') | price_format(store.defaultCurrency) }}<br/>
     {% endif %}
+    <br/>
     <a href="{{ path('vespolina_store_cart_checkout')}}" class="btn btn-success">
         <i class="icon-shopping-cart icon-white"></i>
         Checkout

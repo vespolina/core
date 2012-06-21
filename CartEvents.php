@@ -12,9 +12,15 @@ final class CartEvents
 {
 
     /**
+     * The cart initialization cart is fired after a new cart is created and initialized
+     */
+    const CART_INIT = 'vespolina_cart.cart_init';
+
+    /**
      * After a pricing context has been created, following event is called to initialize the pricing context.
-     * The pricing context is typically used to inject price related parameters required to perform
-     * actual calculations.  For instance one could inject an explicit discount or tax percentage, possible
+     * The pricing context is typically used to inject context dependent pricing parameters
+     *
+     * For instance one could inject an explicit discount or tax percentage, possible
      * overriding default parameters.
      */
     const CART_INIT_PRICING_CONTEXT = 'vespolina_cart.init_pricing_context';

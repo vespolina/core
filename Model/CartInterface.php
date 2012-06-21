@@ -22,6 +22,17 @@ use Vespolina\ProductBundle\Model\Option\OptionInterface;
  */
 interface CartInterface
 {
+
+    /**
+     * Add an cart attribute (for instance passing along if the cart should be taxed)
+     *
+     * @abstract
+     * @param $name
+     * @param $value
+     * @return mixed
+     */
+    function addAttribute($name, $value);
+
     /**
      * Remove all items
      *
@@ -29,6 +40,14 @@ interface CartInterface
      *
      */
     function clearItems();
+
+    /**
+     * Retrieve an cart attribute
+     * @abstract
+     * @param $name
+     * @return mixed
+     */
+    function getAttribute($name);
 
     /**
      * Get the time when the cart was created

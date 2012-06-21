@@ -58,7 +58,7 @@ interface CartPricingProviderInterface
      * @param \Vespolina\CartBundle\Model\CartItemInterface $cartItem
      * @param $pricingContext
      */
-    function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext = null);
+    function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext);
 
 
 

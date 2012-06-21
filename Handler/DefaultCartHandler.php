@@ -46,9 +46,10 @@ class DefaultCartHandler extends  AbstractCartHandler
         $pricingSet->set('upchargeNett', $upChargeNett);
         $pricingSet->set('totalNett', $totalNett);
 
-
         //Determine item level taxes
-        if (null != $this->taxationManager) {
+        $taxationEnabled = $cartItem->getCart()->getAttribute('taxation_enabled');
+
+        if ($taxationEnabled) {
 
             $this->determineCartItemTaxes(
                     $cartItem,
@@ -102,7 +103,6 @@ class DefaultCartHandler extends  AbstractCartHandler
             $taxValue = $rate * $value / 100;
             $totalTax += $taxValue;
         }
-
         $cartItemPricingSet->set('totalTax', $totalTax);
   }
 
