@@ -52,22 +52,6 @@ class Cart extends BaseOrder implements CartInterface
     /**
      * @inheritdoc
      */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getFollowUp()
     {
         return $this->followUp;
@@ -94,22 +78,6 @@ class Cart extends BaseOrder implements CartInterface
     /**
      * @inheritdoc
      */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setExpiresAt(\DateTime $expiresAt)
-    {
-        $this->expiresAt = $expiresAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function setFollowUp($followUp)
     {
         $this->followUp = $followUp;
@@ -125,7 +93,6 @@ class Cart extends BaseOrder implements CartInterface
      */
     public function setPricingSet($pricingSet)
     {
-
         $this->pricingSet = $pricingSet;
     }
 
