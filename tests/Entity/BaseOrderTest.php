@@ -41,4 +41,47 @@ class BaseOrderTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains($item, $order->getItems(), 'this should have been removed on setting a new array of items');
         $this->assertCount(2, $order->getItems());
     }
+
+    public function testAttributeMethods()
+    {
+        $order = new BaseOrder();
+
+        $this->assertNull($order->getAttribute('noAttribute'));
+
+        $order->addAttribute('attribute1', 1);
+        $this->assertCount(1, $order->getAttributes());
+        $this->assertSame(1, $order->getAttribute('attribute1'));
+
+        $order->addAttribute('attribute2', 2);
+        $this->assertCount(2, $order->getAttributes());
+        $this->assertSame(2, $order->getAttribute('attribute2'));
+
+        $order->removeAttribute('attribute2');
+        $this->assertCount(1, $order->getAttributes(), 'remove by attribute');
+        $this->assertNull($order->getAttribute('attribute2'));
+
+        $attributes = array(
+            'attribute2' => 2,
+            'attribute3' => 3
+        );
+
+        $order->addAttributes($attributes);
+        $this->assertCount(3, $order->getAttributes());
+        $this->assertSame(2, $order->getAttribute('attribute2'));
+        $this->assertSame(3, $order->getAttribute('attribute3'));
+
+        $order->setAttributes($attributes);
+        $this->assertCount(2, $order->getAttributes());
+        $this->assertNull($order->getAttribute('attribute1'));
+        $this->assertSame(2, $order->getAttribute('attribute2'));
+        $this->assertSame(3, $order->getAttribute('attribute3'));
+
+        $order->removeAttribute('attribute3');
+        $this->assertCount(1, $order->getAttributes(), 'attribute should be removed by type');
+        $order->removeAttribute('nada');
+        $this->assertCount(1, $order->getAttributes());
+
+        $order->clearAttributes();
+        $this->assertEmpty($order->getAttributes());
+    }
 }

@@ -21,31 +21,10 @@ class Cart extends BaseOrder implements CartInterface
     const STATE_CLOSED = 'closed';      //Closed after processing
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
 
-    protected $attributes;
     protected $expiresAt;
     protected $followUp;
     protected $paymentInstruction;
     protected $pricingSet;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->attributes = array();
-    }
-
-    public function addAttribute($name, $value) {
-
-        $this->attributes[$name] = $value;
-    }
-
-    public function getAttribute($name) {
-
-        if (array_key_exists($name, $this->attributes)) {
-            return $this->attributes[$name];
-        }
-    }
 
     /**
      * @inheritdoc
@@ -108,15 +87,5 @@ class Cart extends BaseOrder implements CartInterface
     public function setPricingSet($pricingSet)
     {
         $this->pricingSet = $pricingSet;
-    }
-
-    public function setAttributes($attributes)
-    {
-        $this->attributes = $attributes;
-    }
-
-    public function getAttributes()
-    {
-        return $this->attributes;
     }
 }
