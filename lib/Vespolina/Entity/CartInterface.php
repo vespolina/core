@@ -5,14 +5,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
-namespace Vespolina\CartBundle\Model;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Vespolina\CartBundle\Model\CartInterface;
-use Vespolina\CartBundle\Model\CartItemInterface;
-use Vespolina\ProductBundle\Model\Option\OptionInterface;
+namespace Vespolina\Entity\Model;
 
 /**
  * CartInterface is a generic interface for shopping cart
@@ -22,7 +15,6 @@ use Vespolina\ProductBundle\Model\Option\OptionInterface;
  */
 interface CartInterface
 {
-
     /**
      * Add an cart attribute (for instance passing along if the cart should be taxed)
      *

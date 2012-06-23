@@ -6,16 +6,16 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\CartBundle\Model;
+namespace Vespolina\Entity\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Vespolina\Entity\BaseOrder;
 /**
  * Cart implements a basic cart implementation
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-class Cart implements CartInterface
+class Cart extends BaseOrder implements CartInterface
 {
     const STATE_OPEN = 'open';          //Available for change
     const STATE_LOCKED = 'locked';      //Locked for processing
