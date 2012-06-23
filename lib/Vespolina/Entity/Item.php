@@ -17,7 +17,9 @@ use Vespolina\Entity\ItemInterface;
  */
 class Item implements ItemInterface
 {
+    protected $options;
     protected $parent;
+    protected $state;
 
     /**
      * @inheritdoc
@@ -33,5 +35,40 @@ class Item implements ItemInterface
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Add a option for the product in this item
+     *
+     * @param $type string or array with [$type] = $value
+     * @param $value or null if $type is an array
+     */
+    protected function addOption($type, $value = null)
+    {
+
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function setState($state)
+    {
+        $this->state = $state;
     }
 }

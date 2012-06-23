@@ -107,14 +107,6 @@ abstract class CartItem implements CartItemInterface
     /**
      * @inheritdoc
      */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getQuantity()
     {
         return $this->quantity;
@@ -157,22 +149,6 @@ abstract class CartItem implements CartItemInterface
     public function setPricingSet($pricingSet)
     {
         $this->pricingSet = $pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function setState($state)
-    {
-        $this->state = $state;
     }
 
     /**
