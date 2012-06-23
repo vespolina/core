@@ -18,6 +18,8 @@ use Vespolina\CartBundle\Model\CartItemInterface;
  */
 interface CartPricingProviderInterface
 {
+    // TODO: this need to go into entity
+
 
     /**
      * Create a pricing set

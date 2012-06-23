@@ -19,6 +19,8 @@ use Vespolina\CartBundle\Pricing\PricingSet;
  */
 abstract class AbstractCartPricingProvider implements CartPricingProviderInterface
 {
+    // TODO: this need to go into entity
+
     protected $handlers;
     protected $taxationManager;
 

@@ -11,6 +11,8 @@ namespace Vespolina\CartBundle\Pricing;
 
 interface PricingSetInterface
 {
+    // TODO: this need to go into entity
+
 
     function all();
     function get($name);

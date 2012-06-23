@@ -12,6 +12,8 @@ use Vespolina\CartBundle\Pricing\PricingSetInterface;
 
 class PricingSet implements PricingSetInterface
 {
+    // TODO: this need to go into entity
+
     protected $pricingElements;
 
     public function __construct()

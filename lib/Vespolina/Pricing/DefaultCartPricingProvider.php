@@ -22,6 +22,8 @@ use Vespolina\CartBundle\Pricing\AbstractCartPricingProvider;
  */
 class DefaultCartPricingProvider extends AbstractCartPricingProvider
 {
+    // TODO: this will probably be removed from core
+
     protected $fulfillmentPricingEnabled;
 
     public function __construct()
