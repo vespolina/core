@@ -6,14 +6,14 @@
  * with this source code in the file LICENSE.
  */
 
-use Vespolina\Entity\Order;
+use Vespolina\Entity\BaseOrder;
 use Vespolina\Entity\Item;
 
-class OrderTest extends \PHPUnit_Framework_TestCase
+class BaseOrderTest extends \PHPUnit_Framework_TestCase
 {
     public function testItems()
     {
-        $order = new Order();
+        $order = new BaseOrder();
         $this->assertNull($order->getItems(), 'make sure we start out empty');
 
         $item = new Item();

@@ -9,14 +9,14 @@
 namespace Vespolina\Entity;
 
 use Vespolina\Entity\ItemInterface;
-
+use Vespolina\Entity\OrderInterface;
 /**
  * Order is a base class for shopping cart or sales order
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-class Order implements OrderInterface
+class BaseOrder implements OrderInterface
 {
     protected $items;
     protected $name;
