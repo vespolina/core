@@ -26,14 +26,6 @@ interface CartInterface
     function addAttribute($name, $value);
 
     /**
-     * Remove all items
-     *
-     * @abstract
-     *
-     */
-    function clearItems();
-
-    /**
      * Retrieve an cart attribute
      * @abstract
      * @param $name
@@ -42,43 +34,40 @@ interface CartInterface
     function getAttribute($name);
 
     /**
-     * Get the time when the cart was created
+     * Return the time this cart expires
      *
-     * @abstract
-     *
-     */
-    function getCreatedAt();
-
-    /**
-     * Get the time when the cart will expire
-     *
-     * @abstract
-     *
+     * @return
      */
     function getExpiresAt();
 
     /**
-     * Get an id to the follow up entity for the cart.
-     * Eg.  this could be the sales order id
+     * Set the time that this cart expires
      *
-     * @abstract
+     * @param DateTime $expiresAt
+     */
+    function setExpiresAt(\DateTime $expiresAt);
+
+    /**
+     * Get a follow up entity for the cart.
+     * Eg.  this could be the sales order
      *
+     * @return
      */
     function getFollowUp();
 
     /**
-     * Get cart item for a given index
+     * Set the follow up
      *
-     * @return Vespolina\CartBundle\Model\CartItemInterface
+     * @return
      */
-    function getItem($index);
+    function setFollowUp($followUp);
 
     /**
-     * Retrieve all items in the cart
+     * Return the payment instruction the cart
      *
-     * @return array of Vespolina\CartBundle\Model\CartItemInterface compatible instances
+     * @return payment instruction
      */
-    function getItems();
+    function getPaymentInstruction();
 
     /**
      * Set a payment instruction for the cart
@@ -88,60 +77,11 @@ interface CartInterface
     function setPaymentInstruction($paymentInstruction);
 
     /**
-     * Return the payment instruction the cart
-     *
-     * @return payment instruction
-     */
-    function getPaymentInstruction();
-
-
-    /**
-     * Return the pricing informaton for the item
+     * Return the pricing information for the cart
      *
      * @return mixed
      */
     function getPricingSet();
-
-    /**
-     * Return only the recurring items in the cart
-     *
-     * @return array of Vespolina\CartBundle\Model\CartItemInterface
-     */
-    function getRecurringItems();
-
-    /**
-     * Return the items from the cart that are not recurring
-     *
-     * @return array of Vespolina\CartBundle\Model\CartItemInterface
-     */
-    function getNonRecurringItems();
-
-    /**
-     * Get name of the cart (useful in multi-cart environments)
-     *
-     * @return string
-     */
-    function getName();
-
-    /**
-     * Get cart owner
-     *
-     * @return User or
-     */
-    function getOwner();
-
-    /**
-     * Return the current state of the cart
-     *
-     * @return
-     */
-    function getState();
-
-    function getUpdatedAt();
-
-    function setFollowUp($followUp);
-
-    function setExpiresAt(\DateTime $expiresAt);
 
     /**
      * Set pricing information
@@ -150,18 +90,4 @@ interface CartInterface
      * @param $pricing
      */
     function setPricingSet($pricing);
-
-    /**
-     * Set the total price for the cart, if the pricing set is calculated it should be set from there
-     *
-     * @param $totalPrice
-     */
-    function setTotalPrice($totalPrice);
-
-    /**
-     * Return the total price for the cart
-     *
-     * @return string
-     */
-    function getTotalPrice();
 }
