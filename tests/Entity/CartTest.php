@@ -13,6 +13,8 @@ class CartTest extends \PHPUnit_Framework_TestCase
 {
     public function testTotalCartItems()
     {
+        $this->markTestSkipped();
+
         $cart = $this->createCart('testCart');
         $cartable1 = $this->createCartableItem('cartable1', 1);
         $this->addItemToCart($cart, $cartable1);
@@ -33,6 +35,8 @@ class CartTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveItemFromCart()
     {
+        $this->markTestSkipped();
+
         $cart = $this->createCart('testCart');
         $cartable1 = $this->createCartableItem('cartable1', 1);
         $item = $this->addItemToCart($cart, $cartable1);
@@ -51,13 +55,4 @@ class CartTest extends \PHPUnit_Framework_TestCase
 
         //$this->markTestIncomplete('We have removed item completely but not by quantity, next step is to write method to remove quantity');
     }
-
-    public function testGetRecurringItems()
-    {
-        $this->markTestSkipped();
-        $cart = $this->buildLoadedCart('recurringTest', 2, 4);
-        $this->assertSame(4, count($cart->getRecurringItems()));
-        $this->assertSame(2, count($cart->getNonRecurringItems()));
-    }
-
 }
