@@ -5,7 +5,6 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-
 namespace Vespolina\Entity\Model;
 
 use Vespolina\Entity\BaseOrder;
@@ -128,11 +127,6 @@ class Cart extends BaseOrder implements CartInterface
     {
 
         $this->pricingSet = $pricingSet;
-    }
-
-    public function isEmpty()
-    {
-        return $this->getItems()->isEmpty();
     }
 
     public function setAttributes($attributes)

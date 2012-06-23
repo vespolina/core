@@ -19,6 +19,13 @@ use Vespolina\Entity\ItemInterface;
 interface OrderInterface
 {
     /**
+     * A test to see if the cart doesn't have any items in it
+     *
+     * @return boolean
+     */
+    function isEmpty();
+
+    /**
      * Add an item to the order
      *
      * @param ItemInterface $item

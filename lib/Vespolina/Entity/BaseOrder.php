@@ -27,6 +27,14 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
+    public function isEmpty()
+    {
+        return empty($this->items);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function addItem(ItemInterface $item)
     {
         $item->setParent($this);
