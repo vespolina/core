@@ -22,12 +22,10 @@ class Cart extends BaseOrder implements CartInterface
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
 
     protected $attributes;
-    protected $createdAt;
     protected $expiresAt;
     protected $followUp;
     protected $paymentInstruction;
     protected $pricingSet;
-    protected $updatedAt;
 
     /**
      * Constructor
@@ -47,6 +45,22 @@ class Cart extends BaseOrder implements CartInterface
         if (array_key_exists($name, $this->attributes)) {
             return $this->attributes[$name];
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setExpiresAt(\DateTime $expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
     }
 
     /**
