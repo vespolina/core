@@ -17,16 +17,48 @@ use Vespolina\Entity\ItemInterface;
  */
 class Item implements ItemInterface
 {
+    protected $name;
     protected $options;
     protected $parent;
+    protected $product;
+    protected $quantity;
     protected $state;
 
     /**
      * @inheritdoc
      */
-    function setParent(OrderInterface $parent)
+    public function getName()
     {
-        $this->parent = $parent;
+        return $this->name;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getOption($type)
+    {
+        if (isset($this->options[$type])) {
+
+            return $this->options[$type];
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     /**
@@ -40,6 +72,30 @@ class Item implements ItemInterface
     /**
      * @inheritdoc
      */
+    public function setParent(OrderInterface $parent)
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getState()
     {
         return $this->state;
@@ -48,27 +104,26 @@ class Item implements ItemInterface
     /**
      * Add a option for the product in this item
      *
-     * @param $type string or array with [$type] = $value
-     * @param $value or null if $type is an array
+     * @param string $type
+     * @param string $value
      */
-    protected function addOption($type, $value = null)
+    protected function addOption($type, $value)
     {
-
+        $this->options[$type] = $value;
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function setQuantity($quantity)
     {
         $this->quantity = $quantity;
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function setState($state)
     {
         $this->state = $state;
+    }
+
+    protected function setProduct($product)
+    {
+        $this->product = $product;
     }
 }

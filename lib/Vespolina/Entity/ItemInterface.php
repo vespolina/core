@@ -40,6 +40,13 @@ interface ItemInterface
     function getOptions();
 
     /**
+     * Return the order/cart where this item belongs
+     *
+     * @return Vespolina\Entity\OrderInterface
+     */
+    function getParent();
+
+    /**
      * Set the parent order for this item
      *
      * @param Vespolina\Entity\OrderInterface $parent
@@ -47,12 +54,10 @@ interface ItemInterface
     function setParent(OrderInterface $parent);
 
     /**
-     * Return the order/cart where this item belongs
+     * Return the product for this item
      *
-     * @return Vespolina\Entity\OrderInterface
+     * @return Vespolina\Entity\ProductInterface
      */
-    function getParent();
-
     function getProduct();
 
     /**
