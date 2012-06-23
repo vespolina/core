@@ -18,6 +18,35 @@ use Vespolina\Entity\OrderInterface;
 interface ItemInterface
 {
     /**
+     * Return the name of the cart item
+     *
+     * @return string
+     */
+    function getName();
+
+    /**
+     * Set the name of the cart item
+     *
+     * @param string $name
+     */
+    function setName($name);
+
+    /**
+     * Get all options
+     *
+     * @abstract
+     * @return void
+     */
+    function getOptions();
+
+    /**
+     * Return the order/cart where this item belongs
+     *
+     * @return Vespolina\Entity\OrderInterface
+     */
+    function getParent();
+
+    /**
      * Set the parent order for this item
      *
      * @param Vespolina\Entity\OrderInterface $parent
@@ -25,10 +54,24 @@ interface ItemInterface
     function setParent(OrderInterface $parent);
 
     /**
-     * Return the order where this items belongs
+     * Return the product for this item
      *
-     * @return Vespolina\Entity\OrderInterface
+     * @return Vespolina\Entity\ProductInterface
      */
-    function getParent();
+    function getProduct();
 
+    /**
+     * Return the quantity of the item
+     *
+     * @return integer
+     */
+    function getQuantity();
+
+    /**
+     * Get the cart state for this item
+     *
+     * @abstract
+     * @return void
+     */
+    function getState();
 }

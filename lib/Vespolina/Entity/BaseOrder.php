@@ -9,20 +9,90 @@
 namespace Vespolina\Entity;
 
 use Vespolina\Entity\ItemInterface;
-
+use Vespolina\Entity\OrderInterface;
 /**
  * Order is a base class for shopping cart or sales order
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-class Order implements OrderInterface
+class BaseOrder implements OrderInterface
 {
+    protected $attributes;
     protected $items;
     protected $name;
     protected $owner;
     protected $state;
     protected $totalPrice;
+
+    /**
+     * @inheritdoc
+     */
+    public function addAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addAttributes(array $attributes)
+    {
+        $this->attributes = array_merge($this->attributes, $attributes);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function clearAttributes()
+    {
+        $this->attributes = array();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttribute($name)
+    {
+        if (isset($this->attributes[$name])) {
+
+            return $this->attributes[$name];
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removeAttribute($name)
+    {
+        unset($this->attributes[$name]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isEmpty()
+    {
+        return empty($this->items);
+    }
 
     /**
      * @inheritdoc

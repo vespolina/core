@@ -19,6 +19,60 @@ use Vespolina\Entity\ItemInterface;
 interface OrderInterface
 {
     /**
+     * Add an attribute to the collection
+     *
+     * @param $name, $value
+     */
+    function addAttribute($name, $value);
+
+    /**
+     * Add a collection of Attribute
+     *
+     * @param array $attributes
+     */
+    function addAttributes(array $attributes);
+
+    /**
+     * Remove all attributes from the collection
+     */
+    function clearAttributes();
+
+    /**
+     * Return a specific attribute from the collection
+     *
+     * @param $name
+     */
+    function getAttribute($name);
+
+    /**
+     * Return a collection of Attribute
+     *
+     * @return array of attributes
+     */
+    function getAttributes();
+
+    /**
+     * Remove an attribute from the collection
+     *
+     * @param string $name
+     */
+    function removeAttribute($name);
+
+    /**
+     * Set a collection of Attribute
+     *
+     * @param array $attributes
+     */
+    function setAttributes(array $attributes);
+
+    /**
+     * A test to see if the cart doesn't have any items in it
+     *
+     * @return boolean
+     */
+    function isEmpty();
+
+    /**
      * Add an item to the order
      *
      * @param ItemInterface $item
