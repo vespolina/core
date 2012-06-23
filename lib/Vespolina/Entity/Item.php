@@ -112,6 +112,26 @@ class Item implements ItemInterface
         $this->options[$type] = $value;
     }
 
+    protected function addOptions(array $options)
+    {
+        $this->options = array_merge($this->options, $options);
+    }
+
+    protected function clearOptions()
+    {
+        $this->options = array();
+    }
+
+    protected function removeOption($type)
+    {
+        unset($this->options[$type]);
+    }
+
+    protected function setOptions(array $options)
+    {
+        $this->options = $options;
+    }
+
     protected function setQuantity($quantity)
     {
         $this->quantity = $quantity;

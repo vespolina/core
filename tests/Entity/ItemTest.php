@@ -14,11 +14,11 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         $rmAddOption = new \ReflectionMethod($item, 'addOption');
         $rmAddOption->setAccessible(true);
-        $rmAddOption->invoke($item, array('option1', 1));
+        $rmAddOption->invokeArgs($item, array('option1', 1));
         $this->assertCount(1, $item->getOptions());
         $this->assertSame(1, $item->getOption('option1'));
 
-        $rmAddOption->invoke($item, array('option2', 2));
+        $rmAddOption->invokeArgs($item, array('option2', 2));
         $this->assertCount(2, $item->getOptions());
         $this->assertSame(2, $item->getOption('option2'));
 
