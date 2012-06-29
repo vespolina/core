@@ -9,9 +9,9 @@
 namespace Vespolina\CartBundle\Pricing;
 
 use Vespolina\CartBundle\Handler\CartHandlerInterface;
-use Vespolina\CartBundle\Model\CartItemInterface;
 use Vespolina\CartBundle\Pricing\CartPricingProviderInterface;
 use Vespolina\CartBundle\Pricing\PricingSet;
+use Vespolina\Entity\ItemInterface;
 
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
@@ -49,7 +49,7 @@ abstract class AbstractCartPricingProvider implements CartPricingProviderInterfa
         $this->taxationManager = $taxationManager;
     }
 
-    protected function getCartHandler(CartItemInterface $cartItem)
+    protected function getCartHandler(ItemInterface $cartItem)
     {
         $type = $cartItem->getCartableItem()->getType();
         if (!isset($this->handlers[$type])) {
