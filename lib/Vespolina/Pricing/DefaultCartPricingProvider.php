@@ -11,9 +11,8 @@ namespace Vespolina\CartBundle\Pricing;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Vespolina\CartBundle\Handler\CartHandlerInterface;
-use Vespolina\CartBundle\Model\CartableItemInterface;
-use Vespolina\CartBundle\Model\CartInterface;
-use Vespolina\CartBundle\Model\CartItemInterface;
+use Vespolina\Entity\CartInterface;
+use Vespolina\Entity\ItemInterface;
 use Vespolina\CartBundle\Pricing\AbstractCartPricingProvider;
 
 /**
@@ -87,9 +86,8 @@ class DefaultCartPricingProvider extends AbstractCartPricingProvider
 
     }
 
-    public function determineCartItemPrices(CartItemInterface $cartItem, $pricingContext)
+    public function determineCartItemPrices(ItemInterface $cartItem, $pricingContext)
     {
-
         $handler = $this->getCartHandler($cartItem);
         $handler->determineCartItemPrices($cartItem, $pricingContext);
     }
@@ -134,7 +132,7 @@ class DefaultCartPricingProvider extends AbstractCartPricingProvider
         }
     }
 
-    protected function sumItemPrices(CartItemInterface $cartItem, $pricingContext)
+    protected function sumItemPrices(ItemInterface $cartItem, $pricingContext)
     {
         $cartItemPricingSet = $cartItem->getPricingSet();
 
