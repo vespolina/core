@@ -1,20 +1,19 @@
 <?php
 /**
- * (c) Vespolina Project http://www.vespolina-project.org
+ * (c) 2012 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\CartBundle;
+namespace Vespolina\Entity\Order;
 
 final class CartEvents
 {
-
     /**
      * The cart initialization cart is fired after a new cart is created and initialized
      */
-    const CART_INIT = 'vespolina_cart.cart_init';
+    const INIT = 'vespolina_cart.cart_init';
 
     /**
      * After a pricing context has been created, following event is called to initialize the pricing context.
@@ -23,7 +22,7 @@ final class CartEvents
      * For instance one could inject an explicit discount or tax percentage, possible
      * overriding default parameters.
      */
-    const CART_INIT_PRICING_CONTEXT = 'vespolina_cart.init_pricing_context';
+    const INIT_PRICING_CONTEXT = 'vespolina_cart.init_pricing_context';
 
     /**
      * The cart finished event is triggered  when all basic operations on a cart have been completed
@@ -31,6 +30,5 @@ final class CartEvents
      *
      * @var string
      */
-    const CART_FINISHED = 'vespolina_cart.cart_finished';
-
+    const FINISHED = 'vespolina_cart.cart_finished';
 }
