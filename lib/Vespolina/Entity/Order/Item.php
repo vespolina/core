@@ -6,9 +6,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\ItemInterface;
+use Vespolina\Entity\Order\ItemInterface;
 
 /**
  * Item is a class for items in an order

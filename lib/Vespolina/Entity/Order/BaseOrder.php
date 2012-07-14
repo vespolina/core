@@ -6,10 +6,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\ItemInterface;
-use Vespolina\Entity\OrderInterface;
+use Vespolina\Entity\Order\ItemInterface;
+use Vespolina\Entity\Order\OrderInterface;
+
 /**
  * Order is a base class for shopping cart or sales order
  *
