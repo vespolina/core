@@ -6,9 +6,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\ItemInterface;
+use Vespolina\Entity\Order\ItemInterface;
 
 /**
  * OrderInterface is a generic interface for shopping cart or sales order
