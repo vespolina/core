@@ -6,9 +6,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\OrderInterface;
+use Vespolina\Entity\Order\OrderInterface;
 
 /**
  * ItemInterface is an interface for items in an order
@@ -42,7 +42,7 @@ interface ItemInterface
     /**
      * Return the order/cart where this item belongs
      *
-     * @return Vespolina\Entity\OrderInterface
+     * @return Vespolina\Entity\Order\OrderInterface
      */
     function getParent();
 

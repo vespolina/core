@@ -5,9 +5,11 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\Entity;
 
-use Vespolina\Entity\BaseOrder;
+namespace Vespolina\Entity\Order;
+
+use Vespolina\Entity\Order\BaseOrder;
+
 /**
  * Cart implements a basic cart implementation
  *
