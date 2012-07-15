@@ -10,6 +10,10 @@ class ItemTest extends \PHPUnit_Framework_TestCase
     {
         $item = new Item();
 
+        $rmSetProduct = new \ReflectionMethod($item, 'setProduct');
+        $rmSetProduct->setAccessible(true);
+        $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate()));
+
         $this->assertNull($item->getOption('noOption'));
 
         $rmAddOption = new \ReflectionMethod($item, 'addOption');
@@ -58,5 +62,15 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $rmClearOptions->setAccessible(true);
         $rmClearOptions->invoke($item);
         $this->assertEmpty($item->getOptions());
+    }
+
+    protected function createProductOptionValidate()
+    {
+        $product = $this->getMock('Vespolina\Entity\Product');
+        $product->expects($this->atLeastOnce())
+            ->method('validateOption')
+            ->will($this->returnValue(true));
+
+        return $product;
     }
 }
