@@ -12,64 +12,47 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         $rmSetProduct = new \ReflectionMethod($item, 'setProduct');
         $rmSetProduct->setAccessible(true);
-        $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate()));
 
         $this->assertNull($item->getOption('noOption'));
 
-        $rmAddOption = new \ReflectionMethod($item, 'addOption');
-        $rmAddOption->setAccessible(true);
-        $rmAddOption->invokeArgs($item, array('option1', 1));
-        $this->assertCount(1, $item->getOptions());
-        $this->assertSame(1, $item->getOption('option1'));
-
-        $rmAddOption->invokeArgs($item, array('option2', 2));
-        $this->assertCount(2, $item->getOptions());
-        $this->assertSame(2, $item->getOption('option2'));
-
-        $rmRemoveOption = new \ReflectionMethod($item, 'removeOption');
-        $rmRemoveOption->setAccessible(true);
-        $rmRemoveOption->invoke($item, 'option2');
-        $this->assertCount(1, $item->getOptions(), 'remove by option');
-        $this->assertNull($item->getOption('option2'));
-
-        $options = array(
-            'option2' => 2,
-            'option3' => 3
-        );
-
-        $rmAddOptions = new \ReflectionMethod($item, 'addOptions');
-        $rmAddOptions->setAccessible(true);
-        $rmAddOptions->invoke($item, $options);
-        $this->assertCount(3, $item->getOptions());
-        $this->assertSame(2, $item->getOption('option2'));
-        $this->assertSame(3, $item->getOption('option3'));
-
         $rmSetOptions = new \ReflectionMethod($item, 'setOptions');
         $rmSetOptions->setAccessible(true);
-        $rmSetOptions->invoke($item, $options);
-        $this->assertCount(2, $item->getOptions());
-        $this->assertNull($item->getOption('option1'));
-        $this->assertSame(2, $item->getOption('option2'));
-        $this->assertSame(3, $item->getOption('option3'));
 
-        $rmRemoveOption->invoke($item, 'option3');
-        $this->assertCount(1, $item->getOptions(), 'option should be removed by type');
+        $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate()));
+        $rmSetOptions->invoke($item, array(
+            'option2' => 2,
+            'option3' => 3
+        ));
 
-        $rmRemoveOption->invoke($item, 'nada');
-        $this->assertCount(1, $item->getOptions());
+        $options = $item->getOptions();
+        $this->assertCount(2, $options);
+        $this->assertArrayHasKey('option2', $options);
+        $this->assertArrayHasKey('option3', $options);
 
         $rmClearOptions = new \ReflectionMethod($item, 'clearOptions');
         $rmClearOptions->setAccessible(true);
+
+        $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate(false)));
+        $this->setExpectedException('Vespolina\Entity\Exception\InvalidOptionsException');
+        $rmClearOptions->invoke($item);
+        $this->assertSame($options, $item->getOptions(), 'nothing should have been removed if the validation fails');
+
+        $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate()));
         $rmClearOptions->invoke($item);
         $this->assertEmpty($item->getOptions());
+
+        $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate(false)));
+        $this->setExpectedException('Vespolina\Entity\Exception\InvalidOptionsException');
+        $rmSetOptions->invokeArgs($item, array('failure' => 0));
+        $this->assertEmpty($item->getOptions(), 'nothing should be added if the validation fails');
     }
 
-    protected function createProductOptionValidate()
+    protected function createProductOptionValidate($returns = true)
     {
         $product = $this->getMock('Vespolina\Entity\Product');
         $product->expects($this->atLeastOnce())
             ->method('validateOptions')
-            ->will($this->returnValue(true));
+            ->will($this->returnValue($returns));
 
         return $product;
     }
