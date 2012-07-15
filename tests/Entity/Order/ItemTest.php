@@ -1,6 +1,6 @@
 <?php
 
-use Vespolina\Entity\Item;
+use Vespolina\Entity\Order\Item;
 /**
  * @author Richard Shank <develop@zestic.com>
  */

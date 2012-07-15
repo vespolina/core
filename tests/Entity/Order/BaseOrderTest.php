@@ -6,8 +6,8 @@
  * with this source code in the file LICENSE.
  */
 
-use Vespolina\Entity\BaseOrder;
-use Vespolina\Entity\Item;
+use Vespolina\Entity\Order\BaseOrder;
+use Vespolina\Entity\Order\Item;
 
 class BaseOrderTest extends \PHPUnit_Framework_TestCase
 {
