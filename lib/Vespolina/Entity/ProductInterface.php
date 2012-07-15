@@ -208,4 +208,13 @@ interface ProductInterface
      * @return type
      */
     function getType();
+
+    /**
+     * Check the passed options to make sure it is a valid combination
+     *
+     * @param array $options
+     *
+     * @return boolean
+     */
+    function validateOptions(array $options);
 }

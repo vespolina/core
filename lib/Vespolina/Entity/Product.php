@@ -332,6 +332,15 @@ class Product implements ProductInterface
         }
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function validateOptions(array $options)
+    {
+        // todo: actually validate, for now return true, just to prevent breaking things
+        return true;
+    }
+
     protected function extractOptionCombos($optionSet)
     {
         if ($curSet = array_shift($optionSet)) {
