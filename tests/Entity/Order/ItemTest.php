@@ -54,7 +54,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($item->getOptions());
 
         $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate(false)));
-        $this->setExpectedException('Vespolina\Exception\InvalidOptionsException');
+        $this->setExpectedException('Vespolina\Entity\Exception\InvalidOptionsException');
         $rmSetOptions->invokeArgs($item, array('failure' => 0));
         $this->assertEmpty($item->getOptions(), 'nothing should be added if the validation fails');
     }
@@ -65,16 +65,6 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $product->expects($this->atLeastOnce())
             ->method('validateOptions')
             ->will($this->returnValue($returns));
-
-        return $product;
-    }
-
-    protected function createProductOptionValidate()
-    {
-        $product = $this->getMock('Vespolina\Entity\Product');
-        $product->expects($this->atLeastOnce())
-            ->method('validateOptions')
-            ->will($this->returnValue(true));
 
         return $product;
     }
