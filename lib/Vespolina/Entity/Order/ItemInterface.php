@@ -49,7 +49,7 @@ interface ItemInterface
     /**
      * Set the parent order for this item
      *
-     * @param Vespolina\Entity\OrderInterface $parent
+     * @param Vespolina\Entity\Order\OrderInterface $parent
      */
     function setParent(OrderInterface $parent);
 
