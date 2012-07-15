@@ -68,4 +68,14 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
         return $product;
     }
+
+    protected function createProductOptionValidate()
+    {
+        $product = $this->getMock('Vespolina\Entity\Product');
+        $product->expects($this->atLeastOnce())
+            ->method('validateOption')
+            ->will($this->returnValue(true));
+
+        return $product;
+    }
 }
