@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Order;
 
+use Vespolina\Entity\Exception\InvalidOptionsException;
 use Vespolina\Entity\Order\ItemInterface;
 
 /**
@@ -101,34 +102,19 @@ class Item implements ItemInterface
         return $this->state;
     }
 
-    /**
-     * Add a option for the product in this item
-     *
-     * @param string $type
-     * @param string $value
-     */
-    protected function addOption($type, $value)
-    {
-        $this->options[$type] = $value;
-    }
-
-    protected function addOptions(array $options)
-    {
-        $this->options = array_merge($this->options, $options);
-    }
-
     protected function clearOptions()
     {
+        if (!$this->product->validateOptions(array())) {
+            throw new InvalidOptionsException('This product requires options');
+        }
         $this->options = array();
-    }
-
-    protected function removeOption($type)
-    {
-        unset($this->options[$type]);
     }
 
     protected function setOptions(array $options)
     {
+        if (!$this->product->validateOptions($options)) {
+            throw new InvalidOptionsException('This combination of options is not valid for the product');
+        }
         $this->options = $options;
     }
 
