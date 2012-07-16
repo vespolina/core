@@ -25,6 +25,7 @@ class Cart extends BaseOrder implements CartInterface
 
     protected $expiresAt;
     protected $followUp;
+    protected $name;
     protected $paymentInstruction;
     protected $pricingSet;
 
@@ -65,22 +66,41 @@ class Cart extends BaseOrder implements CartInterface
     /**
      * @inheritdoc
      */
-    public function getPricingSet()
-    {
-        return $this->pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function setFollowUp($followUp)
     {
         $this->followUp = $followUp;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function setPrice($name, $price)
     {
         $this->prices[$name] = $price;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPricingSet()
+    {
+        return $this->pricingSet;
     }
 
     /**
