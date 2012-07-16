@@ -12,5 +12,7 @@ interface EventInterface
 {
     function getName();
 
-    function setName();
+    function setName($name);
+
+    function getSubject();
 }
