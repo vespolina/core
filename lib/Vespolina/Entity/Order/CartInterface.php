@@ -64,6 +64,20 @@ interface CartInterface
     function setFollowUp($followUp);
 
     /**
+     * Return the name assigned to the cart
+     *
+     * @return string
+     */
+    function getName();
+
+    /**
+     * Set a name for this cart
+     *
+     * @param $name
+     */
+    function setName($name);
+
+    /**
      * Return the payment instruction the cart
      *
      * @return payment instruction
