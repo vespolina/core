@@ -6,9 +6,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity\Exception;
+namespace Vespolina\Exception;
 
-class InvalidOptionsException extends \Exception
+class InvalidConfigurationException extends \Exception
 {
 
 }
