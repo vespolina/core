@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Pricing\PricingSetInterface;
 
 /**
  * ItemInterface is an interface for items in an order
@@ -52,6 +53,20 @@ interface ItemInterface
      * @param Vespolina\Entity\Order\OrderInterface $parent
      */
     function setParent(OrderInterface $parent);
+
+    /**
+     * Set a pricing set for this item
+     *
+     * @param Vespolina\Pricing\PricingSetInterface $pricingSet
+     */
+    function setPricingSet(PricingSetInterface $pricingSet);
+
+    /**
+     * Return the pricing set for this item
+     *
+     * @return Vespolina\Pricing\PricingSetInterface|null
+     */
+    function getPricingSet();
 
     /**
      * Return the product for this item
