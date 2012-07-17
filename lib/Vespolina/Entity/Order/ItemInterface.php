@@ -57,7 +57,11 @@ interface ItemInterface
     /**
      * Set a pricing set for this item
      *
+<<<<<<< HEAD
      * @param Vespolina\Entity\Pricing\PricingSetInterface $pricingSet
+=======
+     * @param Vespolina\Pricing\PricingSetInterface $pricingSet
+>>>>>>> add pricingSet to Item
      */
     function setPricingSet(PricingSetInterface $pricingSet);
 
