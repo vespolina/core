@@ -1,11 +1,23 @@
 <?php
 
 use Vespolina\Entity\Order\Item;
+use Vespolina\Entity\Product;
+
 /**
  * @author Richard Shank <develop@zestic.com>
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {
+    public function testConstruct()
+    {
+        $item = new Item();
+        $this->assertNull($item->getProduct(), 'its ok if no product is passed in');
+
+        $product = new Product();
+        $item = new Item($product);
+        $this->assertSame($product, $item->getProduct(), 'the construct should set the product, if its passed in');
+    }
+
     public function testOptionMethods()
     {
         $item = new Item();
@@ -33,7 +45,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $rmClearOptions->setAccessible(true);
 
         $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate(false)));
-        $this->setExpectedException('Vespolina\Entity\Exception\InvalidOptionsException');
+        $this->setExpectedException('Vespolina\Exception\InvalidOptionsException');
         $rmClearOptions->invoke($item);
         $this->assertSame($options, $item->getOptions(), 'nothing should have been removed if the validation fails');
 
@@ -42,7 +54,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($item->getOptions());
 
         $rmSetProduct->invokeArgs($item, array($this->createProductOptionValidate(false)));
-        $this->setExpectedException('Vespolina\Entity\Exception\InvalidOptionsException');
+        $this->setExpectedException('Vespolina\Exception\InvalidOptionsException');
         $rmSetOptions->invokeArgs($item, array('failure' => 0));
         $this->assertEmpty($item->getOptions(), 'nothing should be added if the validation fails');
     }
