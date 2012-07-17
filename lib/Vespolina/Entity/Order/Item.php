@@ -8,8 +8,9 @@
 
 namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\Exception\InvalidOptionsException;
+use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Order\ItemInterface;
+use Vespolina\Entity\ProductInterface;
 
 /**
  * Item is a class for items in an order
@@ -24,6 +25,11 @@ class Item implements ItemInterface
     protected $product;
     protected $quantity;
     protected $state;
+
+    public function __construct(ProductInterface $product = null)
+    {
+        $this->product = $product;
+    }
 
     /**
      * @inheritdoc
