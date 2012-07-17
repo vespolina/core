@@ -7,7 +7,7 @@
  */
 namespace Vespolina\Entity;
 
-use Vespolina\Entity\Exception\IdentifierCheckDigitException;
+use Vespolina\Exception\IdentifierCheckDigitException;
 use Vespolina\Entity\IdentifierInterface;
 
 /**

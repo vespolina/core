@@ -11,7 +11,7 @@ use Vespolina\Entity\BaseIdentifier;
 class BaseIdentifierTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @expectedException Vespolina\Entity\Exception\IdentifierCheckDigitException
+     * @expectedException Vespolina\Exception\IdentifierCheckDigitException
      */
     public function testSetCodeException()
     {
