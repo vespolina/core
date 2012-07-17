@@ -10,6 +10,7 @@ namespace Vespolina\Entity\Order;
 
 use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Order\ItemInterface;
+use Vespolina\Pricing\PricingSetInterface;
 use Vespolina\Entity\ProductInterface;
 
 /**
@@ -22,6 +23,7 @@ class Item implements ItemInterface
     protected $name;
     protected $options;
     protected $parent;
+    protected $pricingSet;
     protected $product;
     protected $quantity;
     protected $state;
@@ -82,6 +84,22 @@ class Item implements ItemInterface
     public function setParent(OrderInterface $parent)
     {
         $this->parent = $parent;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPricingSet(PricingSetInterface $pricingSet)
+    {
+        $this->pricingSet = $pricingSet;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPricingSet()
+    {
+        return $this->pricingSet;
     }
 
     /**
