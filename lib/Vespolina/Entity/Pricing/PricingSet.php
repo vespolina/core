@@ -6,9 +6,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Pricing;
+namespace Vespolina\Entity\Pricing;
 
-use Vespolina\Pricing\PricingSetInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 
 class PricingSet implements PricingSetInterface
 {
