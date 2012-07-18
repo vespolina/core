@@ -6,7 +6,7 @@
  * with this source code in the file LICENSE.
  */
  
-namespace Vespolina\Pricing;
+namespace Vespolina\Entity\Pricing;
 
 interface PricingSetInterface
 {
