@@ -90,4 +90,32 @@ interface CartInterface
      * @param $pricing
      */
     function setPricingSet($pricing);
+    
+    /**
+     * Return the cart creation date
+     *
+     * @return
+     */
+    function getCreatedAt();
+
+    /**
+     * Set the cart creation date
+     *
+     * @param DateTime $createdAt
+     */
+    function setCreatedAt(\DateTime $createdAt);
+    
+    /**
+     * Return the cart update date
+     *
+     * @return
+     */
+    function getUpdateAt();
+
+    /**
+     * Set the cart update date
+     *
+     * @param DateTime $updatedAt
+     */
+    function setUpdateAt(\DateTime $updatedAt);
 }
