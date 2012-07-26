@@ -10,7 +10,7 @@ namespace Vespolina\Entity\Order;
 
 use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Order\ItemInterface;
-use Vespolina\Pricing\PricingSetInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\ProductInterface;
 
 /**
@@ -55,7 +55,6 @@ class Item implements ItemInterface
     public function getOption($type)
     {
         if (isset($this->options[$type])) {
-
             return $this->options[$type];
         }
 
