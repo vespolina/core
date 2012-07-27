@@ -91,7 +91,7 @@ class Cart extends BaseOrder implements CartInterface
         $this->pricingSet = $pricingSet;
     }
     
-    /**
+     /**
      * @inheritdoc
      */
     public function getCreatedAt()
@@ -104,7 +104,7 @@ class Cart extends BaseOrder implements CartInterface
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
-        return $this->createdAt;
+        $this->createdAt = $createdAt;
     }
     
     /**
@@ -120,6 +120,6 @@ class Cart extends BaseOrder implements CartInterface
      */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
-        return $this->updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 }
