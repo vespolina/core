@@ -110,12 +110,12 @@ interface CartInterface
      *
      * @return
      */
-    function getUpdateAt();
+    function getUpdatedAt();
 
     /**
      * Set the cart update date
      *
      * @param DateTime $updatedAt
      */
-    function setUpdateAt(\DateTime $updatedAt);
+    function setUpdatedAt(\DateTime $updatedAt);
 }
