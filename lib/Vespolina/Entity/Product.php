@@ -281,7 +281,7 @@ class Product implements ProductInterface
         }
         if (!$idSet = $this->identifiers->get($key)) {
             $optionGroup = key($target);
-            throw new ParameterNotFoundException(sprintf('There is not an option group %s with the option %s', $optionGroup, $target[$optionGroup]));
+            throw new \Exception(sprintf('There is not an option group %s with the option %s', $optionGroup, $target[$optionGroup]));
         }
         $idSet->addIdentifier($identifier);
 
