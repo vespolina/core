@@ -23,14 +23,20 @@ class Cart extends BaseOrder implements CartInterface
     const STATE_CLOSED = 'closed';      //Closed after processing
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
 
+    protected $createdAt;
     protected $expiresAt;
     protected $followUp;
+    protected $id;
     protected $name;
     protected $paymentInstruction;
     protected $pricingSet;
-    protected $createdAt;
     protected $updatedAt;
-    
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * @inheritdoc
      */
