@@ -153,7 +153,7 @@ class Cart extends BaseOrder implements CartInterface
         $this->autoSetUpdatedAt();
     }
 
-    public function autoSetUpdateAt()
+    public function autoSetUpdatedAt()
     {
         $this->updateAt = new \DateTime();
     }
