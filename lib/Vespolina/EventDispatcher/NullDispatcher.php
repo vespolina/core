@@ -8,10 +8,19 @@
 
 namespace Vespolina\EventDispatcher;
 
+use Vespolina\EventDispatcher\Event;
 use Vespolina\EventDispatcher\EventInterface;
 
 class NullDispatcher implements EventDispatcherInterface
 {
+    public function createEvent($name, $subject = null)
+    {
+        $event = new Event($subject);
+        $event->setName($name);
+
+        return $event;
+    }
+
     public function dispatch($eventName, EventInterface $event = null)
     {
         return null;
