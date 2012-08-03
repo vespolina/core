@@ -13,10 +13,9 @@ use Vespolina\EventDispatcher\EventInterface;
 
 class NullDispatcher implements EventDispatcherInterface
 {
-    public function createEvent($name, $subject = null)
+    public function createEvent($subject = null)
     {
         $event = new Event($subject);
-        $event->setName($name);
 
         return $event;
     }
