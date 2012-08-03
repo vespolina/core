@@ -12,5 +12,7 @@ use Vespolina\EventDispatcher\EventInterface;
 
 interface EventDispatcherInterface
 {
+    function createEvent($name, $subject=null);
+
     function dispatch($eventName, EventInterface $event = null);
 }
