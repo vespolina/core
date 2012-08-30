@@ -106,7 +106,7 @@ class Cart extends BaseOrder implements CartInterface
     /**
      * @inheritdoc
      */
-    public function getPricingSet()
+    public function getPricing()
     {
         return $this->pricingSet;
     }
@@ -114,7 +114,7 @@ class Cart extends BaseOrder implements CartInterface
     /**
      * @inheritdoc
      */
-    public function setPricingSet($pricingSet)
+    public function setPricing($pricingSet)
     {
         $this->pricingSet = $pricingSet;
     }
