@@ -59,14 +59,14 @@ interface ItemInterface
      *
      * @param Vespolina\Entity\Pricing\PricingSetInterface $pricingSet
      */
-    function setPricingSet(PricingSetInterface $pricingSet);
+    function setPricing(PricingSetInterface $pricingSet);
 
     /**
      * Return the pricing set for this item
      *
      * @return Vespolina\Pricing\PricingSetInterface|null
      */
-    function getPricingSet();
+    function getPricing();
 
     /**
      * Return the product for this item

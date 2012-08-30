@@ -96,7 +96,7 @@ interface CartInterface
      *
      * @return mixed
      */
-    function getPricingSet();
+    function getPricing();
 
     /**
      * Set pricing information
@@ -104,7 +104,7 @@ interface CartInterface
      * @abstract
      * @param $pricing
      */
-    function setPricingSet($pricing);
+    function setPricing($pricing);
     
     /**
      * Return the cart creation date
