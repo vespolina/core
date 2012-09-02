@@ -7,7 +7,7 @@
  */
 namespace  Vespolina\Entity\Identifier;
 
-use Vespolina\Entity\BaseIdentifier;
+use Vespolina\Entity\Identifier\BaseIdentifier;
 
 /**
  * @author Richard D Shank <develop@zestic.com>

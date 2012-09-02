@@ -7,7 +7,7 @@
  */
 namespace  Vespolina\Entity\Identifier;
 
-use Vespolina\Entity\GS1Identifier;
+use Vespolina\Entity\Identifier\GS1Identifier;
 
 /**
  * @author Richard D Shank <develop@zestic.com>

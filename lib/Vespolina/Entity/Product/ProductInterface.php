@@ -6,12 +6,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Product;
 
-use Vespolina\Entity\FeatureInterface;
-use Vespolina\Entity\IdentifierInterface;
-use Vespolina\Entity\OptionInterface;
-use Vespolina\Entity\OptionGroupInterface;
+use Vespolina\Entity\Product\FeatureInterface;
+use Vespolina\Entity\Identifier\IdentifierInterface;
+use Vespolina\Entity\Product\OptionInterface;
+use Vespolina\Entity\Product\OptionGroupInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -43,7 +43,7 @@ interface ProductInterface
     /**
      * Add an array of feature to the product
      *
-     * @param array of Vespolina\Entity\FeatureInterface $features
+     * @param array of Vespolina\Entity\Product\FeatureInterface $features
      */
     function addFeatures(array $features);
 
@@ -55,7 +55,7 @@ interface ProductInterface
     /**
      * Return the features of the product
      *
-     * @return Vespolina\Entity\FeatureInterface
+     * @return \Vespolina\Entity\Product\FeatureInterface
      */
     function getFeatures();
 
@@ -64,7 +64,7 @@ interface ProductInterface
      *
      * @param $type
      *
-     * @return Vespolina\Entity\FeatureInterface
+     * @return \Vespolina\Entity\Product\FeatureInterface
      */
     function getFeature($type);
 
@@ -106,7 +106,7 @@ interface ProductInterface
     /**
      * Add an option set to the product
      *
-     * @param Vespolina\Entity\OptionGroupInterface $optionGroup
+     * @param \Vespolina\Entity\Product\OptionGroupInterface $optionGroup
      *
      */
 /** remove for now to get feature tests to pass

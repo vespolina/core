@@ -5,10 +5,10 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Identifier;
 
 use Vespolina\Exception\IdentifierCheckDigitException;
-use Vespolina\Entity\IdentifierInterface;
+use Vespolina\Entity\Identifier\IdentifierInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>

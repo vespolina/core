@@ -6,9 +6,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Product;
 
-use Vespolina\Entity\FeatureInterface;
+use Vespolina\Entity\Product\FeatureInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
