@@ -91,7 +91,7 @@ interface MerchandiseInterface extends BaseProductInterface
 
     /**
      * Return the store this merchandise belongs in
-     * 
+     *
      * @return
      */
     function getStore();
