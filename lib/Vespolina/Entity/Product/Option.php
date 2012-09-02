@@ -5,9 +5,9 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Product;
 
-use Vespolina\Entity\OptionInterface;
+use Vespolina\Entity\Product\OptionInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>

@@ -5,7 +5,7 @@
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Product;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -15,7 +15,7 @@ interface OptionGroupInterface
     /**
      * Add a option to this product options node.
      *
-     * @param Vespolina\Entity\OptionInterface $option
+     * @param Vespolina\Entity\Product\OptionInterface $option
      */
     function addOption(OptionInterface $option);
 
@@ -36,7 +36,7 @@ interface OptionGroupInterface
      *
      * @param string $value
      *
-     * @return Vespolina\Entity\OptionInterface
+     * @return Vespolina\Entity\Product\OptionInterface
      */
     function getOption($value);
 
@@ -45,14 +45,14 @@ interface OptionGroupInterface
      *
      * @param string $display
      *
-     * @return Vespolina\Entity\OptionInterface or null
+     * @return Vespolina\Entity\Product\OptionInterface or null
      */
     function getOptionByDisplay($display);
 
     /**
      * Return all the options for this type
      *
-     * @return array of Vespolina\Entity\OptionInterface
+     * @return array of Vespolina\Entity\Product\OptionInterface
      */
     function getOptions();
 
@@ -66,7 +66,7 @@ interface OptionGroupInterface
     /**
      * Remove a option from this product options set
      *
-     * @param Vespolina\Entity\OptionInterface $option
+     * @param Vespolina\Entity\Product\OptionInterface $option
      */
     function removeOption(OptionInterface $option);
 

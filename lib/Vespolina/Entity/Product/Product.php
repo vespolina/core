@@ -6,13 +6,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Product;
 
-use Vespolina\Entity\IdentifierInterface;
-use Vespolina\Entity\FeatureInterface;
+use Vespolina\Entity\Identifier\IdentifierInterface;
+use Vespolina\Entity\Product\FeatureInterface;
 use Vespolina\ProductBundle\Model\Identifier\ProductIdentifierSetInterface;
-use Vespolina\Entity\OptionInterface;
-use Vespolina\Entity\OptionGroupInterface;
+use Vespolina\Entity\Product\OptionInterface;
+use Vespolina\Entity\Product\OptionGroupInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
