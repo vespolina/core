@@ -46,13 +46,6 @@ interface BaseProductInterface
     function getFeatures();
 
     /**
-     * Remove a feature by its type
-     *
-     * @param $type
-     */
-    function removeFeature($type);
-
-    /**
      * Set the features of the product to a feature set
      *
      * @param $features
