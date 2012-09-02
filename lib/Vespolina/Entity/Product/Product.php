@@ -18,35 +18,10 @@ use Vespolina\Entity\Product\OptionGroupInterface;
  * @author Richard D Shank <develop@zestic.com>
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-class Product implements ProductInterface
+class Product extends BaseProduct implements ProductInterface
 {
-    const PHYSICAL      = 1;
-    const UNIQUE        = 2;
-    const DOWNLOAD      = 4;
-    const TIME          = 8;
-    const SERVICE       = 16;
-
-    protected $description;
-    protected $name;
-    protected $optionGroups;
+    protected $assets;
     protected $slug;
-    protected $type;
-
-    /**
-     * @inheritdoc
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * @inheritdoc
@@ -70,22 +45,6 @@ class Product implements ProductInterface
     /**
      * @inheritdoc
      */
-    public function clearFeatures()
-    {
-        $this->features = array();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getFeatures()
-    {
-        return $this->features;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getFeature($type)
     {
         if (isset($this->features[$type])) {
@@ -104,17 +63,6 @@ class Product implements ProductInterface
             $feature = $feature->getType();
         }
             unset($this->features[$feature]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setFeatures($features)
-    {
-        $this->features = array();
-        foreach ($features as $feature) {
-            $this->addFeature($feature);
-        }
     }
 
     /**
@@ -152,114 +100,6 @@ class Product implements ProductInterface
     /**
      * @inheritdoc
      */
-    public function addIdentifierSet($index, $identifierSet) {
-        $this->identifierSets[$index] = $identifierSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getIdentifiers() {
-        return $this->identifierSets;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @inheritdoc
-     */
-/** remove for now to get feature tests to pass
-    public function addOptionGroup(OptionGroupInterface $optionGroup)
-    {
-        $this->options[] = $optionGroup;
-        $this->identifiers = array();
-        $this->processIdentifiers();
-    }
-*/
-    /**
-     * @inheritdoc
-     */
-    public function removeOptionGroup($group)
-    {
-        if ($group instanceof OptionGroupInterface) {
-            $group = $group->getName();
-        }
-        foreach ($this->options as $key => $option) {
-            if ($option->getName() == $group) {
-                $this->options->remove($key);
-                $this->identifiers = new ArrayCollection();
-                $this->processIdentifiers();
-                return;
-            }
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setOptions($optionGroups)
-    {
-        $identifiers = $this->identifiers;
-        $this->clearOptions();
-        $this->options = new ArrayCollection;
-        foreach ($optionGroups as $optionGroup) {
-            $this->options->add($optionGroup);
-        }
-        $this->identifiers = $identifiers;
-        $this->processIdentifiers();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function clearOptions()
-    {
-       $this->options = array();
-       $this->identifiers = array();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getIdentifierSets()
-    {
-        return $this->identifiers;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getIdentifierSet($target = null)
-    {
-        $key = $target ? $this->createKeyFromOptions($target) : 'primary:primary;';
-        return $this->identifiers->get($key);
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getOptionSet($target)
     {
         foreach ($this->identifiers as $optionSet) {
@@ -268,40 +108,6 @@ class Product implements ProductInterface
             }
         }
         return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addIdentifier($identifier, $target = null)
-    {
-        $key = $target ? $target : 'primary:primary;';
-        if (is_array($key)) {
-            $key = $this->createKeyFromOptions($target);
-        }
-        if (!$idSet = $this->identifiers->get($key)) {
-            $optionGroup = key($target);
-            throw new \Exception(sprintf('There is not an option group %s with the option %s', $optionGroup, $target[$optionGroup]));
-        }
-        $idSet->addIdentifier($identifier);
-
-        $this->processIdentifiers();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /*
@@ -315,7 +121,7 @@ class Product implements ProductInterface
             if ($options) {
                 $choices = array();
                 $name = $productOption->getName();
-                foreach($options as $option) {
+                foreach ($options as $option) {
                     $choices[] = array($name => $option->getValue());
                 }
                 $optionSet[$name] = $choices;

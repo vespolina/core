@@ -25,12 +25,10 @@ abstract class BaseProduct implements BaseProductInterface
     const TIME          = 8;
     const SERVICE       = 16;
 
-    protected $assets;
     protected $description;
     protected $features;
     protected $name;
     protected $optionGroups;
-    protected $slug;
     protected $type;
 
     /**
@@ -87,7 +85,8 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function getIdentifiers() {
+    public function getIdentifiers()
+    {
         return $this->identifierSets;
     }
 
@@ -183,19 +182,6 @@ abstract class BaseProduct implements BaseProductInterface
     {
         $key = $target ? $this->createKeyFromOptions($target) : 'primary:primary;';
         return $this->identifiers->get($key);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getOptionSet($target)
-    {
-        foreach ($this->identifiers as $optionSet) {
-            if (!count(array_diff_assoc($optionSet->getOptions(), $target))) {
-                return $optionSet;
-            }
-        }
-        return null;
     }
 
     /**

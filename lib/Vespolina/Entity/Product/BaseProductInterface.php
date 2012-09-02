@@ -116,6 +116,8 @@ interface BaseProductInterface
      */
     function getIdentifierSets();
 
+    function getIdentifiers();
+
     /**
      * Return an identifier set for the option set combination
      *
