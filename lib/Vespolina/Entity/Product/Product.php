@@ -10,9 +10,9 @@ namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\FeatureInterface;
-use Vespolina\ProductBundle\Model\Identifier\ProductIdentifierSetInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
+use Vespolina\Entity\Product\ProductInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
