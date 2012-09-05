@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Product;
 use Vespolina\Entity\Pricing\PricingSet;
 use Vespolina\Entity\Product\BaseProduct;
 use Vespolina\Entity\Product\MerchandiseInterface;
+use Vespolina\Entity\Product\ProductInterface;
 
 class Merchandise extends BaseProduct implements MerchandiseInterface
 {
@@ -23,6 +24,19 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     protected $slug;
     protected $store;
     protected $terms;
+
+    public function __construct(ProductInterface $product)
+    {
+        $this->product = $product;
+        $rc = new \ReflectionClass(get_parent_class($this));
+        $properties = $rc->getProperties();
+        foreach ($properties as $property) {
+            $property->setAccessible(true);
+            $value = $property->getValue($product);
+            $property->setValue($this, $value);
+            $property->setAccessible(false);
+        }
+    }
 
     /**
      * @inheritdoc
