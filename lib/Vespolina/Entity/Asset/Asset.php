@@ -15,21 +15,20 @@ use Vespolina\Entity\Asset\AssetInterface;
  */
 class Asset implements AssetInterface
 {
-    protected $id;
+    protected $height;
     protected $label;
+    protected $mime;
     protected $priority;
     protected $src;
-    protected $height;
-    protected $width;
-    protected $mime;
     protected $type;
+    protected $width;
 
     /**
      * Set the asset label
      *
      * @param $label
      */
-    function setLabel($label)
+    public function setLabel($label)
     {
         $this->label = $label;
     }
@@ -38,7 +37,7 @@ class Asset implements AssetInterface
      * Get the asset label.
      * @return label
      */
-    function getLabel()
+    public function getLabel()
     {
         return $this->label;
     }
@@ -48,7 +47,7 @@ class Asset implements AssetInterface
      *
      * @param $priority
      */
-    function setPriority($priority)
+    public function setPriority($priority)
     {
         $this->priority = $priority;
     }
@@ -57,7 +56,7 @@ class Asset implements AssetInterface
      * Get the asset priority.
      * @return priority
      */
-    function getPriority()
+    public function getPriority()
     {
         return $this->priority;
     }
@@ -65,7 +64,7 @@ class Asset implements AssetInterface
     /**
      * @inheritdoc
      */
-    function setSrc($src)
+    public function setSrc($src)
     {
         $this->src = $src;
     }
@@ -73,7 +72,7 @@ class Asset implements AssetInterface
     /**
      * @inheritdoc
      */
-    function getSrc()
+    public function getSrc()
     {
         return $this->src;
     }
@@ -83,7 +82,7 @@ class Asset implements AssetInterface
      *
      * @param $height
      */
-    function setHeight($height)
+    public function setHeight($height)
     {
         $this->height = $height;
     }
@@ -92,7 +91,7 @@ class Asset implements AssetInterface
      * Get the asset height.
      * @return height
      */
-    function getHeight()
+    public function getHeight()
     {
         return $this->height;
     }
@@ -102,7 +101,7 @@ class Asset implements AssetInterface
      *
      * @param $width
      */
-    function setWidth($width)
+    public function setWidth($width)
     {
         $this->width = $width;
     }
@@ -111,7 +110,7 @@ class Asset implements AssetInterface
      * Get the asset width.
      * @return width
      */
-    function getWidth()
+    public function getWidth()
     {
         return $this->width;
     }
@@ -121,7 +120,7 @@ class Asset implements AssetInterface
      *
      * @param $mime
      */
-    function setMime($mime)
+    public function setMime($mime)
     {
         $this->mime = $mime;
     }
@@ -130,7 +129,7 @@ class Asset implements AssetInterface
      * Get the asset mime.
      * @return mime
      */
-    function getMime()
+    public function getMime()
     {
         return $this->mime;
     }
@@ -140,7 +139,7 @@ class Asset implements AssetInterface
      *
      * @param $type
      */
-    function setType($type)
+    public function setType($type)
     {
         $this->type = $type;
     }
@@ -149,7 +148,7 @@ class Asset implements AssetInterface
      * Get the asset type.
      * @return type
      */
-    function getType()
+    public function getType()
     {
         return $this->type;
     }
