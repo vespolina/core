@@ -133,8 +133,7 @@ class BaseOrder implements OrderInterface
      */
     public function removeItem(ItemInterface $item)
     {
-        foreach ($this->items as $key => $itemToCompare)
-        {
+        foreach ($this->items as $key => $itemToCompare) {
             if ($itemToCompare == $item) {
                 unset($this->items[$key]);
                 break;

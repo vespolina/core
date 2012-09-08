@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Product;
 
+use Vespolina\Entity\Asset\AssetInterface;
 use Vespolina\Entity\Pricing\PricingSet;
 use Vespolina\Entity\Product\BaseProduct;
 use Vespolina\Entity\Product\MerchandiseInterface;
@@ -68,6 +69,59 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addAsset(AssetInterface $asset)
+    {
+        $this->assets[] = $asset;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addAssets(array $assets)
+    {
+        $this->assets = array_merge($this->assets, $assets);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function clearAssets()
+    {
+        $this->assets = array();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAssets()
+    {
+        return $this->assets;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removeAsset(AssetInterface $asset)
+    {
+        foreach ($this->assets as $key => $assetToCompare) {
+            if ($assetToCompare == $asset) {
+                unset($this->assets[$key]);
+                break;
+            }
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setAssets(array $assets)
+    {
+        $this->assets = $assets;
     }
 
     /**
