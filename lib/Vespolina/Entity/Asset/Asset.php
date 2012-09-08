@@ -18,7 +18,7 @@ class Asset implements AssetInterface
     protected $id;
     protected $label;
     protected $priority;
-    protected $fileName;
+    protected $src;
     protected $height;
     protected $width;
     protected $mime;
@@ -43,7 +43,6 @@ class Asset implements AssetInterface
         return $this->label;
     }
 
-
     /**
      * Set the asset priority
      *
@@ -64,23 +63,19 @@ class Asset implements AssetInterface
     }
 
     /**
-     * Set the asset filename
-     *
-     * @param $fileName
+     * @inheritdoc
      */
-    function setFileName($fileName)
+    function setSrc($src)
     {
-        $this->fileName = $fileName;
+        $this->src = $src;
     }
 
     /**
-     * Get the asset file name.
-     *
-     * @return fileName
+     * @inheritdoc
      */
-    function getFileName()
+    function getSrc()
     {
-        return $this->fileName;
+        return $this->src;
     }
 
     /**

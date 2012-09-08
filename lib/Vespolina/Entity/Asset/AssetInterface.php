@@ -41,17 +41,18 @@ interface AssetInterface
     function getPriority();
 
     /**
-     * Set the asset file name
+     * Set the src url for the asset
      *
-     * @param $fileName
+     * @param string $src
      */
-    function setFileName($fileName);
+    function setSrc($src);
 
     /**
-     * Get the asset file name.
-     * @return fileName
+     * Return the src url for the asset
+     *
+     * @return string
      */
-    function getFileName();
+    function getSrc();
 
     /**
      * Set the asset height
