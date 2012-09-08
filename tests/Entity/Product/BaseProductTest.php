@@ -6,17 +6,18 @@
  * with this source code in the file LICENSE.
  */
 
-use Vespolina\Entity\Feature;
-use Vespolina\Entity\Option;
-use Vespolina\Entity\OptionGroup;
-use Vespolina\Entity\Product;
+use Vespolina\Entity\Asset\Media;
+use Vespolina\Entity\Product\Feature;
+use Vespolina\Entity\Product\Option;
+use Vespolina\Entity\Product\OptionGroup;
+use Vespolina\Entity\Product\BaseProduct;
 use Vespolina\Entity\Identifier\SKUIdentifier;
 
-class ProductTest extends \PHPUnit_Framework_TestCase
+class BaseProductTest extends \PHPUnit_Framework_TestCase
 {
     public function testFeatureMethods()
     {
-        $product = new Product();
+        $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
 
         $feature1 = new Feature();
         $feature1->setType('feature1');
@@ -62,9 +63,39 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($product->getFeatures());
     }
 
+    public function testMedia()
+    {
+        $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
+        $this->assertNull($product->getAllMedia(), 'make sure we start out empty');
+
+        $media = new Media();
+        $product->addMedia($media);
+        $this->assertContains($media, $product->getAllMedia());
+        $this->assertCount(1, $product->getAllMedia());
+
+        $medias = array();
+        $medias[] = new Media();
+        $medias[] = new Media();
+        $product->addMediaCollection($medias);
+        $this->assertCount(3, $product->getAllMedia());
+        $this->assertContains($media, $product->getAllMedia());
+
+        $product->removeMedia($media);
+        $this->assertNotContains($media, $product->getAllMedia());
+        $this->assertCount(2, $product->getAllMedia());
+
+        $product->clearMedia();
+        $this->assertEmpty($product->getAllMedia());
+
+        $product->addMedia($media);
+        $product->setMedia($medias);
+        $this->assertNotContains($media, $product->getAllMedia(), 'this should have been removed on setting a new array of items');
+        $this->assertCount(2, $product->getAllMedia());
+    }
+
     public function testOptionMatrix()
     {
-        $product = new Product();
+        $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
 
         $colorGroup = new OptionGroup();
         $colorBlue = $this->createOption('blue', 'color', 'colorBlue');

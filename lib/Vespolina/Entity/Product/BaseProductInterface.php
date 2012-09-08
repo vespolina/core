@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Product;
 
+use Vespolina\Entity\Asset\MediaInterface;
 use Vespolina\Entity\Product\FeatureInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\OptionInterface;
@@ -127,6 +128,46 @@ interface BaseProductInterface
      * @param $target
      */
     function addIdentifier($identifier, $target = null);
+
+    /**
+     * Add a media to the collection
+     *
+     * @param MediaInterface $media
+     */
+    function addMedia(MediaInterface $media);
+
+    /**
+     * Add a collection of medias
+     *
+     * @param array $medias
+     */
+    function addMediaCollection(array $medias);
+
+    /**
+     * Remove all media from the collection
+     */
+    function clearMedia();
+
+    /**
+     * Return a collection of media
+     *
+     * @return array of MediaInterface
+     */
+    function getAllMedia();
+
+    /**
+     * Remove a media from the collection
+     *
+     * @param MediaInterface $media
+     */
+    function removeMedia(MediaInterface $media);
+
+    /**
+     * Set a collection of media
+     *
+     * @param array $media
+     */
+    function setMedia(array $media);
 
     /**
      * Use a different name or different technique
