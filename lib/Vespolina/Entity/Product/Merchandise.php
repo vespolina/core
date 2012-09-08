@@ -29,7 +29,7 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     public function __construct(ProductInterface $product)
     {
         $this->product = $product;
-        $rc = new \ReflectionClass(get_parent_class($this));
+        $rc = new \ReflectionClass('Vespolina\Entity\Product\BaseProduct');
         $properties = $rc->getProperties();
         foreach ($properties as $property) {
             $property->setAccessible(true);
