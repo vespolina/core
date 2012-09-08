@@ -27,6 +27,7 @@ abstract class BaseProduct implements BaseProductInterface
 
     protected $description;
     protected $features;
+    protected $media;
     protected $name;
     protected $optionGroups;
     protected $type;
