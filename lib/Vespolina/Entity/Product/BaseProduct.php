@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Product;
 
+use Vespolina\Entity\Asset\MediaInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProductInterface;
 use Vespolina\Entity\Product\OptionInterface;
@@ -51,6 +52,25 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
+    public function addFeature(FeatureInterface $feature)
+    {
+        $type = $feature->getType();
+        $this->features[$type] = $feature;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addFeatures(array $features)
+    {
+        foreach($features as $feature) {
+            $this->addFeature($feature);
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function clearFeatures()
     {
         $this->features = array();
@@ -59,9 +79,32 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
+    public function getFeature($type)
+    {
+        if (isset($this->features[$type])) {
+            return $this->features[$type];
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getFeatures()
     {
         return $this->features;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    function removeFeature($feature)
+    {
+        if ($feature instanceof FeatureInterface) {
+            $feature = $feature->getType();
+        }
+        unset($this->features[$feature]);
     }
 
     /**
@@ -201,6 +244,60 @@ abstract class BaseProduct implements BaseProductInterface
         $idSet->addIdentifier($identifier);
 
         $this->processIdentifiers();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addMedia(MediaInterface $media)
+    {
+        $this->media[] = $media;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addMediaCollection(array $media)
+    {
+        $this->media = array_merge($this->media, $media);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function clearMedia()
+    {
+        $this->media = array();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAllMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removeMedia(MediaInterface $media)
+    {
+        foreach ($this->media as $key => $mediaToCompare) {
+            if ($mediaToCompare == $media) {
+                unset($this->media[$key]);
+                break;
+            }
+
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setMedia(array $media)
+    {
+        $this->media = $media;
     }
 
     /**

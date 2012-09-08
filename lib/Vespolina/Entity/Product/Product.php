@@ -20,50 +20,7 @@ use Vespolina\Entity\Product\ProductInterface;
  */
 class Product extends BaseProduct implements ProductInterface
 {
-    protected $assets;
     protected $slug;
-
-    /**
-     * @inheritdoc
-     */
-    public function addFeature(FeatureInterface $feature)
-    {
-        $type = $feature->getType();
-        $this->features[$type] = $feature;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addFeatures(array $features)
-    {
-        foreach($features as $feature) {
-            $this->addFeature($feature);
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getFeature($type)
-    {
-        if (isset($this->features[$type])) {
-            return $this->features[$type];
-        }
-
-        return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    function removeFeature($feature)
-    {
-        if ($feature instanceof FeatureInterface) {
-            $feature = $feature->getType();
-        }
-            unset($this->features[$feature]);
-    }
 
     /**
      * @inheritdoc
