@@ -13,6 +13,7 @@ use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProductInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
+use Vespolina\Entity\Taxonomy\TaxonomyInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -298,6 +299,69 @@ abstract class BaseProduct implements BaseProductInterface
     public function setMedia(array $media)
     {
         $this->media = $media;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addTaxonomy(TaxonomyInterface $taxonomy)
+    {
+        $this->taxonomies[] = $taxonomy;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addTaxonomies(array $taxonomies)
+    {
+        $this->taxonomies = array_merge($this->taxonomies, $taxonomies);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function clearTaxonomies()
+    {
+        $this->taxonomies = array();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTaxonomy($name)
+    {
+
+
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTaxonomies()
+    {
+        return $this->taxonomies;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removeTaxonomy(TaxonomyInterface $taxonomy)
+    {
+        foreach ($this->taxonomies as $key => $taxonomyToCompare) {
+            if ($taxonomyToCompare == $taxonomy) {
+                unset($this->taxonomies[$key]);
+                break;
+            }
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setTaxonomies(array $taxonomies)
+    {
+        $this->taxonomies = $taxonomies;
     }
 
     /**
