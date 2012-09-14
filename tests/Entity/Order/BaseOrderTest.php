@@ -84,4 +84,34 @@ class BaseOrderTest extends \PHPUnit_Framework_TestCase
         $order->clearAttributes();
         $this->assertEmpty($order->getAttributes());
     }
+
+    public function testTaxonomy()
+    {
+        $order = new BaseOrder();
+        $this->assertNull($order->getTaxonomies(), 'make sure we start out empty');
+
+        $taxonomy = new Taxonomy();
+        $order->addTaxonomy($taxonomy);
+        $this->assertContains($taxonomy, $order->getTaxonomies());
+        $this->assertCount(1, $order->getTaxonomies());
+
+        $taxonomies = array();
+        $taxonomies[] = new Taxonomy();
+        $taxonomies[] = new Taxonomy();
+        $order->addTaxonomies($taxonomies);
+        $this->assertCount(3, $order->getTaxonomies());
+        $this->assertContains($taxonomy, $order->getTaxonomies());
+
+        $order->removeTaxonomy($taxonomy);
+        $this->assertNotContains($taxonomy, $order->getTaxonomies());
+        $this->assertCount(2, $order->getTaxonomies());
+
+        $order->clearTaxonomies();
+        $this->assertEmpty($order->getTaxonomies());
+
+        $order->addTaxonomy($taxonomy);
+        $order->setTaxonomies($taxonomies);
+        $this->assertNotContains($taxonomy, $order->getTaxonomies(), 'this should have been removed on setting a new array of items');
+        $this->assertCount(2, $order->getTaxonomies());
+    }
 }
