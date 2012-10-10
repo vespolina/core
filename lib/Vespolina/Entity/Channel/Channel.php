@@ -6,9 +6,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity\SalesChannel;
+namespace Vespolina\Entity\Channel;
 
-interface SalesZoneInterface
+use Vespolina\Entity\Channel\ChannelInterface;
+
+class Channel implements ChannelInterface
 {
 
 }
