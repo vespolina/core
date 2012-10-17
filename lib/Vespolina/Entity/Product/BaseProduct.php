@@ -28,7 +28,7 @@ abstract class BaseProduct implements BaseProductInterface
     const SERVICE       = 16;
 
     protected $description;
-    protected $features;
+    protected $attributes;
     protected $media;
     protected $name;
     protected $optionGroups;
@@ -53,37 +53,37 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function addFeature(FeatureInterface $feature)
+    public function addAttribute(AttributeInterface $attribute)
     {
-        $type = $feature->getType();
-        $this->features[$type] = $feature;
+        $type = $attribute->getType();
+        $this->attributes[$type] = $attribute;
     }
 
     /**
      * @inheritdoc
      */
-    public function addFeatures(array $features)
+    public function addAttributes(array $attributes)
     {
-        foreach($features as $feature) {
-            $this->addFeature($feature);
+        foreach($attributes as $attribute) {
+            $this->addAttribute($attribute);
         }
     }
 
     /**
      * @inheritdoc
      */
-    public function clearFeatures()
+    public function clearAttributes()
     {
-        $this->features = array();
+        $this->attributes = array();
     }
 
     /**
      * @inheritdoc
      */
-    public function getFeature($type)
+    public function getAttribute($type)
     {
-        if (isset($this->features[$type])) {
-            return $this->features[$type];
+        if (isset($this->attributes[$type])) {
+            return $this->attributes[$type];
         }
 
         return null;
@@ -92,30 +92,30 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function getFeatures()
+    public function getAttributes()
     {
-        return $this->features;
+        return $this->attributes;
     }
 
     /**
      * @inheritdoc
      */
-    function removeFeature($feature)
+    function removeAttribute($attribute)
     {
-        if ($feature instanceof FeatureInterface) {
-            $feature = $feature->getType();
+        if ($attribute instanceof AttributeInterface) {
+            $attribute = $attribute->getType();
         }
-        unset($this->features[$feature]);
+        unset($this->attributes[$attribute]);
     }
 
     /**
      * @inheritdoc
      */
-    public function setFeatures($features)
+    public function setAttributes($attributes)
     {
-        $this->features = array();
-        foreach ($features as $feature) {
-            $this->addFeature($feature);
+        $this->attributes = array();
+        foreach ($attributes as $attribute) {
+            $this->addAttribute($attribute);
         }
     }
 
@@ -154,7 +154,7 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-/** remove for now to get feature tests to pass
+/** remove for now to get attribute tests to pass
     public function addOptionGroup(OptionGroupInterface $optionGroup)
     {
         $this->options[] = $optionGroup;

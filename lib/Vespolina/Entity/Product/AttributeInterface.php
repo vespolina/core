@@ -10,47 +10,47 @@ namespace Vespolina\Entity\Product;
 /**
  * @author Richard D Shank <develop@zestic.com>
  */
-interface FeatureInterface
+interface AttributeInterface
 {
     /**
-     * Set the name of this feature. ie: Sling Blade, Miramax, R
+     * Set the name of this attribute. ie: Sling Blade, Miramax, R
      *
      * @param $name
      */
     function setName($name);
 
     /**
-     * Get the name of this feature
+     * Get the name of this attribute
      *
-     * @return string name of node
+     * @return string
      */
     function getName();
 
     /**
-     * Set the search term for this feature
+     * Set the search term for this attribute
      *
      * @param $term
      */
     function setSearchTerm($term);
 
     /**
-     * Return the search term for this feature
+     * Return the search term for this attribute
      *
-     * @return string term
+     * @return string
      */
     function getSearchTerm();
 
     /**
-     * Set the type of feature. ie: title, studio, rated
+     * Set the type of attribute. ie: title, studio, rated
      *
      * @param $type
      */
     function setType($type);
 
     /**
-     * Return the type of feature
+     * Return the type of attribute
      *
-     * @return string type
+     * @return string
      */
     function getType();
 }

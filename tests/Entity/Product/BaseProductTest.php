@@ -7,7 +7,7 @@
  */
 
 use Vespolina\Entity\Asset\Media;
-use Vespolina\Entity\Product\Feature;
+use Vespolina\Entity\Product\Attribute;
 use Vespolina\Entity\Product\Option;
 use Vespolina\Entity\Product\OptionGroup;
 use Vespolina\Entity\Product\BaseProduct;
@@ -15,52 +15,53 @@ use Vespolina\Entity\Identifier\SKUIdentifier;
 
 class BaseProductTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFeatureMethods()
+    public function testAttributeMethods()
     {
+        /** @var $product \Vespolina\Entity\Product\BaseProduct */
         $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
 
-        $feature1 = new Feature();
+        $feature1 = new Attribute();
         $feature1->setType('feature1');
-        $product->addFeature($feature1);
-        $this->assertCount(1, $product->getFeatures());
-        $this->assertSame($feature1, $product->getFeature('feature1'));
+        $product->addAttribute($feature1);
+        $this->assertCount(1, $product->getAttributes());
+        $this->assertSame($feature1, $product->getAttribute('feature1'));
 
-        $feature2 = new Feature();
+        $feature2 = new Attribute();
         $feature2->setType('feature2');
-        $product->addFeature($feature2);
-        $this->assertCount(2, $product->getFeatures());
-        $this->assertSame($feature2, $product->getFeature('feature2'));
+        $product->addAttribute($feature2);
+        $this->assertCount(2, $product->getAttributes());
+        $this->assertSame($feature2, $product->getAttribute('feature2'));
 
-        $product->removeFeature($feature2);
-        $this->assertCount(1, $product->getFeatures(), 'remove by feature');
-        $this->assertNull($product->getFeature('feature2'));
+        $product->removeAttribute($feature2);
+        $this->assertCount(1, $product->getAttributes(), 'remove by feature');
+        $this->assertNull($product->getAttribute('feature2'));
 
-        $feature3 = new Feature();
+        $feature3 = new Attribute();
         $feature3->setType('feature3');
 
         $features = array();
         $features[] = $feature2;
         $features[] = $feature3;
 
-        $product->addFeatures($features);
-        $this->assertCount(3, $product->getFeatures());
-        $this->assertSame($feature2, $product->getFeature('feature2'));
-        $this->assertSame($feature3, $product->getFeature('feature3'));
+        $product->addAttributes($features);
+        $this->assertCount(3, $product->getAttributes());
+        $this->assertSame($feature2, $product->getAttribute('feature2'));
+        $this->assertSame($feature3, $product->getAttribute('feature3'));
 
-        $product->setFeatures($features);
-        $this->assertCount(2, $product->getFeatures());
-        $this->assertNull($product->getFeature('feature1'));
-        $this->assertSame($feature2, $product->getFeature('feature2'));
-        $this->assertSame($feature3, $product->getFeature('feature3'));
+        $product->setAttributes($features);
+        $this->assertCount(2, $product->getAttributes());
+        $this->assertNull($product->getAttribute('feature1'));
+        $this->assertSame($feature2, $product->getAttribute('feature2'));
+        $this->assertSame($feature3, $product->getAttribute('feature3'));
 
 
-        $product->removeFeature('feature3');
-        $this->assertCount(1, $product->getFeatures(), 'feature should be removed by type');
-        $product->removeFeature('nada');
-        $this->assertCount(1, $product->getFeatures());
+        $product->removeAttribute('feature3');
+        $this->assertCount(1, $product->getAttributes(), 'feature should be removed by type');
+        $product->removeAttribute('nada');
+        $this->assertCount(1, $product->getAttributes());
 
-        $product->clearFeatures();
-        $this->assertEmpty($product->getFeatures());
+        $product->clearAttributes();
+        $this->assertEmpty($product->getAttributes());
     }
 
     public function testMedia()

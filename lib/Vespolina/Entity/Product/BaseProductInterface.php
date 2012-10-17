@@ -9,8 +9,8 @@
 namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\MediaInterface;
-use Vespolina\Entity\Product\FeatureInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
+use Vespolina\Entity\Product\AttributeInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
 use Vespolina\Entity\Taxonomy\TaxonomyInterface;
@@ -38,21 +38,21 @@ interface BaseProductInterface
     /**
      * Remove all features from the product
      */
-    function clearFeatures();
+    function clearAttributes();
 
     /**
      * Return the features of the product
      *
-     * @return \Vespolina\Entity\Product\FeatureInterface
+     * @return \Vespolina\Entity\Product\AttributeInterface
      */
-    function getFeatures();
+    function getAttributes();
 
     /**
      * Set the features of the product to a feature set
      *
      * @param $features
      */
-    function setFeatures($features);
+    function setAttributes($features);
 
     /**
      * Set the name of the product
@@ -80,14 +80,14 @@ interface BaseProductInterface
     /**
      * Remove an options set from the product
      *
-     * @param string name of group $name
+     * @param string
      */
     function removeOptionGroup($name);
 
     /**
      * Set the options of the product to an option set
      *
-     * @param array of Vespolina\ProductBundle\Node\OptionGroupInterface $optionGroup
+     * @param array
      */
     function setOptions($options);
 
@@ -118,7 +118,7 @@ interface BaseProductInterface
      *
      * @param array (optional) option set or null returns primary
      *
-     * @return Vespolina\ProductBundle\Identifier\ProductIdentifierSetInterface
+     * @return \Vespolina\ProductBundle\Identifier\ProductIdentifierSetInterface
      */
     function getIdentifierSet($target = null);
 
@@ -238,7 +238,8 @@ interface BaseProductInterface
 
     /**
      * Get the product type.
-     * @return type
+     *
+     * @return string
      */
     function getType();
 
@@ -252,7 +253,7 @@ interface BaseProductInterface
     /**
      * Set the cart creation date
      *
-     * @param DateTime $createdAt
+     * @param \DateTime $createdAt
      */
     function setCreatedAt(\DateTime $createdAt);
 
@@ -266,7 +267,7 @@ interface BaseProductInterface
     /**
      * Set the cart update date
      *
-     * @param DateTime $updatedAt
+     * @param \DateTime $updatedAt
      */
     function setUpdatedAt(\DateTime $updatedAt);
 }
