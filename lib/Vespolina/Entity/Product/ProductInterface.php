@@ -10,7 +10,7 @@ namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProductInterface;
-use Vespolina\Entity\Product\FeatureInterface;
+use Vespolina\Entity\Product\AttributeInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
 
@@ -21,34 +21,34 @@ use Vespolina\Entity\Product\OptionGroupInterface;
 interface ProductInterface extends BaseProductInterface
 {
     /**
-     * Add a single feature to the product
+     * Add a single attribute to the product
      *
-     * @param FeatureInterface $feature
+     * @param AttributeInterface $attribute
      */
-    function addFeature(FeatureInterface $feature);
+    function addAttribute(AttributeInterface $attribute);
 
     /**
-     * Add an array of feature to the product
+     * Add an array of attribute to the product
      *
-     * @param array of Vespolina\Entity\Product\FeatureInterface $features
+     * @param array of Vespolina\Entity\Product\AttributeInterface $attributes
      */
-    function addFeatures(array $features);
+    function addAttributes(array $attributes);
 
     /**
-     * Return a feature by its type
+     * Return a attribute by its type
      *
      * @param $type
      *
-     * @return \Vespolina\Entity\Product\FeatureInterface
+     * @return \Vespolina\Entity\Product\AttributeInterface
      */
-    function getFeature($type);
+    function getAttribute($type);
 
     /**
-     * Remove a feature by its type
+     * Remove a attribute by its type
      *
      * @param $type
      */
-    function removeFeature($type);
+    function removeAttribute($type);
 
     /**
      * Return a new instance of the ProductIdentifierSet, based on the class passed into the Product from the constructor

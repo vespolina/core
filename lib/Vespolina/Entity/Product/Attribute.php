@@ -8,12 +8,12 @@
 
 namespace Vespolina\Entity\Product;
 
-use Vespolina\Entity\Product\FeatureInterface;
+use Vespolina\Entity\Product\AttributeInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
  */
-class Feature implements FeatureInterface
+class Attribute implements AttributeInterface
 {
     protected $name;
     protected $searchTerm;
