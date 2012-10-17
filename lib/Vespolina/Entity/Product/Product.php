@@ -10,7 +10,6 @@ namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProduct;
-use Vespolina\Entity\Product\FeatureInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
 use Vespolina\Entity\Product\ProductInterface;
