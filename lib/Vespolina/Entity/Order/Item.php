@@ -11,7 +11,7 @@ namespace Vespolina\Entity\Order;
 use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
-use Vespolina\Entity\ProductInterface;
+use Vespolina\Entity\Product\ProductInterface;
 
 /**
  * Item is a class for items in an order
