@@ -6,8 +6,8 @@
  * with this source code in the file LICENSE.
  */
 
-use Vespolina\Entity\Option;
-use Vespolina\Entity\OptionGroup;
+use Vespolina\Entity\Product\Option;
+use Vespolina\Entity\Product\OptionGroup;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
