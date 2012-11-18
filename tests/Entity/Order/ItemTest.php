@@ -1,7 +1,7 @@
 <?php
 
 use Vespolina\Entity\Order\Item;
-use Vespolina\Entity\Product;
+use Vespolina\Entity\Product\Product;
 
 /**
  * @author Richard Shank <develop@zestic.com>
