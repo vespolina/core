@@ -61,7 +61,7 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
     protected function createProductOptionValidate($returns = true)
     {
-        $product = $this->getMock('Vespolina\Entity\Product');
+        $product = $this->getMock('Vespolina\Entity\Product\Product');
         $product->expects($this->atLeastOnce())
             ->method('validateOptions')
             ->will($this->returnValue($returns));
