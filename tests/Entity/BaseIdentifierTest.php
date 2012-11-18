@@ -6,7 +6,7 @@
  * with this source code in the file LICENSE.
  */
 
-use Vespolina\Entity\BaseIdentifier;
+use Vespolina\Entity\Identifier\BaseIdentifier;
 
 class BaseIdentifierTest extends \PHPUnit_Framework_TestCase
 {
