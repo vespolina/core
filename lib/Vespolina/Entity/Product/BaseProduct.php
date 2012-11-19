@@ -27,13 +27,17 @@ abstract class BaseProduct implements BaseProductInterface
     const TIME          = 8;
     const SERVICE       = 16;
 
+    protected $assets;
     protected $attributes;
+    protected $createdAt;
     protected $description;
     protected $id;
     protected $media;
     protected $name;
     protected $optionGroups;
+    protected $taxonomies;
     protected $type;
+    protected $updatedAt;
 
     public function getId()
     {
