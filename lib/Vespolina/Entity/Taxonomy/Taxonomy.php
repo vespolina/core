@@ -15,6 +15,7 @@ use Vespolina\Entity\Taxonomy\TaxonomyInterface;
  */
 class Taxonomy implements TaxonomyInterface
 {
+    protected $id;
     protected $isHierarchical;
     protected $name;
     protected $terms;
@@ -23,6 +24,11 @@ class Taxonomy implements TaxonomyInterface
     public function __construct($isHierarchical = false)
     {
         $this->isHierarchical = $isHierarchical;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
