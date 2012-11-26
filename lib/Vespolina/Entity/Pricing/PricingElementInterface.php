@@ -10,6 +10,14 @@ namespace Vespolina\Entity\Pricing;
 interface PricingElementInterface
 {
     /**
+     * Process this pricing element. The results are passed back and also available with a call to getValue(). A null is
+     * returned on failure
+     *
+     * @return mixed
+     */
+    function process();
+
+    /**
      * Set the order of this element being processed. If the order is not set, it is saved until the end of the
      * processing to be executed. The higher the number, the later it is executed.
      *
@@ -23,4 +31,11 @@ interface PricingElementInterface
      * @return int
      */
     function getOrder();
+
+    /**
+     * Return the processed value of this PricingElement.
+     * 
+     * @return mixed
+     */
+    function getValue();
 }
