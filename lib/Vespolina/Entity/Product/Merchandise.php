@@ -18,13 +18,11 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
 {
     protected $activateOn;
     protected $active;
-    protected $assets;
     protected $deactivateOn;
     protected $pricing;
     protected $product;
     protected $slug;
     protected $store;
-    protected $terms;
 
     public function __construct(ProductInterface $product)
     {
