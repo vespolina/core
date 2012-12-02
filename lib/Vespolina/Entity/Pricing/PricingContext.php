@@ -25,6 +25,10 @@ class PricingContext implements PricingContextInterface
     {
         $this->data = $data;
         $this->entities = array();
+
+        if ($this->getQuantity() == null) {
+            $this->setQuantity(1);
+        }
     }
 
     public function addEntity($entity)
@@ -61,5 +65,15 @@ class PricingContext implements PricingContextInterface
     public function getData()
     {
         return $this->data;
+    }
+
+    public function getQuantity()
+    {
+        return $this->get('quantity');
+    }
+
+    public function setQuantity($quantity)
+    {
+        $this->set('quantity', $quantity);
     }
 }
