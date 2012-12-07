@@ -26,7 +26,7 @@ class PricingContext implements PricingContextInterface
         $this->data = $data;
         $this->entities = array();
 
-        if ($this->getQuantity() == null) {
+        if ($this->getQuantity() === null) {
             $this->setQuantity(1);
         }
     }
