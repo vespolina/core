@@ -30,10 +30,12 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
         $rc = new \ReflectionClass('Vespolina\Entity\Product\BaseProduct');
         $properties = $rc->getProperties();
         foreach ($properties as $property) {
-            $property->setAccessible(true);
-            $value = $property->getValue($product);
-            $property->setValue($this, $value);
-            $property->setAccessible(false);
+            if ($property->getName() !== 'assets') {
+                $property->setAccessible(true);
+                $value = $property->getValue($product);
+                $property->setValue($this, $value);
+                $property->setAccessible(false);
+            }
         }
     }
 
