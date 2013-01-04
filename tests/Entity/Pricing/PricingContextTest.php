@@ -11,6 +11,7 @@ class PricingContextTest extends \PHPUnit_Framework_TestCase
     {
         $data = array(
             'something' => 'nothing',
+            'quantity'  => 1,
         );
         $context = new PricingContext($data);
 
