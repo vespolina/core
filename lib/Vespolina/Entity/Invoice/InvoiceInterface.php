@@ -17,17 +17,5 @@ use Vespolina\Entity\Order\OrderInterface;
  */
 interface InvoiceInterface
 {
-    /**
-     * Set the order for this invoice
-     *
-     * @param \Vespolina\Entity\OrderInterface $order
-     */
-    function setOrder(OrderInterface $order);
 
-    /**
-     * Return the order for this invoice
-     *
-     * @return \Vespolina\Entity\OrderInterface
-     */
-    function getOrder();
 }

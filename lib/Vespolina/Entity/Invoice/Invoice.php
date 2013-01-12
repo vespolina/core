@@ -18,22 +18,63 @@ use Vespolina\Entity\Order\OrderInterface;
  */
 class Invoice implements InvoiceInterface
 {
-    private $dueDate;
-    private $order;
+    protected $dueDate;
+    protected $issuedDate;
+    protected $orders;
+    protected $partner;
+    protected $payment;
+    protected $previousInvoice;
 
     /**
-     * @inherit
+     * @inheritdoc
      */
-    public function setOrder(OrderInterface $order)
+    public function addOrder(OrderInterface $order)
     {
-        $this->order = $order;
+        $this->orders[] = $order;
     }
 
     /**
-     * @inherit
+     * @inheritdoc
      */
-    public function getOrder()
+    public function clearOrders()
     {
-        return $this->order;
+        $this->orders = array();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function mergeOrders(array $orders)
+    {
+        $this->orders = array_merge($this->orders, $orders);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removeOrder(OrderInterface $order)
+    {
+        foreach ($this->orders as $key => $orderToCompare) {
+            if ($orderToCompare == $order) {
+                unset($this->orders[$key]);
+                break;
+            };
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
     }
 }
