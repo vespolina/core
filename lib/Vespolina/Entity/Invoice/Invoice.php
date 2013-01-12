@@ -1,15 +1,15 @@
 <?php
 /**
- * (c) 2012 Vespolina Project http://www.vespolina-project.org
+ * (c) 2012-2013 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity;
+namespace Vespolina\Entity\Invoice;
 
-use Vespolina\Entity\InvoiceInterface;
-use Vespolina\Entity\OrderInterface;
+use Vespolina\Entity\Invoice\InvoiceInterface;
+use Vespolina\Entity\Order\OrderInterface;
 
 /**
  * Invoice for an order
