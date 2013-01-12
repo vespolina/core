@@ -1,6 +1,6 @@
 <?php
 /**
- * (c) 2011-2012 Vespolina Project http://www.vespolina-project.org
+ * (c) 2011-2013 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -23,19 +23,9 @@ class Cart extends BaseOrder implements CartInterface
     const STATE_CLOSED = 'closed';      //Closed after processing
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
 
-    protected $createdAt;
-    protected $expiresAt;
     protected $followUp;
-    protected $id;
     protected $name;
     protected $paymentInstruction;
-    protected $pricingSet;
-    protected $updatedAt;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @inheritdoc
@@ -101,54 +91,6 @@ class Cart extends BaseOrder implements CartInterface
     public function setPrice($name, $price)
     {
         $this->prices[$name] = $price;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPricing()
-    {
-        return $this->pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPricing($pricingSet)
-    {
-        $this->pricingSet = $pricingSet;
-    }
-    
-     /**
-     * @inheritdoc
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 
     public function autoSetCreatedAt()
