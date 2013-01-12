@@ -10,6 +10,7 @@ namespace Vespolina\Entity\Invoice;
 
 use Vespolina\Entity\Invoice\InvoiceInterface;
 use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
  * Invoice for an order
@@ -19,11 +20,53 @@ use Vespolina\Entity\Order\OrderInterface;
 class Invoice implements InvoiceInterface
 {
     protected $dueDate;
+    protected $id;
     protected $issuedDate;
     protected $orders;
     protected $partner;
     protected $payment;
     protected $previousInvoice;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setDueDate(\DateTime $dueDate)
+    {
+        $this->dueDate = $dueDate;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDueDate()
+    {
+        return $this->dueDate;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setIssuedDate(\DateTime $issuedDate)
+    {
+        $this->issuedDate = $issuedDate;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getIssuedDate()
+    {
+        return $this->issuedDate;
+    }
 
     /**
      * @inheritdoc
@@ -31,6 +74,8 @@ class Invoice implements InvoiceInterface
     public function addOrder(OrderInterface $order)
     {
         $this->orders[] = $order;
+
+        return $this;
     }
 
     /**
@@ -39,6 +84,8 @@ class Invoice implements InvoiceInterface
     public function clearOrders()
     {
         $this->orders = array();
+
+        return $this;
     }
 
     /**
@@ -55,6 +102,8 @@ class Invoice implements InvoiceInterface
     public function mergeOrders(array $orders)
     {
         $this->orders = array_merge($this->orders, $orders);
+
+        return $this;
     }
 
     /**
@@ -68,6 +117,8 @@ class Invoice implements InvoiceInterface
                 break;
             };
         }
+
+        return $this;
     }
 
     /**
@@ -76,5 +127,61 @@ class Invoice implements InvoiceInterface
     public function setOrders($orders)
     {
         $this->orders = $orders;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPartner(PartnerInterface $partner)
+    {
+        $this->partner = $partner;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPartner()
+    {
+        return $this->partner;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPayment($payment)
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPayment()
+    {
+        return $this->payment;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPreviousInvoice(InvoiceInterface $previousInvoice)
+    {
+        $this->previousInvoice = $previousInvoice;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPreviousInvoice()
+    {
+        return $this->previousInvoice;
     }
 }

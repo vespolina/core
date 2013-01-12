@@ -11,7 +11,6 @@ use Vespolina\Entity\Order\Order;
 
 class InvoiceTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testOrders()
     {
         $invoice = new Invoice();
@@ -41,5 +40,4 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains($order, $invoice->getOrders(), 'this should have been removed on setting a new array of orders');
         $this->assertCount(2, $invoice->getOrders());
     }
-    
 }
