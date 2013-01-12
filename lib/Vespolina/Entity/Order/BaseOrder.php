@@ -20,11 +20,25 @@ use Vespolina\Entity\Order\OrderInterface;
 class BaseOrder implements OrderInterface
 {
     protected $attributes;
+    protected $channel;
+    protected $createdAt;
+    protected $fulfillment;
+    protected $expiresAt;
+    protected $id;
     protected $items;
     protected $name;
     protected $owner;
+    protected $partner;
+    protected $payment;
+    protected $pricingSet;
     protected $state;
     protected $totalPrice;
+    protected $updatedAt;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @inheritdoc
@@ -85,6 +99,22 @@ class BaseOrder implements OrderInterface
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -168,9 +198,33 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPricing()
+    {
+        return $this->pricingSet;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPricing($pricingSet)
+    {
+        $this->pricingSet = $pricingSet;
     }
 
     /**
@@ -192,14 +246,6 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function setOwner($owner)
-    {
-        $this->owner = $owner;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function setTotalPrice($totalPrice)
     {
         $this->totalPrice = $totalPrice;
@@ -211,5 +257,21 @@ class BaseOrder implements OrderInterface
     public function getTotalPrice()
     {
         return $this->totalPrice;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 }
