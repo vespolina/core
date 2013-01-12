@@ -25,6 +25,8 @@ class Invoice implements InvoiceInterface
     protected $orders;
     protected $partner;
     protected $payment;
+    protected $periodEnd;
+    protected $periodStart;
     protected $previousInvoice;
 
     public function getId()
@@ -124,7 +126,7 @@ class Invoice implements InvoiceInterface
     /**
      * @inheritdoc
      */
-    public function setOrders($orders)
+    public function setOrders(array $orders)
     {
         $this->orders = $orders;
 
@@ -165,6 +167,42 @@ class Invoice implements InvoiceInterface
     public function getPayment()
     {
         return $this->payment;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPeriodEnd(\DateTime $periodEnd)
+    {
+        $this->periodEnd = $periodEnd;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPeriodEnd()
+    {
+        return $this->periodEnd;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPeriodStart(\DateTime $periodStart)
+    {
+        $this->periodStart = $periodStart;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPeriodStart()
+    {
+        return $this->periodStart;
     }
 
     /**

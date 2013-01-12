@@ -125,6 +125,36 @@ interface InvoiceInterface
     function getPayment();
 
     /**
+     * Set the end of the billing period for this invoice
+     *
+     * @param \DateTime $periodEnd
+     * @return $this
+     */
+    function setPeriodEnd(\DateTime $periodEnd);
+
+    /**
+     * Return the end of the billing period of this invoice
+     *
+     * @return \DateTime
+     */
+    function getPeriodEnd();
+
+    /**
+     * Set the start of the billing period for this invoice
+     *
+     * @param \DateTime $periodEnd
+     * @return $this
+     */
+    function setPeriodStart(\DateTime $periodStart);
+
+    /**
+     * Return the start of the billing period of this invoice
+     *
+     * @return \DateTime
+     */
+    function getPeriodStart();
+        
+    /**
      * Set previously created Invoice for the Partner, can be used for reporting
      *
      * @param \Vespolina\Entity\Partner\InvoiceInterface $previousInvoice
