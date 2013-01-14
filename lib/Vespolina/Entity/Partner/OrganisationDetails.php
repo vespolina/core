@@ -9,10 +9,16 @@ namespace Vespolina\Entity\Partner;
 
 class OrganisationDetails implements OrganisationDetailsInterface
 {
-    protected $name;
     protected $category;
     protected $employees;
-    
+    protected $id;
+    protected $name;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
 	/**
      * {@inheritdoc}
      */
