@@ -1,6 +1,6 @@
 <?php
 /**
- * (c) 2011-2012 Vespolina Project http://www.vespolina-project.org
+ * (c) 2011-2013 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -8,8 +8,10 @@
 
 namespace Vespolina\Entity\Order;
 
+use Vespolina\Entity\Channel\Channel;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Entity\Partner\Partner;
 
 /**
  * Order is a base class for shopping cart or sales order
@@ -104,6 +106,22 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
+    public function setChannel(Channel $channel)
+    {
+        $this->channel = $channel;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -115,6 +133,38 @@ class BaseOrder implements OrderInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setExpiresAt(\DateTime $expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setFulfillment($fulfillment)
+    {
+        $this->fulfillment = $fulfillment;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFulfillment()
+    {
+        return $this->fulfillment;
     }
 
     /**
@@ -214,6 +264,38 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
+    public function setPartner(Partner $partner)
+    {
+        $this->partner = $partner;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPartner()
+    {
+        return $this->partner;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPayment($payment)
+    {
+        $this->payment = $payment;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPayment()
+    {
+        return $this->payment;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getPricing()
     {
         return $this->pricingSet;
@@ -262,16 +344,16 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function getUpdatedAt()
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
-        return $this->updatedAt;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
      * @inheritdoc
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function getUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+        return $this->updatedAt;
     }
 }
