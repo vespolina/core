@@ -24,7 +24,6 @@ class Cart extends BaseOrder implements CartInterface
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
 
     protected $followUp;
-    protected $name;
     protected $paymentInstruction;
 
     /**
@@ -67,22 +66,6 @@ class Cart extends BaseOrder implements CartInterface
     public function setFollowUp($followUp)
     {
         $this->followUp = $followUp;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 
     /**

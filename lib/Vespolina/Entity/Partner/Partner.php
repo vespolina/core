@@ -23,25 +23,31 @@ class Partner implements PartnerInterface
     const ROLE_CUSTOMER    = 'ROLE_CUSTOMER';
     const ROLE_EMPLOYEE    = 'ROLE_EMPLOYEE';
     const ROLE_SUPPLIER    = 'ROLE_SUPPLIER';
-    
+
+    protected $addresses;
+    protected $currency;
+    protected $id;
+    protected $language;
+    protected $name;
+    protected $organisationDetails;
     protected $partnerId;
     protected $partnerSince;
-    protected $roles;
-    protected $name;
-    protected $type;
-    protected $currency;
-    protected $language;
     protected $paymentTerms;
-    protected $addresses;
-    protected $primaryContact;
     protected $personalDetails;
-    protected $organisationDetails;
+    protected $primaryContact;
+    protected $roles;
+    protected $type;
 
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
     }
-    
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * @inheritdoc
      */
