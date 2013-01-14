@@ -9,13 +9,19 @@ namespace Vespolina\Entity\Partner;
 
 class PersonalDetails implements PersonalDetailsInterface
 {
+    protected $id;
     protected $initials;
     protected $firstname;
     protected $prefix;
     protected $lastname;
     protected $nationalIdentificationNumber;
     protected $partner;
-    
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
 	/**
 	 * {@inheritdoc}
 	 */

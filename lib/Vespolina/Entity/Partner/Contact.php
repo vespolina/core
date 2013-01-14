@@ -9,10 +9,16 @@ namespace Vespolina\Entity\Partner;
 
 class Contact implements ContactInterface
 {
-    protected $name;
     protected $email;
+    protected $id;
+    protected $name;
     protected $phone;
-    
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -20,6 +20,7 @@ use Vespolina\Entity\Product\ProductInterface;
  */
 class Item implements ItemInterface
 {
+    protected $id;
     protected $name;
     protected $options;
     protected $parent;
@@ -31,6 +32,11 @@ class Item implements ItemInterface
     public function __construct(ProductInterface $product = null)
     {
         $this->product = $product;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
