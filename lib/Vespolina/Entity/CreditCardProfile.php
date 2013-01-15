@@ -20,7 +20,7 @@ abstract class CreditCardProfile
 
     /**
      * @param string $address
-     * @return $this
+     * @return \Vespolina\Entity\CreditCardProfile
      */
     public function setAddress($address)
     {
@@ -39,7 +39,7 @@ abstract class CreditCardProfile
 
     /**
      * @param string $cardNumber
-     * @return $this
+     * @return \Vespolina\Entity\CreditCardProfile
      */
     public function setCardNumber($cardNumber)
     {
@@ -64,7 +64,7 @@ abstract class CreditCardProfile
 
     /**
      * @param $cardType
-     * @return $this
+     * @return \Vespolina\Entity\CreditCardProfile
      */
     public function setCardType($cardType)
     {
@@ -84,7 +84,7 @@ abstract class CreditCardProfile
     /**
      * @param $month
      * @param $year
-     * @return $this
+     * @return \Vespolina\Entity\CreditCardProfile
      */
     public function setExpiration($month, $year)
     {
