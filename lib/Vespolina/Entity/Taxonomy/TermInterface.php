@@ -15,7 +15,9 @@ interface TermInterface
     /**
      * Add an attribute to the collection
      *
-     * @param $name, $value
+     * @param $name
+     * @param $value
+     * @return mixed
      */
     function addAttribute($name, $value);
 
@@ -56,6 +58,7 @@ interface TermInterface
      * Set a collection of Attribute
      *
      * @param array $attributes
+     * @return \Vespolina\Entity\Taxonomy\TermInterface
      */
     function setAttributes(array $attributes);
 
@@ -96,6 +99,7 @@ interface TermInterface
      * Set a collection of terms as the children
      *
      * @param array $terms
+     * @return \Vespolina\Entity\Taxonomy\TermInterface
      */
     function setChildren(array $terms);
     
@@ -108,10 +112,21 @@ interface TermInterface
      */
     function getName();
 
+    /**
+     * @return mixed
+     */
     function getPath();
 
+    /**
+     * @param $name
+     * @return \Vespolina\Entity\Taxonomy\TermInterface
+     */
     function setName($name);
 
+    /**
+     * @param $path
+     * @return \Vespolina\Entity\Taxonomy\TermInterface
+     */
     function setPath($path);
 
     /**
