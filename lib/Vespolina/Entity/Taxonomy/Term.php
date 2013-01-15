@@ -26,7 +26,6 @@ class Term implements TermInterface
         $this->name = $name;
     }
 
-
     /**
      * @inheritdoc
      */
@@ -86,6 +85,8 @@ class Term implements TermInterface
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
+
+        return $this;
     }
 
     /**
@@ -159,6 +160,8 @@ class Term implements TermInterface
     {
         $this->clearChildren();
         $this->addChildren($terms);
+
+        return $this;
     }
 
     /**
@@ -168,12 +171,15 @@ class Term implements TermInterface
     {
         return $this->name;
     }
+
     /**
      * @inheritdoc
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -190,6 +196,8 @@ class Term implements TermInterface
     public function setPath($path)
     {
         $this->path = $path;
+
+        return $this;
     }
 
     /**
