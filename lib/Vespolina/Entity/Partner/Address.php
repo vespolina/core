@@ -42,6 +42,8 @@ class Address implements AddressInterface
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
     
 	/**
@@ -58,6 +60,8 @@ class Address implements AddressInterface
     public function setStreet($street)
     {
         $this->street = $street;
+
+        return $this;
     }
 
 	/**
@@ -74,6 +78,8 @@ class Address implements AddressInterface
     public function setNumber($number)
     {
         $this->number = $number;
+
+        return $this;
     }
 
 	/**
@@ -90,6 +96,8 @@ class Address implements AddressInterface
     public function setNumbersuffix($numbersuffix)
     {
         $this->numbersuffix = $numbersuffix;
+
+        return $this;
     }
 
 	/**
@@ -106,6 +114,8 @@ class Address implements AddressInterface
     public function setZipcode($zipcode)
     {
         $this->zipcode = $zipcode;
+
+        return $this;
     }
 
 	/**
@@ -122,6 +132,8 @@ class Address implements AddressInterface
     public function setCity($city)
     {
         $this->city = $city;
+
+        return $this;
     }
 
 	/**
@@ -138,6 +150,8 @@ class Address implements AddressInterface
     public function setState($state)
     {
         $this->state = $state;
+
+        return $this;
     }
 
 	/**
@@ -154,5 +168,7 @@ class Address implements AddressInterface
     public function setCountry($country)
     {
         $this->country = $country;
+
+        return $this;
     }
 }

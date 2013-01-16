@@ -18,6 +18,7 @@ interface AddressInterface
     /**
      * Set type of address - e.g. invoice or delivery
      * @param string $type
+     * @return \Vespolina\Entity\Partner\AddressInterface
      */
     function setType($type);
     
@@ -29,6 +30,7 @@ interface AddressInterface
     /**
      * Set street
      * @param string $street
+     * @return \Vespolina\Entity\Partner\AddressInterface
      */
     function setStreet($street);
     
@@ -40,6 +42,7 @@ interface AddressInterface
     /**
      * Set street number
      * @param integer $number
+     * @return \Vespolina\Entity\Partner\AddressInterface
      */
     
     function setNumber($number);
@@ -52,6 +55,7 @@ interface AddressInterface
     /**
      * Set streetnumber suffix
      * @param string $numberSuffix
+     * @return \Vespolina\Entity\Partner\AddressInterface
      */
     function setNumberSuffix($numberSuffix);
     
@@ -63,6 +67,7 @@ interface AddressInterface
     /**
      * Set zipcode
      * @param string $zipCode
+     * @return \Vespolina\Entity\Partner\AddressInterface
      */
     function setZipcode($zipCode);
     
@@ -74,6 +79,7 @@ interface AddressInterface
     /**
      * Set city
      * @param string $city
+     * @return \Vespolina\Entity\Partner\AddressInterface
      */
     function setCity($city);
     
@@ -85,6 +91,7 @@ interface AddressInterface
     /**
      * Set state / province
      * @param string $state
+     * @return \Vespolina\Entity\Partner\AddressInterface
      */
     function setState($state);
     
@@ -96,6 +103,7 @@ interface AddressInterface
     /**
      * Set country
      * @param string $country
+     * @return \Vespolina\Entity\Partner\AddressInterface
      */
     function setCountry($country);
 }
