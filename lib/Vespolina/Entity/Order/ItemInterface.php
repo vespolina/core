@@ -19,6 +19,53 @@ use Vespolina\Entity\Pricing\PricingSetInterface;
 interface ItemInterface
 {
     /**
+     * Add an attribute to the collection
+     *
+     * @param $name, $value
+     */
+    function addAttribute($name, $value);
+
+    /**
+     * Add a collection of Attribute
+     *
+     * @param array $attributes
+     */
+    function addAttributes(array $attributes);
+
+    /**
+     * Remove all attributes from the collection
+     */
+    function clearAttributes();
+
+    /**
+     * Return a specific attribute from the collection
+     *
+     * @param $name
+     */
+    function getAttribute($name);
+
+    /**
+     * Return a collection of Attribute
+     *
+     * @return array of attributes
+     */
+    function getAttributes();
+
+    /**
+     * Remove an attribute from the collection
+     *
+     * @param string $name
+     */
+    function removeAttribute($name);
+
+    /**
+     * Set a collection of Attribute
+     *
+     * @param array $attributes
+     */
+    function setAttributes(array $attributes);
+
+    /**
      * Return the name of the cart item
      *
      * @return string
