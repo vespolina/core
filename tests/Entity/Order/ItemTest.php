@@ -18,6 +18,49 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($product, $item->getProduct(), 'the construct should set the product, if its passed in');
     }
 
+    public function testAttributeMethods()
+    {
+        $item = new Item();
+
+        $this->assertNull($item->getAttribute('noAttribute'));
+
+        $item->addAttribute('attribute1', 1);
+        $this->assertCount(1, $item->getAttributes());
+        $this->assertSame(1, $item->getAttribute('attribute1'));
+
+        $item->addAttribute('attribute2', 2);
+        $this->assertCount(2, $item->getAttributes());
+        $this->assertSame(2, $item->getAttribute('attribute2'));
+
+        $item->removeAttribute('attribute2');
+        $this->assertCount(1, $item->getAttributes(), 'remove by attribute');
+        $this->assertNull($item->getAttribute('attribute2'));
+
+        $attributes = array(
+            'attribute2' => 2,
+            'attribute3' => 3
+        );
+
+        $item->addAttributes($attributes);
+        $this->assertCount(3, $item->getAttributes());
+        $this->assertSame(2, $item->getAttribute('attribute2'));
+        $this->assertSame(3, $item->getAttribute('attribute3'));
+
+        $item->setAttributes($attributes);
+        $this->assertCount(2, $item->getAttributes());
+        $this->assertNull($item->getAttribute('attribute1'));
+        $this->assertSame(2, $item->getAttribute('attribute2'));
+        $this->assertSame(3, $item->getAttribute('attribute3'));
+
+        $item->removeAttribute('attribute3');
+        $this->assertCount(1, $item->getAttributes(), 'attribute should be removed by type');
+        $item->removeAttribute('nada');
+        $this->assertCount(1, $item->getAttributes());
+
+        $item->clearAttributes();
+        $this->assertEmpty($item->getAttributes());
+    }
+
     public function testOptionMethods()
     {
         $item = new Item();
