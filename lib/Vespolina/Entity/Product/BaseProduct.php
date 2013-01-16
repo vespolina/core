@@ -50,6 +50,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -67,6 +69,8 @@ abstract class BaseProduct implements BaseProductInterface
     {
         $type = $attribute->getType();
         $this->attributes[$type] = $attribute;
+
+        return $this;
     }
 
     /**
@@ -77,6 +81,8 @@ abstract class BaseProduct implements BaseProductInterface
         foreach($attributes as $attribute) {
             $this->addAttribute($attribute);
         }
+
+        return $this;
     }
 
     /**
@@ -85,6 +91,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function clearAttributes()
     {
         $this->attributes = array();
+
+        return $this;
     }
 
     /**
@@ -116,6 +124,8 @@ abstract class BaseProduct implements BaseProductInterface
             $attribute = $attribute->getType();
         }
         unset($this->attributes[$attribute]);
+
+        return $this;
     }
 
     /**
@@ -127,6 +137,8 @@ abstract class BaseProduct implements BaseProductInterface
         foreach ($attributes as $attribute) {
             $this->addAttribute($attribute);
         }
+
+        return $this;
     }
 
     /**
@@ -135,6 +147,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function addIdentifierSet($index, $identifierSet)
     {
         $this->identifierSets[$index] = $identifierSet;
+
+        return $this;
     }
 
     /**
@@ -151,6 +165,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -185,9 +201,12 @@ abstract class BaseProduct implements BaseProductInterface
                 $this->options->remove($key);
                 $this->identifiers = new ArrayCollection();
                 $this->processIdentifiers();
-                return;
+
+                return $this;
             }
         }
+
+        return $this;
     }
 
     /**
@@ -203,6 +222,8 @@ abstract class BaseProduct implements BaseProductInterface
         }
         $this->identifiers = $identifiers;
         $this->processIdentifiers();
+
+        return $this;
     }
 
     /**
@@ -212,6 +233,8 @@ abstract class BaseProduct implements BaseProductInterface
     {
        $this->options = array();
        $this->identifiers = array();
+
+        return $this;
     }
 
     /**
@@ -236,6 +259,7 @@ abstract class BaseProduct implements BaseProductInterface
     public function getIdentifierSet($target = null)
     {
         $key = $target ? $this->createKeyFromOptions($target) : 'primary:primary;';
+
         return $this->identifiers->get($key);
     }
 
@@ -253,8 +277,9 @@ abstract class BaseProduct implements BaseProductInterface
             throw new \Exception(sprintf('There is not an option group %s with the option %s', $optionGroup, $target[$optionGroup]));
         }
         $idSet->addIdentifier($identifier);
-
         $this->processIdentifiers();
+
+        return $this;
     }
 
     /**
@@ -263,6 +288,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function addMedia(MediaInterface $media)
     {
         $this->media[] = $media;
+
+        return $this;
     }
 
     /**
@@ -271,6 +298,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function addMediaCollection(array $media)
     {
         $this->media = array_merge($this->media, $media);
+
+        return $this;
     }
 
     /**
@@ -279,6 +308,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function clearMedia()
     {
         $this->media = array();
+
+        return $this;
     }
 
     /**
@@ -301,6 +332,8 @@ abstract class BaseProduct implements BaseProductInterface
             }
 
         }
+
+        return $this;
     }
 
     /**
@@ -309,6 +342,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function setMedia(array $media)
     {
         $this->media = $media;
+
+        return $this;
     }
 
     /**
@@ -317,6 +352,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function addTaxonomy(TaxonomyInterface $taxonomy)
     {
         $this->taxonomies[] = $taxonomy;
+
+        return $this;
     }
 
     /**
@@ -325,6 +362,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function addTaxonomies(array $taxonomies)
     {
         $this->taxonomies = array_merge($this->taxonomies, $taxonomies);
+
+        return $this;
     }
 
     /**
@@ -333,6 +372,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function clearTaxonomies()
     {
         $this->taxonomies = array();
+
+        return $this;
     }
 
     /**
@@ -364,6 +405,8 @@ abstract class BaseProduct implements BaseProductInterface
                 break;
             }
         }
+
+        return $this;
     }
 
     /**
@@ -372,6 +415,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function setTaxonomies(array $taxonomies)
     {
         $this->taxonomies = $taxonomies;
+
+        return $this;
     }
 
     /**
@@ -380,6 +425,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -404,6 +451,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -420,6 +469,8 @@ abstract class BaseProduct implements BaseProductInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     public function autoSetCreatedAt()
@@ -428,10 +479,14 @@ abstract class BaseProduct implements BaseProductInterface
             $this->createdAt = new \DateTime();
         }
         $this->autoSetUpdatedAt();
+
+        return $this;
     }
 
     public function autoSetUpdatedAt()
     {
         $this->updatedAt = new \DateTime();
+
+        return $this;
     }
 }
