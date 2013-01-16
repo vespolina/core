@@ -20,6 +20,16 @@ class PartnerTest extends \PHPUnit_Framework_TestCase
     public function testFluentInterface()
     {
         $addressOnFile = new Address();
+        $addressOnFile
+            ->setZipcode('20201')
+            ->setNumber(20209)
+            ->setNumbersuffix('No.')
+            ->setStreet('Main St.')
+            ->setCity('Columbia')
+            ->setState('SC')
+            ->setCountry('US')
+            ->setType('on file')
+        ;
 
         $partner = new Partner();
         $partner
