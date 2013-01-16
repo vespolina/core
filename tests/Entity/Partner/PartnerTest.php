@@ -10,5 +10,8 @@ use Vespolina\Entity\Partner\Partner;
 
 class PartnerTest extends \PHPUnit_Framework_TestCase
 {
-    // todo: payment profile (cc profile)
+    public function testPaymentProfileMethods()
+    {
+        $this->markTestIncomplete('tests for payment profiles (including cc) need to be written and implemented');
+    }
 }
