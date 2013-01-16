@@ -20,6 +20,7 @@ use Vespolina\Entity\Product\ProductInterface;
  */
 class Item implements ItemInterface
 {
+    protected $attributes;
     protected $id;
     protected $name;
     protected $options;
@@ -37,6 +38,67 @@ class Item implements ItemInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addAttributes(array $attributes)
+    {
+        $this->attributes = array_merge($this->attributes, $attributes);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function clearAttributes()
+    {
+        $this->attributes = array();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttribute($name)
+    {
+        if (isset($this->attributes[$name])) {
+
+            return $this->attributes[$name];
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removeAttribute($name)
+    {
+        unset($this->attributes[$name]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
     }
 
     /**
