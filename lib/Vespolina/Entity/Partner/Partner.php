@@ -62,6 +62,8 @@ class Partner implements PartnerInterface
     public function setPartnerId($partnerId)
     {
         $this->partnerId = $partnerId;
+
+        return $this;
     }
     
     /**
@@ -78,6 +80,8 @@ class Partner implements PartnerInterface
     public function setPartnerSince(\DateTime $partnerSince)
     {
         $this->partnerSince = $partnerSince;
+
+        return $this;
     }
 
     /**
@@ -94,6 +98,8 @@ class Partner implements PartnerInterface
     public function addRole($role)
     {
         $this->roles[] = $role;
+
+        return $this;
     }
     
     /**
@@ -102,6 +108,8 @@ class Partner implements PartnerInterface
     public function setRoles($roles)
     {
         $this->roles = $roles;
+
+        return $this;
     }
     
     /**
@@ -118,6 +126,8 @@ class Partner implements PartnerInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -134,6 +144,8 @@ class Partner implements PartnerInterface
     public function setShortName($shortName)
     {
         $this->shortName = $shortName;
+
+        return $this;
     }
     
     /**
@@ -150,6 +162,8 @@ class Partner implements PartnerInterface
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -166,6 +180,8 @@ class Partner implements PartnerInterface
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+
+        return $this;
     }
 
     /**
@@ -182,6 +198,8 @@ class Partner implements PartnerInterface
     public function setLanguage($language)
     {
         $this->language = $language;
+
+        return $this;
     }
 
     /**
@@ -198,6 +216,8 @@ class Partner implements PartnerInterface
     public function setPaymentTerms($paymentTerms)
     {
         $this->paymentTerms = $paymentTerms;
+
+        return $this;
     }
 
     /**
@@ -214,6 +234,8 @@ class Partner implements PartnerInterface
     public function setAddresses($addresses)
     {
         $this->addresses = $addresses;
+
+        return $this;
     }
 
     /**
@@ -222,6 +244,8 @@ class Partner implements PartnerInterface
     public function addAddress($address)
     {
         $this->addresses[] = $address;
+
+        return $this;
     }
     
     /**
@@ -246,6 +270,8 @@ class Partner implements PartnerInterface
     public function setPrimaryContact(Contact $primaryContact)
     {
         $this->primaryContact = $primaryContact;
+
+        return $this;
     }
 
     /**
@@ -262,6 +288,8 @@ class Partner implements PartnerInterface
     public function setPersonalDetails($personalDetails)
     {
         $this->personalDetails = $personalDetails;
+
+        return $this;
     }
 
     /**
@@ -278,6 +306,8 @@ class Partner implements PartnerInterface
     public function setOrganisationDetails($organisationDetails)
     {
         $this->organisationDetails = $organisationDetails;
+
+        return $this;
     }
 
 }
