@@ -18,30 +18,56 @@ use Vespolina\Entity\Order\OrderInterface;
 interface BillingAgreementInterface
 {
     /**
-     * Get the billing amount to be charged periodically
+     * Set the billing amount of the agreement
+     * 
+     * @param $billingAmount
+     * @return $this
+     */
+    function setBillingAmount($billingAmount);
+
+    /**
+     * Return the billing amount to be charged
      *
      * @return integer
      */
     function getBillingAmount();
 
+    function setBillingCycles($billingCycles);
+
     /**
-     * Get the number of billing cycles
-     *
+     * Return the number of billing cycles
      *
      * @return integer
      */
     function getBillingCycles();
 
+    function setBillingInterval($billingInterval);
+
     /**
-     * Get the interval (day, month, year)
+     * Return the billing interval (day, month, year)
      *
-     * @return integer
+     * @return string
      */
     function getBillingInterval();
 
+    function setInitialBillingDate(\DateTime $initialBillingDate);
+
     /*
-     * Get the date when the first billing request should be created
+     * Return the date when the first billing request should be created
      *
+     * @return /DateTime
      */
-    function getPlannedDate();
+    function getInitialBillingDate();
+
+    function setOrder(OrderInterface $order);
+
+    function getOrder();
+
+    function setPartner(PartnerInterface $partner);
+
+    function getPartner();
+
+    function setPaymentGateway($paymentGateway);
+
+    function getPaymentGateway();
 }
