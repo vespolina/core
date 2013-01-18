@@ -309,5 +309,4 @@ class Partner implements PartnerInterface
 
         return $this;
     }
-
 }
