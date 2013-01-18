@@ -21,7 +21,9 @@ interface ItemInterface
     /**
      * Add an attribute to the collection
      *
-     * @param $name, $value
+     * @param $name
+     * @param $value
+     * @return
      */
     function addAttribute($name, $value);
 
