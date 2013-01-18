@@ -12,5 +12,13 @@ use Vespolina\Entity\Channel\ChannelInterface;
 
 class Channel implements ChannelInterface
 {
+    protected $id;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
