@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * 
  * @author Willem-Jan Zijderveld <willemjan@beeldspraak.com>
  */
-class Partner implements PartnerInterface
+class BasePartner implements PartnerInterface
 {
     const INDIVIDUAL       = 'individual';
     const ORGANISATION     = 'organisation';
@@ -26,7 +26,6 @@ class Partner implements PartnerInterface
 
     protected $addresses;
     protected $currency;
-    protected $id;
     protected $language;
     protected $name;
     protected $organisationDetails;

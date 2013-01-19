@@ -29,6 +29,8 @@ class Item implements ItemInterface
     protected $product;
     protected $quantity;
     protected $state;
+    protected $order;
+
 
     public function __construct(ProductInterface $product = null)
     {
@@ -38,6 +40,25 @@ class Item implements ItemInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param $order
+     * @return Item
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 
     /**
