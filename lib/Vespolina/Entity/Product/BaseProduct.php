@@ -31,17 +31,31 @@ abstract class BaseProduct implements BaseProductInterface
     protected $attributes;
     protected $createdAt;
     protected $description;
-    protected $id;
     protected $media;
     protected $name;
     protected $optionGroups;
     protected $taxonomies;
     protected $type;
     protected $updatedAt;
+    protected $price;
 
-    public function getId()
+    /**
+     * @param float $price
+     * @return \Vespolina\Entity\Product\BaseProduct
+     */
+    public function setPrice($price)
     {
-        return $this->id;
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
     /**
