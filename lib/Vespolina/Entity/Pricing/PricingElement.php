@@ -8,11 +8,26 @@
 namespace Vespolina\Entity\Pricing;
 
 use Vespolina\Entity\Pricing\PricingElementInterface;
+use Vespolina\Exception\FunctionNotSupportedException;
 
 class PricingElement implements PricingElementInterface
 {
-    /** @var integer */
+    protected $netValue;
     protected $order;
+    protected $processed;
+    protected $value;
+
+    public function setNetValue($netValue)
+    {
+        $this->netValue = $netValue;
+
+        return $this;
+    }
+
+    public function getNetValue()
+    {
+        return $this->netValue;
+    }
 
     /**
      * @inheritdoc
@@ -20,6 +35,8 @@ class PricingElement implements PricingElementInterface
     public function setOrder($order)
     {
         $this->order = $order;
+
+        return $this;
     }
 
     /**
@@ -28,5 +45,33 @@ class PricingElement implements PricingElementInterface
     public function getOrder()
     {
         return $this->order;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function process()
+    {
+        if (!$this->processed) {
+            return $this->doProcess();
+        }
+
+        return true;
+    }
+
+    protected function doProcess()
+    {
+        throw new FunctionNotSupportedException('process() has not been implemented in ' . get_class($this));
     }
 }
