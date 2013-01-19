@@ -16,6 +16,7 @@ use Vespolina\Entity\Product\ProductInterface;
 
 class Merchandise extends BaseProduct implements MerchandiseInterface
 {
+    protected $id;
     protected $activateOn;
     protected $active;
     protected $deactivateOn;
@@ -23,6 +24,11 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     protected $product;
     protected $slug;
     protected $store;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function __construct(ProductInterface $product)
     {
