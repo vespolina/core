@@ -29,8 +29,6 @@ class Item implements ItemInterface
     protected $product;
     protected $quantity;
     protected $state;
-    protected $parent;
-
 
     public function __construct(ProductInterface $product = null)
     {
