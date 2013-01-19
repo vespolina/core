@@ -21,6 +21,12 @@ use Vespolina\Entity\Product\ProductInterface;
 class Product extends BaseProduct implements ProductInterface
 {
     protected $slug;
+    protected $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @inheritdoc
