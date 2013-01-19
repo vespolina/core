@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Billing;
 
 use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
  * An interface for a request to bill a party
