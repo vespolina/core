@@ -113,7 +113,7 @@ class PersonalDetails implements PersonalDetailsInterface
 	/**
 	 * {@inheritdoc}
 	 */
-    public function setPartner(\Vespolina\PartnerBundle\Document\Partner $partner)
+    public function setPartner(PartnerInterface $partner)
     {
         $partner->setPersonalDetails($this);
         $this->partner = $partner;

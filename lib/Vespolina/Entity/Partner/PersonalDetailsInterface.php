@@ -14,70 +14,70 @@ interface PersonalDetailsInterface
      * @param string $initials
      */
     function setInitials($initials);
-    
+
     /**
      * Get initials of customer
      * @return string
      */
     function getInitials();
-    
+
     /**
      * Set firstname of customer
      * @param string $firstname
      */
     function setFirstname($firstname);
-    
+
     /**
      * Get firstname of customer
      * @return string
      */
     function getFirstname();
-    
+
     /**
      * Set prefix of customer
      * @param string $prefix
      */
     function setPrefix($prefix);
-    
+
     /**
      * Get prefix of customer
      * @return string
      */
     function getPrefix();
-    
+
     /**
      * Set lastname of customer
      * @param string $lastname
      */
     function setLastname($lastname);
-    
+
     /**
      * Get lastname of customer
      * @return string
      */
     function getLastname();
-    
+
     /**
      * Set national identification number
      * @param string $nationalIdentificationNumber
      */
     function setNationalIdentificationNumber($nationalIdentificationNumber);
-    
+
     /**
      * Get national identification number
      * @return string
      */
     function getNationalIdentificationNumber();
-    
+
     /**
      * Set the partner for this personalDetails
-     * @param Vespolina\PartnerBundle\Document\Partner
+     * @param \Vespolina\Entity\Partner\PartnerInterface
      */
-    function setPartner(\Vespolina\PartnerBundle\Document\Partner $partner);
-    
+    function setPartner(PartnerInterface $partner);
+
     /**
      * Get the referenced partner
-     * @return Vespolina\PartnerBundle\Document\Partner
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function getPartner();
 }
