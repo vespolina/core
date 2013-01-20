@@ -10,9 +10,7 @@ namespace Vespolina\Entity\Pricing;
 
 interface PricingSetInterface
 {
-
     function all();
     function get($name);
     function set($name, $value);
-
 }
