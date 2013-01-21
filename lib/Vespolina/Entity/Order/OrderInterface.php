@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Order\ItemInterface;
+use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
  * OrderInterface is a generic interface for shopping cart or sales order
@@ -21,7 +22,9 @@ interface OrderInterface
     /**
      * Add an attribute to the collection
      *
-     * @param $name, $value
+     * @param $name
+     * @param $value
+     * @return mixed
      */
     function addAttribute($name, $value);
 
@@ -101,7 +104,7 @@ interface OrderInterface
     /**
      * Merge an array of items to the items already in the order
      *
-     * @param array of Vespolina\Entity\ItemInterface $items
+     * @param \Vespolina\Entity\Order\ItemInterface[] $items
      */
     function mergeItems(array $items);
 
@@ -122,21 +125,22 @@ interface OrderInterface
     /**
      * Set the owner of the owner
      *
-     * @param User $owner
+     * @param \Vespolina\Entity\Partner\PartnerInterface $owner
      */
-    function setOwner($owner);
+    function setOwner(PartnerInterface $owner);
 
     /**
      * Return the owner of the order
      *
-     * @return User
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function getOwner();
 
     /**
      * Set the current state of the order
      *
-     * @return
+     * @param $state
+     * @return \Vespolina\Entity\Order\OrderInterface
      */
     function setState($state);
 
