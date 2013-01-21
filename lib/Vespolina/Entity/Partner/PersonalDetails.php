@@ -15,7 +15,6 @@ class PersonalDetails implements PersonalDetailsInterface
     protected $prefix;
     protected $lastname;
     protected $nationalIdentificationNumber;
-    protected $partner;
 
     public function getId()
     {
@@ -100,22 +99,5 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setNationalIdentificationNumber($nationalIdentificationNumber)
     {
         $this->nationalIdentificationNumber = $nationalIdentificationNumber;
-    }
-    
-	/**
-	 * {@inheritdoc}
-	 */
-    public function getPartner()
-    {
-        return $this->partner;
-    }
-
-	/**
-	 * {@inheritdoc}
-	 */
-    public function setPartner(PartnerInterface $partner)
-    {
-        $partner->setPersonalDetails($this);
-        $this->partner = $partner;
     }
 }
