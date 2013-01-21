@@ -12,6 +12,7 @@ use Vespolina\Entity\Channel\Channel;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\Partner;
+use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
  * Order is a base class for shopping cart or sales order
@@ -248,9 +249,11 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function setOwner($owner)
+    public function setOwner(PartnerInterface $owner)
     {
         $this->owner = $owner;
+
+        return $this;
     }
 
     /**
