@@ -66,7 +66,4 @@ class OrganisationDetails implements OrganisationDetailsInterface
     {
         $this->employees = $employees;
     }
-
-	
-        
 }
