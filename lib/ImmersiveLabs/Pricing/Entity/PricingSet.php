@@ -2,7 +2,7 @@
 
 namespace ImmersiveLabs\Pricing\Entity;
 
-use Vespolina\Entity\Pricing\Element\TotalValueElement;
+use ImmersiveLabs\Pricing\Entity\Element\TotalValueElement;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 
 class PricingSet implements PricingSetInterface
@@ -79,5 +79,10 @@ class PricingSet implements PricingSetInterface
 
         $this->processed = $processed;
         $this->processingState = self::PROCESSING_FINISHED;
+    }
+
+    protected function addElement($value)
+    {
+
     }
 }
