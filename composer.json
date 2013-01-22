@@ -1,0 +1,13 @@
+{
+    "name": "iampersistent/pricing",
+    "description": "Pricing for Vespolina.",
+    "authors": [
+        {"name": "Richard Shank", "email": "develop@zestic.com"}
+    ],
+    "keywords": ["Pricing"],
+    "autoload": {
+        "psr-0": {
+            "Pricing": "lib/"
+        }
+    }
+}
