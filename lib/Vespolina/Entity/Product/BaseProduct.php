@@ -37,11 +37,11 @@ abstract class BaseProduct implements BaseProductInterface
     protected $taxonomies;
     protected $type;
     protected $updatedAt;
-    protected $pricingSet;
+    protected $pricingSet = array();
 
     /**
      * @param $pricingSet
-     * @return \Vespolina\Entity\Product\BaseProduct
+     * @return array
      */
     public function setPricingSet($pricingSet)
     {
@@ -51,7 +51,7 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @return $priceSet
+     * @return array $priceSet
      */
     public function getPricingSet()
     {

@@ -29,8 +29,7 @@ interface ProductInterface extends BaseProductInterface
 
     /**
      * Add an array of attribute to the product
-     *
-     * @param array of Vespolina\Entity\Product\AttributeInterface $attributes
+     * @param array $attributes
      */
     function addAttributes(array $attributes);
 
@@ -53,6 +52,7 @@ interface ProductInterface extends BaseProductInterface
     /**
      * Return a new instance of the ProductIdentifierSet, based on the class passed into the Product from the constructor
      *
+     * @param $options
      * @return instance of Vespolina\ProductBundle\Identifier\ProductIdentifierSetInterface
      */
     function createProductIdentifierSet($options);

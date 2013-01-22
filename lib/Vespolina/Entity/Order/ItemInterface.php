@@ -99,28 +99,26 @@ interface ItemInterface
     /**
      * Set the parent order for this item
      *
-     * @param Vespolina\Entity\Order\OrderInterface $parent
+     * @param \Vespolina\Entity\Order\OrderInterface $parent
      */
     function setParent(OrderInterface $parent);
 
     /**
      * Set a pricing set for this item
-     *
-     * @param Vespolina\Entity\Pricing\PricingSetInterface $pricingSet
      */
-    function setPricing(PricingSetInterface $pricingSet);
+    function setPricing($pricingSet);
 
     /**
      * Return the pricing set for this item
      *
-     * @return Vespolina\Pricing\PricingSetInterface|null
+     * @return \Vespolina\Entity\Pricing\PricingSetInterface|null
      */
     function getPricing();
 
     /**
      * Return the product for this item
      *
-     * @return Vespolina\Entity\ProductInterface
+     * @return \Vespolina\Entity\Product\ProductInterface
      */
     function getProduct();
 

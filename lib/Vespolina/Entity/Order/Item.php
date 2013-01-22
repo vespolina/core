@@ -156,7 +156,7 @@ class Item implements ItemInterface
     /**
      * @inheritdoc
      */
-    public function setPricing(PricingSetInterface $pricingSet)
+    public function setPricing($pricingSet)
     {
         $this->pricingSet = $pricingSet;
     }
