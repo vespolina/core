@@ -1,11 +1,6 @@
 <?php
-/**
- * (c) 2012 Vespolina Project http://www.vespolina-project.org
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-namespace Pricing\Entity;
+
+namespace ImmersiveLabs\Pricing\Entity;
 
 use Vespolina\Entity\Pricing\PricingElementInterface;
 use Vespolina\Exception\FunctionNotSupportedException;
@@ -50,5 +45,26 @@ class PricingElement implements PricingElementInterface
     protected function doProcess($context, $processed)
     {
         throw new FunctionNotSupportedException('process() has not been implemented in ' . get_class($this));
+    }
+
+    /**
+     * Set the order of this element being processed. If the order is not set, it is saved until the end of the
+     * processing to be executed. The higher the number, the later it is executed.
+     *
+     * @param integer $position
+     */
+    function setPosition($position)
+    {
+        // TODO: Implement setPosition() method.
+    }
+
+    /**
+     * Return the order of this element's execution
+     *
+     * @return integer
+     */
+    function getPosition()
+    {
+        // TODO: Implement getPosition() method.
     }
 }

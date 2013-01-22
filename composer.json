@@ -5,9 +5,10 @@
         {"name": "Richard Shank", "email": "develop@zestic.com"}
     ],
     "keywords": ["Pricing"],
+    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
-            "Pricing": "lib/"
+            "ImmersiveLabs\\Pricing": "lib/"
         }
     }
 }

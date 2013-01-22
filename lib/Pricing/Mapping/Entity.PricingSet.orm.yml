@@ -1,0 +1,14 @@
+ImmersiveLabs\Pricing\Entity\PricingSet:
+    type: entity
+    table: pricing_set
+
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        pricingElements:
+            type: array
+            nullable: true
+            name: "pricing_elements"
