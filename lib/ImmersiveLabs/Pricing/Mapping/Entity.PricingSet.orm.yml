@@ -8,7 +8,8 @@ ImmersiveLabs\Pricing\Entity\PricingSet:
             generator: { strategy: AUTO }
 
     fields:
-        pricingElements:
+        processed:
             type: array
+        processingState:
+            type: string
             nullable: true
-            name: "pricing_elements"
