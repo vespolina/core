@@ -1,0 +1,25 @@
+ImmersiveLabs\Pricing\Entity\PricingElement:
+    type: entity
+    table: pricing_element
+
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        netValue:
+            type: float
+            nullable: true
+            name: "net_value"
+        order:
+            type: integer
+            nullable: true
+            name: "processing_order"
+        processed:
+            type: boolean
+            nullable: true
+        value:
+            type: float
+            nullable: true
+            name: "pricing_value"
