@@ -10,7 +10,7 @@ namespace Vespolina\Entity\Pricing;
 
 interface PricingSetInterface
 {
-    function all();
+    function getNetValue();
+    function getTotalValue();
     function get($name);
-    function set($name, $value);
 }
