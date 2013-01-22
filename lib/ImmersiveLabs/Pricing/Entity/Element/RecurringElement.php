@@ -53,7 +53,7 @@ class RecurringElement extends PricingElement
 
     protected function doProcess($context, $processed)
     {
-        $processed['netValue'] = $this->attribute['netValue'];
+        $processed['netValue'] = $this->attributes['netValue'];
 
         return $processed;
     }
