@@ -151,6 +151,10 @@ interface OrderInterface
      */
     function getState();
 
+    function setPricing($pricingSet);
+
+    function getPricing();
+
     /**
      * Set the total price for the order
      *
