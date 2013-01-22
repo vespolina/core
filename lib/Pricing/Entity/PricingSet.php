@@ -8,6 +8,7 @@
 
 namespace Pricing\Entity;
 
+use Vespolina\Entity\Pricing\Element\TotalValueElement;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 
 class PricingSet implements PricingSetInterface
@@ -31,6 +32,8 @@ class PricingSet implements PricingSetInterface
         foreach ($this->returns as $return) {
             $this->processed[$return] = null;
         }
+
+        $this->addElement(new TotalValueElement());
     }
 
     public function getDiscounts()
