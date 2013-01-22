@@ -1,5 +1,5 @@
 ImmersiveLabs\Pricing\Entity\PricingElement:
-    type: entity
+    type: mappedSuperclass
     table: pricing_element
 
     id:
@@ -20,3 +20,4 @@ ImmersiveLabs\Pricing\Entity\PricingElement:
             type: string
             nullable: true
             name: "element_type"
+

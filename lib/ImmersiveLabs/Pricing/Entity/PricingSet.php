@@ -3,15 +3,18 @@
 namespace ImmersiveLabs\Pricing\Entity;
 
 use ImmersiveLabs\Pricing\Entity\Element\TotalValueElement;
+use Vespolina\Entity\Pricing\PricingElementInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class PricingSet implements PricingSetInterface
 {
+    protected $id;
     protected $context;
-    protected $elements;
     protected $processed;
     protected $processingState = self::PROCESSING_UNPROCESSED;
     protected $returns;
+    protected $pricingElements;
 
     const PROCESSING_UNPROCESSED = 0;
     const PROCESSING_FINISHED = 1;
@@ -27,7 +30,13 @@ class PricingSet implements PricingSetInterface
             $this->processed[$return] = null;
         }
 
-        $this->addElement(new TotalValueElement());
+        $this->pricingElements = new ArrayCollection();
+        $this->pricingElements->add(new TotalValueElement());
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getDiscounts()
@@ -82,8 +91,8 @@ class PricingSet implements PricingSetInterface
         $this->processingState = self::PROCESSING_FINISHED;
     }
 
-    public function addElement($value)
+    public function addElement(PricingElementInterface $element)
     {
-        $this->elements[] = $value;
+        $this->pricingElements->add($element);
     }
 }
