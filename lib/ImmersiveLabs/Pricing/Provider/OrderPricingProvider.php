@@ -1,53 +1,73 @@
 <?php
 
 namespace ImmersiveLabs\Pricing\Provider;
+
 use Vespolina\Entity\Order\OrderInterface;
+use ImmersiveLabs\Pricing\Entity\PricingSet;
 use ImmersiveLabs\Pricing\Entity\PricingContext;
 use Vespolina\Entity\Pricing\PricingContextInterface;
 use Vespolina\Entity\Order\ItemInterface;
+use Vespolina\Order\Pricing\OrderPricingProviderInterface;
+use Vespolina\Order\Handler\OrderHandlerInterface;
 
-class OrderPricingProvider
+class OrderPricingProvider implements OrderPricingProviderInterface
 {
     // method that updates the pricing for the given order
-    public function updatePricing(OrderInterface $order, PricingContextInterface $pricingContext = null)
+    public function determineOrderPrices(OrderInterface $order, PricingContextInterface $pricingContext = null)
     {
         // not implemented
         if ($pricingContext === null) {
             $pricingContext = $this->createPricingContext();
         }
 
+        foreach ($order->getItems() as $item) {
+            $this->determineOrderItemPrices($item, $pricingContext);
+        }
+
+        // summing it up
         $itemsTotalNet = 0;
+
         // updating prices for each item
         foreach ($order->getItems() as $item) {
             /** @var ItemInterface $item */
             $pricing = $item->getPricing();
-            $itemsTotalNet += $pricing['netValue'];
+            $itemsTotalNet += $pricing['totalNet'];
         }
 
-        $previousTotal = $pricingContext->get('totalNet');
-        $pricingContext->set('totalNet', $previousTotal + $itemsTotalNet);
+        if (!$pricingSet = $order->getPricing()) {
+            $pricingSet = new PricingSet();
+            $order->setPricing($pricingSet);
+        }
 
         // if pricing context has taxation enabled we calculate the taxes with the percentage set
         // example taxRates : 0.10 for 10%, 0.25 for 25%
         if ($pricingContext->get('taxRate')) {
-            $pricingContext->set('totalTax', $pricingContext->get('totalNet') * $pricingContext->get('taxRate'));
+            $pricingSet->set('totalNet', $itemsTotalNet);
+            $totalTax = $itemsTotalNet * $pricingContext->get('taxRate');
+            $pricingSet->set('totalTax', $totalTax);
+            $pricingSet->set('totalGross', $itemsTotalNet + $totalTax);
         }
 
-        return $pricingContext;
+        $pricingSet->setProcessingState(PricingSet::PROCESSING_FINISHED);
     }
 
-    /**
-     * @return \ImmersiveLabs\Pricing\Entity\PricingContext
-     */
-    public function createPricingContext()
+    function createPricingSet()
     {
-        $pricingContext = new PricingContext();
-        $pricingContext->set('totalNet', 0);
-        $pricingContext->set('totalTax', 0);
-        $pricingContext->set('totalGross', 0);
+        $pricingSet = new PricingSet();
 
-        return $pricingContext;
+        return $pricingSet;
     }
 
+    function addOrderHandler(OrderHandlerInterface $handler)
+    {
+    }
 
+    function determineOrderItemPrices(ItemInterface $item, PricingContextInterface $pricingContext)
+    {
+        $pricing = array();
+        $productPricing = $item->getProduct()->getPricingSet();
+        $pricing['totalNet'] = $item->getQuantity() * $productPricing['netValue'];
+
+        $item->setPricing($pricing);
+    }
 }

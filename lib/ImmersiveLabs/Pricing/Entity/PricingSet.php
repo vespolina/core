@@ -78,6 +78,16 @@ class PricingSet implements PricingSetInterface
         return $this->processed[$name];
     }
 
+    public function set($name, $value)
+    {
+        $this->processed[$name] = $value;
+    }
+
+    public function has($name, $value)
+    {
+        return isset($this->processed[$name]);
+    }
+
     public function process($context = null)
     {
         // create empty array with keys from $this->processed
@@ -94,5 +104,56 @@ class PricingSet implements PricingSetInterface
     public function addElement(PricingElementInterface $element)
     {
         $this->pricingElements->add($element);
+    }
+
+
+    public function setContext($context)
+    {
+        $this->context = $context;
+    }
+
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    public function setPricingElements($pricingElements)
+    {
+        $this->pricingElements = $pricingElements;
+    }
+
+    public function getPricingElements()
+    {
+        return $this->pricingElements;
+    }
+
+    public function setProcessed($processed)
+    {
+        $this->processed = $processed;
+    }
+
+    public function getProcessed()
+    {
+        return $this->processed;
+    }
+
+    public function setProcessingState($processingState)
+    {
+        $this->processingState = $processingState;
+    }
+
+    public function getProcessingState()
+    {
+        return $this->processingState;
+    }
+
+    public function setReturns($returns)
+    {
+        $this->returns = $returns;
+    }
+
+    public function getReturns()
+    {
+        return $this->returns;
     }
 }
