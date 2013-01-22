@@ -29,7 +29,8 @@ interface PricingElementInterface
      * Process this pricing element. The results are passed back and also available with a call to getValue(). A null is
      * returned on failure
      *
+     * @param $context
      * @return mixed
      */
-    function process();
+    function process($context);
 }
