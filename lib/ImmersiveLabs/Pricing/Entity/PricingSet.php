@@ -82,8 +82,8 @@ class PricingSet implements PricingSetInterface
         $this->processingState = self::PROCESSING_FINISHED;
     }
 
-    protected function addElement($value)
+    public function addElement($value)
     {
-
+        $this->elements[] = $value;
     }
 }
