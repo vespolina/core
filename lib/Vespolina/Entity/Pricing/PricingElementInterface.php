@@ -30,7 +30,8 @@ interface PricingElementInterface
      * returned on failure
      *
      * @param $context
+     * @param $processed
      * @return mixed
      */
-    function process($context);
+    function process($context, $processed);
 }
