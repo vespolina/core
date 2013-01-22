@@ -11,33 +11,19 @@ namespace Vespolina\Entity\Pricing;
 interface PricingElementInterface
 {
     /**
-     * Return the net value of this PricingElement.
-     *
-     * @return mixed
-     */
-    function getNetValue();
-
-    /**
      * Set the order of this element being processed. If the order is not set, it is saved until the end of the
      * processing to be executed. The higher the number, the later it is executed.
      *
-     * @param integer $order
+     * @param integer $position
      */
-    function setOrder($order);
+    function setPosition($position);
 
     /**
      * Return the order of this element's execution
      *
      * @return integer
      */
-    function getOrder();
-
-    /**
-     * Return the processed value of this PricingElement.
-     *
-     * @return mixed
-     */
-    function getValue();
+    function getPosition();
 
     /**
      * Process this pricing element. The results are passed back and also available with a call to getValue(). A null is
