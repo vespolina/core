@@ -12,29 +12,21 @@ use Vespolina\Exception\FunctionNotSupportedException;
 
 class PricingElement implements PricingElementInterface
 {
-    protected $netValue;
-    protected $order;
-    protected $processed;
-    protected $value;
+    protected $attributes;
+    protected $position;
+    protected $type;
 
-    public function setNetValue($netValue)
+    public function __construct()
     {
-        $this->netValue = $netValue;
-
-        return $this;
-    }
-
-    public function getNetValue()
-    {
-        return $this->netValue;
+        $attribute['netValue']  = '';
     }
 
     /**
      * @inheritdoc
      */
-    public function setOrder($order)
+    public function setPosition($position)
     {
-        $this->order = $order;
+        $this->position = $position;
 
         return $this;
     }
@@ -42,35 +34,20 @@ class PricingElement implements PricingElementInterface
     /**
      * @inheritdoc
      */
-    public function getOrder()
+    public function getPosition()
     {
-        return $this->order;
+        return $this->position;
     }
 
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    public function getValue()
-    {
-        return $this->value;
-    }
     /**
      * @inheritdoc
      */
-    public function process()
+    public function process($context)
     {
-        if (!$this->processed) {
-            return $this->doProcess();
-        }
-
-        return true;
+        return $this->doProcess($context);
     }
 
-    protected function doProcess()
+    protected function doProcess($context)
     {
         throw new FunctionNotSupportedException('process() has not been implemented in ' . get_class($this));
     }
