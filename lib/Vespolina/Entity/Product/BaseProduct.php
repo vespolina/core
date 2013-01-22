@@ -37,25 +37,25 @@ abstract class BaseProduct implements BaseProductInterface
     protected $taxonomies;
     protected $type;
     protected $updatedAt;
-    protected $price;
+    protected $priceSet;
 
     /**
-     * @param float $price
+     * @param $priceSet
      * @return \Vespolina\Entity\Product\BaseProduct
      */
-    public function setPrice($price)
+    public function setPriceSet($priceSet)
     {
-        $this->price = $price;
+        $this->priceSet = $priceSet;
 
         return $this;
     }
 
     /**
-     * @return float
+     * @return $priceSet
      */
-    public function getPrice()
+    public function getPriceSet()
     {
-        return $this->price;
+        return $this->priceSet;
     }
 
     /**
