@@ -182,7 +182,18 @@ class BaseOrder implements OrderInterface
     public function addItem(ItemInterface $item)
     {
         $item->setParent($this);
-        $this->items[] = $item;
+
+        $found = false;
+        foreach ($this->items as $existingItem) {
+            if ($item == $existingItem) {
+                $found = true;
+                break;
+            }
+        }
+
+        if (!$found) {
+            $this->items[] = $item;
+        }
     }
 
     /**
