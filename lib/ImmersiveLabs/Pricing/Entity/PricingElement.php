@@ -7,6 +7,7 @@ use Vespolina\Exception\FunctionNotSupportedException;
 
 class PricingElement implements PricingElementInterface
 {
+    protected $id;
     protected $attributes;
     protected $order;
     protected $type;
@@ -73,5 +74,10 @@ class PricingElement implements PricingElementInterface
     function getPosition()
     {
         // TODO: Implement getPosition() method.
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

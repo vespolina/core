@@ -8,18 +8,15 @@ ImmersiveLabs\Pricing\Entity\PricingElement:
             generator: { strategy: AUTO }
 
     fields:
-        netValue:
-            type: float
+        attributes:
+            type: array
             nullable: true
-            name: "net_value"
+            name: "pricing_attributes"
         order:
             type: integer
             nullable: true
             name: "processing_order"
-        processed:
-            type: boolean
+        type:
+            type: string
             nullable: true
-        value:
-            type: float
-            nullable: true
-            name: "pricing_value"
+            name: "element_type"
