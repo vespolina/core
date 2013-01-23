@@ -183,6 +183,9 @@ class BaseOrder implements OrderInterface
     {
         $item->setParent($this);
 
+        if (!$this->items) {
+            $this->clearItems();
+        }
         $found = false;
         foreach ($this->items as $existingItem) {
             if ($item == $existingItem) {
