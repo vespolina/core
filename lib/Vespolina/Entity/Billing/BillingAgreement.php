@@ -10,9 +10,11 @@ class BillingAgreement implements BillingAgreementInterface
     protected $billingCycles;
     protected $billingInterval;
     protected $initialBillingDate;
+    protected $nextBillingDate;
     protected $order;
     protected $partner;
     protected $paymentGateway;
+    protected $totalCycles;
 
     public function setBillingAmount($billingAmount)
     {
@@ -62,6 +64,18 @@ class BillingAgreement implements BillingAgreementInterface
         return $this->initialBillingDate;
     }
 
+    public function setNextBillingDate(\DateTime $nextBillingDate)
+    {
+        $this->nextBillingDate = $nextBillingDate;
+
+        return $this;
+    }
+
+    public function getNextBillingDate()
+    {
+        return $this->nextBillingDate;
+    }
+
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
@@ -96,5 +110,17 @@ class BillingAgreement implements BillingAgreementInterface
     public function getPaymentGateway()
     {
         return $this->paymentGateway;
+    }
+
+    public function setTotalCycles($totalCycles)
+    {
+        $this->totalCycles = $totalCycles;
+
+        return $this;
+    }
+
+    public function getTotalCycles()
+    {
+        return $this->totalCycles;
     }
 }
