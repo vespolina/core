@@ -6,7 +6,7 @@ use ImmersiveLabs\Pricing\Entity\PricingElement;
 
 class TotalValueElement extends PricingElement
 {
-    protected $order = 100000;
+    protected $position = 100000;
 
     protected function doProcess($context, $processed)
     {

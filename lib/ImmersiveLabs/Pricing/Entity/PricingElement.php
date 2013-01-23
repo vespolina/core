@@ -9,7 +9,7 @@ class PricingElement implements PricingElementInterface
 {
     protected $id;
     protected $attributes;
-    protected $order;
+    protected $position;
     protected $type;
 
     public function __construct()
@@ -22,24 +22,6 @@ class PricingElement implements PricingElementInterface
         $this->attributes['netValue']  = $netValue;
 
         return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getOrder()
-    {
-        return $this->order;
     }
 
     /**
@@ -63,7 +45,9 @@ class PricingElement implements PricingElementInterface
      */
     function setPosition($position)
     {
-        // TODO: Implement setPosition() method.
+        $this->position = $position;
+
+        return $this;
     }
 
     /**
@@ -73,7 +57,7 @@ class PricingElement implements PricingElementInterface
      */
     function getPosition()
     {
-        // TODO: Implement getPosition() method.
+        return $this->position;
     }
 
     public function getId()

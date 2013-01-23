@@ -64,10 +64,9 @@ class OrderPricingProvider implements OrderPricingProviderInterface
 
     function determineOrderItemPrices(ItemInterface $item, PricingContextInterface $pricingContext)
     {
-        $pricing = array();
         $productPricing = $item->getProduct()->getPricingSet();
-        $pricing['totalNet'] = $item->getQuantity() * $productPricing['netValue'];
+        $itemPricing = $productPricing->process($pricingContext);
 
-        $item->setPricing($pricing);
+        $item->setPricing($itemPricing);
     }
 }
