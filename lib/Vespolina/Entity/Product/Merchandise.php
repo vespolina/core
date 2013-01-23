@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\AssetInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Pricing\PricingSet;
 use Vespolina\Entity\Product\BaseProduct;
 use Vespolina\Entity\Product\MerchandiseInterface;
@@ -159,7 +160,7 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     /**
      * @inheritdoc
      */
-    public function setPricing(PricingSet $pricing)
+    public function setPricing(PricingSetInterface $pricing)
     {
         $this->pricing = $pricing;
     }

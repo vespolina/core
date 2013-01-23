@@ -48,4 +48,14 @@ class PricingSet implements PricingSetInterface
     {
         return $this->pricingElements;
     }
+
+    function getNetValue()
+    {
+        // TODO: Implement getNetValue() method.
+    }
+
+    function getTotalValue()
+    {
+        // TODO: Implement getTotalValue() method.
+    }
 }
