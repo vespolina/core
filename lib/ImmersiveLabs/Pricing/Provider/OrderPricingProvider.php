@@ -20,6 +20,11 @@ class OrderPricingProvider implements OrderPricingProviderInterface
             $pricingContext = $this->createPricingContext();
         }
 
+        if (!$orderPricingSet = $order->getPricing()) {
+            $orderPricingSet = new PricingSet();
+            $order->setPricing($orderPricingSet);
+        }
+
         foreach ($order->getItems() as $item) {
             $this->determineOrderItemPrices($item, $pricingContext);
         }
@@ -31,24 +36,21 @@ class OrderPricingProvider implements OrderPricingProviderInterface
         foreach ($order->getItems() as $item) {
             /** @var ItemInterface $item */
             $pricing = $item->getPricing();
-            $itemsTotalNet += $pricing['totalNet'];
+            $itemsTotalNet += $pricing->getTotalValue();
         }
 
-        if (!$pricingSet = $order->getPricing()) {
-            $pricingSet = new PricingSet();
-            $order->setPricing($pricingSet);
-        }
+        $orderPricingSet->set('netValue', $itemsTotalNet);
+        $orderPricingSet->set('totalValue', $itemsTotalNet);
 
         // if pricing context has taxation enabled we calculate the taxes with the percentage set
         // example taxRates : 0.10 for 10%, 0.25 for 25%
-        if ($pricingContext->get('taxRate')) {
-            $pricingSet->set('totalNet', $itemsTotalNet);
+        if ($pricingContext->get('taxRate')) { // todo: this should be the location
             $totalTax = $itemsTotalNet * $pricingContext->get('taxRate');
-            $pricingSet->set('totalTax', $totalTax);
-            $pricingSet->set('totalGross', $itemsTotalNet + $totalTax);
+            $orderPricingSet->set('taxes', $totalTax);
+            $orderPricingSet->set('totalValue', $itemsTotalNet + $totalTax);
         }
 
-        $pricingSet->setProcessingState(PricingSet::PROCESSING_FINISHED);
+        $orderPricingSet->setProcessingState(PricingSet::PROCESSING_FINISHED);
     }
 
     function createPricingSet()
@@ -64,7 +66,7 @@ class OrderPricingProvider implements OrderPricingProviderInterface
 
     function determineOrderItemPrices(ItemInterface $item, PricingContextInterface $pricingContext)
     {
-        $productPricing = $item->getProduct()->getPricingSet();
+        $productPricing = $item->getProduct()->getPricing();
         $itemPricing = $productPricing->process($pricingContext);
 
         $item->setPricing($itemPricing);

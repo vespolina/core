@@ -135,6 +135,9 @@ class PricingSet implements PricingSetInterface
 
     public function getPricingElements()
     {
+        if (!$this->pricingElements) {
+            return array();
+        }
         $elements = $this->pricingElements->toArray();
         $returnElements = array();
         foreach ($elements as $element) {
