@@ -9,7 +9,7 @@ class RecurringElement extends PricingElement
     public function __construct()
     {
         $attribute['cycles']  = '';
-        $attribute['initialCharge'] = '';
+        $attribute['recurringCharge'] = '';
         $attribute['interval']  = '';
         $attribute['startsIn'] = null;
 
@@ -28,18 +28,6 @@ class RecurringElement extends PricingElement
         return $this->attributes['cycles'];
     }
 
-    public function setInitialCharge($initialCharge)
-    {
-        $this->attributes['initialCharge'] = $initialCharge;
-
-        return $this;
-    }
-
-    public function getInitialCharge()
-    {
-        return $this->attributes['initialCharge'];
-    }
-
     public function setInterval($interval)
     {
         $this->attributes['interval'] = $interval;
@@ -50,6 +38,18 @@ class RecurringElement extends PricingElement
     public function getInterval()
     {
         return $this->attributes['interval'];
+    }
+
+    public function setRecurringCharge($recurringCharge)
+    {
+        $this->attributes['recurringCharge'] = $recurringCharge;
+
+        return $this;
+    }
+
+    public function getRecurringCharge()
+    {
+        return $this->attributes['recurringCharge'];
     }
 
     public function setStartsIn($startsIn)
