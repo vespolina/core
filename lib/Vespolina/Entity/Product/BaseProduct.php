@@ -14,6 +14,7 @@ use Vespolina\Entity\Product\BaseProductInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
 use Vespolina\Entity\Taxonomy\TaxonomyInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -43,7 +44,7 @@ abstract class BaseProduct implements BaseProductInterface
      * @param $pricingSet
      * @return array
      */
-    public function setPricingSet($pricingSet)
+    public function setPricing(PricingSetInterface $pricingSet)
     {
         $this->pricingSet = $pricingSet;
 
@@ -53,7 +54,7 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @return array $priceSet
      */
-    public function getPricingSet()
+    public function getPricing()
     {
         return $this->pricingSet;
     }

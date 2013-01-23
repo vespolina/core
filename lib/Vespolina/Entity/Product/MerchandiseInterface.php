@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\AssetInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Pricing\PricingSet;
 use Vespolina\Entity\Product\BaseProductInterface;
 
@@ -105,9 +106,10 @@ interface MerchandiseInterface extends BaseProductInterface
     /**
      * Return the PricingSet for this merchandise
      *
-     * @param \Vespolina\Entity\Pricing\PricingSet $pricingSet
+     * @param \Vespolina\Entity\Pricing\PricingSetInterface $pricingSet
+     * @return
      */
-    function setPricing(PricingSet $pricingSet);
+    function setPricing(PricingSetInterface $pricingSet);
 
     /**
      * Return the PricingSet for this merchandise
