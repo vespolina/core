@@ -93,23 +93,25 @@ class PricingSet implements PricingSetInterface
         // create empty array with keys from $this->processed
         $processed = array();
         /** @var \Vespolina\Entity\Pricing\PricingElementInterface $element */
-        foreach ($this->elements as $element) {
+        foreach ($this->getPricingElements() as $element) {
             $processed = array_merge($this->processed, $element->process($context, $processed));
         }
 
         $this->processed = $processed;
+
+        $newSet = new self();
+        $newSet->setProcessed($processed);
+        $newSet->setProcessingState(self::PROCESSING_FINISHED);
         $this->processingState = self::PROCESSING_FINISHED;
-    }
 
-    public function addElement(PricingElementInterface $element)
-    {
-        $this->pricingElements->add($element);
+        return $newSet;
     }
-
 
     public function setContext($context)
     {
         $this->context = $context;
+
+        return $this;
     }
 
     public function getContext()
@@ -117,14 +119,31 @@ class PricingSet implements PricingSetInterface
         return $this->context;
     }
 
+    public function addPricingElement(PricingElementInterface $element)
+    {
+        $this->pricingElements->add($element);
+
+        return $this;
+    }
+
     public function setPricingElements($pricingElements)
     {
         $this->pricingElements = $pricingElements;
+
+        return $this;
     }
 
     public function getPricingElements()
     {
-        return $this->pricingElements;
+        $elements = $this->pricingElements->toArray();
+        $returnElements = array();
+        foreach ($elements as $element) {
+            $position = $element->getPosition();
+            $returnElements[$position] = $element;
+        }
+        ksort($returnElements);
+
+        return $returnElements;
     }
 
     public function setProcessed($processed)
