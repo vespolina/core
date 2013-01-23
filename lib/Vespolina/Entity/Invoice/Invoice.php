@@ -8,6 +8,8 @@
 
 namespace Vespolina\Entity\Invoice;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 use Vespolina\Entity\Invoice\InvoiceInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
@@ -28,6 +30,10 @@ class Invoice implements InvoiceInterface
     protected $periodEnd;
     protected $periodStart;
     protected $previousInvoice;
+
+    public function __construct() {
+        $this->orders = new ArrayCollection();
+    }
 
     public function getId()
     {
