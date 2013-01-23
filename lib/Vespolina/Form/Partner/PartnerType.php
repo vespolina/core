@@ -20,7 +20,14 @@ class PartnerType extends AbstractType
             ->add('organisationDetails', new OrganisationDetailsType())
             ->add('primaryContact', new ContactType())
             ->add('addresses', 'collection', array(
-                'type' => new AddressType()
+                'type' => new AddressType(),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'options' => array(
+                    'required' => false,
+                    'attr' => array('class' => 'license-box')
+                )
             ))
         ;
     }
