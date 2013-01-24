@@ -10,6 +10,17 @@ class PartnerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if ($options['is_admin']) {
+            $builder
+                ->add('payByCreditCard', 'choice', array(
+                    'label' => 'Payment Method',
+                    'choices'   => array(1 => 'Credit', 0 => 'Invoice'),
+                    'multiple'  => false,
+                    'expanded' => true,
+                ))
+            ;
+        }
+
         $builder
             ->add('name')
             ->add('type')
@@ -30,6 +41,7 @@ class PartnerType extends AbstractType
                 )
             ))
         ;
+
     }
 
     /**
@@ -37,7 +49,8 @@ class PartnerType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'Vespolina\Entity\Partner\Partner'
+            'data_class' => 'Vespolina\Entity\Partner\Partner',
+            'is_admin' => false
         ));
     }
 
