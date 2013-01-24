@@ -19,6 +19,17 @@ class Order extends BaseOrder implements OrderInterface
 
     protected $followUp;
     protected $paymentInstruction;
+    protected $billingAgreements;
+
+    public function setBillingAgreements($billingAgreements)
+    {
+        $this->billingAgreements = $billingAgreements;
+    }
+
+    public function getBillingAgreements()
+    {
+        return $this->billingAgreements;
+    }
 
     /**
      * @inheritdoc
