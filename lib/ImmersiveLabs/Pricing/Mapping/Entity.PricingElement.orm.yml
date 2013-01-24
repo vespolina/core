@@ -1,6 +1,10 @@
 ImmersiveLabs\Pricing\Entity\PricingElement:
-    type: mappedSuperclass
+    type: entity
     table: pricing_element
+    inheritanceType: SINGLE_TABLE
+    discriminatorMap:
+        recurring: ImmersiveLabs\Pricing\Entity\Element\RecurringElement
+        totalValue: ImmersiveLabs\Pricing\Entity\Element\TotalValueElement
 
     id:
         id:
@@ -12,12 +16,15 @@ ImmersiveLabs\Pricing\Entity\PricingElement:
             type: array
             nullable: true
             name: "pricing_attributes"
-#        order:
-#            type: integer
-#            nullable: true
-#            name: "processing_order"
+        position:
+            type: integer
+            nullable: true
+            name: "processing_order"
         type:
             type: string
             nullable: true
             name: "element_type"
-
+    manyToOne:
+        pricingSet:
+            targetEntity: Vespolina\Entity\Pricing\PricingSetInterface
+            inversedBy: pricingElements
