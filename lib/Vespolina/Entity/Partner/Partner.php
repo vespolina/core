@@ -44,6 +44,7 @@ class Partner implements PartnerInterface
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
+        $this->paymentProfile = new PaymentProfile();
     }
 
     public function getId()
