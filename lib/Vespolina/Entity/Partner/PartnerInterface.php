@@ -19,6 +19,7 @@ interface PartnerInterface
      * Sets the partnerId
      * 
      * @param string $partnerId
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setPartnerId($partnerId);
     
@@ -31,7 +32,8 @@ interface PartnerInterface
     
     /**
      * Date since when this partner joined
-     * @param DateTime $partnerSince
+     * @param \DateTime $partnerSince
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setPartnerSince(\DateTime $partnerSince);
     
@@ -50,6 +52,7 @@ interface PartnerInterface
      * Adds a role to the current Partner
      * 
      * @param string $role
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function addRole($role);
     
@@ -57,13 +60,15 @@ interface PartnerInterface
      * Sets the roles of the partner
      * 
      * @param array $roles
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setRoles($roles);
 
     /**
      * Sets the name of the partner
      * 
-     * @param string $ame
+     * @param string $name
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setName($name);
     
@@ -77,6 +82,7 @@ interface PartnerInterface
     /**
      * Sets the partners default currency (ISO-4217)
      * @param string $currency
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setCurrency($currency);
     
@@ -91,6 +97,7 @@ interface PartnerInterface
      * Sets the partners default language
      * 
      * @param string $language - IETF tag
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setLanguage($language);
     
@@ -105,6 +112,7 @@ interface PartnerInterface
      * Sets the default payment terms for customer
      * 
      * @param string $paymentTerms
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setPaymentTerms($paymentTerms);
     
@@ -117,6 +125,7 @@ interface PartnerInterface
      * Sets the partners type
      * 
      * @param string $type
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setType($type);
     
@@ -131,6 +140,7 @@ interface PartnerInterface
      * Sets the partners addresses
      * 
      * @param \Vespolina\Entity\Partner\Address[] $addresses
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setAddresses($addresses);
     
@@ -138,6 +148,7 @@ interface PartnerInterface
      * Adds a partners address
      * 
      * @param \Vespolina\Entity\Partner\Address $address
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function addAddress($address);
     
@@ -152,6 +163,7 @@ interface PartnerInterface
      * Sets the partners primary contact
      * 
      * @param \Vespolina\Entity\Partner\Contact $contact
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setPrimaryContact(Contact $contact);
     
@@ -166,13 +178,14 @@ interface PartnerInterface
      * Sets the personal details for this partner
      * 
      * @param $personalDetails
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setPersonalDetails($personalDetails);
     
     /**
      * Personal details of partner (used for type individual)
      * 
-     * @return mixed
+     * @return \Vespolina\Entity\Partner\PersonalDetailsInterface
      */
     function getPersonalDetails();
     
@@ -180,13 +193,14 @@ interface PartnerInterface
      * Sets the organistaion details
      * 
      * @param $organisationDetails
+     * @return \Vespolina\Entity\Partner\PartnerInterface
      */
     function setOrganisationDetails($organisationDetails);
     
     /**
      * The organistaion details for this partner (used for type organisation)
      * 
-     * @return mixed
+     * @return \Vespolina\Entity\Partner\OrganisationDetailsInterface
      */
     function getOrganisationDetails();
 }

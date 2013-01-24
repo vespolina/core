@@ -13,11 +13,12 @@ interface OrganisationDetailsInterface
      * Set the organisation name
      * 
      * @param string $name
+     * @return \Vespolina\Entity\Partner\OrganisationDetailsInterface
      */
     function setName($name);
     
     /**
-     * Returns the organistion name
+     * Returns the organisation name
      * @return string
      */
     function getName();
@@ -25,6 +26,7 @@ interface OrganisationDetailsInterface
     /**
      * Set the category (e.g. Education, Government, Insurance etc) 
      * @param string $category
+     * @return \Vespolina\Entity\Partner\OrganisationDetailsInterface
      */
     function setCategory($category);
     
@@ -37,6 +39,7 @@ interface OrganisationDetailsInterface
     /**
      * Set the number employees (e.g. 25-50)
      * @param string $employees
+     * @return \Vespolina\Entity\Partner\OrganisationDetailsInterface
      */
     function setEmployees($employees);
     

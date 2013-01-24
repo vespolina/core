@@ -35,6 +35,8 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setInitials($initials)
     {
         $this->initials = $initials;
+
+        return $this;
     }
 
 	/**
@@ -51,6 +53,8 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
+
+        return $this;
     }
 
 	/**
@@ -67,6 +71,8 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
+
+        return $this;
     }
 
 	/**
@@ -83,6 +89,8 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
+
+        return $this;
     }
 
 	/**
@@ -99,5 +107,7 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setNationalIdentificationNumber($nationalIdentificationNumber)
     {
         $this->nationalIdentificationNumber = $nationalIdentificationNumber;
+
+        return $this;
     }
 }
