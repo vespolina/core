@@ -39,6 +39,7 @@ class Partner implements PartnerInterface
     protected $roles;
     protected $type;
     protected $payByCreditCard = true;
+    protected $paymentProfile;
 
     public function __construct()
     {
@@ -48,6 +49,18 @@ class Partner implements PartnerInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setPaymentProfile($paymentProfile)
+    {
+        $this->paymentProfile = $paymentProfile;
+
+        return $this;
+    }
+
+    public function getPaymentProfile()
+    {
+        return $this->paymentProfile;
     }
 
     /**
