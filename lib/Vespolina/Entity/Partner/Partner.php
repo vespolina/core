@@ -38,6 +38,7 @@ class Partner implements PartnerInterface
     protected $primaryContact;
     protected $roles;
     protected $type;
+    protected $payByCreditCard = true;
 
     public function __construct()
     {
@@ -309,5 +310,15 @@ class Partner implements PartnerInterface
         $this->organisationDetails = $organisationDetails;
 
         return $this;
+    }
+
+    public function setPayByCreditCard($payByCreditCard)
+    {
+        $this->payByCreditCard = $payByCreditCard;
+    }
+
+    public function isPayByCreditCard()
+    {
+        return $this->payByCreditCard;
     }
 }
