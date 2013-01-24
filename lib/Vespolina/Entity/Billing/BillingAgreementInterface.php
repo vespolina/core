@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Billing;
 
+use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 
@@ -63,6 +64,10 @@ interface BillingAgreementInterface
     function setOrder(OrderInterface $order);
 
     function getOrder();
+
+    function setOrderItem(ItemInterface $item);
+
+    function getOrderItem();
 
     function setPartner(PartnerInterface $partner);
 
