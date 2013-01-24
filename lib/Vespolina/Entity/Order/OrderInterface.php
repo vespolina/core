@@ -90,7 +90,7 @@ interface OrderInterface
     /**
      * Retrieve all items in the order
      *
-     * @return array of Vespolina\Entity\ItemInterface compatible instances
+     * @return \Vespolina\Entity\Order\ItemInterface[]
      */
     function getItems();
 
