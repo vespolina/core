@@ -15,6 +15,12 @@ class BillingAgreement implements BillingAgreementInterface
     protected $partner;
     protected $paymentGateway;
     protected $totalCycles;
+    protected $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function setBillingAmount($billingAmount)
     {

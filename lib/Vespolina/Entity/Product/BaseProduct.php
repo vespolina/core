@@ -80,9 +80,10 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function addAttribute($attribute, $value)
+    public function addAttribute(AttributeInterface $attribute)
     {
-        $this->attributes[$attribute] = $value;
+        $type = $attribute->getType();
+        $this->attributes[$type] = $attribute;
 
         return $this;
     }
@@ -134,6 +135,9 @@ abstract class BaseProduct implements BaseProductInterface
      */
     function removeAttribute($attribute)
     {
+        if ($attribute instanceof AttributeInterface) {
+            $attribute = $attribute->getType();
+        }
         unset($this->attributes[$attribute]);
 
         return $this;
@@ -144,7 +148,10 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function setAttributes($attributes)
     {
-        $this->attributes = $attributes;
+        $this->attributes = array();
+        foreach ($attributes as $attribute) {
+            $this->addAttribute($attribute);
+        }
 
         return $this;
     }

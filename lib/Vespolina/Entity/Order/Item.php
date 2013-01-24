@@ -51,6 +51,14 @@ class Item implements ItemInterface
     /**
      * @inheritdoc
      */
+    public function setAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function addAttributes(array $attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes);
