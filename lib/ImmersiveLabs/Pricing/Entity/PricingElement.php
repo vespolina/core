@@ -10,6 +10,7 @@ class PricingElement implements PricingElementInterface
     protected $id;
     protected $attributes;
     protected $position;
+    protected $pricingSet;
     protected $type;
 
     public function __construct()

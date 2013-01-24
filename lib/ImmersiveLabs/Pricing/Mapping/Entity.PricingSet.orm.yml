@@ -13,3 +13,8 @@ ImmersiveLabs\Pricing\Entity\PricingSet:
         processingState:
             type: string
             nullable: true
+    oneToMany:
+        pricingElements:
+            targetEntity: Vespolina\Entity\Pricing\PricingElementInterface
+            mappedBy: pricingSet
+            cascade: [ "persist", "remove" ]
