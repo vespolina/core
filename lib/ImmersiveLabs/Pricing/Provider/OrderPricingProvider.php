@@ -9,9 +9,18 @@ use Vespolina\Entity\Pricing\PricingContextInterface;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Order\Pricing\OrderPricingProviderInterface;
 use Vespolina\Order\Handler\OrderHandlerInterface;
+use ImmersiveLabs\BillingBundle\Provider\TaxProvider;
 
 class OrderPricingProvider implements OrderPricingProviderInterface
 {
+    /** @var TaxProvider */
+    protected $taxProvider;
+
+    public function __construct(TaxProvider $taxProvider)
+    {
+        $this->taxProvider = $taxProvider;
+    }
+
     // method that updates the pricing for the given order
     public function determineOrderPrices(OrderInterface $order, PricingContextInterface $pricingContext = null)
     {
@@ -39,15 +48,16 @@ class OrderPricingProvider implements OrderPricingProviderInterface
             $itemsTotalNet += $pricing->getTotalValue();
         }
 
-        $orderPricingSet->set('netValue', $itemsTotalNet);
         $orderPricingSet->set('totalValue', $itemsTotalNet);
 
         // if pricing context has taxation enabled we calculate the taxes with the percentage set
         // example taxRates : 0.10 for 10%, 0.25 for 25%
-        if ($pricingContext->get('taxRate')) { // todo: this should be the location
-            $totalTax = $itemsTotalNet * $pricingContext->get('taxRate');
-            $orderPricingSet->set('taxes', $totalTax);
-            $orderPricingSet->set('totalValue', $itemsTotalNet + $totalTax);
+        if ($state = $pricingContext->get('address.state')) {
+            $rate = $this->taxProvider->getTaxByState($state);
+            $totalTax = $itemsTotalNet * $rate;
+            $orderPricingSet->set('taxRate', $rate);
+            $orderPricingSet->set('totalTax', $totalTax);
+            $orderPricingSet->set('totalGross', $itemsTotalNet + $totalTax);
         }
 
         $orderPricingSet->setProcessingState(PricingSet::PROCESSING_FINISHED);
