@@ -33,6 +33,8 @@ class OrganisationDetails implements OrganisationDetailsInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
 	/**
@@ -49,6 +51,8 @@ class OrganisationDetails implements OrganisationDetailsInterface
     public function setCategory($category)
     {
         $this->category = $category;
+
+        return $this;
     }
 
 	/**
@@ -65,5 +69,7 @@ class OrganisationDetails implements OrganisationDetailsInterface
     public function setEmployees($employees)
     {
         $this->employees = $employees;
+
+        return $this;
     }
 }

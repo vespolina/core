@@ -12,6 +12,7 @@ interface PersonalDetailsInterface
     /**
      * Set initials of customer
      * @param string $initials
+     * @return \Vespolina\Entity\Partner\PersonalDetailsInterface
      */
     function setInitials($initials);
 
@@ -24,6 +25,7 @@ interface PersonalDetailsInterface
     /**
      * Set firstname of customer
      * @param string $firstname
+     * @return \Vespolina\Entity\Partner\PersonalDetailsInterface
      */
     function setFirstname($firstname);
 
@@ -36,6 +38,7 @@ interface PersonalDetailsInterface
     /**
      * Set prefix of customer
      * @param string $prefix
+     * @return \Vespolina\Entity\Partner\PersonalDetailsInterface
      */
     function setPrefix($prefix);
 
@@ -48,6 +51,7 @@ interface PersonalDetailsInterface
     /**
      * Set lastname of customer
      * @param string $lastname
+     * @return \Vespolina\Entity\Partner\PersonalDetailsInterface
      */
     function setLastname($lastname);
 
@@ -60,6 +64,7 @@ interface PersonalDetailsInterface
     /**
      * Set national identification number
      * @param string $nationalIdentificationNumber
+     * @return \Vespolina\Entity\Partner\PersonalDetailsInterface
      */
     function setNationalIdentificationNumber($nationalIdentificationNumber);
 
