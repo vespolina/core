@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Implementation of PartnerInterface
- * 
+ *
  * @author Willem-Jan Zijderveld <willemjan@beeldspraak.com>
  */
 class Partner implements PartnerInterface
@@ -29,6 +29,7 @@ class Partner implements PartnerInterface
     protected $id;
     protected $language;
     protected $name;
+    protected $shortName;
     protected $organisationDetails;
     protected $partnerId;
     protected $partnerSince;
