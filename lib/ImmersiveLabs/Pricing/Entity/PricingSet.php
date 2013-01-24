@@ -92,9 +92,14 @@ class PricingSet implements PricingSetInterface
     {
         // create empty array with keys from $this->processed
         $processed = array();
-        /** @var \Vespolina\Entity\Pricing\PricingElementInterface $element */
-        foreach ($this->getPricingElements() as $element) {
-            $processed = array_merge($this->processed, $element->process($context, $processed));
+
+        if (count($this->getPricingElements()) !== 0) {
+            /** @var \Vespolina\Entity\Pricing\PricingElementInterface $element */
+            foreach ($this->getPricingElements() as $element) {
+                $processed = array_merge($this->processed, $element->process($context, $processed));
+            }
+        } else {
+            $processed = $this->processed;
         }
 
         $this->processed = $processed;
