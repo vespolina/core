@@ -42,6 +42,7 @@ class PricingElement implements PricingElementInterface
      * processing to be executed. The higher the number, the later it is executed.
      *
      * @param integer $position
+     * @return \ImmersiveLabs\Pricing\Entity\PricingElement
      */
     function setPosition($position)
     {
