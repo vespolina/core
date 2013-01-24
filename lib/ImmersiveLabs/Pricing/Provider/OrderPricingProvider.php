@@ -44,11 +44,10 @@ class OrderPricingProvider implements OrderPricingProviderInterface
         // updating prices for each item
         foreach ($order->getItems() as $item) {
             /** @var ItemInterface $item */
-            $pricing = $item->getPricing();
-            $itemsTotalNet += $pricing->getTotalValue();
+            $itemsTotalNet += $item->getPricing()->getNetValue();
         }
 
-        $orderPricingSet->set('totalValue', $itemsTotalNet);
+        $orderPricingSet->set('totalNet', $itemsTotalNet);
 
         // if pricing context has taxation enabled we calculate the taxes with the percentage set
         // example taxRates : 0.10 for 10%, 0.25 for 25%
@@ -56,8 +55,8 @@ class OrderPricingProvider implements OrderPricingProviderInterface
             $rate = $this->taxProvider->getTaxByState($state);
             $totalTax = $itemsTotalNet * $rate;
             $orderPricingSet->set('taxRate', $rate);
-            $orderPricingSet->set('totalTax', $totalTax);
-            $orderPricingSet->set('totalGross', $itemsTotalNet + $totalTax);
+            $orderPricingSet->set('taxes', $totalTax);
+            $orderPricingSet->set('totalValue', $itemsTotalNet + $totalTax);
         }
 
         $orderPricingSet->setProcessingState(PricingSet::PROCESSING_FINISHED);
@@ -78,7 +77,6 @@ class OrderPricingProvider implements OrderPricingProviderInterface
     {
         $productPricing = $item->getProduct()->getPricing();
         $itemPricing = $productPricing->process($pricingContext);
-
         $item->setPricing($itemPricing);
     }
 }
