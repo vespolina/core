@@ -25,6 +25,8 @@ class Contact implements ContactInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -49,6 +51,8 @@ class Contact implements ContactInterface
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -65,5 +69,7 @@ class Contact implements ContactInterface
     public function setPhone($phone)
     {
         $this->phone = $phone;
+
+        return $this;
     }
 }
