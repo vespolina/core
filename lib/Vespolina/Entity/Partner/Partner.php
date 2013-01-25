@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Partner;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Vespolina\Entity\Partner\PaymentProfileInterface;
 
 /**
  * Implementation of PartnerInterface
@@ -38,13 +39,22 @@ class Partner implements PartnerInterface
     protected $primaryContact;
     protected $roles;
     protected $type;
-    protected $payByCreditCard = true;
     protected $paymentProfile;
+    protected $paymentProfileType;
+
+    public function setPaymentProfileType($paymentProfileType)
+    {
+        $this->paymentProfileType = $paymentProfileType;
+    }
+
+    public function getPaymentProfileType()
+    {
+        return $this->paymentProfileType;
+    }
 
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
-        $this->paymentProfile = new PaymentProfile();
     }
 
     public function getId()
@@ -52,7 +62,7 @@ class Partner implements PartnerInterface
         return $this->id;
     }
 
-    public function setPaymentProfile($paymentProfile)
+    public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
     {
         $this->paymentProfile = $paymentProfile;
 
@@ -324,15 +334,5 @@ class Partner implements PartnerInterface
         $this->organisationDetails = $organisationDetails;
 
         return $this;
-    }
-
-    public function setPayByCreditCard($payByCreditCard)
-    {
-        $this->payByCreditCard = $payByCreditCard;
-    }
-
-    public function isPayByCreditCard()
-    {
-        return $this->payByCreditCard;
     }
 }
