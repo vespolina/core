@@ -19,12 +19,13 @@ class BillingAgreement implements BillingAgreementInterface
     protected $orderItem;
     protected $partner;
     protected $paymentGateway;
-    protected $processedCycles;
+    protected $numberCyclesBilled;
     protected $updatedAt;
 
     public function __construct()
     {
-
+        $this->active = true;
+        $this->numberCyclesBilled = 0;
     }
 
     public function getId()
@@ -185,21 +186,21 @@ class BillingAgreement implements BillingAgreementInterface
         return $this->paymentGateway;
     }
 
-    public function setProcessedCycles($processedCycles)
+    public function setNumberCyclesBilled($numberCyclesBilled)
     {
-        $this->processedCycles = $processedCycles;
+        $this->numberCyclesBilled = $numberCyclesBilled;
 
         return $this;
     }
 
-    public function getProcessedCycles()
+    public function getNumberCyclesBilled()
     {
-        return $this->processedCycles;
+        return $this->numberCyclesBilled;
     }
 
-    public function increaseProcessedCycles()
+    public function increaseNumberCyclesBilled()
     {
-        $this->processedCycles++;
+        $this->numberCyclesBilled++;
 
         return $this;
     }
