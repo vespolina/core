@@ -81,6 +81,8 @@ class PricingSet implements PricingSetInterface
     public function set($name, $value)
     {
         $this->processed[$name] = $value;
+
+        return $this;
     }
 
     public function has($name, $value)
@@ -157,6 +159,8 @@ class PricingSet implements PricingSetInterface
     public function setProcessed($processed)
     {
         $this->processed = $processed;
+
+        return $this;
     }
 
     public function getProcessed()
@@ -167,6 +171,8 @@ class PricingSet implements PricingSetInterface
     public function setProcessingState($processingState)
     {
         $this->processingState = $processingState;
+
+        return $this;
     }
 
     public function getProcessingState()
@@ -177,6 +183,8 @@ class PricingSet implements PricingSetInterface
     public function setReturns($returns)
     {
         $this->returns = $returns;
+
+        return $this;
     }
 
     public function getReturns()
