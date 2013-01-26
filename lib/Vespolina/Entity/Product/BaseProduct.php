@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Asset\MediaInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProductInterface;
