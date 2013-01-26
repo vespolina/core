@@ -3,6 +3,7 @@
 namespace ImmersiveLabs\Pricing\Entity;
 
 use Vespolina\Entity\Pricing\PricingElementInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Exception\FunctionNotSupportedException;
 
 class PricingElement implements PricingElementInterface
@@ -65,5 +66,17 @@ class PricingElement implements PricingElementInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setPricingSet(PricingSetInterface $pricingSet)
+    {
+        $this->pricingSet = $pricingSet;
+
+        return $this;
+    }
+
+    public function getPricingSet()
+    {
+        return $this->pricingSet;
     }
 }

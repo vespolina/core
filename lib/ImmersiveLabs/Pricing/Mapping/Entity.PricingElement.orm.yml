@@ -26,5 +26,5 @@ ImmersiveLabs\Pricing\Entity\PricingElement:
             name: "element_type"
     manyToOne:
         pricingSet:
-            targetEntity: Vespolina\Entity\Pricing\PricingSetInterface
+            targetEntity: ImmersiveLabs\Pricing\Entity\PricingSet
             inversedBy: pricingElements
