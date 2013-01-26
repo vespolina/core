@@ -34,6 +34,8 @@ class Product extends BaseProduct implements ProductInterface
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
     }
 
     /**
@@ -138,6 +140,7 @@ class Product extends BaseProduct implements ProductInterface
         foreach ($options as $optionGroup => $option) {
             $key .= sprintf('%s:%s;', $optionGroup, $option);
         }
+
         return $key;
     }
 }
