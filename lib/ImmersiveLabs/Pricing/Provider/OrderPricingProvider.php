@@ -43,8 +43,8 @@ class OrderPricingProvider implements OrderPricingProviderInterface
 
         // updating prices for each item
         foreach ($order->getItems() as $item) {
-            /** @var ItemInterface $item */
-            $itemsTotalNet += $item->getPricing()->getNetValue();
+            // this is the total value since we want to capture any calculations that happen on a specific item
+            $itemsTotalNet += $item->getPricing()->getTotalValue();
         }
 
         $orderPricingSet->set('totalNet', $itemsTotalNet);
