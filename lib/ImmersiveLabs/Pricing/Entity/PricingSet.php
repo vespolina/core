@@ -31,7 +31,7 @@ class PricingSet implements PricingSetInterface
         }
 
         $this->pricingElements = new ArrayCollection();
-        $this->pricingElements->add(new TotalValueElement());
+        $this->addPricingElement(new TotalValueElement());
     }
 
     public function getId()
@@ -129,6 +129,7 @@ class PricingSet implements PricingSetInterface
     public function addPricingElement(PricingElementInterface $element)
     {
         $this->pricingElements->add($element);
+        $element->setPricingSet($this);
 
         return $this;
     }
