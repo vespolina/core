@@ -64,4 +64,9 @@ final class OrderEvents
      * UPDATE_ITEM_STATE is triggered when the state of an item in the order has changed
      */
     const UPDATE_ITEM_STATE = 'vespolina_order.item_update_state';
+
+    /**
+     * ACTIVATE OR NEW ITEMS
+     */
+    const ACTIVATE_OR_RENEW_ITEMS = 'vespolina_order.items_activate_or_renew';
 }
