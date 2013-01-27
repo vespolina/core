@@ -85,7 +85,7 @@ class PricingSet implements PricingSetInterface
         return $this;
     }
 
-    public function has($name, $value)
+    public function has($name)
     {
         return isset($this->processed[$name]);
     }
