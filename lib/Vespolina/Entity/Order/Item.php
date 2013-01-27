@@ -48,13 +48,7 @@ class Item implements ItemInterface
         $this->attributes[$name] = $value;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setAttribute($name, $value)
-    {
-        $this->attributes[$name] = $value;
-    }
+
 
     /**
      * @inheritdoc
