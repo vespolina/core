@@ -11,7 +11,7 @@ use Vespolina\Order\Pricing\OrderPricingProviderInterface;
 use Vespolina\Order\Handler\OrderHandlerInterface;
 use ImmersiveLabs\BillingBundle\Provider\TaxProvider;
 
-class OrderPricingProvider implements OrderPricingProviderInterface
+class OrderPricingProvider
 {
     /** @var TaxProvider */
     protected $taxProvider;
