@@ -92,7 +92,7 @@ interface ItemInterface
     /**
      * Return the order/cart where this item belongs
      *
-     * @return Vespolina\Entity\Order\OrderInterface
+     * @return \Vespolina\Entity\Order\OrderInterface
      */
     function getParent();
 
