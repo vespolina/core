@@ -66,7 +66,7 @@ final class OrderEvents
     const UPDATE_ITEM_STATE = 'vespolina_order.item_update_state';
 
     /**
-     * ACTIVATE OR NEW ITEMS
+     * ACTIVATE OR RENEW ITEMS is triggered upon order processing and recurring charges
      */
     const ACTIVATE_OR_RENEW_ITEMS = 'vespolina_order.items_activate_or_renew';
 }
