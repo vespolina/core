@@ -5,22 +5,12 @@ namespace Vespolina\Form\Partner;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Vespolina\Entity\Partner\PaymentProfile;
 
 class PartnerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options['is_admin']) {
-            $builder
-                ->add('payByCreditCard', 'choice', array(
-                    'label' => 'Payment Method',
-                    'choices'   => array(1 => 'Credit', 0 => 'Invoice'),
-                    'multiple'  => false,
-                    'expanded' => true,
-                ))
-            ;
-        }
-
         $builder
             ->add('name')
             ->add('type')
@@ -40,8 +30,18 @@ class PartnerType extends AbstractType
                     'attr' => array('class' => 'license-box')
                 )
             ))
+            ->add('paymentProfileType', 'choice', array(
+                'label' => 'Payment Method',
+                'choices'   => array_combine(PaymentProfile::$validTypes, PaymentProfile::$validTypes),
+                'required'  => true,
+                'multiple'  => false,
+                'expanded' => true,
+            ))
         ;
 
+        if (isset($options['paymentProfileFormTypeClass'])) {
+            $builder->add('paymentProfile', new $options['paymentProfileFormTypeClass']);
+        }
     }
 
     /**
@@ -50,7 +50,7 @@ class PartnerType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
             'data_class' => 'Vespolina\Entity\Partner\Partner',
-            'is_admin' => false
+            'paymentProfileFormTypeClass' => false
         ));
     }
 
