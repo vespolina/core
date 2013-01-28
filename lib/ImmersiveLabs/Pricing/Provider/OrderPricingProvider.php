@@ -44,19 +44,25 @@ class OrderPricingProvider
         // updating prices for each item
         foreach ($order->getItems() as $item) {
             // this is the total value since we want to capture any calculations that happen on a specific item
-            $itemsTotalNet += $item->getPricing()->getTotalValue();
+            $itemsTotalNet += $item->getPricing()->get('netValue');
         }
 
         $orderPricingSet->set('totalNet', $itemsTotalNet);
 
+
         // if pricing context has taxation enabled we calculate the taxes with the percentage set
         // example taxRates : 0.10 for 10%, 0.25 for 25%
-        if ($state = $pricingContext->get('address.state')) {
-            $rate = $this->taxProvider->getTaxByState($state);
-            $totalTax = $itemsTotalNet * $rate;
-            $orderPricingSet->set('taxRate', $rate);
-            $orderPricingSet->set('taxes', $totalTax);
-            $orderPricingSet->set('totalValue', $itemsTotalNet + $totalTax);
+        if ($partner = $pricingContext->get('partner')) {
+            /** @var $partner \Vespolina\Entity\Partner\Partner */
+            if (count($partner->getAddresses())) {
+                /** @var $address \Vespolina\Entity\Partner\AddressInterface */
+                $address = $partner->getAddresses()->get(0);
+                $rate = $this->taxProvider->getTaxForAddress($address);
+                $totalTax = $itemsTotalNet * $rate;
+                $orderPricingSet->set('taxRate', $rate);
+                $orderPricingSet->set('taxes', $totalTax);
+                $orderPricingSet->set('totalValue', $itemsTotalNet + $totalTax);
+            }
         }
 
         $orderPricingSet->setProcessingState(PricingSet::PROCESSING_FINISHED);
