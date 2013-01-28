@@ -104,7 +104,6 @@ class PricingSet implements PricingSetInterface
             $processed = $this->processed;
         }
 
-        $this->processed = $processed;
 
         $newSet = new self();
         $newSet->setProcessed($processed);
