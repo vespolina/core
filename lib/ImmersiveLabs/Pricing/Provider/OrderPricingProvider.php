@@ -26,7 +26,7 @@ class OrderPricingProvider
     {
         // not implemented
         if ($pricingContext === null) {
-            $pricingContext = $this->createPricingContext();
+            $pricingContext = new PricingContext();
         }
 
         if (!$orderPricingSet = $order->getPricing()) {
@@ -48,6 +48,7 @@ class OrderPricingProvider
         }
 
         $orderPricingSet->set('totalNet', $itemsTotalNet);
+        $orderPricingSet->set('totalValue', $itemsTotalNet);
 
 
         // if pricing context has taxation enabled we calculate the taxes with the percentage set
