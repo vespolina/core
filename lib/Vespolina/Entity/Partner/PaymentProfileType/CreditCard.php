@@ -13,7 +13,7 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
 
     /**
      * @param string $cardNumber
-     * @return \Vespolina\Entity\CreditCardProfile
+     * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
      */
     public function setCardNumber($cardNumber)
     {
@@ -38,7 +38,7 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
 
     /**
      * @param $cardType
-     * @return \Vespolina\Entity\CreditCardProfile
+     * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
      */
     public function setCardType($cardType)
     {
@@ -57,7 +57,7 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
 
     /**
      * @param \DateTime
-     * @return \Vespolina\Entity\CreditCardProfile
+     * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
      */
     public function setExpiration(\DateTime $expirationDate)
     {
