@@ -17,6 +17,7 @@ class PaymentProfile implements PaymentProfileInterface
     protected $id;
     protected $reference;
     protected $partner;
+    protected $address;
 
     /**
      * @inheritdoc
@@ -60,5 +61,23 @@ class PaymentProfile implements PaymentProfileInterface
     public function getReference()
     {
         return $this->reference;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }
