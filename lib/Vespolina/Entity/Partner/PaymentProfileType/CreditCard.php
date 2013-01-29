@@ -7,29 +7,9 @@ use Vespolina\Entity\Partner\PaymentProfile;
 class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
 {
     protected $activeCardNumber;
-    protected $address;
     protected $cardType;
     protected $expiration;
     protected $persistedCardNumber;
-
-    /**
-     * @param string $address
-     * @return \Vespolina\Entity\CreditCardProfile
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
 
     /**
      * @param string $cardNumber
