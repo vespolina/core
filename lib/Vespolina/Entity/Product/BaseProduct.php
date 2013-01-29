@@ -43,7 +43,7 @@ abstract class BaseProduct implements BaseProductInterface
 
     /**
      * @param $pricingSet
-     * @return array
+     * @return BaseProductInterface
      */
     public function setPricing(PricingSetInterface $pricingSet)
     {
@@ -53,7 +53,7 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @return array $priceSet
+     * @return PricingSetInterface
      */
     public function getPricing()
     {

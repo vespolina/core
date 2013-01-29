@@ -25,6 +25,9 @@ class Partner implements PartnerInterface
     const ROLE_EMPLOYEE    = 'ROLE_EMPLOYEE';
     const ROLE_SUPPLIER    = 'ROLE_SUPPLIER';
 
+    const PAYMENT_PROFILE_TYPE_CREDIT_CARD = 'Credit Card';
+    const PAYMENT_PROFILE_TYPE_INVOICE = 'Invoice';
+
     protected $addresses;
     protected $currency;
     protected $id;
