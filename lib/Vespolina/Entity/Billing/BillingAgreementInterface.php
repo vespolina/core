@@ -65,9 +65,9 @@ interface BillingAgreementInterface
 
     function getOrder();
 
-    function setOrderItem(ItemInterface $item);
+    function setOrderItems($items);
 
-    function getOrderItem();
+    function getOrderItems();
 
     function setPartner(PartnerInterface $partner);
 
