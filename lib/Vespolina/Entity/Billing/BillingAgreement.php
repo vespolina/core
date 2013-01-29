@@ -2,6 +2,7 @@
 namespace Vespolina\Entity\Billing;
 
 use Vespolina\Entity\Order\ItemInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 
@@ -16,7 +17,7 @@ class BillingAgreement implements BillingAgreementInterface
     protected $initialBillingDate;
     protected $nextBillingDate;
     protected $order;
-    protected $orderItem;
+    protected $orderItems;
     protected $partner;
     protected $paymentGateway;
     protected $numberCyclesBilled;
@@ -26,6 +27,7 @@ class BillingAgreement implements BillingAgreementInterface
     {
         $this->active = true;
         $this->numberCyclesBilled = 0;
+        $this->orderItems = new ArrayCollection();
     }
 
     public function getId()
@@ -150,16 +152,21 @@ class BillingAgreement implements BillingAgreementInterface
         return $this->order;
     }
 
-    public function setOrderItem(ItemInterface $item)
+    public function setOrderItems($items)
     {
-        $this->orderItem = $item;
+        $this->orderItems = $items;
 
         return $this;
     }
 
-    public function getOrderItem()
+    public function getOrderItems()
     {
-        return $this->orderItem;
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(ItemInterface $item)
+    {
+        $this->orderItems->add($item);
     }
 
     public function setPartner(PartnerInterface $partner)
