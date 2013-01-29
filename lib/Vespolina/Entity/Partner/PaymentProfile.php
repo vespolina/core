@@ -17,7 +17,12 @@ class PaymentProfile implements PaymentProfileInterface
     protected $id;
     protected $reference;
     protected $partner;
-    protected $address;
+    protected $billingCity;
+    protected $billingCountry;
+    protected $billingState;
+    protected $billingAddress;
+    protected $billingZipCode;
+    protected $billingPhone;
 
     /**
      * @inheritdoc
@@ -63,21 +68,63 @@ class PaymentProfile implements PaymentProfileInterface
         return $this->reference;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setAddress($address)
+    public function setBillingAddress($billingAddress)
     {
-        $this->address = $address;
-
-        return $this;
+        $this->billingAddress = $billingAddress;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAddress()
+    public function getBillingAddress()
     {
-        return $this->address;
+        return $this->billingAddress;
+    }
+
+    public function setBillingZipCode($billingZipCode)
+    {
+        $this->billingZipCode = $billingZipCode;
+    }
+
+    public function getBillingZipCode()
+    {
+        return $this->billingZipCode;
+    }
+
+    public function setBillingCity($billingCity)
+    {
+        $this->billingCity = $billingCity;
+    }
+
+    public function getBillingCity()
+    {
+        return $this->billingCity;
+    }
+
+    public function setBillingCountry($billingCountry)
+    {
+        $this->billingCountry = $billingCountry;
+    }
+
+    public function getBillingCountry()
+    {
+        return $this->billingCountry;
+    }
+
+    public function setBillingPhone($billingPhone)
+    {
+        $this->billingPhone = $billingPhone;
+    }
+
+    public function getBillingPhone()
+    {
+        return $this->billingPhone;
+    }
+
+    public function setBillingState($billingState)
+    {
+        $this->billingState = $billingState;
+    }
+
+    public function getBillingState()
+    {
+        return $this->billingState;
     }
 }
