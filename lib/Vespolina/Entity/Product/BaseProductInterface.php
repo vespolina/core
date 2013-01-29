@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\MediaInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\AttributeInterface;
 use Vespolina\Entity\Product\OptionInterface;
@@ -270,4 +271,15 @@ interface BaseProductInterface
      * @param \DateTime $updatedAt
      */
     function setUpdatedAt(\DateTime $updatedAt);
+
+    /**
+     * @param PricingSetInterface $pricingSet
+     * @return BaseProductInterface
+     */
+    function setPricing(PricingSetInterface $pricingSet);
+
+    /**
+     * @return PricingSetInterface
+     */
+    function getPricing();
 }
