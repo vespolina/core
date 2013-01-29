@@ -8,10 +8,10 @@ class RecurringElement extends PricingElement
 {
     public function __construct()
     {
-        $attribute['cycles']  = '';
-        $attribute['recurringCharge'] = '';
-        $attribute['interval']  = '';
-        $attribute['startsIn'] = null;
+        $this->attributes['cycles']  = '';
+        $this->attributes['recurringCharge'] = '';
+        $this->attributes['interval']  = '';
+        $this->attributes['startsIn'] = null;
 
         parent::__construct();
     }
@@ -70,6 +70,11 @@ class RecurringElement extends PricingElement
         $processed['recurringCharge'] = $this->attributes['recurringCharge'];
         $processed['interval'] = $this->attributes['interval'];
         $processed['cycles'] = $this->attributes['cycles'];
+        if (!$this->attributes['startsIn']) {
+            $processed['startsOn'] = new \DateTime('today +1 ' . $processed['interval']);
+        } else {
+            $processed['startsOn'] = new \DateTime('today +' . $this->attributes['startsIn']);
+        }
 
         return $processed;
     }
