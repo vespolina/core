@@ -44,4 +44,14 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('9.99', $newSet->getNetValue(), 'the final value should be 9.99');
         $this->assertEquals('9.99', $newSet->getTotalValue(), 'the final value should be 9.00');
     }
+
+    public function testGet()
+    {
+        $pricingSet = new PricingSet();
+        $pricingSet->setProcessed(array('thisExists' => 10));
+        $pricingSet->setProcessingState(PricingSet::PROCESSING_FINISHED);
+        $this->assertNull($pricingSet->get('noWayInHellThisExists'));
+
+        $this->assertEquals(10, $pricingSet->get('thisExists'));
+    }
 }

@@ -75,7 +75,11 @@ class PricingSet implements PricingSetInterface
             throw new \Exception();
         }
 
-        return $this->processed[$name];
+        if (isset($this->processed[$name])) {
+            return $this->processed[$name];
+        }
+
+        return null;
     }
 
     public function set($name, $value)
