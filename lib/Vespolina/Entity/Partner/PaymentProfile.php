@@ -71,6 +71,8 @@ class PaymentProfile implements PaymentProfileInterface
     public function setBillingAddress($billingAddress)
     {
         $this->billingAddress = $billingAddress;
+
+        return $this;
     }
 
     public function getBillingAddress()
@@ -81,6 +83,8 @@ class PaymentProfile implements PaymentProfileInterface
     public function setBillingZipCode($billingZipCode)
     {
         $this->billingZipCode = $billingZipCode;
+
+        return $this;
     }
 
     public function getBillingZipCode()
@@ -91,6 +95,8 @@ class PaymentProfile implements PaymentProfileInterface
     public function setBillingCity($billingCity)
     {
         $this->billingCity = $billingCity;
+
+        return $this;
     }
 
     public function getBillingCity()
@@ -101,6 +107,8 @@ class PaymentProfile implements PaymentProfileInterface
     public function setBillingCountry($billingCountry)
     {
         $this->billingCountry = $billingCountry;
+
+        return $this;
     }
 
     public function getBillingCountry()
@@ -111,6 +119,8 @@ class PaymentProfile implements PaymentProfileInterface
     public function setBillingPhone($billingPhone)
     {
         $this->billingPhone = $billingPhone;
+
+        return $this;
     }
 
     public function getBillingPhone()
@@ -121,6 +131,8 @@ class PaymentProfile implements PaymentProfileInterface
     public function setBillingState($billingState)
     {
         $this->billingState = $billingState;
+
+        return $this;
     }
 
     public function getBillingState()
