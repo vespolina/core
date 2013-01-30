@@ -168,4 +168,16 @@ interface InvoiceInterface
      * @return \Vespolina\Entity\Partner\InvoiceInterface
      */
     function getPreviousInvoice();
+
+    /**
+     * @return boolean
+     */
+    function isPaid();
+
+    /**
+     * @param boolean $paid
+     * @return \Vespolina\Entity\Partner\InvoiceInterface
+     */
+    function setPaid($paid);
+
 }

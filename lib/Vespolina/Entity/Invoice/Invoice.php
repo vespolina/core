@@ -30,6 +30,7 @@ class Invoice implements InvoiceInterface
     protected $periodEnd;
     protected $periodStart;
     protected $previousInvoice;
+    protected $paid = false;
 
     public function __construct() {
         $this->orders = new ArrayCollection();
@@ -227,5 +228,21 @@ class Invoice implements InvoiceInterface
     public function getPreviousInvoice()
     {
         return $this->previousInvoice;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isPaid()
+    {
+        return $this->paid;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
     }
 }
