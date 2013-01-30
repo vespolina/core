@@ -68,6 +68,9 @@ class PaymentProfile implements PaymentProfileInterface
         return $this->reference;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function setBillingAddress($billingAddress)
     {
         $this->billingAddress = $billingAddress;
@@ -75,11 +78,17 @@ class PaymentProfile implements PaymentProfileInterface
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getBillingAddress()
     {
         return $this->billingAddress;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function setBillingZipCode($billingZipCode)
     {
         $this->billingZipCode = $billingZipCode;
@@ -87,11 +96,17 @@ class PaymentProfile implements PaymentProfileInterface
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getBillingZipCode()
     {
         return $this->billingZipCode;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function setBillingCity($billingCity)
     {
         $this->billingCity = $billingCity;
@@ -99,11 +114,17 @@ class PaymentProfile implements PaymentProfileInterface
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getBillingCity()
     {
         return $this->billingCity;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function setBillingCountry($billingCountry)
     {
         $this->billingCountry = $billingCountry;
@@ -111,11 +132,17 @@ class PaymentProfile implements PaymentProfileInterface
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getBillingCountry()
     {
         return $this->billingCountry;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function setBillingPhone($billingPhone)
     {
         $this->billingPhone = $billingPhone;
@@ -123,11 +150,17 @@ class PaymentProfile implements PaymentProfileInterface
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getBillingPhone()
     {
         return $this->billingPhone;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function setBillingState($billingState)
     {
         $this->billingState = $billingState;
@@ -135,6 +168,9 @@ class PaymentProfile implements PaymentProfileInterface
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getBillingState()
     {
         return $this->billingState;
