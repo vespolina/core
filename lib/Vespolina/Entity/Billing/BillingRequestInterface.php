@@ -10,7 +10,8 @@ namespace Vespolina\Entity\Billing;
 
 use ImmersiveLabs\Pricing\Entity\PricingSet;
 use Vespolina\Entity\Partner\PartnerInterface;
-use Vespolina\Entity\Invoice\Invoice;
+use Vespolina\Entity\Invoice\InvoiceInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
  * An interface for a request to bill a party
@@ -34,7 +35,7 @@ interface BillingRequestInterface
      * @param PricingSet $ps
      * @return \Vespolina\Entity\Billing\BillingRequestInterface
      */
-    function setPricingSet(PricingSet $ps);
+    function setPricingSet(PricingSetInterface $ps);
 
     /**
      * @return PricingSet
@@ -78,7 +79,7 @@ interface BillingRequestInterface
      * @param Invoice $invoice
      * @return \Vespolina\Entity\Billing\BillingRequestInterface
      */
-    function setInvoice(Invoice $invoice);
+    function setInvoice(InvoiceInterface $invoice);
 
     /**
      * @return Invoice

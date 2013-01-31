@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Billing;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
+use Vespolina\Entity\Partner\PaymentProfileInterface;
 
 /**
  * An interface for a request to bill a party
@@ -73,7 +74,7 @@ interface BillingAgreementInterface
 
     function getPartner();
 
-    function setPaymentGateway($paymentGateway);
+    function setPaymentProfile(PaymentProfileInterface $paymentProfile);
 
-    function getPaymentGateway();
+    function getPaymentProfile();
 }

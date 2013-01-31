@@ -9,9 +9,11 @@
 namespace Vespolina\Entity\Billing;
 
 use Vespolina\Entity\Billing\BillingRequestInterface;
-use Vespolina\Entity\Invoice\Invoice;
+use Vespolina\Entity\Invoice\InvoiceInterface;
 use ImmersiveLabs\Pricing\Entity\PricingSet;
 use Vespolina\Entity\Partner\PartnerInterface;
+use Vespolina\Entity\Partner\PaymentProfileInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 
 class BillingRequest implements BillingRequestInterface
 {
@@ -20,14 +22,15 @@ class BillingRequest implements BillingRequestInterface
     const STATUS_PAID = 'Paid';
     const STATUS_CANCELLED = 'Cancelled';
 
-    protected $id;
-    protected $dueDate;
-    protected $createdAt;
     protected $amountDue;
+    protected $createdAt;
+    protected $dueDate;
+    protected $id;
     protected $invoice;
     protected $status;
-    protected $pricingSet;
     protected $partner;
+    protected $paymentProfile;
+    protected $pricingSet;
 
     /**
      * @param $id
@@ -109,7 +112,7 @@ class BillingRequest implements BillingRequestInterface
      * @param Invoice $invoice
      * @return $this
      */
-    public function setInvoice(Invoice $invoice)
+    public function setInvoice(InvoiceInterface $invoice)
     {
         $this->invoice = $invoice;
 
@@ -173,25 +176,6 @@ class BillingRequest implements BillingRequestInterface
     }
 
     /**
-     * @param \ImmersiveLabs\Pricing\Entity\PricingSet $ps
-     * @return \Vespolina\Entity\Billing\BillingRequestInterface
-     */
-    public function setPricingSet(PricingSet $ps)
-    {
-        $this->pricingSet = $ps;
-
-        return $this;
-    }
-
-    /**
-     * @return PricingSet
-     */
-    public function getPricingSet()
-    {
-        return $this->pricingSet;
-    }
-
-    /**
      * @param PartnerInterface $partner
      * @return BillingRequestInterface
      */
@@ -208,5 +192,36 @@ class BillingRequest implements BillingRequestInterface
     public function getPartner()
     {
         return $this->partner;
+    }
+
+    public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
+    {
+        $this->paymentProfile = $paymentProfile;
+
+        return $this;
+    }
+
+    public function getPaymentProfile()
+    {
+        return $this->paymentProfile;
+    }
+
+    /**
+     * @param \Vespolina\Entity\Pricing\PricingSet $ps
+     * @return \Vespolina\Entity\Billing\BillingRequestInterface
+     */
+    public function setPricingSet(PricingSetInterface $ps)
+    {
+        $this->pricingSet = $ps;
+
+        return $this;
+    }
+
+    /**
+     * @return PricingSet
+     */
+    public function getPricingSet()
+    {
+        return $this->pricingSet;
     }
 }
