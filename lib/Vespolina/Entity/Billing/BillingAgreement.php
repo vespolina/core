@@ -23,12 +23,25 @@ class BillingAgreement implements BillingAgreementInterface
     protected $paymentProfile;
     protected $numberCyclesBilled;
     protected $updatedAt;
+    protected $paymentGateway;
 
     public function __construct()
     {
         $this->active = true;
         $this->numberCyclesBilled = 0;
         $this->orderItems = new ArrayCollection();
+    }
+
+    public function setPaymentGateway($paymentGateway)
+    {
+        $this->paymentGateway = $paymentGateway;
+
+        return $this;
+    }
+
+    public function getPaymentGateway()
+    {
+        return $this->paymentGateway;
     }
 
     public function getId()
