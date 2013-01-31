@@ -373,4 +373,24 @@ class BaseOrder implements OrderInterface
     {
         return $this->updatedAt;
     }
+
+    /**
+     * If all licenses in order are free
+     *
+     * @return boolean
+     */
+    public function isAllFree()
+    {
+        $items = $this->getItems();
+
+        foreach ($items as $i) {
+            /** @var Item $i */
+
+            if ($i->getProduct()->getName() != 'Free') {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
