@@ -168,4 +168,11 @@ interface OrderInterface
      * @return string
      */
     function getTotalPrice();
+
+    /**
+     * If all licenses in order are free
+     *
+     * @return boolean
+     */
+    function isAllFree();
 }
