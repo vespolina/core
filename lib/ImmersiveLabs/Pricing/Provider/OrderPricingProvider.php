@@ -4,7 +4,7 @@ namespace ImmersiveLabs\Pricing\Provider;
 
 use Vespolina\Entity\Order\OrderInterface;
 use ImmersiveLabs\Pricing\Entity\PricingSet;
-use ImmersiveLabs\Pricing\Entity\PricingContext;
+use Vespolina\Entity\Pricing\PricingContext;
 use Vespolina\Entity\Pricing\PricingContextInterface;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Order\Pricing\OrderPricingProviderInterface;
@@ -53,7 +53,7 @@ class OrderPricingProvider
 
         // if pricing context has taxation enabled we calculate the taxes with the percentage set
         // example taxRates : 0.10 for 10%, 0.25 for 25%
-        if ($partner = $pricingContext->get('partner')) {
+        if ($partner = $pricingContext['partner']) {
             /** @var $partner \Vespolina\Entity\Partner\Partner */
             if (count($partner->getAddresses())) {
                 /** @var $address \Vespolina\Entity\Partner\AddressInterface */

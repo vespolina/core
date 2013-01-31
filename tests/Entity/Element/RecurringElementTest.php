@@ -11,7 +11,7 @@ class RecurringElementTest extends \PHPUnit_Framework_TestCase
         $recurringElement->setInterval('month');
         $recurringElement->setRecurringCharge('30');
 
-        $context = new \ImmersiveLabs\Pricing\Entity\PricingContext();
+        $context = new \Vespolina\Entity\Pricing\PricingContext();
         $processed = $recurringElement->process($context, array());
 
         $this->assertEquals(new \DateTime('today +1 month'), $processed['startsOn']);
