@@ -76,5 +76,8 @@ interface BillingAgreementInterface
 
     function setPaymentProfile(PaymentProfileInterface $paymentProfile);
 
+    /**
+     * @return \Vespolina\Entity\Partner\PaymentProfileInterface
+     */
     function getPaymentProfile();
 }

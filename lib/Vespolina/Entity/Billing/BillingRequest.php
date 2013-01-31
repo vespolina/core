@@ -17,7 +17,6 @@ use Vespolina\Entity\Pricing\PricingSetInterface;
 
 class BillingRequest implements BillingRequestInterface
 {
-
     const STATUS_PENDING = 'Pending';
     const STATUS_PAID = 'Paid';
     const STATUS_CANCELLED = 'Cancelled';
