@@ -5,7 +5,7 @@ use ImmersiveLabs\Pricing\Entity\PricingSet;
 
 class PricingSetTest extends \PHPUnit_Framework_TestCase
 {
-    public function testAddElements()
+    public function testAddPricingElements()
     {
         $pricingSet = new PricingSet();
 
@@ -53,5 +53,37 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($pricingSet->get('noWayInHellThisExists'));
 
         $this->assertEquals(10, $pricingSet->get('thisExists'));
+    }
+
+    public function testPlus()
+    {
+        $pricingSet1 = new PricingSet();
+        $pricingSet1->set('discounts', 5);
+        $pricingSet1->set('netValue', 5);
+        $pricingSet1->set('surcharge', 5);
+        $pricingSet1->set('taxes', 5);
+        $pricingSet1->set('totalValue', 5);
+        $pricingSet1->setProcessingState(PricingSet::PROCESSING_FINISHED);
+
+        $pricingSet2 = new PricingSet();
+        $pricingSet2->set('discounts', 5);
+        $pricingSet2->set('netValue', 5);
+        $pricingSet2->set('surcharge', 5);
+        $pricingSet2->set('taxes', 5);
+        $pricingSet2->set('totalValue', 5);
+        $pricingSet2->setProcessingState(PricingSet::PROCESSING_FINISHED);
+
+        $sumPricingSet = $pricingSet1->plus($pricingSet2);
+        $this->assertInstanceOf('Vespolina\Entity\Pricing\PricingSetInterface', $sumPricingSet, 'a pricing set should be returned');
+        $this->assertNotSame($pricingSet1, $sumPricingSet, 'the new set should be a new object');
+        $this->assertNotSame($pricingSet2, $sumPricingSet, 'the new set should be a new object');
+        $this->assertEquals('10', $sumPricingSet->get('discounts'), 'the final value should be 10');
+        $this->assertEquals('10', $sumPricingSet->get('netValue'), 'the final value should be 10');
+        $this->assertEquals('10', $sumPricingSet->get('surcharge'), 'the final value should be 10');
+        $this->assertEquals('10', $sumPricingSet->get('taxes'), 'the final value should be 10');
+        $this->assertEquals('10', $sumPricingSet->get('totalValue'), 'the final value should be 10');
+
+        $this->markTestIncomplete('implement combining mismatched processed elements');
+        $this->markTestIncomplete('implement inclusions/exclusions from adding process by passing array (either white or black list?)');
     }
 }
