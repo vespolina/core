@@ -92,6 +92,16 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('10', $sumPricingSet->get('taxes'), 'the final value should be 10');
         $this->assertEquals('10', $sumPricingSet->get('totalValue'), 'the final value should be 10');
 
+        $pricingSet1 = new PricingSet();
+        $pricingSet1->set('scalar', 5);
+        $pricingSet1->set('object', new PricingSet());
+        $pricingSet1->setProcessingState(PricingSet::PROCESSING_FINISHED);
+        $sumPricingSet = $pricingSet1->plus(null);
+        $this->assertInstanceOf('Vespolina\Entity\Pricing\PricingSetInterface', $sumPricingSet, 'a pricing set should be returned when nothing is added');
+        $this->assertNotSame($pricingSet1, $sumPricingSet, 'the new set should be a new object');
+        $this->assertEquals('5', $sumPricingSet->get('scalar'), 'a scalar value is set');
+        $this->assertNull($sumPricingSet->get('object'), 'a non scalar is skipped');
+
         $this->markTestIncomplete('implement combining mismatched processed elements');
         $this->markTestIncomplete('implement inclusions/exclusions from adding process by passing array (either white or black list?)');
     }
