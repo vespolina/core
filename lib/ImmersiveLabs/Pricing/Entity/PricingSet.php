@@ -120,10 +120,18 @@ class PricingSet implements PricingSetInterface
     public function plus($addSet)
     {
         $newSet = new self();
-        $newSet->setProcessed($this->processed);
+        foreach ($this->getProcessed() as $key => $value) {
+            if (!is_scalar($value)) {
+                continue;
+            }
+            $newSet->set($key, $value);
+        }
 
         if ($addSet instanceof PricingSetInterface) {
             foreach ($addSet->getProcessed() as $key => $value) {
+                if (!is_scalar($value)) {
+                    continue;
+                }
                 $total = $this->get($key) + $value;
                 $newSet->set($key, $total);
             }
