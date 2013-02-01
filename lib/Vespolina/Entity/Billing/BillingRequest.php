@@ -40,6 +40,25 @@ class BillingRequest implements BillingRequestInterface
     }
 
     /**
+     * @param $pricingSet
+     * @return BillingRequest
+     */
+    public function setPricingSet($pricingSet)
+    {
+        $this->pricingSet = $pricingSet;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPricingSet()
+    {
+        return $this->pricingSet;
+    }
+
+    /**
      * @param $id
      * @return $this
      */
