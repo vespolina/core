@@ -117,6 +117,20 @@ class PricingSet implements PricingSetInterface
         return $newSet;
     }
 
+    public function plus(PricingSetInterface $addSet)
+    {
+        $newSet = new self();
+        $newSet->setProcessed($this->processed);
+        foreach ($addSet->getProcessed() as $key => $value) {
+            $total = $this->get($key) + $value;
+            $newSet->set($key, $total);
+        }
+
+        $newSet->setProcessingState(self::PROCESSING_FINISHED);
+
+        return $newSet;
+    }
+
     public function setContext($context)
     {
         $this->context = $context;
