@@ -59,6 +59,25 @@ class BillingRequest implements BillingRequestInterface
     }
 
     /**
+     * @param $amountDue
+     * @return BillingRequest
+     */
+    public function setAmountDue($amountDue)
+    {
+        $this->amountDue = $amountDue;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAmountDue()
+    {
+        return $this->amountDue;
+    }
+
+    /**
      * @param $id
      * @return $this
      */
