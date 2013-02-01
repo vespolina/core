@@ -65,6 +65,15 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
         $pricingSet1->set('totalValue', 5);
         $pricingSet1->setProcessingState(PricingSet::PROCESSING_FINISHED);
 
+        $sumPricingSet = $pricingSet1->plus(null);
+        $this->assertInstanceOf('Vespolina\Entity\Pricing\PricingSetInterface', $sumPricingSet, 'a pricing set should be returned when nothing is added');
+        $this->assertNotSame($pricingSet1, $sumPricingSet, 'the new set should be a new object');
+        $this->assertEquals('5', $sumPricingSet->get('discounts'), 'the final value should be 10');
+        $this->assertEquals('5', $sumPricingSet->get('netValue'), 'the final value should be 10');
+        $this->assertEquals('5', $sumPricingSet->get('surcharge'), 'the final value should be 10');
+        $this->assertEquals('5', $sumPricingSet->get('taxes'), 'the final value should be 10');
+        $this->assertEquals('5', $sumPricingSet->get('totalValue'), 'the final value should be 10');
+
         $pricingSet2 = new PricingSet();
         $pricingSet2->set('discounts', 5);
         $pricingSet2->set('netValue', 5);
