@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 use Vespolina\Entity\Partner\PaymentProfileInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 
 class BillingAgreement implements BillingAgreementInterface
 {
@@ -21,6 +22,7 @@ class BillingAgreement implements BillingAgreementInterface
     protected $orderItems;
     protected $partner;
     protected $paymentProfile;
+    protected $pricingSet;
     protected $numberCyclesBilled;
     protected $updatedAt;
 
@@ -140,6 +142,25 @@ class BillingAgreement implements BillingAgreementInterface
         return $this->nextBillingDate;
     }
 
+    public function setNumberCyclesBilled($numberCyclesBilled)
+    {
+        $this->numberCyclesBilled = $numberCyclesBilled;
+
+        return $this;
+    }
+
+    public function getNumberCyclesBilled()
+    {
+        return $this->numberCyclesBilled;
+    }
+
+    public function increaseNumberCyclesBilled()
+    {
+        $this->numberCyclesBilled++;
+
+        return $this;
+    }
+
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
@@ -193,23 +214,23 @@ class BillingAgreement implements BillingAgreementInterface
         return $this->paymentProfile;
     }
 
-    public function setNumberCyclesBilled($numberCyclesBilled)
+    /**
+     * @param \Vespolina\Entity\Pricing\PricingSet $pricingSet
+     * @return \Vespolina\Entity\Billing\BillingRequestInterface
+     */
+    public function setPricing(PricingSetInterface $pricingSet)
     {
-        $this->numberCyclesBilled = $numberCyclesBilled;
+        $this->pricingSet = $pricingSet;
 
         return $this;
     }
 
-    public function getNumberCyclesBilled()
+    /**
+     * @return PricingSet
+     */
+    public function getPricing()
     {
-        return $this->numberCyclesBilled;
-    }
-
-    public function increaseNumberCyclesBilled()
-    {
-        $this->numberCyclesBilled++;
-
-        return $this;
+        return $this->pricingSet;
     }
 
     /**

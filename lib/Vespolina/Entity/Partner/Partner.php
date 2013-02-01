@@ -42,7 +42,7 @@ class Partner implements PartnerInterface
     protected $primaryContact;
     protected $roles;
     protected $type;
-    protected $paymentProfile;
+    protected $preferredPaymentProfile;
     protected $paymentProfileType;
 
     public function setPaymentProfileType($paymentProfileType)
@@ -67,14 +67,14 @@ class Partner implements PartnerInterface
 
     public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
     {
-        $this->paymentProfile = $paymentProfile;
+        $this->preferredPaymentProfile = $paymentProfile;
 
         return $this;
     }
 
     public function getPaymentProfile()
     {
-        return $this->paymentProfile;
+        return $this->preferredPaymentProfile;
     }
 
     /**
@@ -283,6 +283,18 @@ class Partner implements PartnerInterface
     public function removeAddress($address)
     {
         unset($this->addresses[array_find($address)]);
+    }
+
+    public function setPreferredPaymentProfile(PaymentProfileInterface $paymentProfile)
+    {
+        $this->preferredPaymentProfile = $paymentProfile;
+
+        return $this;
+    }
+
+    public function getPreferredPaymentProfile()
+    {
+        return $this->preferredPaymentProfile;
     }
 
     /**

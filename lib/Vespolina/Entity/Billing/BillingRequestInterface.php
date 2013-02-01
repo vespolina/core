@@ -1,6 +1,6 @@
 <?php
 /**
- * (c) 2012 Vespolina Project http://www.vespolina-project.org
+ * (c) 2012-2013 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -32,17 +32,6 @@ interface BillingRequestInterface
     function getId();
 
     /**
-     * @param PricingSet $ps
-     * @return \Vespolina\Entity\Billing\BillingRequestInterface
-     */
-    function setPricingSet(PricingSetInterface $ps);
-
-    /**
-     * @return PricingSet
-     */
-    function getPricingSet();
-
-    /**
      * @param \DateTime $date
      * @return \Vespolina\Entity\Billing\BillingRequestInterface
      */
@@ -63,17 +52,6 @@ interface BillingRequestInterface
      * @return \DateTime
      */
     function getCreatedAt();
-
-    /**
-     * @param float $amount
-     * @return \Vespolina\Entity\Billing\BillingRequestInterface
-     */
-    function setAmountDue($amount);
-
-    /**
-     * @return float
-     */
-    function getAmountDue();
 
     /**
      * @param Invoice $invoice
@@ -136,4 +114,15 @@ interface BillingRequestInterface
      * @return PartnerInterface
      */
     function getPartner();
+
+    /**
+     * @param PricingSet $pricingSet
+     * @return \Vespolina\Entity\Billing\BillingRequestInterface
+     */
+    function setPricing(PricingSetInterface $pricingSet);
+
+    /**
+     * @return \Vespolina\Entity\Pricing\PricingSetInterface
+     */
+    function getPricing();
 }

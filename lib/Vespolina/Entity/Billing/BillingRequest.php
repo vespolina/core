@@ -33,6 +33,12 @@ class BillingRequest implements BillingRequestInterface
     protected $pricingSet;
     protected $status;
 
+    public function __construct()
+    {
+        $this->orderItems = array();
+        $this->status = self::STATUS_PENDING;
+    }
+
     /**
      * @param $id
      * @return $this
@@ -91,25 +97,6 @@ class BillingRequest implements BillingRequestInterface
     }
 
     /**
-     * @param float $amount
-     * @return $this
-     */
-    public function setAmountDue($amount)
-    {
-        $this->amountDue = $amount;
-
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getAmountDue()
-    {
-        return $this->amountDue;
-    }
-
-    /**
      * @param Invoice $invoice
      * @return $this
      */
@@ -135,18 +122,20 @@ class BillingRequest implements BillingRequestInterface
 
     public function getOrderItems()
     {
-        return $this->orderItems;
+        return (array) $this->orderItems;
     }
 
     /**
      * @inheritdoc
      */
-    public function mergeOrderItems(array $items)
+    public function mergeOrderItems($items)
     {
-        $this->orderItems = array_merge($this->orderItems, $items);
+        foreach ($items as $item) {
+            $this->orderItems[] = $item;
+        }
     }
 
-    public function setOrderItems(array $items)
+    public function setOrderItems($items)
     {
         $this->orderItems = $items;
 
@@ -233,12 +222,12 @@ class BillingRequest implements BillingRequestInterface
     }
 
     /**
-     * @param \Vespolina\Entity\Pricing\PricingSet $ps
+     * @param \Vespolina\Entity\Pricing\PricingSet $pricingSet
      * @return \Vespolina\Entity\Billing\BillingRequestInterface
      */
-    public function setPricingSet(PricingSetInterface $ps)
+    public function setPricing(PricingSetInterface $pricingSet)
     {
-        $this->pricingSet = $ps;
+        $this->pricingSet = $pricingSet;
 
         return $this;
     }
@@ -246,7 +235,7 @@ class BillingRequest implements BillingRequestInterface
     /**
      * @return PricingSet
      */
-    public function getPricingSet()
+    public function getPricing()
     {
         return $this->pricingSet;
     }
