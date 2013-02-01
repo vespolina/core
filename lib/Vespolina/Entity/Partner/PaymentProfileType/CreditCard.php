@@ -23,13 +23,23 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
      */
     public function setCardNumber($cardNumber)
     {
-        if ($cardNumber !== null) {
+        if ($cardNumber !== null && strlen($cardNumber) == 16
+            && substr($cardNumber, 12) != str_repeat('*', 12)) {
             $this->activeCardNumber = preg_replace('/\D/', '', $cardNumber);
-            $chars = strlen($this->activeCardNumber);
-            $this->persistedCardNumber = str_repeat('*', $chars - 4) . substr($this->activeCardNumber, -4);
+            $this->persistedCardNumber = str_repeat('*', 12) . substr($this->activeCardNumber, -4);
         }
 
         return $this;
+    }
+
+    public function getCardLast4Digits()
+    {
+        if ($this->persistedCardNumber !== null && strlen($this->persistedCardNumber) == 16) {
+
+            return substr($this->persistedCardNumber, -4);
+        }
+
+        throw new \Exception("The persisted card number is not valid");
     }
 
     /**
