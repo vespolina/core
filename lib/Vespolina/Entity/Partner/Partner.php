@@ -350,4 +350,20 @@ class Partner implements PartnerInterface
 
         return $this;
     }
+
+    /**
+     * Checks if require a billing setup
+     *
+     * @return bool
+     */
+    public function isRequireBillingSetup()
+    {
+        $profile = $this->getPaymentProfile();
+
+        if ($this->getPaymentProfileType() == self::PAYMENT_PROFILE_TYPE_CREDIT_CARD) {
+            return (!$profile || !$profile->getReference());
+        }
+
+        return false;
+    }
 }
