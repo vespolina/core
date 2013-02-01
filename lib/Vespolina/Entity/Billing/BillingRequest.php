@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Billing;
 use Vespolina\Entity\Billing\BillingRequestInterface;
 use Vespolina\Entity\Invoice\InvoiceInterface;
 use ImmersiveLabs\Pricing\Entity\PricingSet;
+use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 use Vespolina\Entity\Partner\PaymentProfileInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
@@ -26,10 +27,11 @@ class BillingRequest implements BillingRequestInterface
     protected $dueDate;
     protected $id;
     protected $invoice;
-    protected $status;
+    protected $orderItems;
     protected $partner;
     protected $paymentProfile;
     protected $pricingSet;
+    protected $status;
 
     /**
      * @param $id
@@ -124,6 +126,31 @@ class BillingRequest implements BillingRequestInterface
     public function getInvoice()
     {
         return $this->invoice;
+    }
+
+    public function addOrderItem(ItemInterface $item)
+    {
+        $this->orderItems[] = $item;
+    }
+
+    public function getOrderItems()
+    {
+        return $this->orderItems;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function mergeOrderItems(array $items)
+    {
+        $this->orderItems = array_merge($this->orderItems, $items);
+    }
+
+    public function setOrderItems(array $items)
+    {
+        $this->orderItems = $items;
+
+        return $this;
     }
 
     /**
