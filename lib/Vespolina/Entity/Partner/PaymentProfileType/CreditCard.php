@@ -23,9 +23,11 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
      */
     public function setCardNumber($cardNumber)
     {
-        $this->activeCardNumber = preg_replace('/\D/', '', $cardNumber);
-        $chars = strlen($this->activeCardNumber);
-        $this->persistedCardNumber = str_repeat('*', $chars - 4) . substr($this->activeCardNumber, -4);
+        if ($cardNumber !== null) {
+            $this->activeCardNumber = preg_replace('/\D/', '', $cardNumber);
+            $chars = strlen($this->activeCardNumber);
+            $this->persistedCardNumber = str_repeat('*', $chars - 4) . substr($this->activeCardNumber, -4);
+        }
 
         return $this;
     }
