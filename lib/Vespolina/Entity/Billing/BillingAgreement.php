@@ -118,6 +118,17 @@ class BillingAgreement implements BillingAgreementInterface
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @inheritdoc
+     */
+    function setCurrentCycleComplete(BillingRequestInterface $billingRequest)
+    {
+        throw new \Exception("whoa dude, setCurrentCycleComplete() hasn't been implemented");
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function setInitialBillingDate(\DateTime $initialBillingDate)
     {
         $this->initialBillingDate = $initialBillingDate;

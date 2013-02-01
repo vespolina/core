@@ -37,4 +37,12 @@ class BillingAgreementTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains($item, $agreement->getOrderItems(), 'this should have been removed on setting a new array of items');
         $this->assertCount(2, $agreement->getOrderItems());
     }
+
+    public function testSetCurrentCycleComplete()
+    {
+        $this->markTestIncomplete('the next billing day should move ahead by the interval');
+        $this->markTestIncomplete('the total number of cycles should have increased');
+    }
+
+
 }
