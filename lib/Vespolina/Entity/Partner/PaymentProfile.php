@@ -2,10 +2,9 @@
 
 namespace Vespolina\Entity\Partner;
 
-use Pimple;
 use Vespolina\Entity\Partner\PartnerInterface;
 
-class PaymentProfile extends Pimple implements PaymentProfileInterface
+class PaymentProfile implements PaymentProfileInterface
 {
     const PAYMENT_PROFILE_TYPE_CREDIT_CARD = 'Credit Card';
     const PAYMENT_PROFILE_TYPE_INVOICE = 'Invoice';

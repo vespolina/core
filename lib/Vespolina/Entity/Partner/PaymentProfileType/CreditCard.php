@@ -11,12 +11,6 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
     protected $expiration;
     protected $persistedCardNumber;
 
-    public function __construct()
-    {
-        $this['process'] = 'billingRequest';
-        $this['paymentType'] = $this->getType();
-    }
-
     /**
      * @param string $cardNumber
      * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
