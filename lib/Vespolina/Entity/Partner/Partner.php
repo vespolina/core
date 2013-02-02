@@ -43,38 +43,17 @@ class Partner implements PartnerInterface
     protected $roles;
     protected $type;
     protected $preferredPaymentProfile;
-    protected $paymentProfileType;
-
-    public function setPaymentProfileType($paymentProfileType)
-    {
-        $this->paymentProfileType = $paymentProfileType;
-    }
-
-    public function getPaymentProfileType()
-    {
-        return $this->paymentProfileType;
-    }
+    protected $paymentProfiles;
 
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
+        $this->paymentProfiles = new ArrayCollection();
     }
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
-    {
-        $this->preferredPaymentProfile = $paymentProfile;
-
-        return $this;
-    }
-
-    public function getPaymentProfile()
-    {
-        return $this->preferredPaymentProfile;
     }
 
     /**
@@ -285,18 +264,6 @@ class Partner implements PartnerInterface
         unset($this->addresses[array_find($address)]);
     }
 
-    public function setPreferredPaymentProfile(PaymentProfileInterface $paymentProfile)
-    {
-        $this->preferredPaymentProfile = $paymentProfile;
-
-        return $this;
-    }
-
-    public function getPreferredPaymentProfile()
-    {
-        return $this->preferredPaymentProfile;
-    }
-
     /**
      * @inheritdoc
      */
@@ -358,12 +325,59 @@ class Partner implements PartnerInterface
      */
     public function isRequireBillingSetup()
     {
-        $profile = $this->getPaymentProfile();
-
-        if ($this->getPaymentProfileType() == self::PAYMENT_PROFILE_TYPE_CREDIT_CARD) {
-            return (!$profile || !$profile->getReference());
+        if ($this->getPreferredPaymentProfile()->getType() == self::PAYMENT_PROFILE_TYPE_CREDIT_CARD) {
+            return !(boolean)$this->getPreferredPaymentProfile();
         }
 
         return false;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPaymentProfiles()
+    {
+        return $this->paymentProfiles;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPaymentProfiles($paymentProfiles)
+    {
+        $this->paymentProfiles = $paymentProfiles;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addPaymentProfile($paymentProfile)
+    {
+        $this->paymentProfiles[] = $paymentProfile;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removePaymentProfile($paymentProfile)
+    {
+        unset($this->paymentProfiles[array_find($paymentProfile)]);
+    }
+
+    public function setPreferredPaymentProfile(PaymentProfileInterface $paymentProfile)
+    {
+        $this->preferredPaymentProfile = $paymentProfile;
+
+        return $this;
+    }
+
+    public function getPreferredPaymentProfile()
+    {
+        return $this->preferredPaymentProfile;
+    }
+
 }
