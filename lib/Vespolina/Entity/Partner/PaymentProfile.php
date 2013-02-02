@@ -23,6 +23,8 @@ class PaymentProfile implements PaymentProfileInterface
     protected $billingAddress;
     protected $billingZipCode;
     protected $billingPhone;
+    protected $createdAt;
+    protected $updatedAt;
 
     /**
      * @inheritdoc
@@ -174,5 +176,35 @@ class PaymentProfile implements PaymentProfileInterface
     public function getBillingState()
     {
         return $this->billingState;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function autoUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime('now');
+    }
+
+    public function autoCreatedAt()
+    {
+        $this->createdAt = new \DateTime('now');
     }
 }
