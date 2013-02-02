@@ -21,6 +21,15 @@ use Vespolina\Entity\Partner\PaymentProfileInterface;
 interface BillingAgreementInterface
 {
     /**
+     * This should be called after the creation of the BillingRequest to handled any housekeeping needed. This includes
+     * increasing the number of processed cycles and determining if there is a future billing date and setting it or
+     * making the agreement inactive, if it has run its course.
+     *
+     * @return $this
+     */
+    function completeCurrentCycle(BillingRequestInterface $billingRequest);
+
+    /**
      * Set the billing amount of the agreement
      * 
      * @param $billingAmount
@@ -80,13 +89,4 @@ interface BillingAgreementInterface
      * @return \Vespolina\Entity\Partner\PaymentProfileInterface
      */
     function getPaymentProfile();
-
-    /**
-     * This should be called after the creation of the BillingRequest to handled any housekeeping needed. This includes
-     * increasing the number of processed cycles and determining if there is a future billing date and setting it or
-     * making the agreement inactive, if it has run its course.
-     *
-     * @return $this
-     */
-    function setCurrentCycleComplete(BillingRequestInterface $billingRequest);
 }

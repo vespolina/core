@@ -121,9 +121,15 @@ class BillingAgreement implements BillingAgreementInterface
     /**
      * @inheritdoc
      */
-    function setCurrentCycleComplete(BillingRequestInterface $billingRequest)
+    function completeCurrentCycle(BillingRequestInterface $billingRequest)
     {
-        throw new \Exception("whoa dude, setCurrentCycleComplete() hasn't been implemented");
+        $date = (integer) $this->nextBillingDate->format('d');
+        $this->nextBillingDate->modify($this->getBillingInterval());
+        $newDate = (integer) $this->nextBillingDate->format('d');
+        if ($date > 28 && $newDate == 1) {
+            $this->nextBillingDate->modify('-1 day');
+        }
+        $this->increaseNumberCyclesBilled();
     }
 
     /**
