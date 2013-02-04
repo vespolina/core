@@ -375,9 +375,11 @@ class Partner implements PartnerInterface
         return $this;
     }
 
+    /**
+     * @return \Vespolina\Entity\Partner\PaymentProfileInterface
+     */
     public function getPreferredPaymentProfile()
     {
         return $this->preferredPaymentProfile;
     }
-
 }
