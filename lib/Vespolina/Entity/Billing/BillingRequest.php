@@ -21,6 +21,7 @@ class BillingRequest implements BillingRequestInterface
     const STATUS_PENDING = 'Pending';
     const STATUS_PAID = 'Paid';
     const STATUS_CANCELLED = 'Cancelled';
+    const STATUS_INVOICE_SENT = 'Invoice Sent';
 
     protected $amountDue;
     protected $createdAt;

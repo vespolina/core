@@ -124,7 +124,12 @@ class BillingAgreement implements BillingAgreementInterface
     function completeCurrentCycle(BillingRequestInterface $billingRequest)
     {
         $date = (integer) $this->nextBillingDate->format('d');
+
         $this->nextBillingDate->modify($this->getBillingInterval());
+
+        $newBillingDate = clone $this->nextBillingDate;
+        $this->nextBillingDate = $newBillingDate;
+
         $newDate = (integer) $this->nextBillingDate->format('d');
         if ($date > 28 && $newDate == 1) {
             $this->nextBillingDate->modify('-1 day');
