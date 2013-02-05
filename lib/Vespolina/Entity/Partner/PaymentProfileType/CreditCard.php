@@ -18,8 +18,7 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
      */
     public function setCardNumber($cardNumber)
     {
-        if ($cardNumber !== null && strlen($cardNumber) == 16
-            && substr($cardNumber, 12) != str_repeat('*', 12)) {
+        if ($cardNumber !== null && substr($cardNumber, 12) != str_repeat('*', 12)) {
             $this->activeCardNumber = preg_replace('/\D/', '', $cardNumber);
             $this->persistedCardNumber = str_repeat('*', 12) . substr($this->activeCardNumber, -4);
         }
