@@ -12,6 +12,7 @@ use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Product\ProductInterface;
+use Vespolina\Entity\Billing\BillingAgreement;
 
 /**
  * Item is a class for items in an order
@@ -29,10 +30,12 @@ class Item implements ItemInterface
     protected $product;
     protected $quantity;
     protected $state;
+    protected $billingAgreements;
 
     public function __construct(ProductInterface $product = null)
     {
         $this->product = $product;
+        $this->billingAgreements = array();
     }
 
     public function getId()
@@ -224,5 +227,28 @@ class Item implements ItemInterface
     protected function setProduct($product)
     {
         $this->product = $product;
+    }
+
+    public function getBillingAgreements()
+    {
+        return $this->billingAgreements;
+    }
+
+    public function setBillingAgreements($billingAgreements)
+    {
+        $this->billingAgreements = $billingAgreements;
+
+        return $this;
+    }
+
+    public function getActiveBillingAgreement()
+    {
+        /** @var BillingAgreement $ba */
+        foreach ($this->billingAgreements as $ba) {
+            if ($ba->getActive()) {
+                return $ba;
+            }
+        }
+        return null;
     }
 }
