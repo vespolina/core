@@ -33,6 +33,8 @@ class BillingRequest implements BillingRequestInterface
     protected $paymentProfile;
     protected $pricingSet;
     protected $status;
+    protected $periodStart;
+    protected $periodEnd;
 
     public function __construct()
     {
@@ -277,5 +279,29 @@ class BillingRequest implements BillingRequestInterface
     public function getPricing()
     {
         return $this->pricingSet;
+    }
+
+    public function setPeriodEnd(\DateTime $periodEnd)
+    {
+        $this->periodEnd = $periodEnd;
+
+        return $this;
+    }
+
+    public function getPeriodEnd()
+    {
+        return $this->periodEnd;
+    }
+
+    public function setPeriodStart(\DateTime $periodStart)
+    {
+        $this->periodStart = $periodStart;
+
+        return $this;
+    }
+
+    public function getPeriodStart()
+    {
+        return $this->periodStart;
     }
 }
