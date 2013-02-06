@@ -64,4 +64,9 @@ final class CartEvents
      * UPDATE_ITEM_STATE is triggered when the state of an item in the cart has changed
      */
     const UPDATE_ITEM_STATE = 'vespolina_cart.item_update_state';
+
+    const UPDATE_ORDER_STATE = 'vespolina_cart.order_update_state';
+    const INIT_ORDER = 'vespolina_cart.init_order';
+    const UPDATE_ORDER = 'vespolina_cart.update_order';
+
 }
