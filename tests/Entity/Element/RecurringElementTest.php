@@ -8,7 +8,7 @@ class RecurringElementTest extends \PHPUnit_Framework_TestCase
     {
         $recurringElement = new RecurringElement();
         $recurringElement->setCycles(-1);
-        $recurringElement->setInterval('month');
+        $recurringElement->setInterval('1 month');
         $recurringElement->setRecurringCharge('30');
 
         $context = new \Vespolina\Entity\Pricing\PricingContext();

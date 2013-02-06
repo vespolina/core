@@ -71,7 +71,7 @@ class RecurringElement extends PricingElement
         $processed['interval'] = $this->attributes['interval'];
         $processed['cycles'] = $this->attributes['cycles'];
         if (!$this->attributes['startsIn']) {
-            $processed['startsOn'] = new \DateTime('today +1 ' . $processed['interval']);
+            $processed['startsOn'] = new \DateTime('today +' . $processed['interval']);
         } else {
             $processed['startsOn'] = new \DateTime('today +' . $this->attributes['startsIn']);
         }
