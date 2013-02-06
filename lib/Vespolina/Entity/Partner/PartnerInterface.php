@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Partner;
 
+use Vespolina\Entity\Partner\ContactInterface;
 /**
  * Partner interface, define basic fields
  * 
@@ -162,10 +163,10 @@ interface PartnerInterface
     /**
      * Sets the partners primary contact
      * 
-     * @param \Vespolina\Entity\Partner\Contact $contact
+     * @param \Vespolina\Entity\Partner\ContactInterface $contact
      * @return \Vespolina\Entity\Partner\PartnerInterface
      */
-    function setPrimaryContact(Contact $contact);
+    function setPrimaryContact(ContactInterface $contact);
     
     /**
      * Primary Contact for this accounts

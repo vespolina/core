@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Partner;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Vespolina\Entity\Partner\ContactInterface;
 use Vespolina\Entity\Partner\PaymentProfileInterface;
 
 /**
@@ -293,7 +294,7 @@ class Partner implements PartnerInterface
     /**
      * @inheritdoc
      */
-    public function setPrimaryContact(Contact $primaryContact)
+    public function setPrimaryContact(ContactInterface $primaryContact)
     {
         $this->primaryContact = $primaryContact;
 

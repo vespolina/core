@@ -7,6 +7,8 @@
  */
 namespace Vespolina\Entity\Partner;
 
+use Vespolina\Entity\Partner\PersonalDetailsInterface;
+
 class PersonalDetails implements PersonalDetailsInterface
 {
     protected $id;
