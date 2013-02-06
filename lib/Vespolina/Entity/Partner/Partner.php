@@ -10,6 +10,7 @@ namespace Vespolina\Entity\Partner;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Partner\PaymentProfileInterface;
+use ImmersiveLabs\CaraCore\Entity\User;
 
 /**
  * Implementation of PartnerInterface
@@ -44,6 +45,7 @@ class Partner implements PartnerInterface
     protected $type;
     protected $preferredPaymentProfile;
     protected $paymentProfiles;
+    protected $user;
 
     public function __construct()
     {
@@ -367,5 +369,20 @@ class Partner implements PartnerInterface
     public function getPreferredPaymentProfile()
     {
         return $this->preferredPaymentProfile;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return \ImmersiveLabs\CaraCore\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
