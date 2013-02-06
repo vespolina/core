@@ -319,20 +319,6 @@ class Partner implements PartnerInterface
     }
 
     /**
-     * Checks if require a billing setup
-     *
-     * @return bool
-     */
-    public function isRequireBillingSetup()
-    {
-        if ($this->getPreferredPaymentProfile()->getType() == self::PAYMENT_PROFILE_TYPE_CREDIT_CARD) {
-            return !(boolean)$this->getPreferredPaymentProfile();
-        }
-
-        return false;
-    }
-
-    /**
      * @inheritdoc
      */
     public function getPaymentProfiles()
