@@ -55,10 +55,10 @@ class OrderPricingProvider
         // example taxRates : 0.10 for 10%, 0.25 for 25%
         if ($partner = $pricingContext['partner']) {
             /** @var $partner \Vespolina\Entity\Partner\Partner */
-            if (count($partner->getAddresses())) {
+            if (count($partner->getPreferredPaymentProfile())) {
                 /** @var $address \Vespolina\Entity\Partner\AddressInterface */
-                $address = $partner->getAddresses()->get(0);
-                $rate = $this->taxProvider->getTaxForAddress($address);
+                $paymentProfile = $partner->getPreferredPaymentProfile();
+                $rate = $this->taxProvider->getTaxByState($paymentProfile->getBillingState());
                 $totalTax = $itemsTotalNet * $rate;
                 $orderPricingSet->set('taxRate', $rate);
                 $orderPricingSet->set('taxes', $totalTax);
