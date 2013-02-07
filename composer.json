@@ -1,13 +1,14 @@
 {
-    "name": "iampersistent/pricing",
+    "name": "immersivelabs/pricing",
     "description": "Pricing for Vespolina.",
     "authors": [
         {"name": "Richard Shank", "email": "develop@zestic.com"}
     ],
     "keywords": ["Pricing"],
+    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
-            "Pricing": "lib/"
+            "ImmersiveLabs": "lib/"
         }
     }
 }

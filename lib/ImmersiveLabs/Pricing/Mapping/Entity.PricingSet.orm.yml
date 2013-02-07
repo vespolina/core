@@ -1,0 +1,20 @@
+ImmersiveLabs\Pricing\Entity\PricingSet:
+    type: entity
+    table: pricing_set
+
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+
+    fields:
+        processed:
+            type: array
+        processingState:
+            type: string
+            nullable: true
+    oneToMany:
+        pricingElements:
+            targetEntity: ImmersiveLabs\Pricing\Entity\PricingElement
+            mappedBy: pricingSet
+            cascade: ["persist", "remove"]
