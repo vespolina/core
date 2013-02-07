@@ -1,10 +1,5 @@
 <?php
-/**
- * (c) 2013 Vespolina Project http://www.vespolina-project.org
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
+
 namespace Vespolina\Entity\Pricing\Element;
 
 use Vespolina\Entity\Pricing\PricingElement;
@@ -13,9 +8,10 @@ class RecurringElement extends PricingElement
 {
     public function __construct()
     {
-        $attribute['cycles']  = '';
-        $attribute['interval']  = '';
-        $attribute['startsIn'] = null;
+        $this->attributes['cycles']  = '';
+        $this->attributes['recurringCharge'] = '';
+        $this->attributes['interval']  = '';
+        $this->attributes['startsIn'] = null;
 
         parent::__construct();
     }
@@ -44,6 +40,18 @@ class RecurringElement extends PricingElement
         return $this->attributes['interval'];
     }
 
+    public function setRecurringCharge($recurringCharge)
+    {
+        $this->attributes['recurringCharge'] = $recurringCharge;
+
+        return $this;
+    }
+
+    public function getRecurringCharge()
+    {
+        return $this->attributes['recurringCharge'];
+    }
+
     public function setStartsIn($startsIn)
     {
         $this->attributes['startsIn'] = $startsIn;
@@ -58,7 +66,15 @@ class RecurringElement extends PricingElement
 
     protected function doProcess($context, $processed)
     {
-        $processed['netValue'] = $this->attribute['netValue'];
+        $processed['netValue'] = $this->attributes['netValue'];
+        $processed['recurringCharge'] = $this->attributes['recurringCharge'];
+        $processed['interval'] = $this->attributes['interval'];
+        $processed['cycles'] = $this->attributes['cycles'];
+        if (!$this->attributes['startsIn']) {
+            $processed['startsOn'] = new \DateTime('today +' . $processed['interval']);
+        } else {
+            $processed['startsOn'] = new \DateTime('today +' . $this->attributes['startsIn']);
+        }
 
         return $processed;
     }

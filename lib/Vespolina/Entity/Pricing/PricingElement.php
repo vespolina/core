@@ -1,32 +1,27 @@
 <?php
-/**
- * (c) 2012 Vespolina Project http://www.vespolina-project.org
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
+
 namespace Vespolina\Entity\Pricing;
 
 use Vespolina\Entity\Pricing\PricingElementInterface;
+use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Exception\FunctionNotSupportedException;
 
 class PricingElement implements PricingElementInterface
 {
+    protected $id;
     protected $attributes;
     protected $position;
+    protected $pricingSet;
     protected $type;
 
     public function __construct()
     {
-        $attribute['netValue']  = '';
+        $this->attributes['netValue']  = '';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setPosition($position)
+    public function setNetValue($netValue)
     {
-        $this->position = $position;
+        $this->attributes['netValue']  = $netValue;
 
         return $this;
     }
@@ -34,21 +29,54 @@ class PricingElement implements PricingElementInterface
     /**
      * @inheritdoc
      */
-    public function getPosition()
+    public function process($context, $processed)
+    {
+        return $this->doProcess($context, $processed);
+    }
+
+    protected function doProcess($context, $processed)
+    {
+        throw new FunctionNotSupportedException('process() has not been implemented in ' . get_class($this));
+    }
+
+    /**
+     * Set the order of this element being processed. If the order is not set, it is saved until the end of the
+     * processing to be executed. The higher the number, the later it is executed.
+     *
+     * @param integer $position
+     * @return \ImmersiveLabs\Pricing\Entity\PricingElement
+     */
+    function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Return the order of this element's execution
+     *
+     * @return integer
+     */
+    function getPosition()
     {
         return $this->position;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function process($context)
+    public function getId()
     {
-        return $this->doProcess($context);
+        return $this->id;
     }
 
-    protected function doProcess($context)
+    public function setPricingSet(PricingSetInterface $pricingSet)
     {
-        throw new FunctionNotSupportedException('process() has not been implemented in ' . get_class($this));
+        $this->pricingSet = $pricingSet;
+
+        return $this;
+    }
+
+    public function getPricingSet()
+    {
+        return $this->pricingSet;
     }
 }
