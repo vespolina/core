@@ -18,7 +18,7 @@ class PaymentProfile implements PaymentProfileInterface
     protected $reference;
     protected $partner;
     protected $billingCity;
-    protected $billingCountry;
+    protected $billingCountry = 'US';
     protected $billingState;
     protected $billingAddress;
     protected $billingZipCode;
