@@ -2,7 +2,7 @@
 
 namespace Vespolina\Entity\Pricing;
 
-use Vespolina\Entity\Pricing\TotalValueElement;
+use Vespolina\Entity\Pricing\Element\TotalValueElement;
 use Vespolina\Entity\Pricing\PricingElementInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 use Doctrine\Common\Collections\ArrayCollection;
