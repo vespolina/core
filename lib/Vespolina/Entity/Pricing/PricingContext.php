@@ -16,64 +16,7 @@ namespace Vespolina\Entity\Pricing;
 
 use Vespolina\Entity\Pricing\PricingContextInterface;
 
-class PricingContext implements PricingContextInterface
+class PricingContext extends \Pimple //implements PricingContextInterface
 {
-    protected $data;
-    protected $entities;
- 
-    public function __construct($data = array())
-    {
-        $this->data = $data;
-        $this->entities = array();
 
-        if ($this->getQuantity() === null) {
-            $this->setQuantity(1);
-        }
-    }
-
-    public function addEntity($entity)
-    {
-        $this->entities[] = $entity;
-    }
-
-    public function getEntities()
-    {
-        return $this->entities;
-    }
-
-    public function setEntities($entities)
-    {
-        $this->entities = $entities;
-    }
-
-    public function get($key, $default = null)
-    {
-        if (array_key_exists($key, $this->data)) {
-            return $this->data[$key];
-        } elseif ($default) {
-            return $default;
-        } else {
-            return null;
-        }
-    }
-
-    public function set($key, $value)
-    {
-        $this->data[$key] = $value;
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    public function getQuantity()
-    {
-        return $this->get('quantity');
-    }
-
-    public function setQuantity($quantity)
-    {
-        $this->set('quantity', $quantity);
-    }
 }
