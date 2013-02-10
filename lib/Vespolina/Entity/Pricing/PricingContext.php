@@ -16,7 +16,7 @@ namespace Vespolina\Entity\Pricing;
 
 use Vespolina\Entity\Pricing\PricingContextInterface;
 
-class PricingContext extends \Pimple //implements PricingContextInterface
+class PricingContext extends \Pimple implements PricingContextInterface
 {
 
 }
