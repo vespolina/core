@@ -2,7 +2,7 @@
     "name": "vespolina/core",
     "type": "entities",
     "description": "Core entities for the Vespolina Project",
-    "keywords": ["ecommerce, shop"],
+    "keywords": ["ecommerce", "shop"],
     "homepage": "https://github.com/vespolina/VespolinaCore",
     "license": "MIT",
     "require": {
