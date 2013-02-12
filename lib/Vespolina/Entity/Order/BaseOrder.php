@@ -186,9 +186,10 @@ class BaseOrder implements OrderInterface
         if (!$this->items) {
             $this->clearItems();
         }
+
         $found = false;
         foreach ($this->items as $existingItem) {
-            if ($item == $existingItem) {
+            if ($item === $existingItem) {
                 $found = true;
                 break;
             }
