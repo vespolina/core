@@ -8,9 +8,12 @@ use Vespolina\Entity\Partner\Partner;
 class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
 {
     protected $activeCardNumber;
+    protected $activeCVV;
     protected $cardType;
     protected $expiration;
     protected $persistedCardNumber;
+    protected $persistedCVV;
+    public $cardInformationChanged = false;
 
     /**
      * @param string $cardNumber
@@ -18,9 +21,25 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
      */
     public function setCardNumber($cardNumber)
     {
-        if ($cardNumber !== null && substr($cardNumber, 12) != str_repeat('*', 12)) {
+        if ($cardNumber != $this->persistedCardNumber) {
             $this->activeCardNumber = preg_replace('/\D/', '', $cardNumber);
             $this->persistedCardNumber = str_repeat('*', 12) . substr($this->activeCardNumber, -4);
+            $this->cardInformationChanged = true;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $CVV
+     * @return CreditCard
+     */
+    public function setCVV($CVV)
+    {
+        if ($CVV != '***' || $CVV != '****') {
+            $this->persistedCVV = str_repeat('*', strlen($CVV));
+            $this->activeCVV = $CVV;
+            $this->cardInformationChanged = true;
         }
 
         return $this;
@@ -37,15 +56,31 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
     }
 
     /**
-     * @param null $type
+     * @param bool $active
      * @return mixed
      */
-    public function getCardNumber($type = null)
+    public function getCardNumber($active = false)
     {
-        if ($type === 'active') {
+        if ($active) {
+
             return $this->activeCardNumber;
         }
+
         return $this->persistedCardNumber;
+    }
+
+    /**
+     * @param bool $active
+     * @return mixed
+     */
+    public function getCVV($active = false)
+    {
+        if ($active) {
+
+            return $this->activeCVV;
+        }
+
+        return $this->persistedCVV;
     }
 
     /**
@@ -71,9 +106,13 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
      * @param \DateTime
      * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
      */
-    public function setExpiration(\DateTime $expirationDate)
+    public function setExpiration(\DateTime $expiration)
     {
-        $this->expiration = $expirationDate;
+        if ($this->expiration !== null && $this->expiration->format('Y-m-d') != $expiration->format('Y-m-d')) {
+            $this->cardInformationChanged = true;
+        }
+
+        $this->expiration = $expiration;
 
         return $this;
     }
@@ -89,5 +128,15 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
     public function getType()
     {
         return Partner::PAYMENT_PROFILE_TYPE_CREDIT_CARD;
+    }
+
+    public function isSetup()
+    {
+        if ($this->getReference() === null || $this->getExpiration() < new \DateTime('now')) {
+
+            return false;
+        }
+
+        return parent::isSetup();
     }
 }

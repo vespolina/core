@@ -207,4 +207,18 @@ class PaymentProfile implements PaymentProfileInterface
     {
         $this->createdAt = new \DateTime('now');
     }
+
+    public function isSetup()
+    {
+        if (!$this->getBillingAddress() || !$this->getBillingZipCode() || !$this->getBillingCountry() || !$this->getBillingCity()) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getType()
+    {
+    }
 }
