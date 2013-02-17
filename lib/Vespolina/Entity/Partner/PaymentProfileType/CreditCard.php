@@ -52,8 +52,9 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
     public function setCVV($CVV)
     {
         if ($CVV != '***' || $CVV != '****') {
-            $this->persistedCardNumber = '***';
+            $this->persistedCVV = str_repeat('*', strlen($CVV));
             $this->activeCVV = $CVV;
+            $this->cardInformationChanged = true;
         }
 
         return $this;
