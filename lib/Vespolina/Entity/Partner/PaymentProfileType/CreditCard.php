@@ -45,6 +45,20 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
         return $this;
     }
 
+    /**
+     * @param $CVV
+     * @return CreditCard
+     */
+    public function setCVV($CVV)
+    {
+        if ($CVV != '***' || $CVV != '****') {
+            $this->persistedCardNumber = '***';
+            $this->activeCVV = $CVV;
+        }
+
+        return $this;
+    }
+
     public function getCardLast4Digits()
     {
         if ($this->persistedCardNumber !== null && strlen($this->persistedCardNumber) == 16) {
