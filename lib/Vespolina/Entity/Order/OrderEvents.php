@@ -31,9 +31,18 @@ final class OrderEvents
 
     /**
      * The order finished event is triggered  when all basic operations on a order have been completed
-     * For instance one first adds three items, adjust quantity and then triggers the order finished event
      */
     const FINISHED = 'vespolina_order.order_finished';
+    
+    /**
+     * PRE_PROCESS_ORDER signals the processing of the order is about to begin
+     */
+    const PRE_PROCESS_ORDER = 'vespolina_order.order_pre_process'
+    
+    /**
+     * POST_PROCESS_ORDER signals the processing of the order has finished
+     */
+    const POST_PROCESS_ORDER = 'vespolina_order.order_post_process'
 
     /**
      * REMOVE_ITEM is triggered a product has been completely removed from a order
