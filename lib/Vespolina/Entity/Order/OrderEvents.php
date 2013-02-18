@@ -61,6 +61,11 @@ final class OrderEvents
     const UPDATE_ITEM = 'vespolina_order.item_update';
 
     /**
+     * UPDATE_ITEM_QUANTITY is triggered when the qunatity of an item in the order has changed
+     */
+    const UPDATE_ITEM_QUANTITY = 'vespolina_order.item_update_quantity';
+
+    /**
      * UPDATE_ITEM_STATE is triggered when the state of an item in the order has changed
      */
     const UPDATE_ITEM_STATE = 'vespolina_order.item_update_state';
