@@ -233,7 +233,7 @@ class PaymentProfile implements PaymentProfileInterface
     public function __clone()
     {
         if ($this->id) {
-
+            $this->id = null;
         }
     }
 }
