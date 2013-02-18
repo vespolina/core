@@ -37,12 +37,12 @@ final class OrderEvents
     /**
      * PRE_PROCESS_ORDER signals the processing of the order is about to begin
      */
-    const PRE_PROCESS_ORDER = 'vespolina_order.order_pre_process'
+    const PRE_PROCESS_ORDER = 'vespolina_order.order_pre_process';
     
     /**
      * POST_PROCESS_ORDER signals the processing of the order has finished
      */
-    const POST_PROCESS_ORDER = 'vespolina_order.order_post_process'
+    const POST_PROCESS_ORDER = 'vespolina_order.order_post_process';
 
     /**
      * REMOVE_ITEM is triggered a product has been completely removed from a order
