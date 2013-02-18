@@ -229,4 +229,11 @@ class PaymentProfile implements PaymentProfileInterface
     {
         return self::PAYMENT_PROFILE_TYPE_MAIN;
     }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
+    }
 }
