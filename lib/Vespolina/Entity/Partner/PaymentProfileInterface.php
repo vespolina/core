@@ -8,6 +8,7 @@ interface PaymentProfileInterface
 {
     function setPartner(PartnerInterface $partner);
 
+    /** @return PartnerInterface */
     function getPartner();
 
     function getId();
@@ -39,4 +40,10 @@ interface PaymentProfileInterface
     function setBillingState($billingState);
 
     function getBillingState();
+
+    /** @return boolean */
+    function isSetup();
+
+    /** @return string */
+    function getType();
 }
