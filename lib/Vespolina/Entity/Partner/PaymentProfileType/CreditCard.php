@@ -35,22 +35,7 @@ class CreditCard extends PaymentProfile
      */
     public function setCVV($CVV)
     {
-        if ($CVV != '***' || $CVV != '****') {
-            $this->persistedCVV = str_repeat('*', strlen($CVV));
-            $this->activeCVV = $CVV;
-            $this->cardInformationChanged = true;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param $CVV
-     * @return CreditCard
-     */
-    public function setCVV($CVV)
-    {
-        if ($CVV != '***' || $CVV != '****') {
+        if ($CVV != $this->persistedCVV) {
             $this->persistedCVV = str_repeat('*', strlen($CVV));
             $this->activeCVV = $CVV;
             $this->cardInformationChanged = true;
