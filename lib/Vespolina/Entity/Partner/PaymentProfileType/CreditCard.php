@@ -5,7 +5,7 @@ namespace Vespolina\Entity\Partner\PaymentProfileType;
 use Vespolina\Entity\Partner\PaymentProfile;
 use Vespolina\Entity\Partner\Partner;
 
-class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
+class CreditCard extends PaymentProfile
 {
     protected $activeCardNumber;
     protected $activeCVV;
@@ -142,7 +142,7 @@ class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
 
     public function getType()
     {
-        return Partner::PAYMENT_PROFILE_TYPE_CREDIT_CARD;
+        return self::PAYMENT_PROFILE_TYPE_CREDIT_CARD;
     }
 
     public function isSetup()

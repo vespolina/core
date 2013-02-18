@@ -6,6 +6,7 @@ use Vespolina\Entity\Partner\PartnerInterface;
 
 class PaymentProfile implements PaymentProfileInterface
 {
+    const PAYMENT_PROFILE_TYPE_MAIN = 'Main profile';
     const PAYMENT_PROFILE_TYPE_CREDIT_CARD = 'Credit Card';
     const PAYMENT_PROFILE_TYPE_INVOICE = 'Invoice';
 
@@ -208,6 +209,9 @@ class PaymentProfile implements PaymentProfileInterface
         $this->createdAt = new \DateTime('now');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function isSetup()
     {
         if (!$this->getBillingAddress() || !$this->getBillingZipCode() || !$this->getBillingCountry() || !$this->getBillingCity()) {
@@ -218,7 +222,11 @@ class PaymentProfile implements PaymentProfileInterface
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getType()
     {
+        return self::PAYMENT_PROFILE_TYPE_MAIN;
     }
 }

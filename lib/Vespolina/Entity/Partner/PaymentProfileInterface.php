@@ -41,7 +41,9 @@ interface PaymentProfileInterface
 
     function getBillingState();
 
+    /** @return boolean */
     function isSetup();
 
+    /** @return string */
     function getType();
 }
