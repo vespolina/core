@@ -109,7 +109,9 @@ class Invoice implements InvoiceInterface
      */
     public function mergeOrders(array $orders)
     {
-        $this->orders = array_merge($this->orders, $orders);
+        foreach ($orders as $order) {
+            $this->orders->add($order);
+        }
 
         return $this;
     }

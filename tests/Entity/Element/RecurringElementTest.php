@@ -1,6 +1,6 @@
 <?php
 
-use ImmersiveLabs\Pricing\Entity\Element\RecurringElement;
+use Vespolina\Entity\Pricing\Element\RecurringElement;
 
 class RecurringElementTest extends \PHPUnit_Framework_TestCase
 {

@@ -14,7 +14,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     public function testOrders()
     {
         $invoice = new Invoice();
-        $this->assertNull($invoice->getOrders(), 'make sure we start out empty');
+        $this->assertEquals($invoice->getOrders()->count(), 0, 'make sure we start out empty');
 
         $order = new Order();
         $invoice->addOrder($order);

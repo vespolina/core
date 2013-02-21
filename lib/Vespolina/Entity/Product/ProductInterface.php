@@ -34,6 +34,21 @@ interface ProductInterface extends BaseProductInterface
     function addAttributes(array $attributes);
 
     /**
+     * Returns true when the product is equal to the product as parameter
+     *
+     * @param ProductInterface $product
+     * @return boolean
+     */
+    function equals(ProductInterface $product);
+
+    /**
+     * Returns the id from a product.  If multiple identification schemas do exist it will return the default one
+     *
+     * @return mixed
+     */
+    function getId();
+
+    /**
      * Return a attribute by its type
      *
      * @param $type
@@ -57,18 +72,6 @@ interface ProductInterface extends BaseProductInterface
      */
     function createProductIdentifierSet($options);
 
-    /**
-     * Use a different name or different technique
-     *
-     * These are valid types of products
-     * Product::PHYSICAL
-     * Product::UNIQUE
-     * Product::DOWNLOAD
-     * Product::TIME
-     * Product::SERVICE
-     *
-     * @param $type
-     */
 
     /**
      * Set the product slug
