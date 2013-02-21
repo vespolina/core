@@ -22,6 +22,8 @@ class Cart extends BaseOrder implements CartInterface
     const STATE_LOCKED = 'locked';      //Locked for processing
     const STATE_CLOSED = 'closed';      //Closed after processing
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
+    const STATE_ABANDONED = 'abandoned'; //Cart was abandoned
+    const STATE_CONVERTED = 'converted'; //Cart was converted into a purchase
 
     protected $followUp;
     protected $paymentInstruction;
