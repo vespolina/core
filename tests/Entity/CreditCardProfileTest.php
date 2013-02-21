@@ -6,7 +6,7 @@
  * with this source code in the file LICENSE.
  */
 
-use Vespolina\Entity\CreditCardProfile;
+use Vespolina\Entity\Partner\PaymentProfileType\CreditCard;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -15,7 +15,7 @@ class CreditCardProfileTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetCardNumber()
     {
-        $profile = $this->getMockForAbstractClass('Vespolina\Entity\CreditCardProfile');
+        $profile = $this->getMockForAbstractClass('Vespolina\Entity\Partner\PaymentProfileType\CreditCard');
         $profile->setCardNumber('1234A 4567-8901.1235');
 
         $activeCardNumber = new \ReflectionProperty($profile, 'activeCardNumber');

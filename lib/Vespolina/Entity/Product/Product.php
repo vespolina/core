@@ -28,6 +28,11 @@ class Product extends BaseProduct implements ProductInterface
         return $this->id;
     }
 
+    public function equals(ProductInterface $product) {
+
+        return ($this->id == $product->getId());
+    }
+
     /**
      * @inheritdoc
      */
