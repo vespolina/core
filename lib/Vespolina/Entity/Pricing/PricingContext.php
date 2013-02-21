@@ -19,4 +19,31 @@ use Vespolina\Entity\Pricing\PricingContextInterface;
 class PricingContext extends \Pimple implements PricingContextInterface
 {
 
+    /**
+     * Convenience getter
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function get($key, $default = null) {
+
+        if ($this->offsetExists($key)) {
+
+            return $this->offsetGet($key);
+        } else {
+
+            return $default;
+        }
+    }
+
+    /**
+     * Convenience setter
+     *
+     * @param $key
+     * @param $value
+     */
+    public function set($key, $value) {
+
+        return $this->offsetSet($key, $value);
+    }
 }

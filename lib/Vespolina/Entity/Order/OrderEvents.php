@@ -8,7 +8,7 @@
 
 namespace Vespolina\Entity\Order;
 
-final class OrderEvents
+class OrderEvents
 {
     /**
      * The order initialization order is is triggered after a new order is created and initialized
