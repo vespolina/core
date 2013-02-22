@@ -18,6 +18,7 @@ class Order extends BaseOrder implements OrderInterface
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
 
     protected $followUp;
+    protected $orderDate;
     protected $paymentInstruction;
     protected $billingAgreements;
 
@@ -71,6 +72,16 @@ class Order extends BaseOrder implements OrderInterface
     public function setFollowUp($followUp)
     {
         $this->followUp = $followUp;
+    }
+
+    public function setOrderDate(\DateTime $orderDate)
+    {
+        $this->orderDate = $orderDate;
+    }
+
+    public function getOrderDate()
+    {
+        return $this->orderDate;
     }
 
     /**

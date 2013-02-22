@@ -12,7 +12,7 @@ use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
- * OrderInterface is a generic interface for shopping cart or sales order
+ * OrderInterface is a generic interface for a shopping cart or sales order
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
