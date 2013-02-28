@@ -13,6 +13,7 @@ class CreditCard extends PaymentProfile
     protected $persistedCardNumber;
     protected $persistedCVV;
     public $cardInformationChanged = false;
+    protected $notifiedAt;
 
     /**
      * @param string $cardNumber
@@ -55,7 +56,7 @@ class CreditCard extends PaymentProfile
     }
 
     /**
-     * @param bool $active
+     * @param boolean $active
      * @return mixed
      */
     public function getCardNumber($active = false)
@@ -137,5 +138,24 @@ class CreditCard extends PaymentProfile
         }
 
         return parent::isSetup();
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getNotifiedAt()
+    {
+        return $this->notifiedAt;
+    }
+
+    /**
+     * @param \DateTime $notifiedAt
+     * @return CreditCard
+     */
+    public function setNotifiedAt(\DateTime $notifiedAt)
+    {
+        $this->notifiedAt = $notifiedAt;
+
+        return $this;
     }
 }
