@@ -8,7 +8,7 @@
  
 namespace Vespolina\Entity\Pricing;
 
-interface PricingSetInterface
+interface PricingSetInterface extends \ArrayAccess
 {
     function getNetValue();
     function getTotalValue();

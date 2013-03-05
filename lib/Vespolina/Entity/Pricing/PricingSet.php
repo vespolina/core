@@ -72,7 +72,7 @@ class PricingSet implements PricingSetInterface
     public function get($name)
     {
         if ($this->processingState != self::PROCESSING_FINISHED) {
-            throw new \Exception();
+            throw new \Exception('Accessing unprocessed pricing element ' . $name);
         }
 
         if (isset($this->processed[$name])) {
@@ -220,4 +220,25 @@ class PricingSet implements PricingSetInterface
     {
         return $this->returns;
     }
+
+    public function offsetExists($offset)
+    {
+        return $this->has($offset);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        return $this->set($offset, $value);
+    }
+
+    public function offsetUnset($offset)
+    {
+
+    }
+
 }
