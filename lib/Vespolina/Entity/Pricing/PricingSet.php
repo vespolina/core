@@ -28,8 +28,12 @@ class PricingSet implements PricingSetInterface
 
     public function get($name)
     {
-        if (array_key_exists($name, $this->pricingElements)) {
-            return $this->pricingElements[$name];
+        if ($this->processingState != self::PROCESSING_FINISHED) {
+            throw new \Exception('Accessing unprocessed pricing element ' . $name);
+        }
+
+        if (isset($this->processed[$name])) {
+            return $this->processed[$name];
         }
     }
 
@@ -60,4 +64,25 @@ class PricingSet implements PricingSetInterface
     {
         // TODO: Implement getTotalValue() method.
     }
+
+    public function offsetExists($offset)
+    {
+        return $this->has($offset);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->get($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        return $this->set($offset, $value);
+    }
+
+    public function offsetUnset($offset)
+    {
+
+    }
+
 }
