@@ -11,8 +11,6 @@ namespace Vespolina\Entity\Order;
 use Vespolina\Entity\Channel\Channel;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
-use Vespolina\Entity\Partner\Partner;
-use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
  * Order is a base class for shopping cart or sales order
@@ -31,7 +29,6 @@ class BaseOrder implements OrderInterface
     protected $items;
     protected $name;
     protected $owner;
-    protected $partner;
     protected $payment;
     protected $pricingSet;
     protected $state;
@@ -249,7 +246,7 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function setOwner(PartnerInterface $owner)
+    public function setOwner($owner)
     {
         $this->owner = $owner;
 
@@ -262,22 +259,6 @@ class BaseOrder implements OrderInterface
     public function getOwner()
     {
         return $this->owner;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPartner(Partner $partner)
-    {
-        $this->partner = $partner;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPartner()
-    {
-        return $this->partner;
     }
 
     /**
