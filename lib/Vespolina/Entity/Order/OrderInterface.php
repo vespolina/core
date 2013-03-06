@@ -9,7 +9,6 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Order\ItemInterface;
-use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
  * OrderInterface is a generic interface for a shopping cart or sales order
@@ -125,16 +124,20 @@ interface OrderInterface
     /**
      * Set the owner of the owner
      *
-     * @param \Vespolina\Entity\Partner\PartnerInterface $owner
+     * @param mixed $owner
      */
-    function setOwner(PartnerInterface $owner);
+    function setOwner($owner);
 
     /**
      * Return the owner of the order
      *
-     * @return \Vespolina\Entity\Partner\PartnerInterface
+     * @return mixed
      */
     function getOwner();
+
+    function setPricing($pricingSet);
+
+    function getPricing();
 
     /**
      * Set the current state of the order
@@ -150,10 +153,6 @@ interface OrderInterface
      * @return
      */
     function getState();
-
-    function setPricing($pricingSet);
-
-    function getPricing();
 
     /**
      * Set the total price for the order
