@@ -15,6 +15,9 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $order = new Order();
         $now = new \DateTime();
         $order->setOrderDate($now);
+        $order->setInternalNotes('lizzen to me very carefully, i shall only say thiz onze');
+
+        $this->assertEquals('lizzen to me very carefully, i shall only say thiz onze', $order->getInternalNotes());
         $this->assertEquals($now, $order->getOrderDate());
     }
 

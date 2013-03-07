@@ -21,6 +21,7 @@ class Order extends BaseOrder implements OrderInterface
     protected $orderDate;
     protected $paymentInstruction;
     protected $billingAgreements;
+    protected $internalNotes;
 
     public function setBillingAgreements($billingAgreements)
     {
@@ -30,22 +31,6 @@ class Order extends BaseOrder implements OrderInterface
     public function getBillingAgreements()
     {
         return $this->billingAgreements;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setExpiresAt(\DateTime $expiresAt)
-    {
-        $this->expiresAt = $expiresAt;
     }
 
     /**
@@ -91,6 +76,18 @@ class Order extends BaseOrder implements OrderInterface
     {
         $this->prices[$name] = $price;
     }
+
+    public function setInternalNotes($internalNotes)
+    {
+        $this->internalNotes = $internalNotes;
+    }
+
+    public function getInternalNotes()
+    {
+        return $this->internalNotes;
+    }
+
+
 
     public function autoSetCreatedAt()
     {
