@@ -29,6 +29,7 @@ class BaseOrder implements OrderInterface
     protected $items;
     protected $name;
     protected $owner;
+    protected $ownerNotes;
     protected $payment;
     protected $pricingSet;
     protected $state;
@@ -340,4 +341,16 @@ class BaseOrder implements OrderInterface
     {
         return $this->updatedAt;
     }
+
+    public function setOwnerNotes($ownerNotes)
+    {
+        $this->ownerNotes = $ownerNotes;
+    }
+
+    public function getOwnerNotes()
+    {
+        return $this->ownerNotes;
+    }
+
+
 }
