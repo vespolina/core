@@ -13,7 +13,8 @@ use Vespolina\Exception\FunctionNotSupportedException;
 class PricingElement implements PricingElementInterface
 {
     protected $attributes;
-    protected $position;
+    protected $position = 0;
+    protected $pricingSet;
     protected $type;
 
     public function __construct()

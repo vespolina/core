@@ -16,7 +16,44 @@ class PricingSet implements PricingSetInterface
 {
     protected $pricingElements;
 
-    public function __construct()
+    const PROCESSING_UNPROCESSED = 0;
+    const PROCESSING_FINISHED = 1;
+
+    public function __construct(array $customReturns = array(), array $globalPricingElements = array())
+    {
+        $defaultReturns = array(
+            'discounts', 'netValue', 'surcharge', 'taxes', 'totalValue'
+        );
+        $this->returns = array_merge($defaultReturns, $customReturns);
+
+        foreach ($this->returns as $return) {
+            $this->processed[$return] = null;
+        }
+
+        $this->addPricingElements($globalPricingElements);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getDiscounts()
+    {
+        return $this->get('discounts');
+    }
+
+    public function getNetValue()
+    {
+        return $this->get('netValue');
+    }
+
+    public function getSurcharge()
+    {
+        return $this->get('surcharge');
+    }
+
+    public function getTaxes()
     {
         $this->pricingElements = array();
     }
@@ -42,7 +79,29 @@ class PricingSet implements PricingSetInterface
         $this->pricingElements[$name] = $value;
     }
 
-    public function setAll($pricingElements)
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    public function addPricingElement(PricingElementInterface $element)
+    {
+        $this->pricingElements[] = $element;
+        $element->setPricingSet($this);
+
+        return $this;
+    }
+
+    public function addPricingElements(array $elements)
+    {
+        foreach ($elements as $element) {
+            $this->addPricingElement($element);
+        }
+
+        return $this;
+    }
+
+    public function setPricingElements($pricingElements)
     {
         $this->pricingElements = $pricingElements;
     }
@@ -52,7 +111,40 @@ class PricingSet implements PricingSetInterface
      */
     public function all()
     {
-        return $this->pricingElements;
+        if (!$this->pricingElements) {
+            return array();
+        }
+        $elements = $this->pricingElements;
+        $returnElements = array();
+        foreach ($elements as $element) {
+            $position = $element->getPosition();
+            while (isset($returnElements[$position])) {
+                $position ++;
+            }
+            $returnElements[$position] = $element;
+        }
+        ksort($returnElements);
+
+        return $returnElements;
+    }
+
+    public function setProcessed($processed)
+    {
+        $this->processed = $processed;
+
+        return $this;
+    }
+
+    public function getProcessed()
+    {
+        return $this->processed;
+    }
+
+    public function setProcessingState($processingState)
+    {
+        $this->processingState = $processingState;
+
+        return $this;
     }
 
     function getNetValue()

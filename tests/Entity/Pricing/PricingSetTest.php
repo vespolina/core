@@ -8,18 +8,49 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
     public function testAddElements()
     {
         $pricingSet = new PricingSet();
-        $pricingElementsCount = count($pricingSet->getPricingElements());
-
-        $this->assertGreaterThan(0, $pricingElementsCount, 'there should be at least one default element');
+        $rp = new \ReflectionProperty($pricingSet, 'pricingElements');
+        $rp->setAccessible(true);
+        $rp->setValue($pricingSet, null);
 
         $element1 = new PricingElement();
         $pricingSet->addPricingElement($element1);
-        $pricingElementsCount++;
-        $this->assertEquals($pricingElementsCount, count($pricingSet->getPricingElements()));
+        $this->assertCount(1, $pricingSet->getPricingElements());
+        $this->assertSame($pricingSet, $element1->getPricingSet());
 
         $element2 = new PricingElement();
         $pricingSet->addPricingElement($element2);
-        $this->assertEquals($pricingElementsCount, count($pricingSet->getPricingElements()), 'should be still two');
+        $this->assertCount(2, $pricingSet->getPricingElements());
+
+        $elements[] = new PricingElement();
+        $elements[] = new PricingElement();
+        $pricingSet->addPricingElements($elements);
+        $this->assertCount(4, $pricingSet->getPricingElements());
+    }
+
+    public function testGetPricingElements()
+    {
+        $pricingSet = new PricingSet();
+        $rp = new \ReflectionProperty($pricingSet, 'pricingElements');
+        $rp->setAccessible(true);
+        $rp->setValue($pricingSet, null);
+
+        $element1 = new PricingElement();
+        $element1->setPosition(100);
+        $element2 = new PricingElement();
+        $element2->setPosition(1000);
+        $element3 = new PricingElement();
+        $element4 = new PricingElement();
+        $elements[] = $element1;
+        $elements[] = $element2;
+        $elements[] = $element3;
+        $elements[] = $element4;
+        $pricingSet->addPricingElements($elements);
+        $pricingElements = $pricingSet->getPricingElements();
+        $this->assertCount(4, $pricingElements);
+        $this->assertArrayHasKey(0, $pricingElements);
+        $this->assertArrayHasKey(1, $pricingElements);
+        $this->assertArrayHasKey(100, $pricingElements);
+        $this->assertArrayHasKey(1000, $pricingElements);
     }
 
     public function testProcess()
