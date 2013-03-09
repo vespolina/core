@@ -10,7 +10,7 @@ class PricingElement implements PricingElementInterface
 {
     protected $id;
     protected $attributes;
-    protected $position;
+    protected $position = 0;
     protected $pricingSet;
     protected $type;
 

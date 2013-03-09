@@ -19,7 +19,7 @@ class PricingSet implements PricingSetInterface
     const PROCESSING_UNPROCESSED = 0;
     const PROCESSING_FINISHED = 1;
 
-    public function __construct(array $customReturns = array())
+    public function __construct(array $customReturns = array(), array $globalPricingElements = array())
     {
         $defaultReturns = array(
             'discounts', 'netValue', 'surcharge', 'taxes', 'totalValue'
@@ -30,8 +30,7 @@ class PricingSet implements PricingSetInterface
             $this->processed[$return] = null;
         }
 
-        $this->pricingElements = new ArrayCollection();
-        $this->addPricingElement(new TotalValueElement());
+        $this->addPricingElements($globalPricingElements);
     }
 
     public function getId()
@@ -156,8 +155,17 @@ class PricingSet implements PricingSetInterface
 
     public function addPricingElement(PricingElementInterface $element)
     {
-        $this->pricingElements->add($element);
+        $this->pricingElements[] = $element;
         $element->setPricingSet($this);
+
+        return $this;
+    }
+
+    public function addPricingElements(array $elements)
+    {
+        foreach ($elements as $element) {
+            $this->addPricingElement($element);
+        }
 
         return $this;
     }
@@ -174,10 +182,13 @@ class PricingSet implements PricingSetInterface
         if (!$this->pricingElements) {
             return array();
         }
-        $elements = $this->pricingElements->toArray();
+        $elements = $this->pricingElements;
         $returnElements = array();
         foreach ($elements as $element) {
             $position = $element->getPosition();
+            while (isset($returnElements[$position])) {
+                $position ++;
+            }
             $returnElements[$position] = $element;
         }
         ksort($returnElements);
