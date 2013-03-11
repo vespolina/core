@@ -11,7 +11,8 @@ class PricingSet implements PricingSetInterface
 {
     protected $id;
     protected $context;
-    protected $processed;
+    protected $processedProperties;
+    protected $processedValues;
     protected $processingState = self::PROCESSING_UNPROCESSED;
     protected $returns;
     protected $pricingElements;
@@ -27,7 +28,7 @@ class PricingSet implements PricingSetInterface
         $this->returns = array_merge($defaultReturns, $customReturns);
 
         foreach ($this->returns as $return) {
-            $this->processed[$return] = null;
+            $this->processedValues[$return] = null;
         }
 
         $this->addPricingElements($globalPricingElements);
@@ -74,8 +75,12 @@ class PricingSet implements PricingSetInterface
             throw new \Exception('Accessing unprocessed pricing element ' . $name);
         }
 
-        if (isset($this->processed[$name])) {
-            return $this->processed[$name];
+        if (isset($this->processedValues[$name])) {
+            return $this->processedValues[$name];
+        }
+
+        if (isset($this->processedProperties[$name])) {
+            return $this->processedProperties[$name];
         }
 
         return null;
@@ -83,20 +88,26 @@ class PricingSet implements PricingSetInterface
 
     public function set($name, $value)
     {
-        $this->processed[$name] = $value;
+        if (is_object($value)) {
+            $this->processedValues[$name] = $value;
+        }
+        $this->processedProperties[$name] = $value;
 
         return $this;
     }
 
     public function has($name)
     {
-        return isset($this->processed[$name]);
+        return (bool) $this->get($name);
     }
 
     public function process($context = null)
     {
         // create empty array with keys from $this->processed
-        $processed = array();
+        $processed = array(
+            'properties' => array(),
+            'values' => array(),
+        );
 
         if (count($this->getPricingElements()) !== 0) {
             /** @var \Vespolina\Entity\Pricing\PricingElementInterface $element */
@@ -104,12 +115,13 @@ class PricingSet implements PricingSetInterface
                 $processed = array_merge($this->processed, $element->process($context, $processed));
             }
         } else {
-            $processed = $this->processed;
+            $processed = $this->getProcessed();
         }
 
 
         $newSet = new self();
-        $newSet->setProcessed($processed);
+        $newSet->setProcessedProperties($processed['properties']);
+        $newSet->setProcessedValues($processed['values']);
         $newSet->setProcessingState(self::PROCESSING_FINISHED);
         $this->processingState = self::PROCESSING_FINISHED;
 
@@ -196,16 +208,38 @@ class PricingSet implements PricingSetInterface
         return $returnElements;
     }
 
-    public function setProcessed($processed)
+    public function setProcessedProperties($properties)
     {
-        $this->processed = $processed;
+        $this->processedProperties = $properties;
 
         return $this;
     }
 
+    public function getProcessedProperties()
+    {
+        return $this->processedProperties;
+    }
+
+    public function setProcessedValues($values)
+    {
+        $this->processedValues = $values;
+
+        return $this;
+    }
+
+    public function getProcessedValues()
+    {
+        return $this->processedValues;
+    }
+
     public function getProcessed()
     {
-        return $this->processed;
+        $processed = array(
+            'properties' => $this->processedProperties,
+            'values' => $this->processedValues,
+        );
+
+        return $processed;
     }
 
     public function setProcessingState($processingState)
