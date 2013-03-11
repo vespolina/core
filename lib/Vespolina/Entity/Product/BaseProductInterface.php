@@ -36,6 +36,16 @@ interface BaseProductInterface
     function getDescription();
 
     /**
+     *
+     */
+    function addAttribute(AttributeInterface $attribute);
+
+    /**
+     *
+     */
+    function addAttributes(array $attributes);
+
+    /**
      * Remove all features from the product
      */
     function clearAttributes();
