@@ -14,6 +14,12 @@ use Vespolina\Entity\Pricing\PricingSetInterface;
 
 class PricingSet implements PricingSetInterface
 {
+    protected $id;
+    protected $context;
+    protected $processedProperties;
+    protected $processedValues;
+    protected $processingState = self::PROCESSING_UNPROCESSED;
+    protected $returns;
     protected $pricingElements;
 
     const PROCESSING_UNPROCESSED = 0;
@@ -27,7 +33,7 @@ class PricingSet implements PricingSetInterface
         $this->returns = array_merge($defaultReturns, $customReturns);
 
         foreach ($this->returns as $return) {
-            $this->processed[$return] = null;
+            $this->processedValues[$return] = null;
         }
 
         $this->addPricingElements($globalPricingElements);
@@ -69,14 +75,87 @@ class PricingSet implements PricingSetInterface
             throw new \Exception('Accessing unprocessed pricing element ' . $name);
         }
 
-        if (isset($this->processed[$name])) {
-            return $this->processed[$name];
+        if (isset($this->processedValues[$name])) {
+            return $this->processedValues[$name];
+        }
+
+        if (isset($this->processedProperties[$name])) {
+            return $this->processedProperties[$name];
         }
     }
 
     public function set($name, $value)
     {
-        $this->pricingElements[$name] = $value;
+        if (is_object($value)) {
+            $this->processedValues[$name] = $value;
+        }
+        $this->processedProperties[$name] = $value;
+
+        return $this;
+    }
+
+    public function has($name)
+    {
+        return (bool) $this->get($name);
+    }
+
+    public function process($context = null)
+    {
+        // create empty array with keys from $this->processed
+        $processed = array(
+            'properties' => array(),
+            'values' => array(),
+        );
+
+        if (count($this->getPricingElements()) !== 0) {
+            /** @var \Vespolina\Entity\Pricing\PricingElementInterface $element */
+            foreach ($this->getPricingElements() as $element) {
+                $processed = array_merge($this->processed, $element->process($context, $processed));
+            }
+        } else {
+            $processed = $this->getProcessed();
+        }
+
+
+        $newSet = new self();
+        $newSet->setProcessedProperties($processed['properties']);
+        $newSet->setProcessedValues($processed['values']);
+        $newSet->setProcessingState(self::PROCESSING_FINISHED);
+        $this->processingState = self::PROCESSING_FINISHED;
+
+        return $newSet;
+    }
+
+    public function plus($addSet)
+    {
+        $newSet = new self();
+        foreach ($this->getProcessed() as $key => $value) {
+            if (!is_scalar($value)) {
+                continue;
+            }
+            $newSet->set($key, $value);
+        }
+
+        if ($addSet instanceof PricingSetInterface) {
+            foreach ($addSet->getProcessed() as $key => $value) {
+                if (!is_scalar($value)) {
+                    continue;
+                }
+                $total = $this->get($key) + $value;
+                $newSet->set($key, $total);
+            }
+        }
+
+        $newSet->setProcessingState(self::PROCESSING_FINISHED);
+
+        return $newSet;
+    }
+
+    public function setContext($context)
+    {
+        $this->context = $context;
+
+        return $this;
     }
 
     public function getContext()
@@ -128,16 +207,38 @@ class PricingSet implements PricingSetInterface
         return $returnElements;
     }
 
-    public function setProcessed($processed)
+    public function setProcessedProperties($properties)
     {
-        $this->processed = $processed;
+        $this->processedProperties = $properties;
 
         return $this;
     }
 
+    public function getProcessedProperties()
+    {
+        return $this->processedProperties;
+    }
+
+    public function setProcessedValues($values)
+    {
+        $this->processedValues = $values;
+
+        return $this;
+    }
+
+    public function getProcessedValues()
+    {
+        return $this->processedValues;
+    }
+
     public function getProcessed()
     {
-        return $this->processed;
+        $processed = array(
+            'properties' => $this->processedProperties,
+            'values' => $this->processedValues,
+        );
+
+        return $processed;
     }
 
     public function setProcessingState($processingState)
