@@ -14,24 +14,26 @@ class PricingSet implements PricingSetInterface
     protected $processedProperties;
     protected $processedValues;
     protected $processingState = self::PROCESSING_UNPROCESSED;
-    protected $returns;
+    protected $returnValues;
     protected $pricingElements;
+    protected $valueElement;
 
     const PROCESSING_UNPROCESSED = 0;
     const PROCESSING_FINISHED = 1;
 
-    public function __construct(array $customReturns = array(), array $globalPricingElements = array())
+    public function __construct(PricingElementValueInterface $valueElement, array $customValues = array(), array $globalPricingElements = array())
     {
-        $defaultReturns = array(
+        $defaultValues = array(
             'discounts', 'netValue', 'surcharge', 'taxes', 'totalValue'
         );
-        $this->returns = array_merge($defaultReturns, $customReturns);
+        $this->returnValues = array_merge($defaultValues, $customValues);
 
-        foreach ($this->returns as $return) {
+        foreach ($this->returnValues as $return) {
             $this->processedValues[$return] = null;
         }
 
         $this->addPricingElements($globalPricingElements);
+        $this->valueElement = $valueElement;
     }
 
     public function getId()
@@ -88,8 +90,10 @@ class PricingSet implements PricingSetInterface
 
     public function set($name, $value)
     {
-        if (is_object($value)) {
+        if (array_key_exists($name, $this->processedValues) || (is_object($value))) {
             $this->processedValues[$name] = $value;
+
+            return $this;
         }
         $this->processedProperties[$name] = $value;
 
@@ -118,8 +122,7 @@ class PricingSet implements PricingSetInterface
             $processed = $this->getProcessed();
         }
 
-
-        $newSet = new self();
+        $newSet = new self($this->valueElement);
         $newSet->setProcessedProperties($processed['properties']);
         $newSet->setProcessedValues($processed['values']);
         $newSet->setProcessingState(self::PROCESSING_FINISHED);
@@ -128,24 +131,19 @@ class PricingSet implements PricingSetInterface
         return $newSet;
     }
 
-    public function plus($addSet)
+    public function add($addSet)
     {
-        $newSet = new self();
-        foreach ($this->getProcessed() as $key => $value) {
-            if (!is_scalar($value)) {
-                continue;
-            }
-            $newSet->set($key, $value);
-        }
+        $newSet = new self($this->valueElement);
+        $newSet->setProcessedProperties($this->getProcessedProperties());
 
         if ($addSet instanceof PricingSetInterface) {
-            foreach ($addSet->getProcessed() as $key => $value) {
-                if (!is_scalar($value)) {
-                    continue;
-                }
-                $total = $this->get($key) + $value;
+            foreach ($addSet->getProcessedValues() as $key => $value) {
+
+                $total = $this->valueElement->add($this->get($key), $value);
                 $newSet->set($key, $total);
             }
+        } else {
+            $newSet->setProcessedValues($this->getProcessedValues());
         }
 
         $newSet->setProcessingState(self::PROCESSING_FINISHED);
@@ -256,14 +254,14 @@ class PricingSet implements PricingSetInterface
 
     public function setReturns($returns)
     {
-        $this->returns = $returns;
+        $this->returnValues = $returns;
 
         return $this;
     }
 
-    public function getReturns()
+    public function getReturnValues()
     {
-        return $this->returns;
+        return $this->returnValues;
     }
 
     public function offsetExists($offset)
