@@ -9,19 +9,20 @@ use Vespolina\Exception\FunctionNotSupportedException;
 class PricingElement implements PricingElementInterface
 {
     protected $id;
-    protected $attributes;
     protected $position = 0;
     protected $pricingSet;
+    protected $properties;
     protected $type;
+    protected $values;
 
     public function __construct()
     {
-        $this->attributes['netValue']  = '';
+        $this->values['netValue']  = '';
     }
 
     public function setNetValue($netValue)
     {
-        $this->attributes['netValue']  = $netValue;
+        $this->values['netValue']  = $netValue;
 
         return $this;
     }

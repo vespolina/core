@@ -8,73 +8,73 @@ class RecurringElement extends PricingElement
 {
     public function __construct()
     {
-        $this->attributes['cycles']  = '';
-        $this->attributes['recurringCharge'] = '';
-        $this->attributes['interval']  = '';
-        $this->attributes['startsIn'] = null;
+        $this->properties['cycles']  = '';
+        $this->values['recurringCharge'] = '';
+        $this->properties['interval']  = '';
+        $this->properties['startsIn'] = null;
 
         parent::__construct();
     }
 
     public function setCycles($cycles)
     {
-        $this->attributes['cycles'] = $cycles;
+        $this->properties['cycles'] = $cycles;
 
         return $this;
     }
 
     public function getCycles()
     {
-        return $this->attributes['cycles'];
+        return $this->properties['cycles'];
     }
 
     public function setInterval($interval)
     {
-        $this->attributes['interval'] = $interval;
+        $this->properties['interval'] = $interval;
 
         return $this;
     }
 
     public function getInterval()
     {
-        return $this->attributes['interval'];
+        return $this->properties['interval'];
     }
 
     public function setRecurringCharge($recurringCharge)
     {
-        $this->attributes['recurringCharge'] = $recurringCharge;
+        $this->values['recurringCharge'] = $recurringCharge;
 
         return $this;
     }
 
     public function getRecurringCharge()
     {
-        return $this->attributes['recurringCharge'];
+        return $this->values['recurringCharge'];
     }
 
     public function setStartsIn($startsIn)
     {
-        $this->attributes['startsIn'] = $startsIn;
+        $this->properties['startsIn'] = $startsIn;
 
         return $this;
     }
 
     public function getStartsIn()
     {
-        return $this->attributes['startsIn'];
+        return $this->properties['startsIn'];
     }
 
     protected function doProcess($context, $processed)
     {
-        $processed['netValue'] = $this->attributes['netValue'];
-        $processed['recurringCharge'] = $this->attributes['recurringCharge'];
-        $processed['interval'] = $this->attributes['interval'];
-        $processed['cycles'] = $this->attributes['cycles'];
-        if (!$this->attributes['startsIn']) {
-            $processed['startsOn'] = new \DateTime('today +' . $processed['interval']);
+        $processed['values']['recurringCharge'] = $this->values['recurringCharge'];
+        $processed['properties']['interval'] = $this->properties['interval'];
+        $processed['properties']['cycles'] = $this->properties['cycles'];
+        if (!$this->properties['startsIn']) {
+            $startsOn = new \DateTime('today +' . $processed['properties']['interval']);
         } else {
-            $processed['startsOn'] = new \DateTime('today +' . $this->attributes['startsIn']);
+            $startsOn = new \DateTime('today +' . $this->properties['startsIn']);
         }
+        $processed['properties']['startsOn'] = $startsOn->format('c');
 
         return $processed;
     }
