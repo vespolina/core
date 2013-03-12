@@ -39,44 +39,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $taxonomies;
     protected $type;
     protected $updatedAt;
-    protected $pricingSet = array();
-
-    /**
-     * @param $pricingSet
-     * @return array
-     */
-    public function setPricing(PricingSetInterface $pricingSet)
-    {
-        $this->pricingSet = $pricingSet;
-
-        return $this;
-    }
-
-    /**
-     * @return array $priceSet
-     */
-    public function getPricing()
-    {
-        return $this->pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
+    protected $pricingSet;
 
     /**
      * @inheritdoc
@@ -155,6 +118,24 @@ abstract class BaseProduct implements BaseProductInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -259,6 +240,25 @@ abstract class BaseProduct implements BaseProductInterface
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * @param $pricingSet
+     * @return array
+     */
+    public function setPricing(PricingSetInterface $pricingSet)
+    {
+        $this->pricingSet = $pricingSet;
+
+        return $this;
+    }
+
+    /**
+     * @return array $priceSet
+     */
+    public function getPricing()
+    {
+        return $this->pricingSet;
     }
 
     /**

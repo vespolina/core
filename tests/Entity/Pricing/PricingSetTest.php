@@ -7,7 +7,8 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddElements()
     {
-        $pricingSet = new PricingSet();
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface');
+        $pricingSet = new PricingSet($valueElement);
         $rp = new \ReflectionProperty($pricingSet, 'pricingElements');
         $rp->setAccessible(true);
         $rp->setValue($pricingSet, null);
@@ -27,9 +28,101 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(4, $pricingSet->getPricingElements());
     }
 
+    public function testSet()
+    {
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface');
+        $pricingSet = new PricingSet($valueElement);
+
+        $pricingSet->set('totalValue', 3);
+        $processedValues = $pricingSet->getProcessedValues();
+        $this->assertSame(3, $processedValues['totalValue'], 'a preset value should return regardless of type');
+        if ($pricingSet->getProcessedProperties()) {
+            $this->assertArrayNotHasKey('totalValue', $pricingSet->getProcessedProperties(), 'an value should not be a property');
+        }
+
+        $object = new stdClass();
+        $pricingSet->set('somethingElse', $object);
+        $processedValues = $pricingSet->getProcessedValues();
+        $this->assertSame($object, $processedValues['somethingElse'], 'an object should be set as a value');
+        if ($pricingSet->getProcessedProperties()) {
+            $this->assertArrayNotHasKey('somethingElse', $pricingSet->getProcessedProperties(), 'an object should not be a property');
+        }
+
+        $pricingSet->set('andNowForSomethingCompletelyDifferent', 43);
+        $processedProperties = $pricingSet->getProcessedProperties();
+        $this->assertSame(43, $processedProperties['andNowForSomethingCompletelyDifferent'], 'a scalar should be set as a property');
+        $this->assertArrayNotHasKey('andNowForSomethingCompletelyDifferent', $pricingSet->getProcessedValues(), 'a scalar should not be a value');
+    }
+
+    public function testGet()
+    {
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface');
+        $pricingSet = new PricingSet($valueElement);
+
+        $object = new stdClass();
+        $pricingSet->setProcessedProperties(array('thisPropertyExists' => 10));
+        $pricingSet->setProcessedValues(array('thisValueExists' => $object));
+        $pricingSet->setProcessingState(PricingSet::PROCESSING_FINISHED);
+        $this->assertNull($pricingSet->get('noWayInHellThisExists'));
+
+        $this->assertEquals(10, $pricingSet->get('thisPropertyExists'));
+        $this->assertEquals($object, $pricingSet->get('thisValueExists'));
+    }
+
+    public function testAdd()
+    {
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface', array('add'));
+        $valueElement
+            ->expects($this->any())
+            ->method('add')
+            ->will($this->returnValue(5));
+        $pricingSet1 = new PricingSet($valueElement);
+        $pricingSet1->set('discounts', 5);
+        $pricingSet1->set('netValue', 5);
+        $pricingSet1->set('surcharge', 5);
+        $pricingSet1->set('taxes', 5);
+        $pricingSet1->set('totalValue', 5);
+        $pricingSet1->setProcessingState(PricingSet::PROCESSING_FINISHED);
+
+        $sumPricingSet = $pricingSet1->add(null);
+        $this->assertInstanceOf('Vespolina\Entity\Pricing\PricingSetInterface', $sumPricingSet, 'a pricing set should be returned when nothing is added');
+        $this->assertNotSame($pricingSet1, $sumPricingSet, 'the new set should be a new object');
+        $this->assertEquals('5', $sumPricingSet->get('discounts'), 'the final value should be 5');
+        $this->assertEquals('5', $sumPricingSet->get('netValue'), 'the final value should be 5');
+        $this->assertEquals('5', $sumPricingSet->get('surcharge'), 'the final value should be 5');
+        $this->assertEquals('5', $sumPricingSet->get('taxes'), 'the final value should be 5');
+        $this->assertEquals('5', $sumPricingSet->get('totalValue'), 'the final value should be 5');
+
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface', array('add'));
+        $valueElement
+            ->expects($this->any())
+            ->method('add')
+            ->will($this->returnValue(10));
+        $pricingSet2 = new PricingSet($valueElement);
+        $pricingSet2->set('discounts', 5);
+        $pricingSet2->set('netValue', 5);
+        $pricingSet2->set('surcharge', 5);
+        $pricingSet2->set('taxes', 5);
+        $pricingSet2->set('totalValue', 5);
+        $pricingSet2->setProcessingState(PricingSet::PROCESSING_FINISHED);
+
+        $sumPricingSet = $pricingSet2->add($pricingSet1);
+        $this->assertInstanceOf('Vespolina\Entity\Pricing\PricingSetInterface', $sumPricingSet, 'a pricing set should be returned');
+        $this->assertNotSame($pricingSet1, $sumPricingSet, 'the new set should be a new object');
+        $this->assertNotSame($pricingSet2, $sumPricingSet, 'the new set should be a new object');
+        $this->assertEquals('10', $sumPricingSet->get('discounts'), 'the final value should be 10');
+        $this->assertEquals('10', $sumPricingSet->get('netValue'), 'the final value should be 10');
+        $this->assertEquals('10', $sumPricingSet->get('surcharge'), 'the final value should be 10');
+        $this->assertEquals('10', $sumPricingSet->get('taxes'), 'the final value should be 10');
+        $this->assertEquals('10', $sumPricingSet->get('totalValue'), 'the final value should be 10');
+
+        $this->markTestIncomplete('implement inclusions/exclusions from adding process by passing array (either white or black list?)');
+    }
+
     public function testGetPricingElements()
     {
-        $pricingSet = new PricingSet();
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface');
+        $pricingSet = new PricingSet($valueElement);
         $rp = new \ReflectionProperty($pricingSet, 'pricingElements');
         $rp->setAccessible(true);
         $rp->setValue($pricingSet, null);
@@ -55,7 +148,8 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
 
     public function testProcess()
     {
-        $pricingSet = new PricingSet();
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface');
+        $pricingSet = new PricingSet($valueElement);
 
         $elementNetValue = $this->getMock('Vespolina\Entity\Pricing\PricingElement', array('process'));
         $elementNetValue->expects($this->any())
@@ -67,7 +161,7 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(array('discount' => '.99')));
 
         $this->markTestIncomplete(
-            'Pricing processingneeds better a better test'
+            'Pricing processing needs better a better test'
         );
         $pricingSet->process();
 
