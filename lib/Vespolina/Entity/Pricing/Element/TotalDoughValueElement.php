@@ -21,14 +21,14 @@ class TotalDoughValueElement extends PricingElement implements PricingElementVal
 
     protected function doProcess($context, $processed)
     {
-        $totalValue = $processed['netValue']->reduce($processed['discounts']);
-        if (isset($processed['surcharge'])) {
-            $totalValue = $totalValue->plus($processed['surcharge']);
+        $totalValue = $processed['values']['netValue']->reduce($processed['values']['discounts']);
+        if (isset($processed['values']['surcharge'])) {
+            $totalValue = $totalValue->plus($processed['values']['surcharge']);
         }
-        if (isset($processed['taxes'])) {
-            $totalValue = $totalValue->plus($processed['taxes']);
+        if (isset($processed['values']['taxes'])) {
+            $totalValue = $totalValue->plus($processed['values']['taxes']);
         }
-        $processed['totalValue'] = $totalValue;
+        $processed['values']['totalValue'] = $totalValue;
 
         return $processed;
     }
