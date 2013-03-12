@@ -15,11 +15,20 @@ class PricingElement implements PricingElementInterface
     protected $attributes;
     protected $position = 0;
     protected $pricingSet;
+    protected $properties;
     protected $type;
+    protected $values;
 
     public function __construct()
     {
-        $attribute['netValue']  = '';
+        $this->values['netValue']  = '';
+    }
+
+    public function setNetValue($netValue)
+    {
+        $this->values['netValue']  = $netValue;
+
+        return $this;
     }
 
     /**
