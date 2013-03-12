@@ -1,15 +1,13 @@
 <?php
 
-use Vespolina\Entity\Pricing\Element\RecurringElement;
+use Vespolina\Entity\Pricing\Element\TotalDoughValueElement;
 
-class RecurringElementTest extends \PHPUnit_Framework_TestCase
+class TotalDoughValueElementTest extends \PHPUnit_Framework_TestCase
 {
     public function testDoProcess()
     {
-        $recurringElement = new RecurringElement();
-        $recurringElement->setCycles(-1);
-        $recurringElement->setInterval('1 month');
-        $recurringElement->setRecurringCharge('30');
+        $recurringElement = new TotalDoughValueElement();
+
 
         $context = new \Vespolina\Entity\Pricing\PricingContext();
         $processed = $recurringElement->process($context, array());
