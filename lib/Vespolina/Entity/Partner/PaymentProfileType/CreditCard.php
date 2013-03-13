@@ -6,100 +6,73 @@ use Vespolina\Entity\Partner\PaymentProfile;
 
 class CreditCard extends PaymentProfile
 {
-    protected $activeCardNumber;
-    protected $activeCVV;
-    protected $cardType;
+    // mapped
+    protected $last4digits;
+
+    // not mapped
+    protected $cardNumber;
+    protected $cvv;
     protected $expiration;
-    protected $persistedCardNumber;
-    protected $persistedCVV;
-    public $cardInformationChanged = false;
-    protected $notifiedAt;
+    protected $cardInformationChanged = false;
 
     /**
-     * @param string $cardNumber
+     * @param $last4digits
+     * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
+     */
+    public function setLast4digits($last4digits)
+    {
+        $this->last4digits = $last4digits;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLast4digits()
+    {
+        return $this->last4digits;
+    }
+
+    /**
+     * @param $cardNumber
      * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
      */
     public function setCardNumber($cardNumber)
     {
-        if ($cardNumber != $this->persistedCardNumber) {
-            $this->activeCardNumber = preg_replace('/\D/', '', $cardNumber);
-            $this->persistedCardNumber = str_repeat('*', 12) . substr($this->activeCardNumber, -4);
-            $this->cardInformationChanged = true;
-        }
+        $this->cardNumber = preg_replace('/\D/', '', $cardNumber);
 
         return $this;
     }
 
     /**
-     * @param $CVV
+     * @param $cvv
+     * @internal param $CVV
      * @return CreditCard
      */
-    public function setCVV($CVV)
+    public function setCVV($cvv)
     {
-        if ($CVV != $this->persistedCVV) {
-            $this->persistedCVV = str_repeat('*', strlen($CVV));
-            $this->activeCVV = $CVV;
-            $this->cardInformationChanged = true;
-        }
+        $this->cvv = $cvv;
 
         return $this;
     }
 
-    public function getCardLast4Digits()
-    {
-        if ($this->persistedCardNumber !== null && strlen($this->persistedCardNumber) == 16) {
-
-            return substr($this->persistedCardNumber, -4);
-        }
-
-        throw new \Exception("The persisted card number is not valid");
-    }
-
     /**
-     * @param boolean $active
+     * @internal param bool $active
      * @return mixed
      */
-    public function getCardNumber($active = false)
+    public function getCardNumber()
     {
-        if ($active) {
-
-            return $this->activeCardNumber;
-        }
-
-        return $this->persistedCardNumber;
+        return $this->cardNumber;
     }
 
     /**
      * @param bool $active
      * @return mixed
      */
-    public function getCVV($active = false)
+    public function getCVV()
     {
-        if ($active) {
-
-            return $this->activeCVV;
-        }
-
-        return $this->persistedCVV;
-    }
-
-    /**
-     * @param $cardType
-     * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
-     */
-    public function setCardType($cardType)
-    {
-        $this->cardType = $cardType;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCardType()
-    {
-        return $this->cardType;
+        return $this->cvv;
     }
 
     /**
@@ -108,10 +81,6 @@ class CreditCard extends PaymentProfile
      */
     public function setExpiration(\DateTime $expiration)
     {
-        if ($this->expiration !== null && $this->expiration->format('Y-m-d') != $expiration->format('Y-m-d')) {
-            $this->cardInformationChanged = true;
-        }
-
         $this->expiration = $expiration;
 
         return $this;
@@ -125,14 +94,20 @@ class CreditCard extends PaymentProfile
         return $this->expiration;
     }
 
+    /**
+     * @return string
+     */
     public function getType()
     {
         return self::PAYMENT_PROFILE_TYPE_CREDIT_CARD;
     }
 
+    /**
+     * @return bool
+     */
     public function isSetup()
     {
-        if ($this->getReference() === null || $this->getExpiration() < new \DateTime('now')) {
+        if ($this->getReference() === null) {
 
             return false;
         }
@@ -141,21 +116,19 @@ class CreditCard extends PaymentProfile
     }
 
     /**
-     * @return \DateTime
+     * @param $cardInformationChanged
      */
-    public function getNotifiedAt()
+    public function setCardInformationChanged($cardInformationChanged)
     {
-        return $this->notifiedAt;
+        $this->cardInformationChanged = $cardInformationChanged;
     }
 
     /**
-     * @param \DateTime $notifiedAt
-     * @return CreditCard
+     * @return mixed
      */
-    public function setNotifiedAt(\DateTime $notifiedAt)
+    public function getCardInformationChanged()
     {
-        $this->notifiedAt = $notifiedAt;
-
-        return $this;
+        return $this->cardInformationChanged;
     }
+
 }
