@@ -8,7 +8,8 @@
 
 namespace Vespolina\Entity\Billing;
 
-use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Entity\Billing\BillingAgreementInterface;
+use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
  * An interface for a request to bill a party
@@ -18,19 +19,36 @@ use Vespolina\Entity\Order\OrderInterface;
 interface BillingRequestInterface
 {
     /**
-     * Get the last date when the billing run was performed for this item
+     * Add a billing agreement which originated into this billing request.
+     * Multiple business agreements can merge into one billing request
+     *
+     * @return mixed
+     */
+    function addBillingAgreement(BillingAgreementInterface $billingAgreement);
+
+    /**
+     * Return the list of billing agreements resulting into this billing request
+     * @return mixed
+     */
+    function getBillingAgreements();
+
+    /**
+     * Get the date on which the billing was effectively performed
      *
      *
      * @return \DateTime
      */
     function getBillingDate();
 
+    function setBillingDate(\DateTime $billingDate);
     /**
      * Return the partner we would like to bill
      *
      * @return \Vespolina\Entity\Partner\PartnerInterface
      */
-    function getBillingParty();
+    function getOwner();
+
+    function setOwner(PartnerInterface $partner);
 
     /**
      * Get the earliest moment we can execute this billing request
@@ -38,6 +56,8 @@ interface BillingRequestInterface
      * @return \DateTime
      */
     function getPlannedBillingDate();
+
+    function setPlannedBillingDate(\DateTime $plannedBillingDate);
 
     /**
      * Return if the billing request is blocked from being executed
