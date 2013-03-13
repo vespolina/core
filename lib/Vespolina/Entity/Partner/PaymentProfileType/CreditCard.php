@@ -41,6 +41,7 @@ class CreditCard extends PaymentProfile
     public function setCardNumber($cardNumber)
     {
         $this->cardNumber = preg_replace('/\D/', '', $cardNumber);
+        $this->setLast4digits(substr($this->cardNumber, -4));
 
         return $this;
     }
@@ -58,7 +59,6 @@ class CreditCard extends PaymentProfile
     }
 
     /**
-     * @internal param bool $active
      * @return mixed
      */
     public function getCardNumber()
@@ -131,4 +131,8 @@ class CreditCard extends PaymentProfile
         return $this->cardInformationChanged;
     }
 
+    public function isCardInformationChanged()
+    {
+        return $this->getCardInformationChanged() == true;
+    }
 }
