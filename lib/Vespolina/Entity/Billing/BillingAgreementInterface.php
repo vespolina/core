@@ -52,14 +52,14 @@ interface BillingAgreementInterface
      */
     function getBillingInterval();
 
-    function setInitialBillingDate(\DateTime $initialBillingDate);
+    function setPlannedBillingDate(\DateTime $plannedBillingDate);
 
     /*
      * Return the date when the first billing request should be created
      *
      * @return /DateTime
      */
-    function getInitialBillingDate();
+    function getPlannedBillingDate();
 
     function setOrder(OrderInterface $order);
 
@@ -69,9 +69,9 @@ interface BillingAgreementInterface
 
     function getOrderItems();
 
-    function setPartner(PartnerInterface $partner);
+    function setOwner(PartnerInterface $owner);
 
-    function getPartner();
+    function getOwner();
 
     function setPaymentGateway($paymentGateway);
 
