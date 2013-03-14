@@ -34,9 +34,11 @@ class BillingRequest implements BillingRequestInterface
     const STATE_PAID = 'paid';              //Cancelled by administration
     const STATE_CLOSED = 'closed';          //(optional) processing after payment received was completed
 
+    protected $consumption;
     protected $createdAt;
     protected $billingAgreements;
     protected $billingDate;
+    protected $id;
     protected $plannedBillingDate;
     protected $owner;
     protected $paymentProfile;
@@ -49,6 +51,11 @@ class BillingRequest implements BillingRequestInterface
     {
         $this->billingAgreements = array();
         $this->consumption = array();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function addBillingAgreement(BillingAgreementInterface $billingAgreement)
@@ -108,17 +115,6 @@ class BillingRequest implements BillingRequestInterface
     public function isBlocked()
     {
         return $this->state == self::STATE_BLOCKED;
-    }
-
-
-
-    public function autoSetCreatedAt()
-    {
-        if (null === $this->createdAt) {
-            $this->createdAt = new \DateTime();
-        }
-
-        return $this;
     }
 
     /**
@@ -226,4 +222,22 @@ class BillingRequest implements BillingRequestInterface
     {
         return $this->state;
     }
+
+    public function autoSetCreatedAt()
+    {
+        if (null === $this->createdAt) {
+            $this->createdAt = new \DateTime();
+        }
+        $this->autoSetUpdatedAt();
+
+        return $this;
+    }
+
+    public function autoSetUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+
+        return $this;
+    }
+
 }
