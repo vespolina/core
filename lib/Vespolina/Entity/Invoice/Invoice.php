@@ -21,15 +21,23 @@ use Vespolina\Entity\Partner\PartnerInterface;
  */
 class Invoice implements InvoiceInterface
 {
+
+    const TYPE_STANDARD = 'standard';       //Default invoice, to be paid
+    const TYPE_PRO_FORMA = 'pro_forma';     //Legal pro forma document, already paid when the entity was created
+    const TYPE_CREDIT_MEMO = 'credit_memo'; //Invoice to credit the customer
+
+    protected $createdAt;
     protected $dueDate;
     protected $id;
     protected $issuedDate;
+    protected $fiscalYear;
     protected $orders;
     protected $partner;
+    protected $paymentTerms;
     protected $payment;
-    protected $periodEnd;
-    protected $periodStart;
-    protected $previousInvoice;
+    protected $reference;   //eg. sales or purchase order #
+    protected $type;
+    protected $updatedAt;
 
     public function __construct() {
         $this->orders = new ArrayCollection();
@@ -57,6 +65,18 @@ class Invoice implements InvoiceInterface
     {
         return $this->dueDate;
     }
+
+    public function setFiscalYear($fiscalYear)
+    {
+        $this->fiscalYear = $fiscalYear;
+    }
+
+    public function getFiscalYear()
+    {
+        return $this->fiscalYear;
+    }
+
+
 
     /**
      * @inheritdoc
@@ -177,57 +197,16 @@ class Invoice implements InvoiceInterface
         return $this->payment;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setPeriodEnd(\DateTime $periodEnd)
+    public function setType($type)
     {
-        $this->periodEnd = $periodEnd;
-
-        return $this;
+        $this->type = $type;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getPeriodEnd()
+    public function getType()
     {
-        return $this->periodEnd;
+        return $this->type;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setPeriodStart(\DateTime $periodStart)
-    {
-        $this->periodStart = $periodStart;
 
-        return $this;
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function getPeriodStart()
-    {
-        return $this->periodStart;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPreviousInvoice(InvoiceInterface $previousInvoice)
-    {
-        $this->previousInvoice = $previousInvoice;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPreviousInvoice()
-    {
-        return $this->previousInvoice;
-    }
 }
