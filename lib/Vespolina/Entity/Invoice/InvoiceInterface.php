@@ -34,6 +34,21 @@ interface InvoiceInterface
     function getDueDate();
 
     /**
+     * Set the fiscal year to which this invoice should be posted to
+     *
+     * (eg. you can have an invoice created in January 2014 which should go to fiscal year 2013)
+     * @param $fiscalYear
+     * @return mixed
+     */
+    function setFiscalYear($fiscalYear);
+
+    /**
+     * Return the fiscal year
+     *
+     * @return mixed
+     */
+    function getFiscalYear();
+    /**
      * Set the issued date of this invoice
      *
      * @param \DateTime $issuedDate
@@ -124,48 +139,4 @@ interface InvoiceInterface
      */
     function getPayment();
 
-    /**
-     * Set the end of the billing period for this invoice
-     *
-     * @param \DateTime $periodEnd
-     * @return $this
-     */
-    function setPeriodEnd(\DateTime $periodEnd);
-
-    /**
-     * Return the end of the billing period of this invoice
-     *
-     * @return \DateTime
-     */
-    function getPeriodEnd();
-
-    /**
-     * Set the start of the billing period for this invoice
-     *
-     * @param \DateTime $periodEnd
-     * @return $this
-     */
-    function setPeriodStart(\DateTime $periodStart);
-
-    /**
-     * Return the start of the billing period of this invoice
-     *
-     * @return \DateTime
-     */
-    function getPeriodStart();
-        
-    /**
-     * Set previously created Invoice for the Partner, can be used for reporting
-     *
-     * @param \Vespolina\Entity\Partner\InvoiceInterface $previousInvoice
-     * @return $this
-     */
-    function setPreviousInvoice(InvoiceInterface $previousInvoice);
-
-    /**
-     * Return the previous invoice for the Partner
-     *
-     * @return \Vespolina\Entity\Partner\InvoiceInterface
-     */
-    function getPreviousInvoice();
 }

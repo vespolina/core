@@ -57,15 +57,6 @@ interface BillingRequestInterface
     function setConsumption(array $consumption);
 
     /**
-     * Return the partner we would like to bill
-     *
-     * @return \Vespolina\Entity\Partner\PartnerInterface
-     */
-    function getOwner();
-
-    function setOwner(PartnerInterface $partner);
-    
-    /**
      * Return the start of period we are billing for
      *
      * @return \DateTime
