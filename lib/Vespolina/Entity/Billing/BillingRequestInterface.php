@@ -41,6 +41,21 @@ interface BillingRequestInterface
     function getBillingDate();
 
     function setBillingDate(\DateTime $billingDate);
+    
+    /**
+     * Add a consumption for this billing request
+     * Eg. key = bandwith_consumed, $value = 800 
+     */
+    function addConsumption($key, $value);    
+     
+    /**
+     * Get the consumption data for this billing request
+     * For instance, consumed server traffic, number of app downloads, ... 
+     */
+    function getConsumption();
+
+    function setConsumption(array $consumption);
+
     /**
      * Return the partner we would like to bill
      *
@@ -49,10 +64,31 @@ interface BillingRequestInterface
     function getOwner();
 
     function setOwner(PartnerInterface $partner);
-
+    
     /**
-     * Get the earliest moment we can execute this billing request
+     * Return the start of period we are billing for
      *
+     * @return \DateTime
+     */
+    function getPeriodStart();
+    
+    function setPeriodStart(\DateTime $periodStart);
+    /**
+     * Return the end of period we are billing for
+     * The period covers the billing request including the end date.
+     *
+     * Typical use cases:
+     * - From 1/1 to 31/1 (European notation) includes 31/1 if only the date is relevant
+     * - From 1/1 00:00 to 30/1 : 23:59:59 if time is relevant as well
+     * @return \DateTime
+     */
+
+    function getPeriodEnd();
+    
+    function setPeriodEnd(\DateTime $periodEnd);
+    /**
+     * Get the earliest moment we can startexecuting this billing request
+     * 
      * @return \DateTime
      */
     function getPlannedBillingDate();

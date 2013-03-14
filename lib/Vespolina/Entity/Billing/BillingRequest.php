@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Billing;
 
 use Vespolina\Entity\Billing\BillingRequestInterface;
+use Vespolina\Entity\Partner\PartnerInterface;
 use Vespolina\Entity\Partner\PaymentProfileInterface;
 
 class BillingRequest implements BillingRequestInterface
@@ -33,23 +34,28 @@ class BillingRequest implements BillingRequestInterface
     const STATE_PAID = 'paid';              //Cancelled by administration
     const STATE_CLOSED = 'closed';          //(optional) processing after payment received was completed
 
-    protected $billingAgreements;
     protected $createdAt;
+    protected $billingAgreements;
     protected $billingDate;
     protected $plannedBillingDate;
     protected $owner;
     protected $paymentProfile;
+    protected $periodStart;
+    protected $periodEnd;
     protected $pricingSet;
     protected $state;
 
     public function __construct()
     {
         $this->billingAgreements = array();
+        $this->consumption = array();
     }
 
     public function addBillingAgreement(BillingAgreementInterface $billingAgreement)
     {
         $this->billingAgreements[] = $billingAgreement;
+
+        return $this;
     }
 
     public function getBillingAgreements()
@@ -73,6 +79,24 @@ class BillingRequest implements BillingRequestInterface
     {
         $this->billingDate = $date;
 
+        return $this;
+    }
+    
+    public function addConsumption($key, $value)
+    {
+        $this->consumption[$key] = $value;
+       
+        return $this;
+    }
+    public function getConsumption()
+    {
+        return $this->consumption;
+    }
+
+    public function setConsumption(array $consumption)
+    {
+        $this->consumption = $consumption;
+	
         return $this;
     }
 
@@ -144,10 +168,31 @@ class BillingRequest implements BillingRequestInterface
         return $this->paymentProfile;
     }
 
-    /**
-     * @param $pricingSet
-     * @return BillingRequest
-     */
+
+    public function setPeriodEnd(\DateTime $periodEnd)
+    {
+        $this->periodEnd = $periodEnd;
+
+        return $this;
+    }
+
+    public function getPeriodEnd()
+    {
+        return $this->periodEnd;
+    }
+
+    public function setPeriodStart(\DateTime $periodStart)
+    {
+        $this->periodStart = $periodStart;
+
+        return $this;
+    }
+
+    public function getPeriodStart()
+    {
+        return $this->periodStart;
+    }
+
     public function setPricingSet($pricingSet)
     {
         $this->pricingSet = $pricingSet;

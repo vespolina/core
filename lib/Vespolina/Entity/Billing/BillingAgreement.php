@@ -1,7 +1,6 @@
 <?php
 namespace Vespolina\Entity\Billing;
 
-use Vespolina\Entity\Order\ItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
@@ -14,11 +13,11 @@ class BillingAgreement implements BillingAgreementInterface
     protected $billingInterval;
     protected $createdAt;
     protected $id;
-    protected $initialBillingDate;
+    protected $plannedBillingDate;
     protected $nextBillingDate;
     protected $order;
     protected $orderItems;
-    protected $partner;
+    protected $owner;
     protected $paymentGateway;
     protected $numberCyclesBilled;
     protected $updatedAt;
@@ -116,16 +115,16 @@ class BillingAgreement implements BillingAgreementInterface
         $this->createdAt = $createdAt;
     }
 
-    public function setInitialBillingDate(\DateTime $initialBillingDate)
+    public function setPlannedBillingDate(\DateTime $plannedBillingDate)
     {
-        $this->initialBillingDate = $initialBillingDate;
+        $this->plannedBillingDate = $plannedBillingDate;
 
         return $this;
     }
 
-    public function getInitialBillingDate()
+    public function getPlannedBillingDate()
     {
-        return $this->initialBillingDate;
+        return $this->plannedBillingDate;
     }
 
     public function setNextBillingDate(\DateTime $nextBillingDate)
@@ -169,16 +168,16 @@ class BillingAgreement implements BillingAgreementInterface
         $this->orderItems->add($item);
     }
 
-    public function setPartner(PartnerInterface $partner)
+    public function setOwner(PartnerInterface $owner)
     {
-        $this->partner = $partner;
+        $this->owner = $owner;
 
         return $this;
     }
 
-    public function getPartner()
+    public function getOwner()
     {
-        return $this->partner;
+        return $this->owner;
     }
 
     public function setPaymentGateway($paymentGateway)
