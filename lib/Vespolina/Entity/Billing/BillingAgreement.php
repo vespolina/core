@@ -2,8 +2,9 @@
 namespace Vespolina\Entity\Billing;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Entity\Billing\BillingAgreementInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
+use Vespolina\Entity\Order\OrderInterface;
 
 class BillingAgreement implements BillingAgreementInterface
 {
