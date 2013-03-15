@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Partner;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Partner\PaymentProfileInterface;
 use ImmersiveLabs\CaraCore\Entity\User;
+use Vespolina\Entity\Partner\PaymentProfileType\CreditCard;
 
 /**
  * Implementation of PartnerInterface
@@ -382,5 +383,24 @@ class Partner implements PartnerInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCardExpired()
+    {
+        $pp = $this->getPreferredPaymentProfile();
+
+        if ($pp instanceof CreditCard) {
+            /** @var CreditCard $pp */
+            if ($pp->getExpiration()) {
+                $now = new \DateTime();
+
+                return $pp->getExpiration() <= $now;
+            }
+        }
+
+        return false;
     }
 }

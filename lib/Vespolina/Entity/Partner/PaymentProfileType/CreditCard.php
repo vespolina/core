@@ -12,8 +12,29 @@ class CreditCard extends PaymentProfile
     // not mapped
     protected $cardNumber;
     protected $cvv;
+    /** @var \DateTime */
     protected $expiration;
     protected $cardInformationChanged = false;
+    /** @var \DateTime */
+    protected $notifiedAt;
+
+    /**
+     * @param \DateTime $notifiedAt
+     */
+    public function setNotifiedAt($notifiedAt)
+    {
+        $this->notifiedAt = $notifiedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getNotifiedAt()
+    {
+        return $this->notifiedAt;
+    }
 
     /**
      * @param $last4digits
@@ -82,6 +103,12 @@ class CreditCard extends PaymentProfile
     public function setExpiration(\DateTime $expiration)
     {
         $this->expiration = $expiration;
+
+        $now = new \DateTime();
+
+        if ($expiration > $now && $this->getNotifiedAt()) {
+            $this->setNotifiedAt(null);
+        }
 
         return $this;
     }
