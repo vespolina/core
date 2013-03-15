@@ -9,8 +9,8 @@
 namespace Vespolina\Entity\Partner;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Vespolina\Entity\Partner\ContactInterface;
 use Vespolina\Entity\Partner\PaymentProfileInterface;
+use ImmersiveLabs\CaraCore\Entity\User;
 
 /**
  * Implementation of PartnerInterface
@@ -40,39 +40,19 @@ class Partner implements PartnerInterface
     protected $primaryContact;
     protected $roles;
     protected $type;
-    protected $paymentProfile;
-    protected $paymentProfileType;
-
-    public function setPaymentProfileType($paymentProfileType)
-    {
-        $this->paymentProfileType = $paymentProfileType;
-    }
-
-    public function getPaymentProfileType()
-    {
-        return $this->paymentProfileType;
-    }
+    protected $preferredPaymentProfile;
+    protected $paymentProfiles;
+    protected $user;
 
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
+        $this->paymentProfiles = new ArrayCollection();
     }
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
-    {
-        $this->paymentProfile = $paymentProfile;
-
-        return $this;
-    }
-
-    public function getPaymentProfile()
-    {
-        return $this->paymentProfile;
     }
 
     /**
@@ -335,5 +315,72 @@ class Partner implements PartnerInterface
         $this->organisationDetails = $organisationDetails;
 
         return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPaymentProfiles()
+    {
+        return $this->paymentProfiles;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPaymentProfiles($paymentProfiles)
+    {
+        $this->paymentProfiles = $paymentProfiles;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addPaymentProfile($paymentProfile)
+    {
+        $this->paymentProfiles[] = $paymentProfile;
+        $paymentProfile->setPartner($this);
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removePaymentProfile($paymentProfile)
+    {
+        unset($this->paymentProfiles[array_find($paymentProfile)]);
+    }
+
+    public function setPreferredPaymentProfile(PaymentProfileInterface $paymentProfile)
+    {
+        $this->preferredPaymentProfile = $paymentProfile;
+
+        return $this;
+    }
+
+    /**
+     * @return \Vespolina\Entity\Partner\PaymentProfileInterface
+     */
+    public function getPreferredPaymentProfile()
+    {
+        return $this->preferredPaymentProfile;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return \ImmersiveLabs\CaraCore\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
