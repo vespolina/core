@@ -338,7 +338,6 @@ class Partner implements PartnerInterface
         $this->preferredPaymentProfile = $paymentProfile;
         foreach ($this->paymentProfiles as $key => $profile) {
             if ($profile == $paymentProfile) {
-
                 return $this;
             }
         }
