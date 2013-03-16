@@ -6,11 +6,11 @@ use Vespolina\Entity\Partner\PartnerInterface;
 
 interface PaymentProfileInterface
 {
+    function getId();
+
     function setPartner(PartnerInterface $partner);
 
     function getPartner();
-
-    function getId();
 
     function setReference($reference);
 
