@@ -6,15 +6,60 @@
  * with this source code in the file LICENSE.
  */
 
-use Vespolina\Entity\Partner\Partner;
 use Vespolina\Entity\Partner\Address;
+use Vespolina\Entity\Partner\Partner;
+use Vespolina\Entity\Partner\PaymentProfile;
 
 class PartnerTest extends \PHPUnit_Framework_TestCase
 {
-    // todo: payment profile (cc profile)
     public function testPaymentProfileMethods()
     {
-        $this->markTestIncomplete('tests for payment profiles (including cc) need to be written and implemented');
+        $partner = new Partner();
+        $this->assertEmpty($partner->getPaymentProfiles(), 'make sure we start out empty');
+
+        $paymentProfile = new PaymentProfile();
+        $paymentProfile->setReference('ref');
+        $partner->addPaymentProfile($paymentProfile);
+        $this->assertContains($paymentProfile, $partner->getPaymentProfiles());
+        $this->assertCount(1, $partner->getPaymentProfiles());
+        $this->assertSame($partner, $paymentProfile->getPartner(), 'the partner should be set in the paymentProfile');
+
+        $paymentProfiles = array();
+        $paymentProfiles[] = new PaymentProfile();
+        $paymentProfiles[] = new PaymentProfile();
+
+        $partner->addPaymentProfile($paymentProfile);
+        $partner->setPaymentProfiles($paymentProfiles);
+        $this->assertNotContains($paymentProfile, $partner->getPaymentProfiles(), 'this should have been removed on setting a new array of paymentProfiles');
+        $this->assertCount(2, $partner->getPaymentProfiles());
+
+        $partner->removePaymentProfile($paymentProfile);
+        $this->assertNotContains($paymentProfile, $partner->getPaymentProfiles());
+        $this->assertCount(2, $partner->getPaymentProfiles());
+
+        $partner->clearPaymentProfiles();
+        $this->assertEmpty($partner->getPaymentProfiles());
+    }
+
+    public function testSetPreferredPaymentProfile()
+    {
+        $partner = new Partner();
+
+        $paymentProfile = new PaymentProfile();
+        $paymentProfile->setReference('profile1');
+        $partner->setPreferredPaymentProfile($paymentProfile);
+
+        $this->assertSame($paymentProfile, $partner->getPreferredPaymentProfile());
+        $this->assertContains($paymentProfile, $partner->getPaymentProfiles(), 'a profile should have been added to the collection of profiles');
+
+        $paymentProfile2 = new PaymentProfile();
+        $paymentProfile2->setReference('profile2');
+        $partner->addPaymentProfile($paymentProfile2);
+        $this->assertCount(2, $partner->getPaymentProfiles());
+
+        $partner->setPreferredPaymentProfile($paymentProfile2);
+        $this->assertSame($paymentProfile2, $partner->getPreferredPaymentProfile());
+        $this->assertCount(2, $partner->getPaymentProfiles());
     }
 
     public function testFluentInterface()

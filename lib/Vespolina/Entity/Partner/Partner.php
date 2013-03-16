@@ -8,9 +8,8 @@
 
 namespace Vespolina\Entity\Partner;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Vespolina\Entity\Partner\AddressInterface;
 use Vespolina\Entity\Partner\PaymentProfileInterface;
-use ImmersiveLabs\CaraCore\Entity\User;
 
 /**
  * Implementation of PartnerInterface
@@ -21,11 +20,9 @@ class Partner implements PartnerInterface
 {
     const INDIVIDUAL       = 'individual';
     const ORGANISATION     = 'organisation';
-    
     const ROLE_CUSTOMER    = 'ROLE_CUSTOMER';
     const ROLE_EMPLOYEE    = 'ROLE_EMPLOYEE';
     const ROLE_SUPPLIER    = 'ROLE_SUPPLIER';
-
     protected $addresses;
     protected $currency;
     protected $id;
@@ -36,18 +33,17 @@ class Partner implements PartnerInterface
     protected $partnerId;
     protected $partnerSince;
     protected $paymentTerms;
+    protected $preferredPaymentProfile;
+    protected $paymentProfiles;
     protected $personalDetails;
     protected $primaryContact;
     protected $roles;
     protected $type;
-    protected $preferredPaymentProfile;
-    protected $paymentProfiles;
-    protected $user;
 
     public function __construct()
     {
-        $this->addresses = new ArrayCollection();
-        $this->paymentProfiles = new ArrayCollection();
+        $this->addresses = array();
+        $this->paymentProfiles = array();
     }
 
     public function getId()
@@ -102,9 +98,9 @@ class Partner implements PartnerInterface
     /**
      * @inheritdoc
      */
-    public function addRole($role)
+    public function setRoles($roles)
     {
-        $this->roles[] = $role;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -112,9 +108,9 @@ class Partner implements PartnerInterface
     /**
      * @inheritdoc
      */
-    public function setRoles($roles)
+    public function addRole($role)
     {
-        $this->roles = $roles;
+        $this->roles[] = $role;
 
         return $this;
     }
@@ -248,7 +244,7 @@ class Partner implements PartnerInterface
     /**
      * @inheritdoc
      */
-    public function addAddress($address)
+    public function addAddress(AddressInterface $address)
     {
         $this->addresses[] = $address;
 
@@ -266,42 +262,6 @@ class Partner implements PartnerInterface
     /**
      * @inheritdoc
      */
-    public function getPrimaryContact()
-    {
-        return $this->primaryContact;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPrimaryContact(ContactInterface $primaryContact)
-    {
-        $this->primaryContact = $primaryContact;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPersonalDetails()
-    {
-        return $this->personalDetails;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPersonalDetails($personalDetails)
-    {
-        $this->personalDetails = $personalDetails;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getOrganisationDetails()
     {
         return $this->organisationDetails;
@@ -310,7 +270,7 @@ class Partner implements PartnerInterface
     /**
      * @inheritdoc
      */
-    public function setOrganisationDetails($organisationDetails)
+    public function setOrganisationDetails(OrganisationDetailsInterface $organisationDetails)
     {
         $this->organisationDetails = $organisationDetails;
 
@@ -349,14 +309,40 @@ class Partner implements PartnerInterface
     /**
      * @inheritdoc
      */
-    public function removePaymentProfile($paymentProfile)
+    public function clearPaymentProfiles()
     {
-        unset($this->paymentProfiles[array_find($paymentProfile)]);
+        $this->paymentProfiles = array();
+
+        return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function removePaymentProfile($paymentProfile)
+    {
+        foreach ($this->paymentProfiles as $key => $profile) {
+            if ($profile == $paymentProfile) {
+                unset($this->paymentProfiles[$key]);
+
+                return;
+            }
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function setPreferredPaymentProfile(PaymentProfileInterface $paymentProfile)
     {
         $this->preferredPaymentProfile = $paymentProfile;
+        foreach ($this->paymentProfiles as $key => $profile) {
+            if ($profile == $paymentProfile) {
+
+                return $this;
+            }
+        }
+        $this->addPaymentProfile($paymentProfile);
 
         return $this;
     }
@@ -369,18 +355,39 @@ class Partner implements PartnerInterface
         return $this->preferredPaymentProfile;
     }
 
-    public function setUser(User $user)
+    /**
+     * @inheritdoc
+     */
+    public function getPrimaryContact()
     {
-        $this->user = $user;
+        return $this->primaryContact;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPrimaryContact(ContactInterface $primaryContact)
+    {
+        $this->primaryContact = $primaryContact;
 
         return $this;
     }
 
     /**
-     * @return \ImmersiveLabs\CaraCore\Entity\User
+     * @inheritdoc
      */
-    public function getUser()
+    public function getPersonalDetails()
     {
-        return $this->user;
+        return $this->personalDetails;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPersonalDetails($personalDetails)
+    {
+        $this->personalDetails = $personalDetails;
+
+        return $this;
     }
 }
