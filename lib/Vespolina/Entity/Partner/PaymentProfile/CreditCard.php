@@ -1,10 +1,10 @@
 <?php
 
-namespace Vespolina\Entity\Partner\PaymentProfileType;
+namespace Vespolina\Entity\Partner\PaymentProfile;
 
 use Vespolina\Entity\Partner\PaymentProfile;
 
-class CreditCard extends PaymentProfile implements PaymentProfileTypeInterface
+class CreditCard extends PaymentProfile
 {
     protected $activeCardNumber;
     protected $cardType;
