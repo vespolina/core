@@ -71,7 +71,7 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface', array('add'));
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface', array('add', 'subtract', 'setPosition', 'getPosition', 'process'));
         $valueElement
             ->expects($this->any())
             ->method('add')
@@ -93,7 +93,7 @@ class PricingSetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('5', $sumPricingSet->get('taxes'), 'the final value should be 5');
         $this->assertEquals('5', $sumPricingSet->get('totalValue'), 'the final value should be 5');
 
-        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface', array('add'));
+        $valueElement = $this->getMock('Vespolina\Entity\Pricing\PricingElementValueInterface', array('add', 'subtract', 'setPosition', 'getPosition', 'process'));
         $valueElement
             ->expects($this->any())
             ->method('add')

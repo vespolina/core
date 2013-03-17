@@ -11,20 +11,27 @@ class TotalValueElement extends PricingElement implements PricingElementValueInt
 
     public function add($augend, $addend)
     {
-        throw new FunctionNotSupportedException('add() has not been implemented in ' . get_class($this));
+        return $augend + $addend;
     }
 
     public function subtract($minuend, $subtrahend)
     {
-        throw new FunctionNotSupportedException('subtract() has not been implemented in ' . get_class($this));
+        return $minuend - $subtrahend;
     }
 
     protected function doProcess($context, $processed)
     {
-        $totalValue = $processed['netValue'];
-        // todo: calculate other preset groups 'discounts', 'surcharge', 'taxes'
-
-        $processed['totalValue'] = $totalValue;
+        $totalValue = $processed['values']['netValue'];
+        if (isset($processed['values']['discounts'])) {
+            $totalValue = $this->subtract($totalValue, $processed['values']['discounts']);
+        }
+        if (isset($processed['values']['surcharge'])) {
+            $totalValue = $this->add($totalValue, $processed['values']['surcharge']);
+        }
+        if (isset($processed['values']['taxes'])) {
+            $totalValue = $this->add($totalValue, $processed['values']['taxes']);
+        }
+        $processed['values']['totalValue'] = $totalValue;
 
         return $processed;
     }
