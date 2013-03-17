@@ -15,7 +15,7 @@ class CreditCardProfileTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetCardNumber()
     {
-        $profile = $this->getMockForAbstractClass('Vespolina\Entity\Partner\PaymentProfile\CreditCard');
+        $profile = $this->getMockForAbstractClass('Vespolina\Entity\Payment\PaymentProfile\CreditCard');
         $profile->setCardNumber('1234A 4567-8901.1235');
 
         $activeCardNumber = new \ReflectionProperty($profile, 'activeCardNumber');
