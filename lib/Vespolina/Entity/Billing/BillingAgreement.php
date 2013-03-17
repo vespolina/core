@@ -27,7 +27,7 @@ class BillingAgreement implements BillingAgreementInterface
     {
         $this->active = true;
         $this->numberCyclesBilled = 0;
-        $this->orderItems = new ArrayCollection();
+        $this->orderItems = array();
     }
 
     public function getId()
