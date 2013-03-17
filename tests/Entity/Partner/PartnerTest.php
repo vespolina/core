@@ -8,7 +8,7 @@
 
 use Vespolina\Entity\Partner\Address;
 use Vespolina\Entity\Partner\Partner;
-use Vespolina\Entity\Partner\PaymentProfile;
+use Vespolina\Entity\Payment\PaymentProfile;
 
 class PartnerTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,6 @@ class PartnerTest extends \PHPUnit_Framework_TestCase
         $partner->addPaymentProfile($paymentProfile);
         $this->assertContains($paymentProfile, $partner->getPaymentProfiles());
         $this->assertCount(1, $partner->getPaymentProfiles());
-        $this->assertSame($partner, $paymentProfile->getPartner(), 'the partner should be set in the paymentProfile');
 
         $paymentProfiles = array();
         $paymentProfiles[] = new PaymentProfile();
