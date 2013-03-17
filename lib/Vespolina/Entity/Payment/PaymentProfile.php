@@ -1,14 +1,11 @@
 <?php
 
-namespace Vespolina\Entity\Partner;
-
-use Vespolina\Entity\Partner\PartnerInterface;
+namespace Vespolina\Entity\Payment;
 
 class PaymentProfile implements PaymentProfileInterface
 {
     protected $id;
     protected $reference;
-    protected $partner;
 
     /**
      * @inheritdoc
@@ -16,24 +13,6 @@ class PaymentProfile implements PaymentProfileInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPartner(PartnerInterface $partner)
-    {
-        $this->partner = $partner;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPartner()
-    {
-        return $this->partner;
     }
 
     /**

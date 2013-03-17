@@ -9,7 +9,7 @@
 namespace Vespolina\Entity\Partner;
 
 use Vespolina\Entity\Partner\AddressInterface;
-use Vespolina\Entity\Partner\PaymentProfileInterface;
+use Vespolina\Entity\Payment\PaymentProfileInterface;
 
 /**
  * Implementation of PartnerInterface
@@ -20,9 +20,11 @@ class Partner implements PartnerInterface
 {
     const INDIVIDUAL       = 'individual';
     const ORGANISATION     = 'organisation';
+
     const ROLE_CUSTOMER    = 'ROLE_CUSTOMER';
     const ROLE_EMPLOYEE    = 'ROLE_EMPLOYEE';
     const ROLE_SUPPLIER    = 'ROLE_SUPPLIER';
+
     protected $addresses;
     protected $currency;
     protected $id;
@@ -347,7 +349,7 @@ class Partner implements PartnerInterface
     }
 
     /**
-     * @return \Vespolina\Entity\Partner\PaymentProfileInterface
+     * @return \Vespolina\Entity\Payment\PaymentProfileInterface
      */
     public function getPreferredPaymentProfile()
     {

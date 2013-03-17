@@ -9,6 +9,7 @@
 namespace Vespolina\Entity\Partner;
 
 use Vespolina\Entity\Partner\ContactInterface;
+use Vespolina\Entity\Payment\PaymentProfileInterface;
 
 /**
  * Partner interface, define basic fields
@@ -164,7 +165,7 @@ interface PartnerInterface
     /**
      * Set the preferred payment profile
      *
-     * @param \Vespolina\Entity\Partner\PaymentProfileInterface $paymentProfile
+     * @param \Vespolina\Entity\Payment\PaymentProfileInterface $paymentProfile
      * @return $this
      */
     function setPreferredPaymentProfile(PaymentProfileInterface $paymentProfile);
@@ -172,7 +173,7 @@ interface PartnerInterface
     /**
      * Return the preferred payment profile
      *
-     * @return \Vespolina\Entity\Partner\PaymentProfileInterface
+     * @return \Vespolina\Entity\Payment\PaymentProfileInterface
      */
     function getPreferredPaymentProfile();
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Vespolina\Entity\Partner\PaymentProfile;
+namespace Vespolina\Entity\Payment\PaymentProfile;
 
-use Vespolina\Entity\Partner\PaymentProfile;
+use Vespolina\Entity\Payment\PaymentProfile;
 
 class Invoice extends PaymentProfile
 {
