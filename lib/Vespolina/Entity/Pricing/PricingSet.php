@@ -186,7 +186,7 @@ class PricingSet implements PricingSetInterface
     /**
      * @inheritdoc
      */
-    public function all()
+    public function getPricingElements()
     {
         if (!$this->pricingElements) {
             return array();
@@ -244,16 +244,6 @@ class PricingSet implements PricingSetInterface
         $this->processingState = $processingState;
 
         return $this;
-    }
-
-    function getNetValue()
-    {
-        // TODO: Implement getNetValue() method.
-    }
-
-    function getTotalValue()
-    {
-        // TODO: Implement getTotalValue() method.
     }
 
     public function offsetExists($offset)

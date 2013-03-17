@@ -1,13 +1,9 @@
 <?php
 
-namespace ImmersiveLabs\Pricing\Entity\Element;
+namespace Vespolina\Entity\Pricing\Element;
 
-<<<<<<< HEAD:lib/ImmersiveLabs/Pricing/Entity/Element/TotalValueElement.php
-use ImmersiveLabs\Pricing\Entity\PricingElement;
-=======
 use Vespolina\Entity\Pricing\PricingElement;
 use Vespolina\Entity\Pricing\PricingElementValueInterface;
->>>>>>> updates to pricing set code:lib/Vespolina/Entity/Pricing/Element/TotalValueElement.php
 
 class TotalValueElement extends PricingElement implements PricingElementValueInterface
 {
