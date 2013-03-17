@@ -119,7 +119,7 @@ class PricingSet implements PricingSetInterface
         if (count($this->getPricingElements()) !== 0) {
             /** @var \Vespolina\Entity\Pricing\PricingElementInterface $element */
             foreach ($this->getPricingElements() as $element) {
-                $processed = array_merge($this->processed, $element->process($context, $processed));
+                $processed = array_merge($processed, $element->process($context, $processed));
             }
         } else {
             $processed = $this->getProcessed();
