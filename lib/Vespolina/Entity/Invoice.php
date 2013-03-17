@@ -18,8 +18,8 @@ use Vespolina\Entity\OrderInterface;
  */
 class Invoice implements InvoiceInterface
 {
-    private $dueDate;
-    private $order;
+    protected $dueDate;
+    protected $order;
 
     /**
      * @inherit
@@ -27,6 +27,8 @@ class Invoice implements InvoiceInterface
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
+
+        return $this;
     }
 
     /**
@@ -35,5 +37,24 @@ class Invoice implements InvoiceInterface
     public function getOrder()
     {
         return $this->order;
+    }
+
+    /**
+     * @param $dueDate
+     * @return Invoice
+     */
+    public function setDueDate($dueDate)
+    {
+        $this->dueDate = $dueDate;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDueDate()
+    {
+        return $this->dueDate;
     }
 }

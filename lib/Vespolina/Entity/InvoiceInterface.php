@@ -21,6 +21,7 @@ interface InvoiceInterface
      * Set the order for this invoice
      *
      * @param \Vespolina\Entity\OrderInterface $order
+     * @return \Vespolina\Entity\InvoiceInterface
      */
     function setOrder(OrderInterface $order);
 

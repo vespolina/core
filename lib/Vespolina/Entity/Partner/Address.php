@@ -1,6 +1,6 @@
 <?php
 /**
- * (c) Vespolina Project http://www.vespolina-project.org
+ * (c) 2012-2013 Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -12,16 +12,22 @@ class Address implements AddressInterface
     const INVOICE        = 'INVOICE';
     const DELIVERY       = 'DELIVERY';
     const CONTACT        = 'CONTACT';
-    
-    protected $type;
-    protected $street;
+
+    protected $city;
+    protected $country;
+    protected $id;
     protected $number;
     protected $numbersuffix;
-    protected $zipcode;
-    protected $city;
     protected $state;
-    protected $country;
-    
+    protected $street;
+    protected $type;
+    protected $zipcode;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -36,6 +42,8 @@ class Address implements AddressInterface
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
     
 	/**
@@ -52,6 +60,8 @@ class Address implements AddressInterface
     public function setStreet($street)
     {
         $this->street = $street;
+
+        return $this;
     }
 
 	/**
@@ -68,6 +78,8 @@ class Address implements AddressInterface
     public function setNumber($number)
     {
         $this->number = $number;
+
+        return $this;
     }
 
 	/**
@@ -84,6 +96,8 @@ class Address implements AddressInterface
     public function setNumbersuffix($numbersuffix)
     {
         $this->numbersuffix = $numbersuffix;
+
+        return $this;
     }
 
 	/**
@@ -100,6 +114,8 @@ class Address implements AddressInterface
     public function setZipcode($zipcode)
     {
         $this->zipcode = $zipcode;
+
+        return $this;
     }
 
 	/**
@@ -116,6 +132,8 @@ class Address implements AddressInterface
     public function setCity($city)
     {
         $this->city = $city;
+
+        return $this;
     }
 
 	/**
@@ -132,6 +150,8 @@ class Address implements AddressInterface
     public function setState($state)
     {
         $this->state = $state;
+
+        return $this;
     }
 
 	/**
@@ -148,5 +168,7 @@ class Address implements AddressInterface
     public function setCountry($country)
     {
         $this->country = $country;
+
+        return $this;
     }
 }

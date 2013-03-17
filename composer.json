@@ -1,12 +1,17 @@
 {
     "name": "vespolina/core",
     "type": "entities",
-    "description": "Core code for the various Vespolina bundles, but not specific to Vespolina",
-    "keywords": ["ecommerce"],
+    "description": "Core entities for the Vespolina Project",
+    "keywords": ["ecommerce", "shop"],
     "homepage": "https://github.com/vespolina/VespolinaCore",
     "license": "MIT",
     "require": {
         "php": ">=5.3.2"
+    },
+    "require": {
+        "php": ">=5.3.2",
+        "pimple/pimple": "*",
+	"doctrine/common": "*"
     },
     "autoload": {
         "psr-0": { "Vespolina": "lib/" }
