@@ -1,8 +1,8 @@
 <?php
 
-namespace Vespolina\Entity\Partner\PaymentProfile;
+namespace Vespolina\Entity\Payment\PaymentProfile;
 
-use Vespolina\Entity\Partner\PaymentProfile;
+use Vespolina\Entity\Payment\PaymentProfile;
 
 class CreditCard extends PaymentProfile
 {
@@ -13,7 +13,7 @@ class CreditCard extends PaymentProfile
 
     /**
      * @param string $cardNumber
-     * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
+     * @return \Vespolina\Entity\Payment\PaymentProfileType\CreditCard
      */
     public function setCardNumber($cardNumber)
     {
@@ -38,7 +38,7 @@ class CreditCard extends PaymentProfile
 
     /**
      * @param $cardType
-     * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
+     * @return \Vespolina\Entity\Payment\PaymentProfileType\CreditCard
      */
     public function setCardType($cardType)
     {
@@ -57,7 +57,7 @@ class CreditCard extends PaymentProfile
 
     /**
      * @param \DateTime
-     * @return \Vespolina\Entity\Partner\PaymentProfileType\CreditCard
+     * @return \Vespolina\Entity\Payment\PaymentProfileType\CreditCard
      */
     public function setExpiration(\DateTime $expirationDate)
     {
