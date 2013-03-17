@@ -7,15 +7,22 @@
  */
 namespace Vespolina\Entity\Partner;
 
+use Vespolina\Entity\Partner\PersonalDetailsInterface;
+
 class PersonalDetails implements PersonalDetailsInterface
 {
+    protected $id;
     protected $initials;
     protected $firstname;
     protected $prefix;
     protected $lastname;
     protected $nationalIdentificationNumber;
-    protected $partner;
-    
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -30,6 +37,8 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setInitials($initials)
     {
         $this->initials = $initials;
+
+        return $this;
     }
 
 	/**
@@ -46,6 +55,8 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
+
+        return $this;
     }
 
 	/**
@@ -62,6 +73,8 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setPrefix($prefix)
     {
         $this->prefix = $prefix;
+
+        return $this;
     }
 
 	/**
@@ -78,6 +91,8 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
+
+        return $this;
     }
 
 	/**
@@ -94,22 +109,7 @@ class PersonalDetails implements PersonalDetailsInterface
     public function setNationalIdentificationNumber($nationalIdentificationNumber)
     {
         $this->nationalIdentificationNumber = $nationalIdentificationNumber;
-    }
-    
-	/**
-	 * {@inheritdoc}
-	 */
-    public function getPartner()
-    {
-        return $this->partner;
-    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-    public function setPartner(\Vespolina\PartnerBundle\Document\Partner $partner)
-    {
-        $partner->setPersonalDetails($this);
-        $this->partner = $partner;
+        return $this;
     }
 }
