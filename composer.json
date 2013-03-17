@@ -8,13 +8,15 @@
     "require": {
         "php": ">=5.3.2",
         "pimple/pimple": "*",
-	    "doctrine/common": "*"
+        "doctrine/common": "*"
     },
     "require-dev": {
         "merk/dough": "*"
     },
     "autoload": {
-        "psr-0": { "Vespolina": "lib/" }
+        "psr-0": {
+            "Vespolina": "lib/"
+        }
     },
     "extra": {
         "branch-alias": {
