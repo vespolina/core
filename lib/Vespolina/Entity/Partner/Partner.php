@@ -303,7 +303,6 @@ class Partner implements PartnerInterface
     public function addPaymentProfile($paymentProfile)
     {
         $this->paymentProfiles[] = $paymentProfile;
-        $paymentProfile->setPartner($this);
 
         return $this;
     }
