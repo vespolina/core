@@ -8,11 +8,7 @@
 
 namespace Vespolina\Entity\Payment;
 
-interface PaymentProfileInterface
+interface PaymentRequestInterface 
 {
-    function getId();
 
-    function setReference($reference);
-
-    function getReference();
 }

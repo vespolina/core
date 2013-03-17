@@ -10,13 +10,14 @@ namespace Vespolina\Entity\Billing;
 
 use Vespolina\Entity\Billing\BillingAgreementInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
+use Vespolina\Entity\Payment\PaymentRequestInterface;
 
 /**
  * An interface for a request to bill a party
  *
  * @author Daniel Kucharski <daniel-xerias.be>
  */
-interface BillingRequestInterface
+interface BillingRequestInterface extends PaymentRequestInterface
 {
     /**
      * Add a billing agreement which originated into this billing request.

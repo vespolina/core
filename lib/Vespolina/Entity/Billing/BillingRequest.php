@@ -10,11 +10,11 @@ namespace Vespolina\Entity\Billing;
 
 use Vespolina\Entity\Billing\BillingRequestInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
-use Vespolina\Entity\Partner\PaymentProfileInterface;
+use Vespolina\Entity\Payment\PaymentProfileInterface;
+use Vespolina\Entity\Payment\PaymentRequest;
 
-class BillingRequest implements BillingRequestInterface
+class BillingRequest extends PaymentRequest implements BillingRequestInterface
 {
-
     /**
      * A typical billing request flow will be:
      *  1) initial state
