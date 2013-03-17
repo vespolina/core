@@ -63,7 +63,12 @@ class PricingSet implements PricingSetInterface
 
     public function getTaxes()
     {
-        $this->pricingElements = array();
+        return $this->get('taxes');
+    }
+
+    public function getTotalValue()
+    {
+        return $this->get('totalValue');
     }
 
     public function __get($name)
@@ -244,6 +249,18 @@ class PricingSet implements PricingSetInterface
         $this->processingState = $processingState;
 
         return $this;
+    }
+
+    public function setReturns($returns)
+    {
+        $this->returnValues = $returns;
+
+        return $this;
+    }
+
+    public function getReturnValues()
+    {
+        return $this->returnValues;
     }
 
     public function offsetExists($offset)

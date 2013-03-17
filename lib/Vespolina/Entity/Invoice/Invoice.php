@@ -39,8 +39,9 @@ class Invoice implements InvoiceInterface
     protected $type;
     protected $updatedAt;
 
-    public function __construct() {
-        $this->orders = new ArrayCollection();
+    public function __construct()
+    {
+        $this->orders = array();
     }
 
     public function getId()
