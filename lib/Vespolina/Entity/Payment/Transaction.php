@@ -1,0 +1,95 @@
+<?php
+
+namespace Vespolina\Entity\Payment;
+
+use Vespolina\Entity\Payment\PaymentProfileInterface;
+use Vespolina\Entity\Payment\TransactionInterface;
+
+class Transaction implements TransactionInterface
+{
+    protected $credit;
+    protected $debit;
+    protected $id;
+    protected $paymentProfile;
+    protected $posted;
+
+    /**
+     * @inheritdoc
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setCredit($credit)
+    {
+        $this->credit = $credit;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCredit()
+    {
+        return $this->credit;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setDebit($debit)
+    {
+        $this->debit = $debit;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getDebit()
+    {
+        return $this->debit;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
+    {
+        $this->paymentProfile = $paymentProfile;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPaymentProfile()
+    {
+        return $this->paymentProfile;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPosted(\DateTime $posted)
+    {
+        $this->posted = $posted;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPosted()
+    {
+        return $this->posted;
+    }
+}
