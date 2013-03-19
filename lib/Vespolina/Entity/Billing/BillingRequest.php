@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Billing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Billing\BillingRequestInterface;
 use Vespolina\Entity\Invoice\InvoiceInterface;
 use ImmersiveLabs\Pricing\Entity\PricingSet;
@@ -38,7 +39,7 @@ class BillingRequest implements BillingRequestInterface
 
     public function __construct()
     {
-        $this->orderItems = array();
+        $this->orderItems = new ArrayCollection();
         $this->status = self::STATUS_PENDING;
     }
 
@@ -158,12 +159,12 @@ class BillingRequest implements BillingRequestInterface
 
     public function addOrderItem(ItemInterface $item)
     {
-        $this->orderItems[] = $item;
+        $this->orderItems->add($item);
     }
 
     public function getOrderItems()
     {
-        return (array) $this->orderItems;
+        return $this->orderItems;
     }
 
     /**
