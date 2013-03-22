@@ -12,10 +12,10 @@ class BillingAgreement implements BillingAgreementInterface
     protected $billingAmount;
     protected $billingCycles;
     protected $billingInterval;
+    protected $billedToDate;
     protected $createdAt;
     protected $id;
-    protected $plannedBillingDate;
-    protected $nextBillingDate;
+    protected $initialBillingDate;
     protected $order;
     protected $orderItems;
     protected $owner;
@@ -34,6 +34,17 @@ class BillingAgreement implements BillingAgreementInterface
     {
         return $this->id;
     }
+
+    public function setBilledToDate(\DateTime $billedToDate)
+    {
+        $this->billedToDate = $billedToDate;
+    }
+
+    public function getBilledToDate()
+    {
+        return $this->billedToDate;
+    }
+
 
     public function autoSetCreatedAt()
     {
@@ -116,28 +127,16 @@ class BillingAgreement implements BillingAgreementInterface
         $this->createdAt = $createdAt;
     }
 
-    public function setPlannedBillingDate(\DateTime $plannedBillingDate)
+    public function setInitialBillingDate(\DateTime $initialBillingDate)
     {
-        $this->plannedBillingDate = $plannedBillingDate;
+        $this->initialBillingDate = $initialBillingDate;
 
         return $this;
     }
 
-    public function getPlannedBillingDate()
+    public function getInitialBillingDate()
     {
-        return $this->plannedBillingDate;
-    }
-
-    public function setNextBillingDate(\DateTime $nextBillingDate)
-    {
-        $this->nextBillingDate = $nextBillingDate;
-
-        return $this;
-    }
-
-    public function getNextBillingDate()
-    {
-        return $this->nextBillingDate;
+        return $this->initialBillingDate;
     }
 
     public function setOrder(OrderInterface $order)

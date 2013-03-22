@@ -13,9 +13,9 @@ use Vespolina\Entity\Partner\PartnerInterface;
 use Vespolina\Entity\Payment\PaymentRequestInterface;
 
 /**
- * An interface for a request to bill a party
+ * An interface for a request to bill periodically a service or product
  *
- * @author Daniel Kucharski <daniel-xerias.be>
+ * @author Daniel Kucharski <daniel@xerias.be>
  */
 interface BillingRequestInterface extends PaymentRequestInterface
 {
@@ -29,13 +29,13 @@ interface BillingRequestInterface extends PaymentRequestInterface
 
     /**
      * Return the list of billing agreements resulting into this billing request
+     *
      * @return mixed
      */
     function getBillingAgreements();
 
     /**
      * Get the date on which the billing was effectively performed
-     *
      *
      * @return \DateTime
      */
@@ -45,7 +45,7 @@ interface BillingRequestInterface extends PaymentRequestInterface
     
     /**
      * Add a consumption for this billing request
-     * Eg. key = bandwith_consumed, $value = 800 
+     * Eg. key = bandwidth_consumed, $value = 800
      */
     function addConsumption($key, $value);    
      
