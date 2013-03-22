@@ -15,5 +15,7 @@ class BillingAgreementTest extends \PHPUnit_Framework_TestCase
         $billingAgreement = new BillingAgreement();
         $this->assertTrue($billingAgreement->getActive());
         $this->assertEquals(0, $billingAgreement->getNumberCyclesBilled());
+
+
     }
 }

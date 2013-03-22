@@ -15,65 +15,94 @@ use Vespolina\Entity\Partner\PartnerInterface;
 /**
  * An interface for a request to bill a party
  *
- * @author Daniel Kucharski <daniel-xerias.be>
+ * @author Daniel Kucharski <daniel@xerias.be>
  */
 interface BillingAgreementInterface
 {
+
     /**
-     * Set the billing amount of the agreement
-     * 
+     * Return the last date which already was billed
+     * This is the billing period end date of the latest billing request
+     *
+     * @return mixed
+     */
+    function getBilledToDate();
+
+    function setBilledToDate(\DateTime $billToDate);
+
+    /**
+     * Return the billing amount to be charged on each interval
+     *
+     * @return integer
+     */
+    function getBillingAmount();
+
+    /**
+     * Set the billing amount to be charged on each cycle
+     *
      * @param $billingAmount
      * @return $this
      */
     function setBillingAmount($billingAmount);
 
     /**
-     * Return the billing amount to be charged
-     *
-     * @return integer
-     */
-    function getBillingAmount();
-
-    function setBillingCycles($billingCycles);
-
-    /**
      * Return the number of billing cycles
+     * If the billing cycles is -1 it is considered infinite
      *
      * @return integer
      */
     function getBillingCycles();
-
-    function setBillingInterval($billingInterval);
+    function setBillingCycles($billingCycles);
 
     /**
      * Return the billing interval (day, month, year)
+     * eg.  when should the billing cycle reoccur
      *
      * @return string
      */
     function getBillingInterval();
 
-    function setPlannedBillingDate(\DateTime $plannedBillingDate);
+    function setBillingInterval($billingInterval);
 
-    /*
-     * Return the date when the first billing request should be created
+    /**
+     * Get the initial (first) billing date for this billing agreement
+     * The billing period start date for the first billing request to this billing agreement will be set to this date
      *
-     * @return /DateTime
+     * @return mixed
      */
-    function getPlannedBillingDate();
+    function getInitialBillingDate();
+
+    function setInitialBillingDate(\DateTime $initialBillingDate);
+
+    /**
+     * Get the entity (eg. order) with resulted into this billing agreement
+     *
+     * @return mixed
+     */
+    function getOrder();
 
     function setOrder(OrderInterface $order);
 
-    function getOrder();
+    function getOrderItems();
 
     function setOrderItems($items);
 
-    function getOrderItems();
+    /**
+     * The owner of this billing agreement (eg. customer)
+     *
+     * @return PartnerInterface
+     */
+    function getOwner();
 
     function setOwner(PartnerInterface $owner);
 
-    function getOwner();
-
+    /**
+     * The payment gateway to be used for this billing agreement
+     *
+     * @return mixed
+     */
+    function getPaymentGateway();
+    
     function setPaymentGateway($paymentGateway);
 
-    function getPaymentGateway();
 }
