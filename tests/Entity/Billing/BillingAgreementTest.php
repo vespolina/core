@@ -55,6 +55,14 @@ class BillingAgreementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * cycles, interval, billedTo,
+     */
+    public function nextCycleData()
+    {
+
+    }
+
+    /**
      * @dataProvider datesAndOffsets
      */
     public function testDateFromOffset($start, $offset, $expected)
@@ -73,6 +81,7 @@ class BillingAgreementTest extends \PHPUnit_Framework_TestCase
             array(new \DateTime('2012-02-29'), '+1 year', new \DateTime('2013-02-28')),
             array(new \DateTime('2013-03-29'), '-1 month', new \DateTime('2013-02-28')),
             array(new \DateTime('2013-03-31'), '+1 month', new \DateTime('2013-04-30')),
+            array(new \DateTime('2012-03-31'), '-4 weeks', new \DateTime('2012-03-03')),
         );
     }
 }
