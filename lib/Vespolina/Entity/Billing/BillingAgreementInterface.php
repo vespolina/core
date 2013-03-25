@@ -52,6 +52,7 @@ interface BillingAgreementInterface
      * @return integer
      */
     function getBillingCycles();
+
     function setBillingCycles($billingCycles);
 
     /**
@@ -63,6 +64,17 @@ interface BillingAgreementInterface
     function getBillingInterval();
 
     function setBillingInterval($billingInterval);
+
+    function computeNextCycle();
+
+    /**
+     * Generate a new date from a starting date plus an offset
+     *
+     * @param \DateTime $start
+     * @param $offset
+     * @return \DateTime
+     */
+    function dateFromOffset(\DateTime $start, $offset);
 
     /**
      * Get the initial (first) billing date for this billing agreement

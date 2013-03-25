@@ -127,6 +127,28 @@ class BillingAgreement implements BillingAgreementInterface
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function computeNextCycle()
+    {
+
+    }
+
+    public function dateFromOffset(\DateTime $start, $offset)
+    {
+        $returnDate = clone $start;
+        $returnDate->modify($offset);
+
+        $date = (integer) $start->format('d');
+        $newDate = (integer) $returnDate->format('d');
+        if ($date > 28 && $newDate < 4) {
+            $returnDate->modify("-$newDate day");
+        }
+
+        return $returnDate;
+    }
+
     public function setInitialBillingDate(\DateTime $initialBillingDate)
     {
         $this->initialBillingDate = $initialBillingDate;
