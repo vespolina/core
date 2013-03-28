@@ -14,26 +14,8 @@ namespace Vespolina\Entity\Order;
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-interface CartInterface
+interface CartInterface extends OrderInterface
 {
-    /**
-     * Add an cart attribute (for instance passing along if the cart should be taxed)
-     *
-     * @abstract
-     * @param $name
-     * @param $value
-     * @return mixed
-     */
-    function addAttribute($name, $value);
-
-    /**
-     * Retrieve an cart attribute
-     * @abstract
-     * @param $name
-     * @return mixed
-     */
-    function getAttribute($name);
-
     /**
      * Return the time this cart expires
      *
@@ -64,20 +46,6 @@ interface CartInterface
     function setFollowUp($followUp);
 
     /**
-     * Return the name assigned to the cart
-     *
-     * @return string
-     */
-    function getName();
-
-    /**
-     * Set a name for this cart
-     *
-     * @param $name
-     */
-    function setName($name);
-
-    /**
      * Return the payment instruction the cart
      *
      * @return payment instruction
@@ -90,21 +58,6 @@ interface CartInterface
      * @param $paymentInstruction
      */
     function setPaymentInstruction($paymentInstruction);
-
-    /**
-     * Return the pricing information for the cart
-     *
-     * @return mixed
-     */
-    function getPricing();
-
-    /**
-     * Set pricing information
-     *
-     * @abstract
-     * @param $pricing
-     */
-    function setPricing($pricing);
     
     /**
      * Return the cart creation date
