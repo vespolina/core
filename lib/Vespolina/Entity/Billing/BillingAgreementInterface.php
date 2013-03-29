@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Billing;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
+use Vespolina\Entity\Payment\PaymentProfileInterface;
 
 /**
  * An interface for a request to bill a party
@@ -111,10 +112,51 @@ interface BillingAgreementInterface
     /**
      * The payment gateway to be used for this billing agreement
      *
-     * @return mixed
+     * @return PaymentProfileInterface
      */
-    function getPaymentGateway();
-    
-    function setPaymentGateway($paymentGateway);
+    function getPaymentProfile();
 
+    /**
+     * @param $paymentProfile
+     * @return BillingAgreementInterface
+     */
+    function setPaymentProfile(PaymentProfileInterface $paymentProfile);
+
+    /**
+     * The amount of time from the processRequestOffset to when the BillingRequest is generated,
+     * will always be <=0
+     *
+     * @param string $generateRequestOffset A php DateTime format
+     * @return BillingAgreementInterface
+     */
+    function setGenerateRequestOffset($generateRequestOffset);
+
+    /**
+     * @return string
+     */
+    function getGenerateRequestOffset();
+
+    /**
+     * The amount of time from the billedToDate to when a BillingRequest should be processed.
+     *
+     * @param string $processRequestOffset A php DateTime format
+     * @return BillingAgreementInterface
+     */
+    function setProcessRequestOffset($processRequestOffset);
+
+    /**
+     * @return string
+     */
+    function getProcessRequestOffset();
+
+    /**
+     * @param \DateTime $generateRequestOn
+     * @return BillingAgreementInterface
+     */
+    function setGenerateRequestOn(\DateTime $generateRequestOn);
+
+    /**
+     * @return \DateTime
+     */
+    function getGenerateRequestOn();
 }
