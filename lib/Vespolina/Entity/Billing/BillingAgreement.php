@@ -139,7 +139,6 @@ class BillingAgreement implements BillingAgreementInterface
     {
         $returnDate = clone $start;
         $returnDate->modify($offset);
-        $monthDate = $start->format('md');
 
         if (stristr($offset, 'month') || stristr($offset, 'year')) {
             $date = (integer) $start->format('d');
