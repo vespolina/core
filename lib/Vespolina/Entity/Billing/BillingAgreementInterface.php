@@ -114,7 +114,43 @@ interface BillingAgreementInterface
      * @return mixed
      */
     function getPaymentGateway();
-    
+
+    /**
+     * @param $paymentGateway
+     * @return BillingAgreementInterface
+     */
     function setPaymentGateway($paymentGateway);
 
+    /**
+     * @param string $generateRequestOffset
+     * @return BillingAgreementInterface
+     */
+    function setGenerateRequestOffset($generateRequestOffset);
+
+    /**
+     * @return string
+     */
+    function getGenerateRequestOffset();
+
+    /**
+     * @param string $processRequestOffset
+     * @return BillingAgreementInterface
+     */
+    function setProcessRequestOffset($processRequestOffset);
+
+    /**
+     * @return string
+     */
+    function getProcessRequestOffset();
+
+    /**
+     * @param \DateTime $generateRequestOn
+     * @return BillingAgreementInterface
+     */
+    function setGenerateRequestOn(\DateTime $generateRequestOn);
+
+    /**
+     * @return \DateTime
+     */
+    function getGenerateRequestOn();
 }

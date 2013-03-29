@@ -253,4 +253,58 @@ class BillingAgreement implements BillingAgreementInterface
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function setGenerateRequestOffset($generateRequestOffset)
+    {
+        $this->generateRequestOffset = $generateRequestOffset;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGenerateRequestOffset()
+    {
+        return $this->generateRequestOffset;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setProcessRequestOffset($processRequestOffset)
+    {
+        $this->processRequestOffset = $processRequestOffset;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getProcessRequestOffset()
+    {
+        return $this->processRequestOffset;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setGenerateRequestOn(\DateTime $generateRequestOn)
+    {
+        $this->generateRequestOn = $generateRequestOn;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGenerateRequestOn()
+    {
+        return $this->generateRequestOn;
+    }
 }
