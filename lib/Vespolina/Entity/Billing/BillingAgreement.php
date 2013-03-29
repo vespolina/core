@@ -259,6 +259,10 @@ class BillingAgreement implements BillingAgreementInterface
      */
     public function setGenerateRequestOffset($generateRequestOffset)
     {
+        if (!strtotime($generateRequestOffset)) {
+            throw new \InvalidArgumentException('String must be a valid PHP DateTime format.');
+        }
+
         $this->generateRequestOffset = $generateRequestOffset;
 
         return $this;
@@ -277,6 +281,10 @@ class BillingAgreement implements BillingAgreementInterface
      */
     public function setProcessRequestOffset($processRequestOffset)
     {
+        if (!strtotime($processRequestOffset)) {
+            throw new \InvalidArgumentException('String must be a valid PHP DateTime format.');
+        }
+
         $this->processRequestOffset = $processRequestOffset;
 
         return $this;
