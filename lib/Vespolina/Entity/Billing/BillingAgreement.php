@@ -14,12 +14,15 @@ class BillingAgreement implements BillingAgreementInterface
     protected $billingInterval;
     protected $billedToDate;
     protected $createdAt;
+    protected $generateRequestOffset;
+    protected $generateRequestOn;
     protected $id;
     protected $initialBillingDate;
     protected $order;
     protected $orderItems;
     protected $owner;
     protected $paymentGateway;
+    protected $processRequestOffset;
     protected $numberCyclesBilled;
     protected $updatedAt;
 
