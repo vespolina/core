@@ -122,7 +122,10 @@ interface BillingAgreementInterface
     function setPaymentGateway($paymentGateway);
 
     /**
-     * @param string $generateRequestOffset
+     * The amount of time from the processRequestOffset to when the BillingRequest is generated,
+     * will always be <=0
+     *
+     * @param string $generateRequestOffset A php DateTime format
      * @return BillingAgreementInterface
      */
     function setGenerateRequestOffset($generateRequestOffset);
@@ -133,7 +136,9 @@ interface BillingAgreementInterface
     function getGenerateRequestOffset();
 
     /**
-     * @param string $processRequestOffset
+     * The amount of time from the billedToDate to when a BillingRequest should be processed.
+     *
+     * @param string $processRequestOffset A php DateTime format
      * @return BillingAgreementInterface
      */
     function setProcessRequestOffset($processRequestOffset);
