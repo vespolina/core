@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Billing;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
+use Vespolina\Entity\Payment\PaymentProfileInterface;
 
 /**
  * An interface for a request to bill a party
@@ -111,15 +112,15 @@ interface BillingAgreementInterface
     /**
      * The payment gateway to be used for this billing agreement
      *
-     * @return mixed
+     * @return PaymentProfileInterface
      */
-    function getPaymentGateway();
+    function getPaymentProfile();
 
     /**
-     * @param $paymentGateway
+     * @param $paymentProfile
      * @return BillingAgreementInterface
      */
-    function setPaymentGateway($paymentGateway);
+    function setPaymentProfile(PaymentProfileInterface $paymentProfile);
 
     /**
      * The amount of time from the processRequestOffset to when the BillingRequest is generated,

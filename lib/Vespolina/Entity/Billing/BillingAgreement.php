@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Billing\BillingAgreementInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Entity\Payment\PaymentProfileInterface;
 
 class BillingAgreement implements BillingAgreementInterface
 {
@@ -21,7 +22,7 @@ class BillingAgreement implements BillingAgreementInterface
     protected $order;
     protected $orderItems;
     protected $owner;
-    protected $paymentGateway;
+    protected $paymentProfile;
     protected $processRequestOffset;
     protected $numberCyclesBilled;
     protected $updatedAt;
@@ -207,16 +208,16 @@ class BillingAgreement implements BillingAgreementInterface
         return $this->owner;
     }
 
-    public function setPaymentGateway($paymentGateway)
+    public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
     {
-        $this->paymentGateway = $paymentGateway;
+        $this->paymentProfile = $paymentProfile;
 
         return $this;
     }
 
-    public function getPaymentGateway()
+    public function getPaymentProfile()
     {
-        return $this->paymentGateway;
+        return $this->paymentProfile;
     }
 
     public function setNumberCyclesBilled($numberCyclesBilled)
