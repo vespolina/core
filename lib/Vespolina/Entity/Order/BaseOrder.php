@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Order;
 use Vespolina\Entity\Channel\Channel;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Entity\Payment\PaymentProfileInterface;
 
 /**
  * Order is a base class for shopping cart or sales order
@@ -265,15 +266,17 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function setPayment($payment)
+    public function setPaymentProfile(PaymentProfileInterface $payment)
     {
         $this->payment = $payment;
+
+        return $this;
     }
 
     /**
      * @inheritdoc
      */
-    public function getPayment()
+    public function getPaymentProfile()
     {
         return $this->payment;
     }

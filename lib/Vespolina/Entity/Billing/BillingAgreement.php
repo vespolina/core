@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Billing\BillingAgreementInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 use Vespolina\Entity\Order\OrderInterface;
+use Vespolina\Entity\Payment\PaymentProfileInterface;
 
 class BillingAgreement implements BillingAgreementInterface
 {
@@ -14,12 +15,15 @@ class BillingAgreement implements BillingAgreementInterface
     protected $billingInterval;
     protected $billedToDate;
     protected $createdAt;
+    protected $generateRequestOffset;
+    protected $generateRequestOn;
     protected $id;
     protected $initialBillingDate;
     protected $order;
     protected $orderItems;
     protected $owner;
-    protected $paymentGateway;
+    protected $paymentProfile;
+    protected $processRequestOffset;
     protected $numberCyclesBilled;
     protected $updatedAt;
 
@@ -204,16 +208,16 @@ class BillingAgreement implements BillingAgreementInterface
         return $this->owner;
     }
 
-    public function setPaymentGateway($paymentGateway)
+    public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
     {
-        $this->paymentGateway = $paymentGateway;
+        $this->paymentProfile = $paymentProfile;
 
         return $this;
     }
 
-    public function getPaymentGateway()
+    public function getPaymentProfile()
     {
-        return $this->paymentGateway;
+        return $this->paymentProfile;
     }
 
     public function setNumberCyclesBilled($numberCyclesBilled)
@@ -249,5 +253,67 @@ class BillingAgreement implements BillingAgreementInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setGenerateRequestOffset($generateRequestOffset)
+    {
+        if (!strtotime($generateRequestOffset)) {
+            throw new \InvalidArgumentException('String must be a valid PHP DateTime format.');
+        }
+
+        $this->generateRequestOffset = $generateRequestOffset;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGenerateRequestOffset()
+    {
+        return $this->generateRequestOffset;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setProcessRequestOffset($processRequestOffset)
+    {
+        if (!strtotime($processRequestOffset)) {
+            throw new \InvalidArgumentException('String must be a valid PHP DateTime format.');
+        }
+
+        $this->processRequestOffset = $processRequestOffset;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getProcessRequestOffset()
+    {
+        return $this->processRequestOffset;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setGenerateRequestOn(\DateTime $generateRequestOn)
+    {
+        $this->generateRequestOn = $generateRequestOn;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGenerateRequestOn()
+    {
+        return $this->generateRequestOn;
     }
 }
