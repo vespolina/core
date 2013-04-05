@@ -13,7 +13,7 @@ use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\AttributeInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
-use Vespolina\Entity\Taxonomy\TaxonomyInterface;
+use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
 
 /**
  * @author Richard D Shank <develop@zestic.com>
@@ -183,9 +183,9 @@ interface BaseProductInterface
     /**
      * Add a taxonomy to the collection
      *
-     * @param TaxonomyInterface $taxonomy
+     * @param TaxonomyNodeInterface $taxonomy
      */
-    function addTaxonomy(TaxonomyInterface $taxonomy);
+    function addTaxonomy(TaxonomyNodeInterface $taxonomy);
 
     /**
      * Add a collection of taxonomies
@@ -216,9 +216,9 @@ interface BaseProductInterface
     /**
      * Remove a taxonomy from the collection
      *
-     * @param TaxonomyInterface $taxonomy
+     * @param TaxonomyNodeInterface $taxonomy
      */
-    function removeTaxonomy(TaxonomyInterface $taxonomy);
+    function removeTaxonomy(TaxonomyNodeInterface $taxonomy);
 
     /**
      * Set a collection of taxonomies
