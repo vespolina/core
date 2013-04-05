@@ -14,7 +14,7 @@ use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProductInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
-use Vespolina\Entity\Taxonomy\TaxonomyInterface;
+use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
@@ -365,7 +365,7 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function addTaxonomy(TaxonomyInterface $taxonomy)
+    public function addTaxonomy(TaxonomyNodeInterface $taxonomy)
     {
         $this->taxonomies[] = $taxonomy;
 
@@ -413,7 +413,7 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function removeTaxonomy(TaxonomyInterface $taxonomy)
+    public function removeTaxonomy(TaxonomyNodeInterface $taxonomy)
     {
         foreach ($this->taxonomies as $key => $taxonomyToCompare) {
             if ($taxonomyToCompare == $taxonomy) {
