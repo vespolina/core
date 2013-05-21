@@ -385,6 +385,15 @@ class Partner implements PartnerInterface
         return $this->user;
     }
 
+    public function getPreferredPaymentProfileType()
+    {
+        if ($this->getPreferredPaymentProfile() instanceof CreditCard) {
+            return 'Credit Card';
+        } else {
+            return 'Invoice';
+        }
+    }
+
     /**
      * @return bool
      */
