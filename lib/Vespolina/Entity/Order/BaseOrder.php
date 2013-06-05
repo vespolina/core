@@ -8,7 +8,7 @@
 
 namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\Channel\Channel;
+use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Payment\PaymentProfileInterface;
@@ -106,7 +106,7 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function setChannel(Channel $channel)
+    public function setChannel(ChannelInterface $channel)
     {
         $this->channel = $channel;
     }

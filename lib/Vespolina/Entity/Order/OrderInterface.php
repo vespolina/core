@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Order;
 
+use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\Order\ItemInterface;
 
 /**
@@ -73,6 +74,21 @@ interface OrderInterface
      * @return boolean
      */
     function isEmpty();
+
+    /**
+     * Return the channel which resulted into this order
+     *
+     * @return ChannelInterface
+     */
+    function getChannel();
+
+    /**
+     * Set the channel which resulted into this order
+     *
+     * @param ChannelInterface $channel
+     * @return mixed
+     */
+    function setChannel(ChannelInterface $channel);
 
     /**
      * Add an item to the order
