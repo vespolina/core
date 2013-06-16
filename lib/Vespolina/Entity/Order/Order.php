@@ -8,6 +8,7 @@
 
 namespace Vespolina\Entity\Order;
 
+use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\Order\BaseOrder;
 
 class Order extends BaseOrder implements OrderInterface
@@ -17,6 +18,7 @@ class Order extends BaseOrder implements OrderInterface
     const STATE_CLOSED = 'closed';      //Closed after processing
     const STATE_EXPIRED = 'expired';    //Unprocessed and expired
 
+    protected $channel;
     protected $followUp;
     protected $orderDate;
     protected $paymentInstruction;
@@ -31,6 +33,22 @@ class Order extends BaseOrder implements OrderInterface
     public function getBillingAgreements()
     {
         return $this->billingAgreements;
+    }
+
+    /**
+     * @param mixed $channel
+     */
+    public function setChannel(ChannelInterface $channel)
+    {
+        $this->channel = $channel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChannel()
+    {
+        return $this->channel;
     }
 
     /**

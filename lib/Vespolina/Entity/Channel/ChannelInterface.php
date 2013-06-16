@@ -11,4 +11,6 @@ namespace Vespolina\Entity\Channel;
 interface ChannelInterface
 {
 
+    function getName();
+    function setName($name);
 }
