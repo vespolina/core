@@ -42,13 +42,6 @@ interface ProductInterface extends BaseProductInterface
     function equals(ProductInterface $product);
 
     /**
-     * Returns the id from a product.  If multiple identification schemas do exist it will return the default one
-     *
-     * @return mixed
-     */
-    function getId();
-
-    /**
      * Return a attribute by its type
      *
      * @param $type

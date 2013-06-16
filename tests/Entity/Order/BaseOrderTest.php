@@ -8,6 +8,7 @@
 
 use Vespolina\Entity\Order\BaseOrder;
 use Vespolina\Entity\Order\Item;
+use Vespolina\Entity\Channel\Channel;
 
 class BaseOrderTest extends \PHPUnit_Framework_TestCase
 {
@@ -85,34 +86,13 @@ class BaseOrderTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($order->getAttributes());
     }
 
-    public function testTaxonomy()
+    public function testChannel()
     {
-        $this->markTestSkipped('taxonomy in repair');
         $order = new BaseOrder();
-        $this->assertNull($order->getTaxonomies(), 'make sure we start out empty');
+        $channel = new Channel();
+        $channel->setName('store1');
+        $order->setChannel($channel);
 
-        $taxonomy = new Taxonomy();
-        $order->addTaxonomy($taxonomy);
-        $this->assertContains($taxonomy, $order->getTaxonomies());
-        $this->assertCount(1, $order->getTaxonomies());
-
-        $taxonomies = array();
-        $taxonomies[] = new Taxonomy();
-        $taxonomies[] = new Taxonomy();
-        $order->addTaxonomies($taxonomies);
-        $this->assertCount(3, $order->getTaxonomies());
-        $this->assertContains($taxonomy, $order->getTaxonomies());
-
-        $order->removeTaxonomy($taxonomy);
-        $this->assertNotContains($taxonomy, $order->getTaxonomies());
-        $this->assertCount(2, $order->getTaxonomies());
-
-        $order->clearTaxonomies();
-        $this->assertEmpty($order->getTaxonomies());
-
-        $order->addTaxonomy($taxonomy);
-        $order->setTaxonomies($taxonomies);
-        $this->assertNotContains($taxonomy, $order->getTaxonomies(), 'this should have been removed on setting a new array of items');
-        $this->assertCount(2, $order->getTaxonomies());
+        $this->assertEquals('store1', $order->getChannel()->getName());
     }
 }

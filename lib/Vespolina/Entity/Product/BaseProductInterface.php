@@ -36,6 +36,13 @@ interface BaseProductInterface
     function getDescription();
 
     /**
+     * Returns the id from a product.  If multiple identification schemas do exist it will return the default one
+     *
+     * @return mixed
+     */
+    function getId();
+
+    /**
      *
      */
     function addAttribute(AttributeInterface $attribute);

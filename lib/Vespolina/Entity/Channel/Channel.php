@@ -13,6 +13,7 @@ use Vespolina\Entity\Channel\ChannelInterface;
 class Channel implements ChannelInterface
 {
     protected $id;
+    protected $name;
 
     /**
      * @return mixed
@@ -21,4 +22,22 @@ class Channel implements ChannelInterface
     {
         return $this->id;
     }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+
 }
