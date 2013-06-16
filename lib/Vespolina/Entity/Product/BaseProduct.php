@@ -40,6 +40,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $type;
     protected $updatedAt;
     protected $pricingSet;
+    protected $id;
 
     /**
      * @inheritdoc
@@ -92,6 +93,11 @@ abstract class BaseProduct implements BaseProductInterface
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
