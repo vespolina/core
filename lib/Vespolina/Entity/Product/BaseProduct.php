@@ -36,6 +36,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $media;
     protected $name;
     protected $optionGroups;
+    protected $parent;
     protected $taxonomies;
     protected $type;
     protected $updatedAt;
@@ -98,6 +99,11 @@ abstract class BaseProduct implements BaseProductInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**
@@ -473,6 +479,13 @@ abstract class BaseProduct implements BaseProductInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
 
         return $this;
     }
