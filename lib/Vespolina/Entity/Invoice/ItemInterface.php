@@ -20,12 +20,8 @@ use Vespolina\Entity\Product\ProductInterface;
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-interface InvoiceItemInterface
+interface ItemInterface
 {
-
-    function getItemNumber();
-
-    function setItemNumber($itemNumber);
 
     function getDescription();
 
@@ -33,18 +29,6 @@ interface InvoiceItemInterface
 
     function getQuantity();
 
-    function setQuantity($quantity);
-
-    function getProduct();
-
-    function setProduct(ProductInterface $product);
-
-    function getProductDescription();
-
-    function setProductDescription($productDescription);
-
-    function getPricingSet();
-
-    function setPricingSet(PricingSetInterface $pricingSet);
+    function getPricing();
 
 }

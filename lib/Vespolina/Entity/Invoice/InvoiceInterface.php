@@ -85,14 +85,7 @@ interface InvoiceInterface
      */
     function getOrders();
 
-    /**
-     * Merge a group of orders with the orders in this invoice
-     *
-     * @param array $orders
-     * @return $this
-     */
-    function mergeOrders(array $orders);
-
+    function getItems();
     /**
      * Remove a specific order from the invoice
      *

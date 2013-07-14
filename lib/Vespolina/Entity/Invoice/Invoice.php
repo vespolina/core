@@ -31,6 +31,7 @@ class Invoice implements InvoiceInterface
     protected $id;
     protected $issuedDate;
     protected $fiscalYear;
+    protected $items;
     protected $orders;
     protected $partner;
     protected $paymentTerms;
@@ -41,6 +42,7 @@ class Invoice implements InvoiceInterface
 
     public function __construct()
     {
+        $this->items = array();
         $this->orders = array();
     }
 
@@ -77,7 +79,10 @@ class Invoice implements InvoiceInterface
         return $this->fiscalYear;
     }
 
-
+    public function getItems()
+    {
+        return $this->items;
+    }
 
     /**
      * @inheritdoc
@@ -125,17 +130,6 @@ class Invoice implements InvoiceInterface
         return $this->orders;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function mergeOrders(array $orders)
-    {
-        foreach ($orders as $order) {
-            $this->orders->add($order);
-        }
-
-        return $this;
-    }
 
     /**
      * @inheritdoc

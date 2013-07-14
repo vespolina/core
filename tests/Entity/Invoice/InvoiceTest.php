@@ -7,38 +7,27 @@
  */
 
 use Vespolina\Entity\Invoice\Invoice;
+use Vespolina\Entity\Invoice\Item;
 use Vespolina\Entity\Order\Order;
 
 class InvoiceTest extends \PHPUnit_Framework_TestCase
 {
-    public function testOrders()
+    public function testCreateInvoice()
     {
-        $this->markTestSkipped('not sure if this should be part of the requirements');
         $invoice = new Invoice();
-        $this->assertEquals($invoice->getOrders()->count(), 0, 'make sure we start out empty');
+        $this->assertEquals(count($invoice->getOrders()), 0, 'make sure we start out empty');
 
+        $item = new Item();
+
+
+        //Add an order reference to the invoice
         $order = new Order();
         $invoice->addOrder($order);
         $this->assertContains($order, $invoice->getOrders());
         $this->assertCount(1, $invoice->getOrders());
 
-        $orders = array();
-        $orders[] = new Order();
-        $orders[] = new Order();
-        $invoice->mergeOrders($orders);
-        $this->assertCount(3, $invoice->getOrders());
-        $this->assertContains($order, $invoice->getOrders());
-
-        $invoice->removeOrder($order);
-        $this->assertNotContains($order, $invoice->getOrders());
-        $this->assertCount(2, $invoice->getOrders());
-
         $invoice->clearOrders();
         $this->assertEmpty($invoice->getOrders());
 
-        $invoice->addOrder($order);
-        $invoice->setOrders($orders);
-        $this->assertNotContains($order, $invoice->getOrders(), 'this should have been removed on setting a new array of orders');
-        $this->assertCount(2, $invoice->getOrders());
     }
 }
