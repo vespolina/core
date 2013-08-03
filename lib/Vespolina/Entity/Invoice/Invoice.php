@@ -1,6 +1,7 @@
 <?php
+
 /**
- * (c) 2012-2013 Vespolina Project http://www.vespolina-project.org
+ * (c) 2011 - ∞ Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -15,7 +16,8 @@ use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
- * Invoice for an order
+ * Invoice entity
+ * Optionally linked to one or multiple orders
  *
  * @author Richard Shank <develop@zestic.com>
  */
@@ -31,6 +33,7 @@ class Invoice implements InvoiceInterface
     protected $id;
     protected $issuedDate;
     protected $fiscalYear;
+    protected $items;
     protected $orders;
     protected $partner;
     protected $paymentTerms;
@@ -41,6 +44,7 @@ class Invoice implements InvoiceInterface
 
     public function __construct()
     {
+        $this->items = array();
         $this->orders = array();
     }
 
@@ -77,7 +81,10 @@ class Invoice implements InvoiceInterface
         return $this->fiscalYear;
     }
 
-
+    public function getItems()
+    {
+        return $this->items;
+    }
 
     /**
      * @inheritdoc
@@ -125,17 +132,6 @@ class Invoice implements InvoiceInterface
         return $this->orders;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function mergeOrders(array $orders)
-    {
-        foreach ($orders as $order) {
-            $this->orders->add($order);
-        }
-
-        return $this;
-    }
 
     /**
      * @inheritdoc
