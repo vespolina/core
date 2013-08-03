@@ -16,7 +16,8 @@ use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 
 /**
- * Invoice for an order
+ * Invoice entity
+ * Optionally linked to one or multiple orders
  *
  * @author Richard Shank <develop@zestic.com>
  */
