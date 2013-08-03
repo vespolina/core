@@ -1,12 +1,13 @@
 <?php
+
 /**
- * (c) 2012 Vespolina Project http://www.vespolina-project.org
+ * (c) 2011 - ∞ Vespolina Project http://www.vespolina-project.org
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity\Order;
+snamespace Vespolina\Entity\Order;
 
 class OrderEvents
 {
@@ -83,4 +84,9 @@ class OrderEvents
      * ACTIVATE OR RENEW ITEMS is triggered upon order processing and recurring charges
      */
     const ACTIVATE_OR_RENEW_ITEMS = 'vespolina_order.items_activate_or_renew';
+
+    /**
+     * CHECKOUT_COMPLETED is triggered after an order was created through a sales funnel
+     */
+    const CHECKOUT_COMPLETED = 'vespolina_order.checkout_completed';
 }

@@ -7,10 +7,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity\Order;
+namespace Vespolina\Specification;
 
-use Vespolina\Entity\Order\OrderEvents;
-
-class CartEvents extends OrderEvents
+/**
+ * Interface to construct entity queries
+ *
+ * @author Daniel Kucharski <daniel@xerias.be>
+ */
+interface SpecificationInterface
 {
+   function isSatisfiedBy($entity);
 }
