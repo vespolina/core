@@ -7,7 +7,7 @@
  * with this source code in the file LICENSE.
  */
 
-snamespace Vespolina\Entity\Order;
+namespace Vespolina\Entity\Order;
 
 class OrderEvents
 {
