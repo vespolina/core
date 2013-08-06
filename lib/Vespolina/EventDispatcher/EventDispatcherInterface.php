@@ -20,7 +20,7 @@ interface EventDispatcherInterface
      *
      * @return instance Vespolina\EventDispatcher\EventInterface
      */
-    function createEvent($subject=null);
+    function createEvent($subject = null);
 
     /**
      * Dispatches an event to all registered listeners.
