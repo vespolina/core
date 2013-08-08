@@ -11,19 +11,20 @@ namespace Vespolina\Entity\Invoice;
 
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
+use Vespolina\Entity\DocumentInterface;
 
 /**
  * An interface for an invoice for an order
  *
  * @author Richard Shank <develop@zestic.com>
  */
-interface InvoiceInterface
+interface InvoiceInterface extends DocumentInterface
 {
     /**
      * Set the due date of this invoice
      *
      * @param \DateTime $dueDate
-     * @return $this
+     * @return self
      */
     function setDueDate(\DateTime $dueDate);
 
@@ -49,11 +50,12 @@ interface InvoiceInterface
      * @return mixed
      */
     function getFiscalYear();
+
     /**
      * Set the issued date of this invoice
      *
      * @param \DateTime $issuedDate
-     * @return $this
+     * @return self
      */
     function setIssuedDate(\DateTime $issuedDate);
 
@@ -68,14 +70,14 @@ interface InvoiceInterface
      * Add an order to be billed in this invoice
      *
      * @param \Vespolina\Entity\Order\OrderInterface $order
-     * @return $this
+     * @return self
      */
     function addOrder(OrderInterface $order);
 
     /**
      * Remove all orders from this invoice
      *
-     * @return $this
+     * @return self
      */
     function clearOrders();
 
@@ -86,12 +88,18 @@ interface InvoiceInterface
      */
     function getOrders();
 
+    /**
+     * Return the items with this invoice
+     *
+     * @return array
+     */
     function getItems();
+
     /**
      * Remove a specific order from the invoice
      *
      * @param \Vespolina\Entity\Order\OrderInterface $order
-     * @return $this
+     * @return self
      */
     function removeOrder(OrderInterface $order);
 
@@ -99,7 +107,7 @@ interface InvoiceInterface
      * Set a group of orders for this invoice
      *
      * @param array $orders
-     * @return $this
+     * @return self
      */
     function setOrders(array $orders);
 
@@ -107,7 +115,7 @@ interface InvoiceInterface
      * Set the Partner getting billed with this invoice
      *
      * @param \Vespolina\Entity\Partner\PartnerInterface $partner
-     * @return $this
+     * @return self
      */
     function setPartner(PartnerInterface $partner);
 
@@ -122,15 +130,14 @@ interface InvoiceInterface
      * Set the payment information from the billing
      *
      * @param $payment
-     * @return $this
+     * @return self
      */
     function setPayment($payment);
 
     /**
      * Return the payment information for this billing
      *
-     * @return
+     * @return mixed
      */
     function getPayment();
-
 }

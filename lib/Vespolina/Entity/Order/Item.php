@@ -13,6 +13,7 @@ use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Product\ProductInterface;
+use Vespolina\Entity\DocumentInterface;
 
 /**
  * Item is a class for items in an order
@@ -21,6 +22,7 @@ use Vespolina\Entity\Product\ProductInterface;
  */
 class Item implements ItemInterface
 {
+    protected $description;
     protected $attributes;
     protected $id;
     protected $name;
@@ -39,6 +41,24 @@ class Item implements ItemInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -118,6 +138,8 @@ class Item implements ItemInterface
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -151,7 +173,7 @@ class Item implements ItemInterface
     /**
      * @inheritdoc
      */
-    public function setParent(OrderInterface $parent)
+    public function setParent(DocumentInterface $parent)
     {
         $this->parent = $parent;
     }

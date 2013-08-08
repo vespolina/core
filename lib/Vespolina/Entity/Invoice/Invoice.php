@@ -9,9 +9,6 @@
 
 namespace Vespolina\Entity\Invoice;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
-use Vespolina\Entity\Invoice\InvoiceInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 
@@ -23,7 +20,6 @@ use Vespolina\Entity\Partner\PartnerInterface;
  */
 class Invoice implements InvoiceInterface
 {
-
     const TYPE_STANDARD = 'standard';       //Default invoice, to be paid
     const TYPE_PRO_FORMA = 'pro_forma';     //Legal pro forma document, already paid when the entity was created
     const TYPE_CREDIT_MEMO = 'credit_memo'; //Invoice to credit the customer
@@ -71,16 +67,25 @@ class Invoice implements InvoiceInterface
         return $this->dueDate;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function setFiscalYear($fiscalYear)
     {
         $this->fiscalYear = $fiscalYear;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFiscalYear()
     {
         return $this->fiscalYear;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getItems()
     {
         return $this->items;
@@ -131,7 +136,6 @@ class Invoice implements InvoiceInterface
     {
         return $this->orders;
     }
-
 
     /**
      * @inheritdoc
@@ -197,13 +201,12 @@ class Invoice implements InvoiceInterface
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     public function getType()
     {
         return $this->type;
     }
-
-
-
 }

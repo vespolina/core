@@ -10,7 +10,7 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
-use Vespolina\Entity\Order\ItemInterface;
+use Vespolina\Entity\DocumentInterface;
 
 /**
  * OrderInterface is a generic interface for a shopping cart or sales order
@@ -18,7 +18,7 @@ use Vespolina\Entity\Order\ItemInterface;
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-interface OrderInterface
+interface OrderInterface extends DocumentInterface
 {
     /**
      * Add an attribute to the collection
@@ -87,7 +87,7 @@ interface OrderInterface
      * Set the channel which resulted into this order
      *
      * @param ChannelInterface $channel
-     * @return mixed
+     * @return self
      */
     function setChannel(ChannelInterface $channel);
 

@@ -9,7 +9,6 @@
 
 namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
@@ -19,6 +18,10 @@ use Vespolina\Entity\Pricing\PricingSetInterface;
  */
 interface ItemInterface
 {
+    function getDescription();
+
+    function setDescription($description);
+
     /**
      * Add an attribute to the collection
      *

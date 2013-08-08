@@ -10,8 +10,6 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
-use Vespolina\Entity\Order\ItemInterface;
-use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Payment\PaymentProfileInterface;
 
 /**
