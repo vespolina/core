@@ -10,35 +10,24 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Exception\InvalidOptionsException;
-use Vespolina\Entity\Order\ItemInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Product\ProductInterface;
+use Vespolina\Entity\Item as BaseItem;
 
 /**
  * Item is a class for items in an order
  *
  * @author Richard Shank <develop@zestic.com>
  */
-class Item implements ItemInterface
+class Item extends BaseItem implements ItemInterface
 {
     protected $attributes;
-    protected $id;
-    protected $name;
     protected $options;
-    protected $parent;
-    protected $pricingSet;
     protected $product;
-    protected $quantity;
     protected $state;
 
     public function __construct(ProductInterface $product = null)
     {
         $this->product = $product;
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -47,9 +36,9 @@ class Item implements ItemInterface
     public function addAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
+
+        return $this;
     }
-
-
 
     /**
      * @inheritdoc
@@ -57,6 +46,8 @@ class Item implements ItemInterface
     public function addAttributes(array $attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes);
+
+        return $this;
     }
 
     /**
@@ -102,22 +93,8 @@ class Item implements ItemInterface
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+        return $this;
     }
 
     /**
@@ -140,60 +117,14 @@ class Item implements ItemInterface
         return $this->options;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getParent()
+    protected function setOptions(array $options)
     {
-        return $this->parent;
-    }
+        if (!$this->product->validateOptions($options)) {
+            throw new InvalidOptionsException('This combination of options is not valid for the product');
+        }
+        $this->options = $options;
 
-    /**
-     * @inheritdoc
-     */
-    public function setParent(OrderInterface $parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPricing($pricingSet)
-    {
-        $this->pricingSet = $pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPricing()
-    {
-        return $this->pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getState()
-    {
-        return $this->state;
+        return $this;
     }
 
     protected function clearOptions()
@@ -204,26 +135,33 @@ class Item implements ItemInterface
         $this->options = array();
     }
 
-    protected function setOptions(array $options)
+    /**
+     * @inheritdoc
+     */
+    public function getProduct()
     {
-        if (!$this->product->validateOptions($options)) {
-            throw new InvalidOptionsException('This combination of options is not valid for the product');
-        }
-        $this->options = $options;
-    }
-
-    protected function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-    }
-
-    protected function setState($state)
-    {
-        $this->state = $state;
+        return $this->product;
     }
 
     protected function setProduct($product)
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    protected function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
     }
 }

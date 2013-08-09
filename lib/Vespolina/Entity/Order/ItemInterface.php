@@ -9,15 +9,15 @@
 
 namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\Order\OrderInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
+use Vespolina\Entity\ItemableInterface;
+use Vespolina\Entity\ItemInterface as BaseItemInterface;
 
 /**
  * ItemInterface is an interface for items in an order
  *
  * @author Richard Shank <develop@zestic.com>
  */
-interface ItemInterface
+interface ItemInterface extends BaseItemInterface
 {
     /**
      * Add an attribute to the collection
@@ -93,16 +93,9 @@ interface ItemInterface
     /**
      * Return the order/cart where this item belongs
      *
-     * @return \Vespolina\Entity\Order\OrderInterface
+     * @return \Vespolina\Entity\ItemableInterface
      */
     function getParent();
-
-    /**
-     * Set the parent order for this item
-     *
-     * @param \Vespolina\Entity\Order\OrderInterface $parent
-     */
-    function setParent(OrderInterface $parent);
 
     /**
      * Set a pricing set for this item
@@ -110,25 +103,11 @@ interface ItemInterface
     function setPricing($pricingSet);
 
     /**
-     * Return the pricing set for this item
-     *
-     * @return \Vespolina\Entity\Pricing\PricingSetInterface|null
-     */
-    function getPricing();
-
-    /**
      * Return the product for this item
      *
      * @return \Vespolina\Entity\Product\ProductInterface
      */
     function getProduct();
-
-    /**
-     * Return the quantity of the item
-     *
-     * @return integer
-     */
-    function getQuantity();
 
     /**
      * Get the cart state for this item

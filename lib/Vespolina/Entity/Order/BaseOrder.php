@@ -10,9 +10,8 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
-use Vespolina\Entity\Order\ItemInterface;
-use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Payment\PaymentProfileInterface;
+use Vespolina\Entity\Itemable;
 
 /**
  * Order is a base class for shopping cart or sales order
@@ -20,7 +19,7 @@ use Vespolina\Entity\Payment\PaymentProfileInterface;
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-class BaseOrder implements OrderInterface
+class BaseOrder extends Itemable implements OrderInterface
 {
     protected $attributes;
     protected $channel;
@@ -28,7 +27,6 @@ class BaseOrder implements OrderInterface
     protected $fulfillment;
     protected $expiresAt;
     protected $id;
-    protected $items;
     protected $name;
     protected $owner;
     protected $ownerNotes;
@@ -37,6 +35,7 @@ class BaseOrder implements OrderInterface
     protected $state;
     protected $totalPrice;
     protected $updatedAt;
+    protected $prices;
 
     public function getId()
     {
@@ -171,68 +170,6 @@ class BaseOrder implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function isEmpty()
-    {
-        return empty($this->items);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addItem(ItemInterface $item)
-    {
-        $item->setParent($this);
-        $this->items[] = $item;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function clearItems()
-    {
-        $this->items = array();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getItems()
-    {
-        return $this->items;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function mergeItems(array $items)
-    {
-        $this->items = array_merge($this->items, $items);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function removeItem(ItemInterface $item)
-    {
-        foreach ($this->items as $key => $itemToCompare) {
-            if ($itemToCompare == $item) {
-                unset($this->items[$key]);
-                break;
-            };
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setItems($items)
-    {
-        $this->items = $items;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function setName($name)
     {
         $this->name = $name;
@@ -356,5 +293,13 @@ class BaseOrder implements OrderInterface
         return $this->ownerNotes;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function setPrice($name, $price)
+    {
+        $this->prices[$name] = $price;
 
+        return $this;
+    }
 }
