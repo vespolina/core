@@ -9,21 +9,16 @@
 
 namespace Vespolina\Entity\Invoice;
 
-use Vespolina\Entity\Partner\PartnerInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
-use Vespolina\Entity\Product\ProductInterface;
-
 /**
  * An interface for an invoice item.
  *
- * It differs from an order item because an invoice item doesn't necessarily to be linked to an order(item)
- * nor does it needs to be linked to an actual product.
+ * It differs from an order item because an invoice item is not necessarily linked to an order(item)
+ * or to an actual product.
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  */
 interface ItemInterface
 {
-
     function getDescription();
 
     function setDescription($description);
@@ -31,5 +26,4 @@ interface ItemInterface
     function getQuantity();
 
     function getPricing();
-
 }

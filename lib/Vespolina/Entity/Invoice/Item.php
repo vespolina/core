@@ -9,16 +9,14 @@
 
 namespace Vespolina\Entity\Invoice;
 
-use Vespolina\Entity\Invoice\ItemInterface;
-use Vespolina\Entity\Invoice\InvoiceInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
+use Vespolina\Entity\BaseItem;
 
 /**
  * Item is a class for items in an order
  *
  * @author Richard Shank <develop@zestic.com>
  */
-class Item implements ItemInterface
+class Item extends BaseItem implements ItemInterface
 {
     protected $id;
     protected $description;

@@ -10,17 +10,15 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Exception\InvalidOptionsException;
-use Vespolina\Entity\Order\ItemInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Product\ProductInterface;
-use Vespolina\Entity\ItemableInterface;
+use Vespolina\Entity\BaseItem;
 
 /**
  * Item is a class for items in an order
  *
  * @author Richard Shank <develop@zestic.com>
  */
-class Item implements ItemInterface
+class Item extends BaseItem implements ItemInterface
 {
     protected $description;
     protected $attributes;
