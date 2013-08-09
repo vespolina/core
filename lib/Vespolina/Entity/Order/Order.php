@@ -10,7 +10,6 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
-use Vespolina\Entity\Order\BaseOrder;
 
 class Order extends BaseOrder implements OrderInterface
 {
@@ -37,24 +36,30 @@ class Order extends BaseOrder implements OrderInterface
     }
 
     /**
-     * @param mixed $channel
+     * @inheritdoc
      */
     public function setChannel(ChannelInterface $channel)
     {
         $this->channel = $channel;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @inheritdoc
      */
     public function getChannel()
     {
         return $this->channel;
     }
 
-    /**
-     * @inheritdoc
-     */
+    public function setFollowUp($followUp)
+    {
+        $this->followUp = $followUp;
+
+        return $this;
+    }
+
     public function getFollowUp()
     {
         return $this->followUp;
@@ -63,6 +68,8 @@ class Order extends BaseOrder implements OrderInterface
     public function setPaymentInstruction($paymentInstruction)
     {
         $this->paymentInstruction = $paymentInstruction;
+
+        return $this;
     }
 
     public function getPaymentInstruction()
@@ -70,30 +77,16 @@ class Order extends BaseOrder implements OrderInterface
         return $this->paymentInstruction;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setFollowUp($followUp)
-    {
-        $this->followUp = $followUp;
-    }
-
     public function setOrderDate(\DateTime $orderDate)
     {
         $this->orderDate = $orderDate;
+
+        return $this;
     }
 
     public function getOrderDate()
     {
         return $this->orderDate;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPrice($name, $price)
-    {
-        $this->prices[$name] = $price;
     }
 
     public function setInternalNotes($internalNotes)
@@ -105,8 +98,6 @@ class Order extends BaseOrder implements OrderInterface
     {
         return $this->internalNotes;
     }
-
-
 
     public function autoSetCreatedAt()
     {

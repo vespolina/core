@@ -10,7 +10,7 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
-use Vespolina\Entity\Order\ItemInterface;
+use Vespolina\Entity\ItemableInterface;
 
 /**
  * OrderInterface is a generic interface for a shopping cart or sales order
@@ -18,7 +18,7 @@ use Vespolina\Entity\Order\ItemInterface;
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-interface OrderInterface
+interface OrderInterface extends ItemableInterface
 {
     /**
      * Add an attribute to the collection
@@ -87,42 +87,9 @@ interface OrderInterface
      * Set the channel which resulted into this order
      *
      * @param ChannelInterface $channel
-     * @return mixed
+     * @return self
      */
     function setChannel(ChannelInterface $channel);
-
-    /**
-     * Add an item to the order
-     *
-     * @param ItemInterface $item
-     */
-    function addItem(ItemInterface $item);
-
-    /**
-     * Remove all items
-     */
-    function clearItems();
-
-    /**
-     * Retrieve all items in the order
-     *
-     * @return \Vespolina\Entity\Order\ItemInterface[]
-     */
-    function getItems();
-
-    /**
-     * Set the items for this order
-     *
-     * @param Array of Vespolina\Entity\ItemInterface
-     */
-    function setItems($items);
-
-    /**
-     * Merge an array of items to the items already in the order
-     *
-     * @param \Vespolina\Entity\Order\ItemInterface[] $items
-     */
-    function mergeItems(array $items);
 
     /**
      * Get name of the order (useful in multi-order environments)

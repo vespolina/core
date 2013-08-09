@@ -9,8 +9,6 @@
 
 namespace Vespolina\Entity\Asset;
 
-use Vespolina\Entity\Asset\AssetInterface;
-
 /**
  * @author Myke Hines <myke@webhines.com>
  */

@@ -12,7 +12,8 @@
         "vespolina/taxonomy": "dev-master"
     },
     "require-dev": {
-        "merk/dough": "*"
+        "merk/dough": "*",
+        "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-0": {

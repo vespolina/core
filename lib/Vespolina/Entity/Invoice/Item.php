@@ -9,28 +9,16 @@
 
 namespace Vespolina\Entity\Invoice;
 
-use Vespolina\Entity\Invoice\ItemInterface;
-use Vespolina\Entity\Invoice\InvoiceInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
+use Vespolina\Entity\Item as BaseItem;
 
 /**
  * Item is a class for items in an order
  *
  * @author Richard Shank <develop@zestic.com>
  */
-class Item implements ItemInterface
+class Item extends BaseItem implements ItemInterface
 {
-    protected $id;
     protected $description;
-    protected $name;
-    protected $parent;
-    protected $pricingSet;
-    protected $quantity;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return mixed
@@ -45,57 +33,5 @@ class Item implements ItemInterface
         $this->description = $description;
 
         return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setParent(InvoiceInterface $parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPricing()
-    {
-        return $this->pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
     }
 }
