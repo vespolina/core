@@ -24,8 +24,4 @@ interface ItemInterface extends BaseItemInterface
     function getDescription();
 
     function setDescription($description);
-
-    function getQuantity();
-
-    function getPricing();
 }

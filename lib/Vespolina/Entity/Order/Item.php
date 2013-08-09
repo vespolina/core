@@ -9,7 +9,6 @@
 
 namespace Vespolina\Entity\Order;
 
-use Vespolina\Entity\ItemableInterface;
 use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Product\ProductInterface;
 use Vespolina\Entity\Item as BaseItem;
@@ -22,13 +21,8 @@ use Vespolina\Entity\Item as BaseItem;
 class Item extends BaseItem implements ItemInterface
 {
     protected $attributes;
-    protected $id;
-    protected $name;
     protected $options;
-    protected $parent;
-    protected $pricingSet;
     protected $product;
-    protected $quantity;
     protected $state;
 
     public function __construct(ProductInterface $product = null)
@@ -48,8 +42,6 @@ class Item extends BaseItem implements ItemInterface
     {
         $this->attributes[$name] = $value;
     }
-
-
 
     /**
      * @inheritdoc
@@ -107,24 +99,6 @@ class Item extends BaseItem implements ItemInterface
     /**
      * @inheritdoc
      */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getOption($type)
     {
         if (isset($this->options[$type])) {
@@ -145,49 +119,9 @@ class Item extends BaseItem implements ItemInterface
     /**
      * @inheritdoc
      */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setParent(ItemableInterface $parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPricing($pricingSet)
-    {
-        $this->pricingSet = $pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPricing()
-    {
-        return $this->pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getProduct()
     {
         return $this->product;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
     }
 
     /**
@@ -212,11 +146,6 @@ class Item extends BaseItem implements ItemInterface
             throw new InvalidOptionsException('This combination of options is not valid for the product');
         }
         $this->options = $options;
-    }
-
-    protected function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
     }
 
     protected function setState($state)

@@ -111,25 +111,11 @@ interface ItemInterface extends BaseItemInterface
     function setPricing($pricingSet);
 
     /**
-     * Return the pricing set for this item
-     *
-     * @return \Vespolina\Entity\Pricing\PricingSetInterface|null
-     */
-    function getPricing();
-
-    /**
      * Return the product for this item
      *
      * @return \Vespolina\Entity\Product\ProductInterface
      */
     function getProduct();
-
-    /**
-     * Return the quantity of the item
-     *
-     * @return integer
-     */
-    function getQuantity();
 
     /**
      * Get the cart state for this item

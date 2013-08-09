@@ -18,17 +18,7 @@ use Vespolina\Entity\Item as BaseItem;
  */
 class Item extends BaseItem implements ItemInterface
 {
-    protected $id;
     protected $description;
-    protected $name;
-    protected $parent;
-    protected $pricingSet;
-    protected $quantity;
-
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return mixed
@@ -43,57 +33,5 @@ class Item extends BaseItem implements ItemInterface
         $this->description = $description;
 
         return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setParent(InvoiceInterface $parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPricing()
-    {
-        return $this->pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
     }
 }

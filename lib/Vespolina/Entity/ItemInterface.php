@@ -9,5 +9,17 @@ namespace Vespolina\Entity;
  */
 interface ItemInterface
 {
+    /**
+     * Return the pricing set for this item
+     *
+     * @return \Vespolina\Entity\Pricing\PricingSetInterface|null
+     */
+    function getPricing();
 
+    /**
+     * Return the quantity of the item
+     *
+     * @return integer
+     */
+    function getQuantity();
 }
