@@ -9,6 +9,8 @@
 
 namespace Vespolina\Entity\Invoice;
 
+use Vespolina\Entity\ItemableInterface;
+
 /**
  * An interface for an invoice item.
  *
@@ -17,7 +19,7 @@ namespace Vespolina\Entity\Invoice;
  *
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-interface ItemInterface
+interface ItemInterface extends ItemableInterface
 {
     function getDescription();
 

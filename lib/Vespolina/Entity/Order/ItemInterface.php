@@ -17,7 +17,7 @@ use Vespolina\Entity\Pricing\PricingSetInterface;
  *
  * @author Richard Shank <develop@zestic.com>
  */
-interface ItemInterface
+interface ItemInterface extends ItemableInterface
 {
     function getDescription();
 
