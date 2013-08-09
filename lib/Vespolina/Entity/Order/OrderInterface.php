@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\ItemableInterface;
+use Vespolina\Entity\ItemInterface;
 
 /**
  * OrderInterface is a generic interface for a shopping cart or sales order
@@ -106,7 +107,7 @@ interface OrderInterface extends ItemableInterface
     /**
      * Retrieve all items in the order
      *
-     * @return \Vespolina\Entity\Order\ItemInterface[]
+     * @return \Vespolina\Entity\ItemInterface[]
      */
     function getItems();
 

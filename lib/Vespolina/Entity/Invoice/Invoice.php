@@ -9,6 +9,7 @@
 
 namespace Vespolina\Entity\Invoice;
 
+use Vespolina\Entity\ItemInterface;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 
@@ -208,5 +209,24 @@ class Invoice implements InvoiceInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    function addItem(ItemInterface $item)
+    {
+        $this->items[] = $item;
+
+        return $this;
+    }
+
+    function removeItem(ItemInterface $item)
+    {
+        foreach ($this->items as $key => $itemToCompare) {
+            if ($itemToCompare == $item) {
+                unset($this->items[$key]);
+                break;
+            };
+        }
+
+        return $this;
     }
 }

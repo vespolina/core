@@ -16,6 +16,6 @@ namespace Vespolina\Entity;
  */
 interface ItemableInterface
 {
-    function addItem($item);
-    function removeItem($item);
+    function addItem(ItemInterface $item);
+    function removeItem(ItemInterface $item);
 }

@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\Payment\PaymentProfileInterface;
+use Vespolina\Entity\ItemInterface;
 
 /**
  * Order is a base class for shopping cart or sales order
