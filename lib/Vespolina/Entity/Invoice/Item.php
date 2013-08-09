@@ -9,7 +9,7 @@
 
 namespace Vespolina\Entity\Invoice;
 
-use Vespolina\Entity\BaseItem;
+use Vespolina\Entity\Item as BaseItem;
 
 /**
  * Item is a class for items in an order

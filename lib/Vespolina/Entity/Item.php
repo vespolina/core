@@ -7,7 +7,7 @@ namespace Vespolina\Entity;
  *
  * @author Luis Cordova <cordoval@gmail.com>
  */
-class BaseItem implements ItemableInterface
+class Item implements ItemInterface
 {
 
 }

@@ -12,7 +12,7 @@ namespace Vespolina\Entity\Order;
 use Vespolina\Entity\ItemableInterface;
 use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Product\ProductInterface;
-use Vespolina\Entity\BaseItem;
+use Vespolina\Entity\Item as BaseItem;
 
 /**
  * Item is a class for items in an order
