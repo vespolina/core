@@ -11,18 +11,15 @@ namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\ItemableInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
+use Vespolina\Entity\ItemInterface as BaseItemInterface;
 
 /**
  * ItemInterface is an interface for items in an order
  *
  * @author Richard Shank <develop@zestic.com>
  */
-interface ItemInterface extends ItemableInterface
+interface ItemInterface extends BaseItemInterface
 {
-    function getDescription();
-
-    function setDescription($description);
-
     /**
      * Add an attribute to the collection
      *
