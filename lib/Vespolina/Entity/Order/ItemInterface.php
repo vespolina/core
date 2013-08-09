@@ -9,6 +9,7 @@
 
 namespace Vespolina\Entity\Order;
 
+use Vespolina\Entity\ItemableInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
@@ -103,9 +104,9 @@ interface ItemInterface
     /**
      * Set the parent order for this item
      *
-     * @param \Vespolina\Entity\Order\OrderInterface $parent
+     * @param \Vespolina\Entity\ItemableInterface $parent
      */
-    function setParent(OrderInterface $parent);
+    function setParent(ItemableInterface $parent);
 
     /**
      * Set a pricing set for this item

@@ -9,6 +9,7 @@
 
 namespace Vespolina\Entity\Order;
 
+use Vespolina\Entity\ItemableInterface;
 use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Product\ProductInterface;
 use Vespolina\Entity\BaseItem;
@@ -20,7 +21,6 @@ use Vespolina\Entity\BaseItem;
  */
 class Item extends BaseItem implements ItemInterface
 {
-    protected $description;
     protected $attributes;
     protected $id;
     protected $name;
@@ -39,24 +39,6 @@ class Item extends BaseItem implements ItemInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
     }
 
     /**
