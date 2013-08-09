@@ -14,7 +14,7 @@ namespace Vespolina\Entity;
  *
  * @author Luis Cordova <cordoval@gmail.com>
  */
-interface DocumentInterface
+interface ItemableInterface
 {
 
 }

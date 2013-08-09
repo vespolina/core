@@ -10,7 +10,7 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
-use Vespolina\Entity\DocumentInterface;
+use Vespolina\Entity\ItemableInterface;
 
 /**
  * OrderInterface is a generic interface for a shopping cart or sales order
@@ -18,7 +18,7 @@ use Vespolina\Entity\DocumentInterface;
  * @author Daniel Kucharski <daniel@xerias.be>
  * @author Richard Shank <develop@zestic.com>
  */
-interface OrderInterface extends DocumentInterface
+interface OrderInterface extends ItemableInterface
 {
     /**
      * Add an attribute to the collection

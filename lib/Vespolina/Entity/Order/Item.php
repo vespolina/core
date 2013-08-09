@@ -13,7 +13,7 @@ use Vespolina\Exception\InvalidOptionsException;
 use Vespolina\Entity\Order\ItemInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Product\ProductInterface;
-use Vespolina\Entity\DocumentInterface;
+use Vespolina\Entity\ItemableInterface;
 
 /**
  * Item is a class for items in an order
@@ -173,7 +173,7 @@ class Item implements ItemInterface
     /**
      * @inheritdoc
      */
-    public function setParent(DocumentInterface $parent)
+    public function setParent(ItemableInterface $parent)
     {
         $this->parent = $parent;
     }

@@ -11,14 +11,14 @@ namespace Vespolina\Entity\Invoice;
 
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
-use Vespolina\Entity\DocumentInterface;
+use Vespolina\Entity\ItemableInterface;
 
 /**
  * An interface for an invoice for an order
  *
  * @author Richard Shank <develop@zestic.com>
  */
-interface InvoiceInterface extends DocumentInterface
+interface InvoiceInterface extends ItemableInterface
 {
     /**
      * Set the due date of this invoice
