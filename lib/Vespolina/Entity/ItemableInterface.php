@@ -17,5 +17,29 @@ namespace Vespolina\Entity;
 interface ItemableInterface
 {
     function addItem(ItemInterface $item);
+
     function removeItem(ItemInterface $item);
+
+    function clearItems();
+
+    /**
+     * Retrieve all items in the order
+     *
+     * @return \Vespolina\Entity\ItemInterface[]
+     */
+    function getItems();
+
+    /**
+     * Set the items for this order
+     *
+     * @param Array of Vespolina\Entity\ItemInterface
+     */
+    function setItems($items);
+
+    /**
+     * Merge an array of items to the items already in the order
+     *
+     * @param \Vespolina\Entity\ItemInterface[] $items
+     */
+    function mergeItems(array $items);
 }

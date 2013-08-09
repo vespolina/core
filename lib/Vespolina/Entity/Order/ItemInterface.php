@@ -98,13 +98,6 @@ interface ItemInterface extends BaseItemInterface
     function getParent();
 
     /**
-     * Set the parent order for this item
-     *
-     * @param \Vespolina\Entity\ItemableInterface $parent
-     */
-    function setParent(ItemableInterface $parent);
-
-    /**
      * Set a pricing set for this item
      */
     function setPricing($pricingSet);

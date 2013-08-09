@@ -89,14 +89,6 @@ class Order extends BaseOrder implements OrderInterface
         return $this->orderDate;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setPrice($name, $price)
-    {
-        $this->prices[$name] = $price;
-    }
-
     public function setInternalNotes($internalNotes)
     {
         $this->internalNotes = $internalNotes;

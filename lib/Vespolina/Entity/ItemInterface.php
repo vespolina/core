@@ -22,4 +22,12 @@ interface ItemInterface
      * @return integer
      */
     function getQuantity();
+
+    /**
+     * Set the parent order for this item
+     *
+     * @param ItemableInterface $parent
+     * @return self
+     */
+    function setParent(ItemableInterface $parent);
 }

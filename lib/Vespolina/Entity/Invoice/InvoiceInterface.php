@@ -12,7 +12,7 @@ namespace Vespolina\Entity\Invoice;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 use Vespolina\Entity\ItemableInterface;
-
+use Vespolina\Entity\ItemInterface as BaseItemInterface;
 /**
  * An interface for an invoice for an order
  *

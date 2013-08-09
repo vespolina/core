@@ -9,7 +9,7 @@
 
 namespace Vespolina\Entity\Invoice;
 
-use Vespolina\Entity\ItemInterface;
+use Vespolina\Entity\Itemable;
 use Vespolina\Entity\Order\OrderInterface;
 use Vespolina\Entity\Partner\PartnerInterface;
 
@@ -19,7 +19,7 @@ use Vespolina\Entity\Partner\PartnerInterface;
  *
  * @author Richard Shank <develop@zestic.com>
  */
-class Invoice implements InvoiceInterface
+class Invoice extends Itemable implements InvoiceInterface
 {
     const TYPE_STANDARD = 'standard';       //Default invoice, to be paid
     const TYPE_PRO_FORMA = 'pro_forma';     //Legal pro forma document, already paid when the entity was created
@@ -82,14 +82,6 @@ class Invoice implements InvoiceInterface
     public function getFiscalYear()
     {
         return $this->fiscalYear;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getItems()
-    {
-        return $this->items;
     }
 
     /**
@@ -209,24 +201,5 @@ class Invoice implements InvoiceInterface
     public function getType()
     {
         return $this->type;
-    }
-
-    function addItem(ItemInterface $item)
-    {
-        $this->items[] = $item;
-
-        return $this;
-    }
-
-    function removeItem(ItemInterface $item)
-    {
-        foreach ($this->items as $key => $itemToCompare) {
-            if ($itemToCompare == $item) {
-                unset($this->items[$key]);
-                break;
-            };
-        }
-
-        return $this;
     }
 }
