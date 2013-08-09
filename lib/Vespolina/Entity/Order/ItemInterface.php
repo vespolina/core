@@ -10,7 +10,6 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\ItemableInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\ItemInterface as BaseItemInterface;
 
 /**
@@ -94,7 +93,7 @@ interface ItemInterface extends BaseItemInterface
     /**
      * Return the order/cart where this item belongs
      *
-     * @return \Vespolina\Entity\Order\OrderInterface
+     * @return \Vespolina\Entity\ItemableInterface
      */
     function getParent();
 

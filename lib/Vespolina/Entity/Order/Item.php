@@ -30,17 +30,14 @@ class Item extends BaseItem implements ItemInterface
         $this->product = $product;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * @inheritdoc
      */
     public function addAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
+
+        return $this;
     }
 
     /**
@@ -49,6 +46,8 @@ class Item extends BaseItem implements ItemInterface
     public function addAttributes(array $attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes);
+
+        return $this;
     }
 
     /**
@@ -94,6 +93,8 @@ class Item extends BaseItem implements ItemInterface
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
+
+        return $this;
     }
 
     /**
@@ -116,20 +117,14 @@ class Item extends BaseItem implements ItemInterface
         return $this->options;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getProduct()
+    protected function setOptions(array $options)
     {
-        return $this->product;
-    }
+        if (!$this->product->validateOptions($options)) {
+            throw new InvalidOptionsException('This combination of options is not valid for the product');
+        }
+        $this->options = $options;
 
-    /**
-     * @inheritdoc
-     */
-    public function getState()
-    {
-        return $this->state;
+        return $this;
     }
 
     protected function clearOptions()
@@ -140,21 +135,33 @@ class Item extends BaseItem implements ItemInterface
         $this->options = array();
     }
 
-    protected function setOptions(array $options)
+    /**
+     * @inheritdoc
+     */
+    public function getProduct()
     {
-        if (!$this->product->validateOptions($options)) {
-            throw new InvalidOptionsException('This combination of options is not valid for the product');
-        }
-        $this->options = $options;
-    }
-
-    protected function setState($state)
-    {
-        $this->state = $state;
+        return $this->product;
     }
 
     protected function setProduct($product)
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    protected function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
     }
 }
