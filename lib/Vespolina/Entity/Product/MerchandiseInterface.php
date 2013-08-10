@@ -10,6 +10,7 @@
 namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\AssetInterface;
+use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Pricing\PricingSet;
 use Vespolina\Entity\Product\BaseProductInterface;
@@ -127,16 +128,16 @@ interface MerchandiseInterface extends BaseProductInterface
     function getProduct();
 
     /**
-     * Set the store this merchandise belongs in
+     * Set the channel to which this merchandise belongs to
      *
      * @param $store
      */
-    function setStore($store);
+    function setChannel(ChannelInterface $channel);
 
     /**
-     * Return the store this merchandise belongs in
+     * Return the channel to which this merchandise belongs to
      *
      * @return
      */
-    function getStore();
+    function getChannel();
 }

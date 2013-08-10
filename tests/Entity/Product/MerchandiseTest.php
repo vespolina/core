@@ -10,13 +10,15 @@
 use Vespolina\Entity\Asset\Asset;
 use Vespolina\Entity\Product\Product;
 use Vespolina\Entity\Product\Merchandise;
+use Vespolina\Entity\Channel\WebStore;
 
 class MerchandiseTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
         $product = $this->createProduct();
-        $merchandise = new Merchandise($product);
+        $storeChannel = new WebStore();
+        $merchandise = new Merchandise($product, $storeChannel);
 
         $this->assertSame($product, $merchandise->getProduct(), 'product should be set in merchandise');
 
@@ -26,6 +28,8 @@ class MerchandiseTest extends \PHPUnit_Framework_TestCase
             $function = 'get' . ucfirst($property);
             $this->assertSame($merchandise->$function(), $product->$function());
         }
+
+        $this->assertSame($merchandise->getChannel(), $storeChannel);
     }
 
     public function testAsset()
