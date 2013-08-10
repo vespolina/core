@@ -25,8 +25,6 @@ abstract class StorageLocation implements StorageLocationInterface
     protected $updatedAt;
     protected $warehouse;
 
-
-
     /**
      * @inheritdoc
      */

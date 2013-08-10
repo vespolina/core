@@ -10,6 +10,7 @@
 namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\AssetInterface;
+use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 use Vespolina\Entity\Pricing\PricingSet;
 use Vespolina\Entity\Product\BaseProduct;
@@ -25,14 +26,14 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     protected $pricing;
     protected $product;
     protected $slug;
-    protected $store;
+    protected $channel;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function __construct(ProductInterface $product)
+    public function __construct(ProductInterface $product, ChannelInterface $channel = null)
     {
         $this->product = $product;
         $rc = new \ReflectionClass('Vespolina\Entity\Product\BaseProduct');
@@ -45,6 +46,8 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
                 $property->setAccessible(false);
             }
         }
+
+        $this->channel = $channel;
     }
 
     public function setSlug($slug)
@@ -185,16 +188,16 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     /**
      * @inheritdoc
      */
-    public function setStore($store)
+    public function setChannel(ChannelInterface $channel)
     {
-        $this->store = $store;
+        $this->channel = $channel;
     }
 
     /**
      * @inheritdoc
      */
-    public function getStore()
+    public function getChannel()
     {
-        return $this->store;
+        return $this->channel;
     }
 }
