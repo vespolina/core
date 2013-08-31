@@ -26,6 +26,7 @@ class Cart extends BaseOrder implements CartInterface
     const STATE_ABANDONED = 'abandoned'; //Cart was abandoned
     const STATE_CONVERTED = 'converted'; //Cart was converted into a purchase
 
+    protected $expiresAt;
     protected $followUp;
     protected $paymentInstruction;
 
@@ -35,6 +36,19 @@ class Cart extends BaseOrder implements CartInterface
     public function getExpiresAt()
     {
         return $this->expiresAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isExpired()
+    {
+        if (null != $this->expiresAt) {
+
+            return $this->expiresAt->getTimestamp() >= time();
+        }
+
+        return false;
     }
 
     /**
