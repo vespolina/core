@@ -25,7 +25,6 @@ class BaseOrder extends Itemable implements OrderInterface
     protected $channel;
     protected $createdAt;
     protected $fulfillment;
-    protected $expiresAt;
     protected $id;
     protected $name;
     protected $owner;
@@ -133,22 +132,6 @@ class BaseOrder extends Itemable implements OrderInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setExpiresAt(\DateTime $expiresAt)
-    {
-        $this->expiresAt = $expiresAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
     }
 
     /**

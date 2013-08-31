@@ -32,6 +32,13 @@ interface CartInterface extends OrderInterface
     function setExpiresAt(\DateTime $expiresAt);
 
     /**
+     * Returns true if the cart is expired
+     *
+     * @return boolean
+     */
+    function isExpired();
+
+    /**
      * Get a follow up entity for the cart.
      * Eg.  this could be the sales order
      *
