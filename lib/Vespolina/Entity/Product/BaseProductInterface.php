@@ -25,16 +25,19 @@ interface BaseProductInterface
     /**
      * Set the description of the product
      *
-     * @param $description
+     * @param string $description Description content
+     * @param string $type Description type (eg. 'brief_description')
      */
-    function setDescription($description);
+    function setDescription($description, $type = 'default');
 
     /**
      * Return the description of the product
      *
+     * @param string $type Description type (eg. 'brief_description')
+
      * @return string
      */
-    function getDescription();
+    function getDescription($type = 'default');
 
     /**
      * Returns the id from a product.  If multiple identification schemas do exist it will return the default one

@@ -16,6 +16,22 @@ use Vespolina\Entity\Identifier\SKUIdentifier;
 
 class BaseProductTest extends \PHPUnit_Framework_TestCase
 {
+    public function testDescriptions()
+    {
+        /** @var $product \Vespolina\Entity\Product\BaseProduct */
+        $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
+
+        $product->setDescription('brief', 'brief text');
+        $product->setDescription('intro', 'simple introduction');
+        $product->setDescription('detail', 'complex text');
+        $product->setDescription('default text');
+
+        $this->assertEquals('brief text', $product->getDescription('brief'));
+        $this->assertEquals('simple introduction', $product->getDescription('intro'));
+        $this->assertEquals('complex text', $product->getDescription('detail'));
+        $this->assertEquals('default text', $product->getDescription());
+    }
+
     public function testAttributeMethods()
     {
         /** @var $product \Vespolina\Entity\Product\BaseProduct */
