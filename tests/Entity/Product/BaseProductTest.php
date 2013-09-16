@@ -21,9 +21,9 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         /** @var $product \Vespolina\Entity\Product\BaseProduct */
         $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
 
-        $product->setDescription('brief', 'brief text');
-        $product->setDescription('intro', 'simple introduction');
-        $product->setDescription('detail', 'complex text');
+        $product->setDescription('brief text', 'brief');
+        $product->setDescription('simple introduction', 'intro');
+        $product->setDescription('complex text', 'detail');
         $product->setDescription('default text');
 
         $this->assertEquals('brief text', $product->getDescription('brief'));
