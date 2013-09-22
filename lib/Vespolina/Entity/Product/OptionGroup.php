@@ -12,7 +12,7 @@ namespace Vespolina\Entity\Product;
 use Vespolina\Entity\Product\OptionGroupInterface;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
+ * @author Richard D Shank <richard@vespolina.org>
  */
 class OptionGroup implements OptionGroupInterface
 {

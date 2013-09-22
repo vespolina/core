@@ -16,7 +16,7 @@ use Vespolina\Entity\Payment\PaymentRequestInterface;
 /**
  * An interface for a request to bill periodically a service or product
  *
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 interface BillingRequestInterface extends PaymentRequestInterface
 {

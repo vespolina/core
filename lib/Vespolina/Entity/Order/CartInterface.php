@@ -12,8 +12,8 @@ namespace Vespolina\Entity\Order;
 /**
  * CartInterface is a generic interface for shopping cart
  *
- * @author Daniel Kucharski <daniel@xerias.be>
- * @author Richard Shank <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@vespolina.org>
+ * @author Richard Shank <richard@vespolina.org>
  */
 interface CartInterface extends OrderInterface
 {
@@ -30,13 +30,6 @@ interface CartInterface extends OrderInterface
      * @param DateTime $expiresAt
      */
     function setExpiresAt(\DateTime $expiresAt);
-
-    /**
-     * Returns true if the cart is expired
-     *
-     * @return boolean
-     */
-    function isExpired();
 
     /**
      * Get a follow up entity for the cart.

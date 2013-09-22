@@ -14,7 +14,7 @@ namespace Vespolina\Entity\Tax;
  *  - defining the customer tax category.  eg. "wholesale customer"
  *  - defining the product tax category eg. "prepared food"
  *
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 interface CategoryInterface
 {

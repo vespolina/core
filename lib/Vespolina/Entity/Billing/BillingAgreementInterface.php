@@ -17,7 +17,7 @@ use Vespolina\Entity\Payment\PaymentProfileInterface;
 /**
  * An interface for a request to bill a party
  *
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 interface BillingAgreementInterface
 {

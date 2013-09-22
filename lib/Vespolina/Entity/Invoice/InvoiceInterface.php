@@ -16,7 +16,7 @@ use Vespolina\Entity\ItemInterface as BaseItemInterface;
 /**
  * An interface for an invoice for an order
  *
- * @author Richard Shank <develop@zestic.com>
+ * @author Richard Shank <richard@vespolina.org>
  */
 interface InvoiceInterface extends ItemableInterface
 {

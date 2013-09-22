@@ -13,10 +13,10 @@ use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\ItemableInterface;
 
 /**
- * OrderInterface is a generic interface for a shopping cart and subsequent order
+ * OrderInterface is a generic interface for a shopping cart or sales order
  *
- * @author Daniel Kucharski <daniel@xerias.be>
- * @author Richard Shank <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@vespolina.org>
+ * @author Richard Shank <richard@vespolina.org>
  */
 interface OrderInterface extends ItemableInterface
 {
@@ -70,14 +70,14 @@ interface OrderInterface extends ItemableInterface
     function setAttributes(array $attributes);
 
     /**
-     * A test to see if the order doesn't have any items in it
+     * A test to see if the cart doesn't have any items in it
      *
      * @return boolean
      */
     function isEmpty();
 
     /**
-     * Return the channel which was used to create this order
+     * Return the channel which resulted into this order
      *
      * @return ChannelInterface
      */
@@ -86,7 +86,7 @@ interface OrderInterface extends ItemableInterface
     /**
      * Set the channel which resulted into this order
      *
-     * @param \Vespolina\Entity\Channel\ChannelInterface $channel
+     * @param ChannelInterface $channel
      * @return self
      */
     function setChannel(ChannelInterface $channel);
@@ -115,22 +115,12 @@ interface OrderInterface extends ItemableInterface
     /**
      * Return the owner of the order
      *
-     * @return \Vespolina\Entity\Partner\PartnerInterface
+     * @return mixed
      */
     function getOwner();
 
-    /**
-     * This typically include values such a total order value.
-     * @param $pricingSet
-     */
     function setPricing($pricingSet);
 
-    /**
-     * Retrieve the pricing set associated to the order
-     * This typically include values such a total order value.
-     *
-     * @return mixed
-     */
     function getPricing();
 
     /**
@@ -150,8 +140,7 @@ interface OrderInterface extends ItemableInterface
 
     /**
      * Set the total price for the order
-     * Proxy method which sets the total price in the pricing set
-
+     *
      * @param $totalPrice
      */
     function setTotalPrice($totalPrice);

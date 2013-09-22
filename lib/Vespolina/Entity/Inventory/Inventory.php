@@ -14,8 +14,8 @@ use Vespolina\Entity\Inventory\InventoryInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 
 /**
- * @author Daniel Kucharski <daniel@xerias.be>
- * @author Richard Shank <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@vespolina.org>
+ * @author Richard Shank <richard@vespolina.org>
  */
 abstract class Inventory implements InventoryInterface
 {

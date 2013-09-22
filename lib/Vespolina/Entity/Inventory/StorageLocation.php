@@ -13,8 +13,8 @@ use Vespolina\Entity\Inventory\StorageLocationInterface;
 use Vespolina\Entity\Inventory\WarehouseInterface;
 
 /**
- * @author Daniel Kucharski <daniel@xerias.be>
- * @author Richard Shank <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@vespolina.org>
+ * @author Richard Shank <richard@vespolina.org>
  */
 abstract class StorageLocation implements StorageLocationInterface
 {

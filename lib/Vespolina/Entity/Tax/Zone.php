@@ -15,7 +15,7 @@ use Vespolina\Entity\Tax\CategoryInterface;
 use Vespolina\Entity\Tax\RateInterface;
 
 /**
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 class Zone implements ZoneInterface
 {

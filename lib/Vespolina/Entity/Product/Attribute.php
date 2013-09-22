@@ -12,7 +12,7 @@ namespace Vespolina\Entity\Product;
 use Vespolina\Entity\Product\AttributeInterface;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
+ * @author Richard D Shank <richard@vespolina.org>
  */
 class Attribute implements AttributeInterface
 {

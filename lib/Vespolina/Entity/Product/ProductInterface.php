@@ -16,8 +16,8 @@ use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Richard D Shank <richard@vespolina.org>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 interface ProductInterface extends BaseProductInterface
 {

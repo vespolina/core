@@ -17,7 +17,7 @@ use Vespolina\Entity\Tax\CategoryInterface;
  *  - defining the customer tax category.  eg. "wholesale customer"
  *  - defining the product tax category eg. "food", "luxary good"
  *
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 class Category implements CategoryInterface
 {

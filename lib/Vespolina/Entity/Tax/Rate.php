@@ -12,7 +12,7 @@ namespace Vespolina\Entity\Tax;
 use Vespolina\Entity\Tax\CategoryInterface;
 
 /**
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 class Rate implements RateInterface
 {

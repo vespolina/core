@@ -12,7 +12,7 @@ namespace Vespolina\Entity\Pricing;
 /**
  * PricingContext implements a data container holding price variables needed for calculation
  *
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 
 use Vespolina\Entity\Pricing\PricingContextInterface;

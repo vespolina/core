@@ -16,8 +16,8 @@ use Vespolina\Entity\Itemable;
 /**
  * Order is a base class for shopping cart or sales order
  *
- * @author Daniel Kucharski <daniel@xerias.be>
- * @author Richard Shank <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@vespolina.org>
+ * @author Richard Shank <richard@vespolina.org>
  */
 class BaseOrder extends Itemable implements OrderInterface
 {
@@ -25,6 +25,7 @@ class BaseOrder extends Itemable implements OrderInterface
     protected $channel;
     protected $createdAt;
     protected $fulfillment;
+    protected $expiresAt;
     protected $id;
     protected $name;
     protected $owner;
@@ -132,6 +133,22 @@ class BaseOrder extends Itemable implements OrderInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setExpiresAt(\DateTime $expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getExpiresAt()
+    {
+        return $this->expiresAt;
     }
 
     /**

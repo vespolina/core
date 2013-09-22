@@ -12,7 +12,7 @@ namespace Vespolina\Entity\Product;
 use Vespolina\Entity\Product\OptionInterface;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
+ * @author Richard D Shank <richard@vespolina.org>
  */
 class Option implements OptionInterface
 {

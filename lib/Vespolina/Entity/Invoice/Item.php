@@ -10,17 +10,15 @@
 namespace Vespolina\Entity\Invoice;
 
 use Vespolina\Entity\Item as BaseItem;
-use Vespolina\Entity\Order\ItemInterface as OrderItemInterface;
 
 /**
  * Item is a class for items in an order
  *
- * @author Richard Shank <develop@zestic.com>
+ * @author Richard Shank <richard@vespolina.org>
  */
 class Item extends BaseItem implements ItemInterface
 {
     protected $description;
-    protected $orderItem;
 
     /**
      * @return mixed
@@ -35,16 +33,5 @@ class Item extends BaseItem implements ItemInterface
         $this->description = $description;
 
         return $this;
-    }
-
-    public function getOrderItem()
-    {
-        return $this->orderItem;
-    }
-
-
-    public function setOrderItem(OrderItemInterface $item)
-    {
-        $this->orderItem = $item;
     }
 }

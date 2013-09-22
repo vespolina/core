@@ -10,7 +10,7 @@
 namespace Vespolina\Entity\Product;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
+ * @author Richard D Shank <richard@vespolina.org>
  */
 interface OptionInterface
 {

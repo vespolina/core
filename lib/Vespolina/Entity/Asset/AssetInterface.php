@@ -10,8 +10,8 @@
 namespace Vespolina\Entity\Asset;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Richard D Shank <richard@vespolina.org>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 interface AssetInterface
 {

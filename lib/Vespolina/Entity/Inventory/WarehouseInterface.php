@@ -12,8 +12,8 @@ namespace Vespolina\Entity\Inventory;
 use Vespolina\Entity\Partner\AddressInterface;
 
 /**
- * @author Daniel Kucharski <daniel@xerias.be>
- * @author Richard Shank <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@vespolina.org>
+ * @author Richard Shank <richard@vespolina.org>
  */
 interface WarehouseInterface
 {

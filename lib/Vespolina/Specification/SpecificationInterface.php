@@ -12,7 +12,7 @@ namespace Vespolina\Specification;
 /**
  * Interface to construct entity queries
  *
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 interface SpecificationInterface
 {

@@ -11,7 +11,7 @@ use Vespolina\Entity\Order\Item;
 use Vespolina\Entity\Product\Product;
 
 /**
- * @author Richard Shank <develop@zestic.com>
+ * @author Richard Shank <richard@vespolina.org>
  */
 class ItemTest extends \PHPUnit_Framework_TestCase
 {

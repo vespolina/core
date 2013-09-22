@@ -17,27 +17,24 @@ use Vespolina\Entity\Product\OptionGroupInterface;
 use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Richard D Shank <richard@vespolina.org>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 interface BaseProductInterface
 {
     /**
      * Set the description of the product
      *
-     * @param string $description Description content
-     * @param string $type Description type (eg. 'brief_description')
+     * @param $description
      */
-    function setDescription($description, $type = 'default');
+    function setDescription($description);
 
     /**
      * Return the description of the product
      *
-     * @param string $type Description type (eg. 'brief_description')
-
      * @return string
      */
-    function getDescription($type = 'default');
+    function getDescription();
 
     /**
      * Returns the id from a product.  If multiple identification schemas do exist it will return the default one

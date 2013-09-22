@@ -14,8 +14,8 @@ use Vespolina\Entity\Order\BaseOrder;
 /**
  * Cart implements a basic cart implementation
  *
- * @author Daniel Kucharski <daniel@xerias.be>
- * @author Richard Shank <develop@zestic.com>
+ * @author Daniel Kucharski <daniel@vespolina.org>
+ * @author Richard Shank <richard@vespolina.org>
  */
 class Cart extends BaseOrder implements CartInterface
 {
@@ -26,7 +26,6 @@ class Cart extends BaseOrder implements CartInterface
     const STATE_ABANDONED = 'abandoned'; //Cart was abandoned
     const STATE_CONVERTED = 'converted'; //Cart was converted into a purchase
 
-    protected $expiresAt;
     protected $followUp;
     protected $paymentInstruction;
 
@@ -36,19 +35,6 @@ class Cart extends BaseOrder implements CartInterface
     public function getExpiresAt()
     {
         return $this->expiresAt;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function isExpired()
-    {
-        if (null != $this->expiresAt) {
-
-            return $this->expiresAt->getTimestamp() >= time();
-        }
-
-        return false;
     }
 
     /**

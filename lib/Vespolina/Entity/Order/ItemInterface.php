@@ -15,7 +15,7 @@ use Vespolina\Entity\ItemInterface as BaseItemInterface;
 /**
  * ItemInterface is an interface for items in an order
  *
- * @author Richard Shank <develop@zestic.com>
+ * @author Richard Shank <richard@vespolina.org>
  */
 interface ItemInterface extends BaseItemInterface
 {

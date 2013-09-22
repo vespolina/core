@@ -17,7 +17,7 @@ use Vespolina\Entity\Partner\PartnerInterface;
  * Invoice entity
  * Optionally linked to one or multiple orders
  *
- * @author Richard Shank <develop@zestic.com>
+ * @author Richard Shank <richard@vespolina.org>
  */
 class Invoice extends Itemable implements InvoiceInterface
 {

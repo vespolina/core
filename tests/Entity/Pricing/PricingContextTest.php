@@ -10,7 +10,7 @@
 use Vespolina\Entity\Pricing\PricingContext;
 
 /**
- * @author Richard Shank <develop@zestic.com>
+ * @author Richard Shank <richard@vespolina.org>
  */
 class PricingContextTest extends \PHPUnit_Framework_TestCase
 {

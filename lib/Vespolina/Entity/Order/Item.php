@@ -16,7 +16,7 @@ use Vespolina\Entity\Item as BaseItem;
 /**
  * Item is a class for items in an order
  *
- * @author Richard Shank <develop@zestic.com>
+ * @author Richard Shank <richard@vespolina.org>
  */
 class Item extends BaseItem implements ItemInterface
 {

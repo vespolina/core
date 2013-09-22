@@ -19,8 +19,8 @@ use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
- * @author Daniel Kucharski <daniel@xerias.be>
+ * @author Richard D Shank <richard@vespolina.org>
+ * @author Daniel Kucharski <daniel@vespolina.org>
  */
 abstract class BaseProduct implements BaseProductInterface
 {
@@ -33,7 +33,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $assets;
     protected $attributes;
     protected $createdAt;
-    protected $descriptions;
+    protected $description;
     protected $media;
     protected $name;
     protected $optionGroups;
@@ -43,11 +43,6 @@ abstract class BaseProduct implements BaseProductInterface
     protected $updatedAt;
     protected $pricingSet;
     protected $id;
-
-    public function __construct()
-    {
-        $this->descriptions = array();
-    }
 
     /**
      * @inheritdoc
@@ -141,9 +136,9 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function setDescription($description, $type = 'default')
+    public function setDescription($description)
     {
-        $this->descriptions[$type] = $description;
+        $this->description = $description;
 
         return $this;
     }
@@ -151,12 +146,9 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function getDescription($type = 'default')
+    public function getDescription()
     {
-        if (array_key_exists($type, $this->descriptions)) {
-
-            return $this->descriptions[$type];
-        }
+        return $this->description;
     }
 
     /**

@@ -11,7 +11,7 @@ use Vespolina\Entity\Product\Option;
 use Vespolina\Entity\Product\OptionGroup;
 
 /**
- * @author Richard D Shank <develop@zestic.com>
+ * @author Richard D Shank <richard@vespolina.org>
  */
 class OptionGroupTest extends \PHPUnit_Framework_TestCase
 {
