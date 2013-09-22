@@ -1,7 +1,7 @@
 Vespolina Core Library
 ======================
 
-[![Build Status](https://secure.travis-ci.org/vespolina/VespolinaCore.png?branch=master)](http://travis-ci.org/vespolina/VespolinaCore)
+[![Build Status](https://secure.travis-ci.org/vespolina/core.png?branch=master)](http://travis-ci.org/vespolina/core)
 
 This bundle is part of the [Vespolina Ecommerce Framework](http://vespolina.org/)
 and licensed under the [MIT License](LICENSE).
