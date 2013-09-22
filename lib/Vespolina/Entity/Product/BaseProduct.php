@@ -33,7 +33,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $assets;
     protected $attributes;
     protected $createdAt;
-    protected $description;
+    protected $descriptions;
     protected $media;
     protected $name;
     protected $optionGroups;
@@ -43,6 +43,11 @@ abstract class BaseProduct implements BaseProductInterface
     protected $updatedAt;
     protected $pricingSet;
     protected $id;
+
+    public function __construct()
+    {
+        $this->descriptions = array();
+    }
 
     /**
      * @inheritdoc
@@ -136,9 +141,9 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function setDescription($description)
+    public function setDescription($description, $type = 'default')
     {
-        $this->description = $description;
+        $this->descriptions[$type] = $description;
 
         return $this;
     }
@@ -146,9 +151,12 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function getDescription()
+    public function getDescription($type = 'default')
     {
-        return $this->description;
+        if (array_key_exists($type, $this->descriptions)) {
+
+            return $this->descriptions[$type];
+        }
     }
 
     /**

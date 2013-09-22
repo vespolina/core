@@ -10,6 +10,7 @@
 namespace Vespolina\Entity\Invoice;
 
 use Vespolina\Entity\Item as BaseItem;
+use Vespolina\Entity\Order\ItemInterface as OrderItemInterface;
 
 /**
  * Item is a class for items in an order
@@ -19,15 +20,37 @@ use Vespolina\Entity\Item as BaseItem;
 class Item extends BaseItem implements ItemInterface
 {
     protected $description;
+    protected $orderItem;
 
     /**
-     * @return mixed
+     * {@inheritdoc}
+     */
+    public function setOrderItem(OrderItemInterface $orderItem)
+    {
+        $this->orderItem = $orderItem;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderItem()
+    {
+        return $this->orderItem;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getDescription()
     {
         return $this->description;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDescription($description)
     {
         $this->description = $description;

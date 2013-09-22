@@ -10,12 +10,14 @@
 namespace Vespolina\Entity\Invoice;
 
 use Vespolina\Entity\ItemInterface as BaseItemInterface;
+use Vespolina\Entity\Order\ItemInterface as OrderItemInterface;
+
 
 /**
  * An interface for an invoice item.
  *
  * It differs from an order item because an invoice item is not necessarily linked to an order(item)
- * or to an actual product.
+ * or perhaps to an actual product.
  *
  * @author Daniel Kucharski <daniel@vespolina.org>
  */
@@ -24,4 +26,13 @@ interface ItemInterface extends BaseItemInterface
     function getDescription();
 
     function setDescription($description);
+
+    function getOrderItem();
+
+    /**
+     * Set the order item this invoice item is referencing
+     * @param OrderItemInterface $orderItem
+     * @return mixed
+     */
+    function setOrderItem(OrderItemInterface $orderItem);
 }
