@@ -153,10 +153,13 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function getDescription($type = 'default')
     {
-        if (array_key_exists($type, $this->descriptions)) {
-
-            return $this->descriptions[$type];
+        if (null !== $this->descriptions) {
+            if (array_key_exists($type, $this->descriptions)) {
+                return $this->descriptions[$type];
+            }
         }
+
+        return null;
     }
 
     /**
