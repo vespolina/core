@@ -39,6 +39,4 @@ class Channel implements ChannelInterface
     {
         return $this->name;
     }
-
-
 }
