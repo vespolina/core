@@ -7,9 +7,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Vespolina\Entity\Payment;
+namespace Vespolina\Entity\Payment\PaymentProfile;
 
-class PaymentRequest implements PaymentRequestInterface
+use Vespolina\Entity\Payment\PaymentProfile;
+
+class Stripe extends PaymentProfile
 {
-
+    public function getType()
+    {
+        return 'stripe';
+    }
 }

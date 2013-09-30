@@ -9,7 +9,15 @@
 
 namespace Vespolina\Entity\Payment;
 
-class PaymentRequest implements PaymentRequestInterface
+class PaymentToken
 {
+    protected $id;
 
+    /**
+     * @inheritdoc
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }

@@ -9,9 +9,6 @@
 
 namespace Vespolina\Entity\Payment;
 
-use Vespolina\Entity\Payment\PaymentProfileInterface;
-use Vespolina\Entity\Payment\TransactionInterface;
-
 class Transaction implements TransactionInterface
 {
     protected $credit;

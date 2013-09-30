@@ -19,6 +19,7 @@ class PaymentContext extends \Pimple
      * Convenience getter
      *
      * @param $key
+     * @param $default
      * @return mixed
      */
     public function get($key, $default = null)
