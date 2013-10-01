@@ -9,8 +9,6 @@
 
 namespace Vespolina\Entity\Payment;
 
-use Vespolina\Entity\Payment\PaymentProfileInterface;
-
 /**
  * TransactionInterface
  *
