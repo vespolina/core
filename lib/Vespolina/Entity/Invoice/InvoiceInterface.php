@@ -140,4 +140,8 @@ interface InvoiceInterface extends ItemableInterface
      * @return mixed
      */
     function getPayment();
+
+    function getInvoiceNumber();
+
+    function setInvoiceNumber($number);
 }

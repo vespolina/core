@@ -28,6 +28,7 @@ class Invoice extends Itemable implements InvoiceInterface
     protected $createdAt;
     protected $dueDate;
     protected $id;
+    protected $invoiceNumber;
     protected $issuedDate;
     protected $fiscalYear;
     protected $items;
@@ -202,4 +203,36 @@ class Invoice extends Itemable implements InvoiceInterface
     {
         return $this->type;
     }
+
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+    }
+
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    public function setPaymentTerms($paymentTerms)
+    {
+        $this->paymentTerms = $paymentTerms;
+    }
+
+    public function getPaymentTerms()
+    {
+        return $this->paymentTerms;
+    }
+
+    public function setInvoiceNumber($invoiceNumber)
+    {
+        $this->invoiceNumber = $invoiceNumber;
+    }
+
+    public function getInvoiceNumber()
+    {
+        return $this->invoiceNumber;
+    }
+
+
 }
