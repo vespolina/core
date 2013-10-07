@@ -6,15 +6,21 @@
     "homepage": "https://github.com/vespolina/VespolinaCore",
     "license": "MIT",
     "require": {
-        "php": ">=5.3.2",
-        "pimple/pimple": "*",
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
         "doctrine/common": "*",
+        "pimple/pimple": "*",
+        "merk/dough": "*",
+        "phpunit/phpunit": "3.7.*",
         "vespolina/media": "dev-master",
         "vespolina/taxonomy": "dev-master"
     },
-    "require-dev": {
-        "merk/dough": "*",
-        "phpunit/phpunit": "3.7.*"
+    "suggest": {
+        "doctrine/common": "*",
+        "pimple/pimple": "*",
+        "vespolina/media": "dev-master",
+        "vespolina/taxonomy": "dev-master"
     },
     "autoload": {
         "psr-0": {

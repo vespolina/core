@@ -28,8 +28,8 @@ class BaseOrder extends Itemable implements OrderInterface
     protected $expiresAt;
     protected $id;
     protected $name;
-    protected $owner;
-    protected $ownerNotes;
+    protected $customer;
+    protected $customerNotes;
     protected $payment;
     protected $pricingSet;
     protected $state;
@@ -186,9 +186,9 @@ class BaseOrder extends Itemable implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function setOwner($owner)
+    public function setCustomer($customer)
     {
-        $this->owner = $owner;
+        $this->customer = $customer;
 
         return $this;
     }
@@ -196,9 +196,9 @@ class BaseOrder extends Itemable implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function getOwner()
+    public function getCustomer()
     {
-        return $this->owner;
+        return $this->customer;
     }
 
     /**
@@ -283,14 +283,14 @@ class BaseOrder extends Itemable implements OrderInterface
         return $this->updatedAt;
     }
 
-    public function setOwnerNotes($ownerNotes)
+    public function setCustomerNotes($customerNotes)
     {
-        $this->ownerNotes = $ownerNotes;
+        $this->customerNotes = $customerNotes;
     }
 
-    public function getOwnerNotes()
+    public function getCustomerNotes()
     {
-        return $this->ownerNotes;
+        return $this->customerNotes;
     }
 
     /**

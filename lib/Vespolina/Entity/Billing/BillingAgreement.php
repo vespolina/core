@@ -29,7 +29,7 @@ class BillingAgreement implements BillingAgreementInterface
     protected $initialBillingDate;
     protected $order;
     protected $orderItems;
-    protected $owner;
+    protected $customer;
     protected $paymentProfile;
     protected $processRequestOffset;
     protected $numberCyclesBilled;
@@ -204,16 +204,16 @@ class BillingAgreement implements BillingAgreementInterface
         $this->orderItems->add($item);
     }
 
-    public function setOwner(PartnerInterface $owner)
+    public function setCustomer(PartnerInterface $customer)
     {
-        $this->owner = $owner;
+        $this->customer = $customer;
 
         return $this;
     }
 
-    public function getOwner()
+    public function getCustomer()
     {
-        return $this->owner;
+        return $this->customer;
     }
 
     public function setPaymentProfile(PaymentProfileInterface $paymentProfile)

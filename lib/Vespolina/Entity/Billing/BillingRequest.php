@@ -41,7 +41,7 @@ class BillingRequest extends PaymentRequest implements BillingRequestInterface
     protected $billingDate;
     protected $id;
     protected $plannedBillingDate;
-    protected $owner;
+    protected $customer;
     protected $paymentProfile;
     protected $periodStart;
     protected $periodEnd;
@@ -138,19 +138,19 @@ class BillingRequest extends PaymentRequest implements BillingRequestInterface
     }
 
     /**
-     * @param PartnerInterface $owner
+     * @param PartnerInterface $customer
      * @return PartnerInterface
      */
-    public function setOwner(PartnerInterface $owner)
+    public function setCustomer(PartnerInterface $customer)
     {
-        $this->owner = $owner;
+        $this->customer = $customer;
 
         return $this;
     }
 
-    public function getOwner()
+    public function getCustomer()
     {
-        return $this->owner;
+        return $this->customer;
     }
 
     public function setPaymentProfile(PaymentProfileInterface $paymentProfile)

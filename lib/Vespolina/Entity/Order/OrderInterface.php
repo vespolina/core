@@ -106,18 +106,18 @@ interface OrderInterface extends ItemableInterface
     function getName();
 
     /**
-     * Set the owner of the owner
+     * Set the customer of the customer
      *
-     * @param mixed $owner
+     * @param mixed $customer
      */
-    function setOwner($owner);
+    function setCustomer($customer);
 
     /**
-     * Return the owner of the order
+     * Return the customer of the order
      *
      * @return mixed
      */
-    function getOwner();
+    function getCustomer();
 
     function setPricing($pricingSet);
 

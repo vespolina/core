@@ -102,13 +102,13 @@ interface BillingAgreementInterface
     function setOrderItems($items);
 
     /**
-     * The owner of this billing agreement (eg. customer)
+     * The customer of this billing agreement (eg. customer)
      *
      * @return PartnerInterface
      */
-    function getOwner();
+    function getCustomer();
 
-    function setOwner(PartnerInterface $owner);
+    function setCustomer(PartnerInterface $customer);
 
     /**
      * The payment gateway to be used for this billing agreement

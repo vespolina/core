@@ -6,7 +6,7 @@ Vespolina Core Library
 This bundle is part of the [Vespolina Ecommerce Framework](http://vespolina.org/)
 and licensed under the [MIT License](LICENSE).
 
-## Requirements
+## Suggested libraries
 
 * pimple
 * vespolina/media
