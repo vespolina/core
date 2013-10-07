@@ -25,6 +25,7 @@ class Invoice extends Itemable implements InvoiceInterface
     const TYPE_PRO_FORMA = 'pro_forma';     //Legal pro forma document, already paid when the entity was created
     const TYPE_CREDIT_MEMO = 'credit_memo'; //Invoice to credit the customer
 
+    protected $customer;
     protected $createdAt;
     protected $dueDate;
     protected $id;
@@ -33,7 +34,6 @@ class Invoice extends Itemable implements InvoiceInterface
     protected $fiscalYear;
     protected $items;
     protected $orders;
-    protected $partner;
     protected $paymentTerms;
     protected $payment;
     protected $reference;   //eg. sales or purchase order #
@@ -159,9 +159,9 @@ class Invoice extends Itemable implements InvoiceInterface
     /**
      * @inheritdoc
      */
-    public function setPartner(PartnerInterface $partner)
+    public function setCustomer(PartnerInterface $customer)
     {
-        $this->partner = $partner;
+        $this->customer = $customer;
 
         return $this;
     }
@@ -169,9 +169,9 @@ class Invoice extends Itemable implements InvoiceInterface
     /**
      * @inheritdoc
      */
-    public function getPartner()
+    public function getCustomer()
     {
-        return $this->partner;
+        return $this->customer;
     }
 
     /**

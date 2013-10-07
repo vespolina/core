@@ -112,19 +112,19 @@ interface InvoiceInterface extends ItemableInterface
     function setOrders(array $orders);
 
     /**
-     * Set the Partner getting billed with this invoice
+     * Set the Customer of invoice
      *
      * @param \Vespolina\Entity\Partner\PartnerInterface $partner
      * @return self
      */
-    function setPartner(PartnerInterface $partner);
+    function setCustomer(PartnerInterface $customer);
 
     /**
-     * Return the partner getting billed in this invoice
+     * Return the customer of this invoice
      *
      * @return \Vespolina\Entity\Partner\PartnerInterface
      */
-    function getPartner();
+    function getCustomer();
 
     /**
      * Set the payment information from the billing
