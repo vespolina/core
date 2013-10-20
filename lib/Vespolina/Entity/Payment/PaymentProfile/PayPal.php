@@ -13,6 +13,9 @@ use Vespolina\Entity\Payment\PaymentProfile;
 
 class PayPal extends PaymentProfile
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return 'paypal';

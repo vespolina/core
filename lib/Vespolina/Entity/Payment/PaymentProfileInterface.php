@@ -16,4 +16,11 @@ interface PaymentProfileInterface
     function setReference($reference);
 
     function getReference();
+
+    /**
+     * The identification of the type of PaymentProfile
+     *
+     * @return string
+     */
+    function getType();
 }

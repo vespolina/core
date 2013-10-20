@@ -13,6 +13,9 @@ use Vespolina\Entity\Payment\PaymentProfile;
 
 class DirectDeposit extends PaymentProfile
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return 'Direct Deposit';

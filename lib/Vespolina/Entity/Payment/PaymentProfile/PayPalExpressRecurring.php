@@ -13,6 +13,9 @@ use Vespolina\Entity\Payment\PaymentProfile;
 
 class PayPalExpressRecurring extends PaymentProfile
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return 'paypal_express_recurring';
