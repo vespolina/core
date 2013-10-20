@@ -9,13 +9,13 @@
 
 namespace Vespolina\Entity\Payment;
 
-class PaymentProfile implements PaymentProfileInterface
+abstract class PaymentProfile implements PaymentProfileInterface
 {
     protected $id;
     protected $reference;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -23,7 +23,7 @@ class PaymentProfile implements PaymentProfileInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setReference($reference)
     {
@@ -33,7 +33,7 @@ class PaymentProfile implements PaymentProfileInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReference()
     {

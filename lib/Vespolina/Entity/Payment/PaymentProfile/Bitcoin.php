@@ -13,6 +13,9 @@ use Vespolina\Entity\Payment\PaymentProfile;
 
 class Bitcoin extends PaymentProfile
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return 'bitcoin';

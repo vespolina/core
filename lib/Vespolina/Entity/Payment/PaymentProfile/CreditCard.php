@@ -20,7 +20,7 @@ class CreditCard extends PaymentProfile
 
     /**
      * @param string $cardNumber
-     * @return \Vespolina\Entity\Payment\PaymentProfileType\CreditCard
+     * @return $this
      */
     public function setCardNumber($cardNumber)
     {
@@ -45,7 +45,7 @@ class CreditCard extends PaymentProfile
 
     /**
      * @param $cardType
-     * @return \Vespolina\Entity\Payment\PaymentProfileType\CreditCard
+     * @return $this
      */
     public function setCardType($cardType)
     {
@@ -64,7 +64,7 @@ class CreditCard extends PaymentProfile
 
     /**
      * @param \DateTime
-     * @return \Vespolina\Entity\Payment\PaymentProfileType\CreditCard
+     * @return $this
      */
     public function setExpiration(\DateTime $expirationDate)
     {
@@ -81,6 +81,9 @@ class CreditCard extends PaymentProfile
         return $this->expiration;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType()
     {
         return 'Credit Card';
