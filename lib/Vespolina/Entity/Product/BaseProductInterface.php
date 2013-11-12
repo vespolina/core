@@ -10,6 +10,7 @@
 namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\MediaInterface;
+use Vespolina\Entity\Brand\BrandInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\AttributeInterface;
 use Vespolina\Entity\Product\OptionInterface;
@@ -71,6 +72,52 @@ interface BaseProductInterface
      * @param $features
      */
     function setAttributes($features);
+
+    /**
+     * Add an brand to the product.
+     *
+     * @param \Vespolina\Entity\Brand\BrandInterface $brand
+     * @return $this
+     */
+    function addBrand(BrandInterface $brand);
+
+    /**
+     * Remove the Brands from the product
+     *
+     * @return $this
+     */
+    function clearBrands();
+
+    /**
+     * Return the Brands
+     *
+     * @return array of \Vespolina\Entity\Brand\BrandInterface
+     */
+    function getBrands();
+
+    /**
+     * Merge an array of Brands with the existing Brands
+     *
+     * @param array $brands
+     * @return $this
+     */
+    function mergeBrands(array $brands);
+
+    /**
+     * Remove an Brand from the existing Brands
+     *
+     * @param \Vespolina\Entity\Brand\BrandInterface $brand
+     * @return $this
+     */
+    function removeBrand(BrandInterface $brand);
+
+    /**
+     * Set the Brands to the Brands in the array
+     *
+     * @param array $brands
+     * @return $this
+     */
+    function setBrands(array $brands);
 
     /**
      * Add an identifier to the product.

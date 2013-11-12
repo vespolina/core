@@ -8,6 +8,7 @@
  */
 
 use Vespolina\Entity\Asset\Media;
+use Vespolina\Entity\Brand\Brand;
 use Vespolina\Entity\Product\Attribute;
 use Vespolina\Entity\Product\Option;
 use Vespolina\Entity\Product\OptionGroup;
@@ -79,6 +80,37 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
 
         $product->clearAttributes();
         $this->assertEmpty($product->getAttributes());
+    }
+
+    public function testBrands()
+    {
+        /** @var $product \Vespolina\Entity\Product\BaseProduct */
+        $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
+        $this->assertNull($product->getBrands(), 'make sure we start out empty');
+
+        $brand = new Brand();
+        $product->addBrand($brand);
+        $this->assertContains($brand, $product->getBrands());
+        $this->assertCount(1, $product->getBrands());
+
+        $brands = array();
+        $brands[] = new Brand();
+        $brands[] = new Brand();
+        $product->mergeBrands($brands);
+        $this->assertCount(3, $product->getBrands());
+        $this->assertContains($brand, $product->getBrands());
+
+        $product->removeBrand($brand);
+        $this->assertNotContains($brand, $product->getBrands());
+        $this->assertCount(2, $product->getBrands());
+
+        $product->clearBrands();
+        $this->assertEmpty($product->getBrands());
+
+        $product->addBrand($brand);
+        $product->setBrands($brands);
+        $this->assertNotContains($brand, $product->getBrands(), 'this should have been removed on setting a new array of brands');
+        $this->assertCount(2, $product->getBrands());
     }
 
     public function testIdentifiers()

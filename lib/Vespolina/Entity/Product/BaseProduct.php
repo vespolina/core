@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Product;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Vespolina\Entity\Asset\MediaInterface;
+use Vespolina\Entity\Brand\BrandInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProductInterface;
 use Vespolina\Entity\Product\OptionInterface;
@@ -32,6 +33,7 @@ abstract class BaseProduct implements BaseProductInterface
 
     protected $assets;
     protected $attributes;
+    protected $brands;
     protected $createdAt;
     protected $descriptions;
     protected $identifiers;
@@ -48,6 +50,11 @@ abstract class BaseProduct implements BaseProductInterface
     public function __construct()
     {
         $this->descriptions = array();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -103,16 +110,6 @@ abstract class BaseProduct implements BaseProductInterface
         return $this->attributes;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
     /**
      * @inheritdoc
      */
@@ -134,6 +131,77 @@ abstract class BaseProduct implements BaseProductInterface
         $this->attributes = array();
         foreach ($attributes as $attribute) {
             $this->addAttribute($attribute);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addBrand(BrandInterface $brand)
+    {
+        $this->brands[] = $brand;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearBrands()
+    {
+        foreach ($this->brands as $key => $brand) {
+            unset($this->brands[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBrands()
+    {
+        return $this->brands;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function mergeBrands(array $brands)
+    {
+        foreach ($brands as $brand) {
+            $this->addBrand($brand);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeBrand(BrandInterface $brand)
+    {
+        foreach ($this->brands as $key => $curBrand) {
+            if ($brand == $curBrand) {
+                unset($this->brands[$key]);
+
+                return $this;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBrands(array $brands)
+    {
+        $this->clearBrands();
+        foreach ($brands as $brand) {
+            $this->addBrand($brand);
         }
 
         return $this;
@@ -479,6 +547,18 @@ abstract class BaseProduct implements BaseProductInterface
         return $this->type;
     }
 
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
     /**
      * @inheritdoc
      */
@@ -493,13 +573,6 @@ abstract class BaseProduct implements BaseProductInterface
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
 
         return $this;
     }
