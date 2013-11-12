@@ -73,6 +73,52 @@ interface BaseProductInterface
     function setAttributes($features);
 
     /**
+     * Add an identifier to the product.
+     *
+     * @param \Vespolina\Entity\Identifier\IdentifierInterface $identifier
+     * @return $this
+     */
+    function addIdentifier(IdentifierInterface $identifier);
+
+    /**
+     * Remove the Identifiers from the product
+     *
+     * @return $this
+     */
+    function clearIdentifiers();
+
+    /**
+     * Return the Identifiers
+     *
+     * @return array of \Vespolina\Entity\Identifier\IdentifierInterface
+     */
+    function getIdentifiers();
+
+    /**
+     * Merge an array of Identifiers with the existing Identifiers
+     *
+     * @param array $identifiers
+     * @return $this
+     */
+    function mergeIdentifiers(array $identifiers);
+
+    /**
+     * Remove an Identifier from the existing Identifiers
+     *
+     * @param \Vespolina\Entity\Identifier\IdentifierInterface $identifier
+     * @return $this
+     */
+    function removeIdentifier(IdentifierInterface $identifier);
+
+    /**
+     * Set the Identifiers to the Identifiers in the array
+     *
+     * @param array $identifiers
+     * @return $this
+     */
+    function setIdentifiers(array $identifiers);
+
+    /**
      * Set the name of the product
      *
      * @param $name
@@ -86,15 +132,6 @@ interface BaseProductInterface
      */
     function getName();
 
-    /**
-     * Add an option set to the product
-     *
-     * @param \Vespolina\Entity\Product\OptionGroupInterface $optionGroup
-     *
-     */
-/** remove for now to get feature tests to pass
-    function addOptionGroup(OptionGroupInterface $optionGroup);
-*/
     /**
      * Remove an options set from the product
      *
@@ -121,32 +158,6 @@ interface BaseProductInterface
      * @return array of Vespolina\ProductBundle\Option\OptionGroupInterface
      */
     function getOptions();
-
-    /**
-     * Return the identifier set generated from the option choices
-     *
-     * @return array of Vespolina\ProductBundle\Identifier\ProductIdentifierSetInterface
-     */
-    function getIdentifierSets();
-
-    function getIdentifiers();
-
-    /**
-     * Return an identifier set for the option set combination
-     *
-     * @param array (optional) option set or null returns primary
-     *
-     * @return \Vespolina\ProductBundle\Identifier\ProductIdentifierSetInterface
-     */
-    function getIdentifierSet($target = null);
-
-    /**
-     * Add an identifier to an identifier set. No target adds identifier to primary.
-     *
-     * @param $identifier
-     * @param $target
-     */
-    function addIdentifier($identifier, $target = null);
 
     /**
      * Add a media to the collection

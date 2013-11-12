@@ -34,6 +34,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $attributes;
     protected $createdAt;
     protected $descriptions;
+    protected $identifiers;
     protected $media;
     protected $name;
     protected $optionGroups;
@@ -163,21 +164,74 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function addIdentifierSet($index, $identifierSet)
+    public function addIdentifier(IdentifierInterface $identifier)
     {
-        $this->identifierSets[$index] = $identifierSet;
+        $this->identifiers[] = $identifier;
 
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     */
+    public function clearIdentifiers()
+    {
+        foreach ($this->identifiers as $key => $identifier) {
+            unset($this->identifiers[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getIdentifiers()
     {
-        return $this->identifierSets;
+        return $this->identifiers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function mergeIdentifiers(array $identifiers)
+    {
+        foreach ($identifiers as $identifier) {
+            $this->addIdentifier($identifier);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeIdentifier(IdentifierInterface $identifier)
+    {
+        foreach ($this->identifiers as $key => $curIdentifier) {
+            if ($identifier == $curIdentifier) {
+                unset($this->identifiers[$key]);
+
+                return $this;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIdentifiers(array $identifiers)
+    {
+        $this->clearIdentifiers();
+        foreach ($identifiers as $identifier) {
+            $this->addIdentifier($identifier);
+        }
+
+        return $this;
     }
 
     /**
@@ -201,17 +255,6 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-/** remove for now to get attribute tests to pass
-    public function addOptionGroup(OptionGroupInterface $optionGroup)
-    {
-        $this->options[] = $optionGroup;
-        $this->identifiers = array();
-        $this->processIdentifiers();
-    }
-*/
-    /**
-     * @inheritdoc
-     */
     public function removeOptionGroup($group)
     {
         if ($group instanceof OptionGroupInterface) {
@@ -221,7 +264,6 @@ abstract class BaseProduct implements BaseProductInterface
             if ($option->getName() == $group) {
                 $this->options->remove($key);
                 $this->identifiers = new ArrayCollection();
-                $this->processIdentifiers();
 
                 return $this;
             }
@@ -235,14 +277,11 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function setOptions($optionGroups)
     {
-        $identifiers = $this->identifiers;
         $this->clearOptions();
         $this->options = new ArrayCollection;
         foreach ($optionGroups as $optionGroup) {
             $this->options->add($optionGroup);
         }
-        $this->identifiers = $identifiers;
-        $this->processIdentifiers();
 
         return $this;
     }
@@ -283,43 +322,6 @@ abstract class BaseProduct implements BaseProductInterface
     public function getPricing()
     {
         return $this->pricingSet;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getIdentifierSets()
-    {
-        return $this->identifiers;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getIdentifierSet($target = null)
-    {
-        $key = $target ? $this->createKeyFromOptions($target) : 'primary:primary;';
-
-        return $this->identifiers->get($key);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addIdentifier($identifier, $target = null)
-    {
-        $key = $target ? $target : 'primary:primary;';
-        if (is_array($key)) {
-            $key = $this->createKeyFromOptions($target);
-        }
-        if (!$idSet = $this->identifiers->get($key)) {
-            $optionGroup = key($target);
-            throw new \Exception(sprintf('There is not an option group %s with the option %s', $optionGroup, $target[$optionGroup]));
-        }
-        $idSet->addIdentifier($identifier);
-        $this->processIdentifiers();
-
-        return $this;
     }
 
     /**

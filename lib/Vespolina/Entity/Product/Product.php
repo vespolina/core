@@ -49,22 +49,6 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * @inheritdoc
      */
-    public function createProductIdentifierSet($options)
-    {
-        return new $this->identifierSetClass($options);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPrimaryIdentifierSet()
-    {
-        return $this->identifiers->get('primary');
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getOptionSet($target)
     {
         foreach ($this->identifiers as $optionSet) {
@@ -75,34 +59,6 @@ class Product extends BaseProduct implements ProductInterface
         return null;
     }
 
-    /*
-     * @inheritdoc
-     */
-    public function processIdentifiers()
-    {
-        $optionSet = array();
-        foreach ($this->options as $productOption) {
-            $options = $productOption->getOptions();
-            if ($options) {
-                $choices = array();
-                $name = $productOption->getName();
-                foreach ($options as $option) {
-                    $choices[] = array($name => $option->getValue());
-                }
-                $optionSet[$name] = $choices;
-            }
-        }
-
-        ksort($optionSet);
-        if ($optionCombos = $this->extractOptionCombos($optionSet)) {
-            foreach ($optionCombos as $key => $combo) {
-                if (!$this->identifiers->containsKey($key)) {
-                    $this->identifiers->set($key, $this->createProductIdentifierSet($combo));
-                }
-            }
-        }
-    }
-
     /**
      * @inheritdoc
      */
@@ -110,37 +66,5 @@ class Product extends BaseProduct implements ProductInterface
     {
         // todo: actually validate, for now return true, just to prevent breaking things
         return true;
-    }
-
-    protected function extractOptionCombos($optionSet)
-    {
-        if ($curSet = array_shift($optionSet)) {
-            $combos = $this->extractOptionCombos($optionSet);
-            $return = array();
-            foreach ($curSet as $option) {
-                $key = $this->createKeyFromOptions($option);
-                if ($combos) {
-                    foreach ($combos as $curKey => $curCombo) {
-                        $returnKey = $key . $curKey;
-                        $return[$returnKey] = array_merge($option, $curCombo);
-                    }
-                } else {
-                    $return[$key] = $option;
-                }
-            }
-            return $return;
-        }
-        return null;
-    }
-
-    protected function createKeyFromOptions($options)
-    {
-        $key = '';
-        ksort($options);
-        foreach ($options as $optionGroup => $option) {
-            $key .= sprintf('%s:%s;', $optionGroup, $option);
-        }
-
-        return $key;
     }
 }

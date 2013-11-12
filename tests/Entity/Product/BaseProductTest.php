@@ -81,6 +81,37 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($product->getAttributes());
     }
 
+    public function testIdentifiers()
+    {
+        /** @var $product \Vespolina\Entity\Product\BaseProduct */
+        $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
+        $this->assertNull($product->getIdentifiers(), 'make sure we start out empty');
+
+        $identifier = new SKUIdentifier();
+        $product->addIdentifier($identifier);
+        $this->assertContains($identifier, $product->getIdentifiers());
+        $this->assertCount(1, $product->getIdentifiers());
+
+        $identifiers = array();
+        $identifiers[] = new SKUIdentifier();
+        $identifiers[] = new SKUIdentifier();
+        $product->mergeIdentifiers($identifiers);
+        $this->assertCount(3, $product->getIdentifiers());
+        $this->assertContains($identifier, $product->getIdentifiers());
+
+        $product->removeIdentifier($identifier);
+        $this->assertNotContains($identifier, $product->getIdentifiers());
+        $this->assertCount(2, $product->getIdentifiers());
+
+        $product->clearIdentifiers();
+        $this->assertEmpty($product->getIdentifiers());
+
+        $product->addIdentifier($identifier);
+        $product->setIdentifiers($identifiers);
+        $this->assertNotContains($identifier, $product->getIdentifiers(), 'this should have been removed on setting a new array of identifiers');
+        $this->assertCount(2, $product->getIdentifiers());
+    }
+    
     public function testMedia()
     {
         $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');

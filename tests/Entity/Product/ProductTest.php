@@ -45,7 +45,6 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $rp->setValue($product2, 9876);
 
 
-        $this->assertTrue(!$product1->equals($product2));
-
+        $this->assertFalse($product1->equals($product2));
     }
 }
