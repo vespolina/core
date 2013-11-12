@@ -59,15 +59,6 @@ interface ProductInterface extends BaseProductInterface
     function removeAttribute($type);
 
     /**
-     * Return a new instance of the ProductIdentifierSet, based on the class passed into the Product from the constructor
-     *
-     * @param $options
-     * @return instance of Vespolina\ProductBundle\Identifier\ProductIdentifierSetInterface
-     */
-    function createProductIdentifierSet($options);
-
-
-    /**
      * Set the product slug
      *
      * @param $slug
