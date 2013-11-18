@@ -14,7 +14,6 @@ use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\AttributeInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
-use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
 
 /**
  * @author Richard D Shank <richard@vespolina.org>
@@ -188,52 +187,6 @@ interface BaseProductInterface
      */
     function setMedia(array $media);
 
-    /**
-     * Add a taxonomy to the collection
-     *
-     * @param TaxonomyNodeInterface $taxonomy
-     */
-    function addTaxonomy(TaxonomyNodeInterface $taxonomy);
-
-    /**
-     * Add a collection of taxonomies
-     *
-     * @param array $taxonomies
-     */
-    function addTaxonomies(array $taxonomies);
-
-    /**
-     * Remove all taxonomies from the collection
-     */
-    function clearTaxonomies();
-
-    /**
-     * Return a specific taxonomy from the collection
-     *
-     * @param $name
-     */
-    function getTaxonomy($name);
-
-    /**
-     * Return a collection of taxonomies
-     *
-     * @return array of taxonomies
-     */
-    function getTaxonomies();
-
-    /**
-     * Remove a taxonomy from the collection
-     *
-     * @param TaxonomyNodeInterface $taxonomy
-     */
-    function removeTaxonomy(TaxonomyNodeInterface $taxonomy);
-
-    /**
-     * Set a collection of taxonomies
-     *
-     * @param array $taxonomies
-     */
-    function setTaxonomies(array $taxonomies);
     /**
      * Use a different name or different technique
      *

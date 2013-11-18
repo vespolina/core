@@ -15,7 +15,6 @@ use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProductInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
-use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
@@ -38,7 +37,6 @@ abstract class BaseProduct implements BaseProductInterface
     protected $name;
     protected $optionGroups;
     protected $parent;
-    protected $taxonomies;
     protected $type;
     protected $updatedAt;
     protected $pricingSet;
@@ -382,79 +380,6 @@ abstract class BaseProduct implements BaseProductInterface
     public function setMedia(array $media)
     {
         $this->media = $media;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addTaxonomy(TaxonomyNodeInterface $taxonomy)
-    {
-        $this->taxonomies[] = $taxonomy;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addTaxonomies(array $taxonomies)
-    {
-        $this->taxonomies = array_merge($this->taxonomies, $taxonomies);
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function clearTaxonomies()
-    {
-        $this->taxonomies = array();
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getTaxonomy($name)
-    {
-
-
-        return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getTaxonomies()
-    {
-        return $this->taxonomies;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function removeTaxonomy(TaxonomyNodeInterface $taxonomy)
-    {
-        foreach ($this->taxonomies as $key => $taxonomyToCompare) {
-            if ($taxonomyToCompare == $taxonomy) {
-                unset($this->taxonomies[$key]);
-                break;
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setTaxonomies(array $taxonomies)
-    {
-        $this->taxonomies = $taxonomies;
 
         return $this;
     }
