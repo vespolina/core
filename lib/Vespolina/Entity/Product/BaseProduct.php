@@ -16,7 +16,6 @@ use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProductInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
-use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
 use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
