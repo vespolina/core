@@ -15,7 +15,6 @@ use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\AttributeInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
-use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
 
 /**
  * @author Richard D Shank <richard@vespolina.org>
