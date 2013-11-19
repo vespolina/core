@@ -41,6 +41,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $updatedAt;
     protected $pricingSet;
     protected $id;
+    protected $options;
 
     public function __construct()
     {
