@@ -8,19 +8,20 @@
     "require": {
         "php": ">=5.3.2"
     },
+    "require": {
+        "vespolina/taxonomy": "dev-master"
+    },
     "require-dev": {
         "doctrine/common": "*",
         "pimple/pimple": "*",
         "merk/dough": "*",
         "phpunit/phpunit": "3.7.*",
-        "vespolina/media": "dev-master",
-        "vespolina/taxonomy": "dev-master"
+        "vespolina/media": "dev-master"
     },
     "suggest": {
         "doctrine/common": "*",
         "pimple/pimple": "*",
-        "vespolina/media": "dev-master",
-        "vespolina/taxonomy": "dev-master"
+        "vespolina/media": "dev-master"
     },
     "autoload": {
         "psr-0": {
