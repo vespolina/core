@@ -30,6 +30,8 @@ class BaseOrder extends Itemable implements OrderInterface
     protected $name;
     protected $customer;
     protected $customerNotes;
+    /** @var  \Vespolina\Entity\Partner\Partner */
+    protected $owner;
     protected $payment;
     protected $pricingSet;
     protected $state;
@@ -199,6 +201,29 @@ class BaseOrder extends Itemable implements OrderInterface
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Set the owner
+     *
+     * @param \Vespolina\Entity\Partner\Partner $owner
+     * @return $this
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Return the owner
+     *
+     * @return \Vespolina\Entity\Partner\Partner
+     */
+    public function getOwner()
+    {
+        return $this->owner;
     }
 
     /**
