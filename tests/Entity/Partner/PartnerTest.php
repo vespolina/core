@@ -9,7 +9,7 @@
 
 use Vespolina\Entity\Partner\Address;
 use Vespolina\Entity\Partner\Partner;
-use Vespolina\Entity\Payment\PaymentProfile;
+use Vespolina\Entity\Payment\PaymentProfile as AbstractPaymentProfile;
 
 class PartnerTest extends \PHPUnit_Framework_TestCase
 {
@@ -88,5 +88,13 @@ class PartnerTest extends \PHPUnit_Framework_TestCase
         ;
 
         $this->assertContains('ROLE_USER', $partner->getRoles());
+    }
+}
+
+class PaymentProfile extends AbstractPaymentProfile
+{
+    public function getType()
+    {
+        return 'test';
     }
 }
