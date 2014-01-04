@@ -27,17 +27,20 @@ class BaseOrder extends Itemable implements OrderInterface
     protected $fulfillment;
     protected $expiresAt;
     protected $id;
-    protected $name;
     protected $customer;
     protected $customerNotes;
+    protected $name;
     /** @var  \Vespolina\Entity\Partner\Partner */
     protected $owner;
     protected $payment;
-    protected $pricingSet;
     protected $state;
-    protected $totalPrice;
     protected $updatedAt;
-    protected $prices;
+    protected $price;
+
+    public function __construct()
+    {
+        $this->price['total'] = 0;
+    }
 
     public function getId()
     {
@@ -247,17 +250,19 @@ class BaseOrder extends Itemable implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function getPricing()
+    public function getPrice($type = 'total')
     {
-        return $this->pricingSet;
+        return $this->price[type];
     }
 
     /**
      * @inheritdoc
      */
-    public function setPricing($pricingSet)
+    public function setPrice($value, $type = 'total')
     {
-        $this->pricingSet = $pricingSet;
+        $this->price[type];
+
+        return $this;
     }
 
     /**
@@ -281,7 +286,7 @@ class BaseOrder extends Itemable implements OrderInterface
      */
     public function setTotalPrice($totalPrice)
     {
-        $this->totalPrice = $totalPrice;
+        $this->price['total'] = $totalPrice;
     }
 
     /**
@@ -289,7 +294,7 @@ class BaseOrder extends Itemable implements OrderInterface
      */
     public function getTotalPrice()
     {
-        return $this->totalPrice;
+        return $this->price['total'];
     }
 
     /**
@@ -316,15 +321,5 @@ class BaseOrder extends Itemable implements OrderInterface
     public function getCustomerNotes()
     {
         return $this->customerNotes;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPrice($name, $price)
-    {
-        $this->prices[$name] = $price;
-
-        return $this;
     }
 }

@@ -14,7 +14,7 @@ interface ItemInterface
      *
      * @return \Vespolina\Entity\Pricing\PricingSetInterface|null
      */
-    function getPricing();
+    function getPrice($type = 'unit');
 
     /**
      * Return the quantity of the item

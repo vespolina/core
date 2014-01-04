@@ -100,7 +100,7 @@ interface ItemInterface extends BaseItemInterface
     /**
      * Set a pricing set for this item
      */
-    function setPricing($pricingSet);
+    function setPrice($value, $type='unit');
 
     /**
      * Return the product for this item

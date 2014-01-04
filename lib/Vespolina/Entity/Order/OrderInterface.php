@@ -119,9 +119,9 @@ interface OrderInterface extends ItemableInterface
      */
     function getCustomer();
 
-    function setPricing($pricingSet);
+    function setPrice($value, $type = 'total');
 
-    function getPricing();
+    function getPrice($type = 'total');
 
     /**
      * Set the current state of the order

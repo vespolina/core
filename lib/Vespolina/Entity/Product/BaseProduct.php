@@ -41,10 +41,10 @@ abstract class BaseProduct implements BaseProductInterface
     protected $name;
     protected $optionGroups;
     protected $parent;
+    protected $price;
     protected $taxonomies;
     protected $type;
     protected $updatedAt;
-    protected $pricingSet;
     protected $id;
 
     public function __construct()
@@ -377,19 +377,19 @@ abstract class BaseProduct implements BaseProductInterface
      * @param $pricingSet
      * @return array
      */
-    public function setPricing(PricingSetInterface $pricingSet)
+    public function setPrice($value, $type = 'unit')
     {
-        $this->pricingSet = $pricingSet;
+        $this->price[$type] = $value;
 
         return $this;
     }
 
     /**
-     * @return array $priceSet
+     * @return array $price
      */
-    public function getPricing()
+    public function getPrice($type = 'unit')
     {
-        return $this->pricingSet;
+        return $this->price[$type];
     }
 
     /**
