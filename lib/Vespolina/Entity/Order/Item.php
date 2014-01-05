@@ -27,7 +27,9 @@ class Item extends BaseItem implements ItemInterface
 
     public function __construct(ProductInterface $product = null)
     {
+        $this->options = [];
         $this->product = $product;
+        parent::__construct();
     }
 
     /**

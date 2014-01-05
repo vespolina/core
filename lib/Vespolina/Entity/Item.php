@@ -11,9 +11,16 @@ class Item implements ItemInterface
 {
     protected $id;
     protected $name;
+    protected $parent;
     protected $price;
     protected $quantity;
-    protected $parent;
+
+    public function __construct()
+    {
+        $this->price = [
+            'unit' => 0,
+        ];
+    }
 
     public function getId()
     {
@@ -41,7 +48,7 @@ class Item implements ItemInterface
     /**
      * @inheritdoc
      */
-    public function setPrice($value, $type='unit')
+    public function setPrice($value, $type = 'unit')
     {
         $this->price[$type] = $value;
 
