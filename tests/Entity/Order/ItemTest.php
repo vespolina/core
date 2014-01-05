@@ -109,6 +109,19 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($item->getOptions(), 'nothing should be added if the validation fails');
     }
 
+    public function testPrice()
+    {
+        $order = new Item();
+        $this->assertSame(0, $order->getPrice(), 'the unit price should start out as 0');
+        $order->setPrice(35);
+        $this->assertSame(35, $order->getPrice('unit'), 'the unit should have been set');
+        $this->assertSame(35, $order->getPrice(), 'if no type is set, the unit should be returned');
+        $order->setPrice(105, 'something special');
+        $this->assertSame(35, $order->getPrice(), 'the unit price should not have been change');
+        $this->assertSame(35, $order->getPrice('unit'), 'the unit price should not have been change');
+        $this->assertSame(105, $order->getPrice('something special'), 'the specific type should be returned');
+    }
+
     protected function createProductOptionValidate($returns = true)
     {
         $product = $this->getMock('Vespolina\Entity\Product\Product');
