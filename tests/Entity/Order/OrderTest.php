@@ -30,4 +30,20 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('james bond', $order->getCustomer()->getName());
     }
 
+    public function testPrice()
+    {
+        $order = new Order();
+        $this->assertSame(0, $order->getPrice(), 'the total price should start out as 0');
+        $this->assertSame(0, $order->getTotalPrice(), 'the total price should start out as 0');
+        $order->setPrice(35);
+        $this->assertSame(35, $order->getTotalPrice(), 'the total should be set if no price type is passed');
+        $this->assertSame(35, $order->getPrice(), 'if no type is set, the total should be returned');
+        $order->setTotalPrice(70);
+        $this->assertSame(70, $order->getTotalPrice(), 'it should match using get TotalPrice');
+        $this->assertSame(70, $order->getPrice(), 'if no type is set, the total should be returned');
+        $order->setPrice(105, 'something special');
+        $this->assertSame(70, $order->getTotalPrice(), 'the Total price should not have been changed');
+        $this->assertSame(70, $order->getPrice(), 'the Total price should not have been change');
+        $this->assertSame(105, $order->getPrice('something special'), 'the specific type should be returned');
+    }
 }

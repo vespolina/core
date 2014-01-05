@@ -252,7 +252,7 @@ class BaseOrder extends Itemable implements OrderInterface
      */
     public function getPrice($type = 'total')
     {
-        return $this->price[type];
+        return $this->price[$type];
     }
 
     /**
@@ -260,7 +260,7 @@ class BaseOrder extends Itemable implements OrderInterface
      */
     public function setPrice($value, $type = 'total')
     {
-        $this->price[type];
+        $this->price[$type] = $value;
 
         return $this;
     }
