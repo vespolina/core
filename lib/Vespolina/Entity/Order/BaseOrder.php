@@ -11,6 +11,7 @@ namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
 use Vespolina\Entity\Payment\PaymentProfileInterface;
+use Vespolina\Entity\Payment\TransactionInterface;
 use Vespolina\Entity\Itemable;
 
 /**
@@ -31,7 +32,6 @@ class BaseOrder extends Itemable implements OrderInterface
     protected $customer;
     protected $customerNotes;
     protected $name;
-    protected $payment;
     protected $state;
     protected $updatedAt;
     protected $price;
@@ -226,24 +226,6 @@ class BaseOrder extends Itemable implements OrderInterface
     public function getOwner()
     {
         return $this->owner;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPaymentProfile(PaymentProfileInterface $payment)
-    {
-        $this->payment = $payment;
-
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPaymentProfile()
-    {
-        return $this->payment;
     }
 
     /**

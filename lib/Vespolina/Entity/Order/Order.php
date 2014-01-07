@@ -13,12 +13,13 @@ use Vespolina\Entity\Channel\ChannelInterface;
 
 class Order extends BaseOrder implements OrderInterface
 {
+    protected $billingAgreements;
     protected $channel;
     protected $followUp;
     protected $orderDate;
     protected $paymentInstruction;
-    protected $billingAgreements;
     protected $internalNotes;
+    protected $transaction;
 
     public function setBillingAgreements($billingAgreements)
     {
@@ -93,6 +94,24 @@ class Order extends BaseOrder implements OrderInterface
     public function getInternalNotes()
     {
         return $this->internalNotes;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setTransaction(TransactionInterface $transaction)
+    {
+        $this->transaction = $transaction;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTransaction()
+    {
+        return $this->transaction;
     }
 
     public function autoSetCreatedAt()
