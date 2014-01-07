@@ -13,13 +13,6 @@ use Vespolina\Entity\Channel\ChannelInterface;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    const STATE_OPEN = 'open';          //Available for change
-    const STATE_LOCKED = 'locked';      //Locked for processing
-    const STATE_CLOSED = 'closed';      //Closed after processing
-    const STATE_EXPIRED = 'expired';    //Not processed and expired
-    const STATE_ABANDONED = 'abandoned'; //Cart was abandoned
-    const STATE_CONVERTED = 'converted'; //Cart was converted into a purchase
-
     protected $channel;
     protected $followUp;
     protected $orderDate;
