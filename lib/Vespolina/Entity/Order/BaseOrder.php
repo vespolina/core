@@ -27,11 +27,10 @@ class BaseOrder extends Itemable implements OrderInterface
     protected $fulfillment;
     protected $expiresAt;
     protected $id;
+    /** @var  \Vespolina\Entity\Partner\Partner */
     protected $customer;
     protected $customerNotes;
     protected $name;
-    /** @var  \Vespolina\Entity\Partner\Partner */
-    protected $owner;
     protected $payment;
     protected $state;
     protected $updatedAt;

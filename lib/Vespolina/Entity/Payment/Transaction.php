@@ -15,6 +15,7 @@ class Transaction implements TransactionInterface
     protected $debit;
     protected $id;
     protected $paymentProfile;
+    protected $paymentRequest;
     protected $posted;
 
     /**
@@ -77,6 +78,28 @@ class Transaction implements TransactionInterface
     public function getPaymentProfile()
     {
         return $this->paymentProfile;
+    }
+
+    /**
+     * Set the paymentRequest
+     *
+     * @param mixed $paymentRequest
+     * @return $this
+     */
+    public function setPaymentRequest($paymentRequest)
+    {
+        $this->paymentRequest = $paymentRequest;
+        return $this;
+    }
+
+    /**
+     * Return the paymentRequest
+     *
+     * @return mixed
+     */
+    public function getPaymentRequest()
+    {
+        return $this->paymentRequest;
     }
 
     /**
