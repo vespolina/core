@@ -10,6 +10,7 @@
 namespace Vespolina\Entity\Order;
 
 use Vespolina\Entity\Channel\ChannelInterface;
+use Vespolina\Entity\Payment\TransactionInterface;
 
 class Order extends BaseOrder implements OrderInterface
 {
