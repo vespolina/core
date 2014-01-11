@@ -4,11 +4,13 @@ namespace Vespolina\Entity\Brand;
 
 class Brand implements BrandInterface
 {
+    protected $createdAt;
     protected $description;
     protected $id;
     protected $logo;
     protected $name;
     protected $slug;
+    protected $updatedAt;
     protected $uri;
 
     /**
@@ -107,5 +109,58 @@ class Brand implements BrandInterface
     public function getUri()
     {
         return $this->uri;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function autoSetCreatedAt()
+    {
+        if (null === $this->createdAt) {
+            $this->createdAt = new \DateTime();
+        }
+        $this->autoSetUpdatedAt();
+
+        return $this;
+    }
+
+    public function autoSetUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+
+        return $this;
     }
 }
