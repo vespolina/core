@@ -49,6 +49,7 @@ abstract class BaseProduct implements BaseProductInterface
 
     public function __construct()
     {
+        $this->brands = array();
         $this->descriptions = array();
     }
 
