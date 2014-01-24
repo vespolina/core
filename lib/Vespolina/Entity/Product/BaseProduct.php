@@ -45,6 +45,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $taxonomies;
     protected $type;
     protected $updatedAt;
+    protected $variations;
     protected $id;
 
     public function __construct()
@@ -546,6 +547,31 @@ abstract class BaseProduct implements BaseProductInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Return the variations
+     *
+     * @return mixed
+     */
+    public function getVariations()
+    {
+        return $this->variations;
+    }
+
+    public function hasVariations()
+    {
+        return (bool) count($this->variations);
+    }
+
+    public function useVariation($label)
+    {
+        if (!isset($this->variations[$label])) {
+            $class = get_class($this);
+            $this->variations[$label] = new $class();
+        }
+
+        return $this->variations[$label];
     }
 
     public function getParent()
