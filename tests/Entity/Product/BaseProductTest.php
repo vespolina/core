@@ -86,7 +86,7 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
     {
         /** @var $product \Vespolina\Entity\Product\BaseProduct */
         $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
-        $this->assertNull($product->getBrands(), 'make sure we start out empty');
+        $this->assertEmpty($product->getBrands(), 'make sure we start out empty');
 
         $brand = new Brand();
         $product->addBrand($brand);
