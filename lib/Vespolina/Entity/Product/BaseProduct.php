@@ -17,7 +17,6 @@ use Vespolina\Entity\Product\BaseProductInterface;
 use Vespolina\Entity\Product\OptionInterface;
 use Vespolina\Entity\Product\OptionGroupInterface;
 use Vespolina\Entity\Taxonomy\TaxonomyNodeInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
 
 /**
  * @author Richard D Shank <richard@vespolina.org>
@@ -375,7 +374,8 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @param $pricingSet
+     * @param $value
+     * @param $type
      * @return array
      */
     public function setPrice($value, $type = 'unit')

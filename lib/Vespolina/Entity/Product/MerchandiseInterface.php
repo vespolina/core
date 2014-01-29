@@ -11,8 +11,6 @@ namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\AssetInterface;
 use Vespolina\Entity\Channel\ChannelInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
-use Vespolina\Entity\Pricing\PricingSet;
 use Vespolina\Entity\Product\BaseProductInterface;
 
 interface MerchandiseInterface extends BaseProductInterface
@@ -104,21 +102,6 @@ interface MerchandiseInterface extends BaseProductInterface
      * @return \DateTime
      */
     function getDeactivateOn();
-
-    /**
-     * Return the PricingSet for this merchandise
-     *
-     * @param \Vespolina\Entity\Pricing\PricingSetInterface $pricingSet
-     * @return
-     */
-    function setPricing(PricingSetInterface $pricingSet);
-
-    /**
-     * Return the PricingSet for this merchandise
-     *
-     * @return \Vespolina\Entity\Pricing\PricingSet $pricingSet
-     */
-    function getPricing();
 
     /**
      * Return the product of this merchandise

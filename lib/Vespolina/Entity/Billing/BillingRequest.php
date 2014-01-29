@@ -45,7 +45,7 @@ class BillingRequest extends PaymentRequest implements BillingRequestInterface
     protected $paymentProfile;
     protected $periodStart;
     protected $periodEnd;
-    protected $pricingSet;
+    protected $price;
     protected $state;
 
     public function __construct()
@@ -190,19 +190,22 @@ class BillingRequest extends PaymentRequest implements BillingRequestInterface
         return $this->periodStart;
     }
 
-    public function setPricingSet($pricingSet)
+    /**
+     * @inheritdoc
+     */
+    public function setPrice($value, $type = 'unit')
     {
-        $this->pricingSet = $pricingSet;
+        $this->price[$type] = $value;
 
         return $this;
     }
 
     /**
-     * @return mixed
+     * @inheritdoc
      */
-    public function getPricingSet()
+    public function getPrice($type = 'unit')
     {
-        return $this->pricingSet;
+        return $this->price[$type];
     }
 
     /**

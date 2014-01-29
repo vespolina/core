@@ -12,7 +12,7 @@ interface ItemInterface
     /**
      * Return the pricing set for this item
      *
-     * @return \Vespolina\Entity\Pricing\PricingSetInterface|null
+     * @return mixed
      */
     function getPrice($type = 'unit');
 

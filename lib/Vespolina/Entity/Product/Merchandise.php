@@ -11,8 +11,6 @@ namespace Vespolina\Entity\Product;
 
 use Vespolina\Entity\Asset\AssetInterface;
 use Vespolina\Entity\Channel\ChannelInterface;
-use Vespolina\Entity\Pricing\PricingSetInterface;
-use Vespolina\Entity\Pricing\PricingSet;
 use Vespolina\Entity\Product\BaseProduct;
 use Vespolina\Entity\Product\MerchandiseInterface;
 use Vespolina\Entity\Product\ProductInterface;
@@ -159,22 +157,6 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     public function getDeactivateOn()
     {
         return $this->deactivateOn;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setPricing(PricingSetInterface $pricing)
-    {
-        $this->pricing = $pricing;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getPricing()
-    {
-        return $this->pricing;
     }
 
     /**
