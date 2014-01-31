@@ -145,7 +145,7 @@ class Item extends BaseItem implements ItemInterface
         return $this->product;
     }
 
-    protected function setProduct($product)
+    public function setProduct($product)
     {
         $this->product = $product;
 
