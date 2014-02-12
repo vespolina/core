@@ -197,8 +197,6 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $sizeSmall = $this->createOption('small', 'size', 'sizeSmall');
         $sizeGroup->addOption($sizeLarge);
         $sizeGroup->addOption($sizeSmall);
-
-
     }
 
     public function testVariations()
@@ -221,8 +219,6 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceof('VariationProduct', $variations['variant1']);
     }
 
-
-
     protected function createOption($display, $type, $value)
     {
         $option = new Option();
@@ -233,8 +229,6 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
 
         return $option;
     }
-
-
 }
 
 class VariationProduct extends BaseProduct
