@@ -39,6 +39,7 @@ class BaseOrder extends Itemable implements OrderInterface
     public function __construct()
     {
         $this->price['total'] = 0;
+        $this->items = [];
     }
 
     public function getId()

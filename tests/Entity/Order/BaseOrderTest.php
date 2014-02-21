@@ -16,7 +16,7 @@ class BaseOrderTest extends \PHPUnit_Framework_TestCase
     public function testItems()
     {
         $order = new BaseOrder();
-        $this->assertNull($order->getItems(), 'make sure we start out empty');
+        $this->assertCount(0, $order->getItems(), 'make sure we start out empty');
 
         $item = new Item();
         $order->addItem($item);
