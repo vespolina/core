@@ -197,8 +197,26 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $sizeSmall = $this->createOption('small', 'size', 'sizeSmall');
         $sizeGroup->addOption($sizeLarge);
         $sizeGroup->addOption($sizeSmall);
+    }
 
+    public function testVariations()
+    {
+        $product = new VariationProduct();
 
+        $this->assertFalse($product->hasVariations(), 'there should not be any variations when initialized');
+        $this->assertEmpty($product->getVariations(), 'there should not be any variations when initialized');
+
+        $product->setPrice(3);
+        $product->useVariation('variant1')->setPrice(4);
+        $product->useVariation('variant2')->setPrice(7);
+        $this->assertSame(3, $product->getPrice());
+        $this->assertSame(4, $product->useVariation('variant1')->getPrice());
+        $this->assertSame(7, $product->useVariation('variant2')->getPrice());
+
+        $this->assertTrue($product->hasVariations());
+        $variations = $product->getVariations();
+        $this->assertCount(2, $variations);
+        $this->assertInstanceof('VariationProduct', $variations['variant1']);
     }
 
     protected function createOption($display, $type, $value)
@@ -211,4 +229,9 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
 
         return $option;
     }
+}
+
+class VariationProduct extends BaseProduct
+{
+
 }
