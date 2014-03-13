@@ -375,9 +375,20 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
+     * @param $prices
+     * @return $this
+     */
+    public function setPrices($prices)
+    {
+        $this->price = $prices;
+
+        return $this;
+    }
+
+    /**
      * @param $value
      * @param $type
-     * @return array
+     * @return $this
      */
     public function setPrice($value, $type = 'unit')
     {
