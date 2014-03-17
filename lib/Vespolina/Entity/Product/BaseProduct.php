@@ -398,12 +398,16 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @return array $price
+     * @return mixed
      */
     public function getPrice($type = 'unit')
     {
+        if (!isset($this->price[$type])) {
+            return null;
+        }
+
         return $this->price[$type];
-    }
+}
 
     /**
      * @inheritdoc
