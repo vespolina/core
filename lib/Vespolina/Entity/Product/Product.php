@@ -23,8 +23,8 @@ class Product extends BaseProduct implements ProductInterface
 {
     protected $slug;
 
-    public function equals(ProductInterface $product) {
-
+    public function equals(ProductInterface $product)
+    {
         return ($this->id == $product->getId());
     }
 
@@ -56,6 +56,7 @@ class Product extends BaseProduct implements ProductInterface
                 return $optionSet;
             }
         }
+
         return null;
     }
 
