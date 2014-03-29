@@ -40,7 +40,7 @@ abstract class BaseProduct implements BaseProductInterface
     protected $name;
     protected $optionGroups;
     protected $parent;
-    protected $price;
+    protected $prices;
     protected $taxonomies;
     protected $type;
     protected $updatedAt;
@@ -380,9 +380,17 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function setPrices($prices)
     {
-        $this->price = $prices;
+        $this->prices = $prices;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPrices()
+    {
+        return $this->prices;
     }
 
     /**
@@ -392,7 +400,7 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function setPrice($value, $type = 'unit')
     {
-        $this->price[$type] = $value;
+        $this->prices[] = ['type' => $type, 'value' => $value];
 
         return $this;
     }
@@ -402,12 +410,12 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function getPrice($type = 'unit')
     {
-        if (!isset($this->price[$type])) {
-            return null;
+        foreach ($this->prices as $price) {
+            if ($price['type'] == $type) {
+                return $price;
+            }
         }
-
-        return $this->price[$type];
-}
+    }
 
     /**
      * @inheritdoc
