@@ -51,6 +51,7 @@ abstract class BaseProduct implements BaseProductInterface
     {
         $this->brands = array();
         $this->descriptions = array();
+        $this->prices = array();
     }
 
     public function getId()
@@ -400,6 +401,13 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function setPrice($value, $type = 'unit')
     {
+        foreach ($this->prices as $key => $price) {
+            if ($price['type'] == $type) {
+                $this->prices[$key] = ['type' => $type, 'value' => $value];
+
+                return $this;
+            }
+        }
         $this->prices[] = ['type' => $type, 'value' => $value];
 
         return $this;
@@ -412,9 +420,11 @@ abstract class BaseProduct implements BaseProductInterface
     {
         foreach ($this->prices as $price) {
             if ($price['type'] == $type) {
-                return $price;
+                return $price['value'];
             }
         }
+
+        return null;
     }
 
     /**
