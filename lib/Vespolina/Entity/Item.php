@@ -12,13 +12,14 @@ class Item implements ItemInterface
     protected $id;
     protected $name;
     protected $parent;
-    protected $price;
+    protected $prices;
     protected $quantity;
 
     public function __construct()
     {
-        $this->price = [
-            'unit' => 0,
+        $this->prices[] = [
+            'type'  => 'unit',
+            'value' => 0,
         ];
     }
 
@@ -50,7 +51,14 @@ class Item implements ItemInterface
      */
     public function setPrice($value, $type = 'unit')
     {
-        $this->price[$type] = $value;
+        foreach ($this->prices as $key => $price) {
+            if ($price['type'] == $type) {
+                $this->prices[$key] = ['type' => $type, 'value' => $value];
+
+                return $this;
+            }
+        }
+        $this->prices[] = ['type' => $type, 'value' => $value];
 
         return $this;
     }
@@ -60,7 +68,13 @@ class Item implements ItemInterface
      */
     public function getPrice($type = 'unit')
     {
-        return $this->price[$type];
+        foreach ($this->prices as $price) {
+            if ($price['type'] == $type) {
+                return $price['value'];
+            }
+        }
+
+        return null;
     }
 
     protected function setQuantity($quantity)

@@ -111,15 +111,15 @@ class ItemTest extends \PHPUnit_Framework_TestCase
 
     public function testPrice()
     {
-        $order = new Item();
-        $this->assertSame(0, $order->getPrice(), 'the unit price should start out as 0');
-        $order->setPrice(35);
-        $this->assertSame(35, $order->getPrice('unit'), 'the unit should have been set');
-        $this->assertSame(35, $order->getPrice(), 'if no type is set, the unit should be returned');
-        $order->setPrice(105, 'something special');
-        $this->assertSame(35, $order->getPrice(), 'the unit price should not have been change');
-        $this->assertSame(35, $order->getPrice('unit'), 'the unit price should not have been change');
-        $this->assertSame(105, $order->getPrice('something special'), 'the specific type should be returned');
+        $item = new Item();
+        $this->assertSame(0, $item->getPrice(), 'the unit price should start out as 0');
+        $item->setPrice(35);
+        $this->assertSame(35, $item->getPrice('unit'), 'the unit should have been set');
+        $this->assertSame(35, $item->getPrice(), 'if no type is set, the unit should be returned');
+        $item->setPrice(105, 'something special');
+        $this->assertSame(35, $item->getPrice(), 'the unit price should not have been change');
+        $this->assertSame(35, $item->getPrice('unit'), 'the unit price should not have been change');
+        $this->assertSame(105, $item->getPrice('something special'), 'the specific type should be returned');
     }
 
     protected function createProductOptionValidate($returns = true)
