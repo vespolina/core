@@ -45,13 +45,14 @@ class BillingRequest extends PaymentRequest implements BillingRequestInterface
     protected $paymentProfile;
     protected $periodStart;
     protected $periodEnd;
-    protected $price;
+    protected $prices;
     protected $state;
 
     public function __construct()
     {
-        $this->billingAgreements = array();
-        $this->consumption = array();
+        $this->billingAgreements = [];
+        $this->consumption = [];
+        $this->prices = [];
     }
 
     public function getId()
@@ -195,7 +196,14 @@ class BillingRequest extends PaymentRequest implements BillingRequestInterface
      */
     public function setPrice($value, $type = 'unit')
     {
-        $this->price[$type] = $value;
+        foreach ($this->prices as $key => $price) {
+            if ($price['type'] == $type) {
+                $this->prices[$key] = ['type' => $type, 'value' => $value];
+
+                return $this;
+            }
+        }
+        $this->prices[] = ['type' => $type, 'value' => $value];
 
         return $this;
     }
@@ -205,7 +213,13 @@ class BillingRequest extends PaymentRequest implements BillingRequestInterface
      */
     public function getPrice($type = 'unit')
     {
-        return $this->price[$type];
+        foreach ($this->prices as $price) {
+            if ($price['type'] == $type) {
+                return $price['value'];
+            }
+        }
+
+        return null;
     }
 
     /**

@@ -25,21 +25,24 @@ class BaseOrder extends Itemable implements OrderInterface
     protected $attributes;
     protected $channel;
     protected $createdAt;
-    protected $fulfillment;
-    protected $expiresAt;
-    protected $id;
     /** @var  \Vespolina\Entity\Partner\Partner */
     protected $customer;
     protected $customerNotes;
+    protected $fulfillment;
+    protected $expiresAt;
+    protected $id;
+    protected $prices;
     protected $name;
     protected $state;
     protected $updatedAt;
-    protected $price;
 
     public function __construct()
     {
-        $this->price['total'] = 0;
         $this->items = [];
+        $this->prices[] = [
+            'type' => 'total',
+            'value' => 0
+        ];
     }
 
     public function getId()
@@ -232,19 +235,32 @@ class BaseOrder extends Itemable implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function getPrice($type = 'total')
+    public function setPrice($value, $type = 'total')
     {
-        return $this->price[$type];
+        foreach ($this->prices as $key => $price) {
+            if ($price['type'] == $type) {
+                $this->prices[$key] = ['type' => $type, 'value' => $value];
+
+                return $this;
+            }
+        }
+        $this->prices[] = ['type' => $type, 'value' => $value];
+
+        return $this;
     }
 
     /**
      * @inheritdoc
      */
-    public function setPrice($value, $type = 'total')
+    public function getPrice($type = 'total')
     {
-        $this->price[$type] = $value;
+        foreach ($this->prices as $price) {
+            if ($price['type'] == $type) {
+                return $price['value'];
+            }
+        }
 
-        return $this;
+        return null;
     }
 
     /**
@@ -268,7 +284,7 @@ class BaseOrder extends Itemable implements OrderInterface
      */
     public function setTotalPrice($totalPrice)
     {
-        $this->price['total'] = $totalPrice;
+        return $this->setPrice($totalPrice, 'total');
     }
 
     /**
@@ -276,7 +292,7 @@ class BaseOrder extends Itemable implements OrderInterface
      */
     public function getTotalPrice()
     {
-        return $this->price['total'];
+        return $this->getPrice('total');
     }
 
     /**
