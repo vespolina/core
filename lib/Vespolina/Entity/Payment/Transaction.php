@@ -17,6 +17,7 @@ class Transaction implements TransactionInterface
     protected $paymentProfile;
     protected $paymentRequest;
     protected $posted;
+    protected $reference;
 
     /**
      * @inheritdoc
@@ -118,5 +119,28 @@ class Transaction implements TransactionInterface
     public function getPosted()
     {
         return $this->posted;
+    }
+
+    /**
+     * Set the reference
+     *
+     * @param string $reference
+     * @return $this
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Return the reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
     }
 }
