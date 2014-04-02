@@ -7,7 +7,6 @@
  * with this source code in the file LICENSE.
  */
 
-use Vespolina\Entity\Asset\Media;
 use Vespolina\Entity\Brand\Brand;
 use Vespolina\Entity\Product\Attribute;
 use Vespolina\Entity\Product\Option;
@@ -15,6 +14,8 @@ use Vespolina\Entity\Product\OptionGroup;
 use Vespolina\Entity\Product\BaseProduct;
 use Vespolina\Entity\Product\Product;
 use Vespolina\Entity\Identifier\SKUIdentifier;
+use Vespolina\Media\Entity\Asset;
+use Vespolina\Media\Entity\Media;
 
 class BaseProductTest extends \PHPUnit_Framework_TestCase
 {
@@ -81,6 +82,36 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
 
         $product->clearAttributes();
         $this->assertEmpty($product->getAttributes());
+    }
+
+    public function testAssets()
+    {
+        $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
+        $this->assertNull($product->getAssets(), 'make sure we start out empty');
+
+        $asset = new Asset();
+        $product->addAsset($asset);
+        $this->assertContains($asset, $product->getAssets());
+        $this->assertCount(1, $product->getAssets());
+
+        $assets = array();
+        $assets[] = new Asset();
+        $assets[] = new Asset();
+        $product->mergeAssets($assets);
+        $this->assertCount(3, $product->getAssets());
+        $this->assertContains($asset, $product->getAssets());
+
+        $product->removeAsset($asset);
+        $this->assertNotContains($asset, $product->getAssets());
+        $this->assertCount(2, $product->getAssets());
+
+        $product->clearAssets();
+        $this->assertEmpty($product->getAssets());
+
+        $product->addAsset($asset);
+        $product->setAssets($assets);
+        $this->assertNotContains($asset, $product->getAssets(), 'this should have been removed on setting a new array of assets');
+        $this->assertCount(2, $product->getAssets());
     }
 
     public function testBrands()

@@ -50,46 +50,6 @@ interface MerchandiseInterface extends BaseProductInterface
     function getActive();
 
     /**
-     * Add a asset to the collection
-     *
-     * @param \Vespolina\Entity\Asset\AssetInterface $asset
-     */
-    function addAsset(AssetInterface $asset);
-
-    /**
-     * Add a collection of assets
-     *
-     * @param array $assets
-     */
-    function addAssets(array $assets);
-
-    /**
-     * Remove all assets from the collection
-     */
-    function clearAssets();
-
-    /**
-     * Return a collection of assets
-     *
-     * @return array of \Vespolina\Entity\Asset\AssetInterface
-     */
-    function getAssets();
-
-    /**
-     * Remove an asset from the collection
-     *
-     * @param AssetInterface $asset
-     */
-    function removeAsset(AssetInterface $asset);
-
-    /**
-     * Set a collection of assets
-     *
-     * @param array $assets
-     */
-    function setAssets(array $assets);
-
-    /**
      * Set the date this merchandise becomes inactive in the store.
      *
      * @param \DateTime $deactivateOn

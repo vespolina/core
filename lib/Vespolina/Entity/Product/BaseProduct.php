@@ -60,7 +60,83 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     */
+    public function addAsset($asset)
+    {
+        if (!$this->assets) {
+            $this->clearAssets();
+        }
+        $found = false;
+        foreach ($this->assets as $existingAsset) {
+            if ($asset == $existingAsset) {
+                $found = true;
+                break;
+            }
+        }
+
+        if (!$found) {
+            $this->assets[] = $asset;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearAssets()
+    {
+        $this->assets = array();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssets()
+    {
+        return $this->assets;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function mergeAssets(array $assets)
+    {
+        $this->assets = array_merge($this->assets, $assets);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAsset($asset)
+    {
+        foreach ($this->assets as $key => $assetToCompare) {
+            if ($assetToCompare == $asset) {
+                unset($this->assets[$key]);
+                break;
+            };
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAssets(array $assets)
+    {
+        $this->assets = $assets;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function addAttribute(AttributeInterface $attribute)
     {

@@ -93,59 +93,6 @@ class Merchandise extends BaseProduct implements MerchandiseInterface
     /**
      * @inheritdoc
      */
-    public function addAsset(AssetInterface $asset)
-    {
-        $this->assets[] = $asset;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addAssets(array $assets)
-    {
-        $this->assets = array_merge($this->assets, $assets);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function clearAssets()
-    {
-        $this->assets = array();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAssets()
-    {
-        return $this->assets;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function removeAsset(AssetInterface $asset)
-    {
-        foreach ($this->assets as $key => $assetToCompare) {
-            if ($assetToCompare == $asset) {
-                unset($this->assets[$key]);
-                break;
-            }
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setAssets(array $assets)
-    {
-        $this->assets = $assets;
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function setDeactivateOn(\DateTime $deactivateOn)
     {
         $this->deactivateOn = $deactivateOn;

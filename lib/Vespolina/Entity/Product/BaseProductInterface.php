@@ -45,6 +45,46 @@ interface BaseProductInterface
     function getId();
 
     /**
+     * Add a asset to the collection
+     *
+     * @param mixed $asset
+     */
+    function addAsset($asset);
+
+    /**
+     * Remove all assets from the collection
+     */
+    function clearAssets();
+
+    /**
+     * Return a collection of assets
+     *
+     * @return array of \Vespolina\Entity\Asset\AssetInterface
+     */
+    function getAssets();
+
+    /**
+     * Add a collection of assets
+     *
+     * @param array $assets
+     */
+    function mergeAssets(array $assets);
+
+    /**
+     * Remove an asset from the collection
+     *
+     * @param mixed $asset
+     */
+    function removeAsset($asset);
+
+    /**
+     * Set a collection of assets
+     *
+     * @param array $assets
+     */
+    function setAssets(array $assets);
+
+    /**
      *
      */
     function addAttribute(AttributeInterface $attribute);
@@ -292,6 +332,7 @@ interface BaseProductInterface
      * @param array $taxonomies
      */
     function setTaxonomies(array $taxonomies);
+
     /**
      * Use a different name or different technique
      *
