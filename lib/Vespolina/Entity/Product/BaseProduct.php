@@ -103,7 +103,7 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * {@inheritdoc}
      */
-    public function mergeAssets(array $assets)
+    public function mergeAssets($assets)
     {
         $this->assets = array_merge($this->assets, $assets);
 
@@ -128,9 +128,12 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setAssets(array $assets)
+    public function setAssets($assets)
     {
-        $this->assets = $assets;
+        $this->clearAssets();
+        foreach ($assets as $asset) {
+            $this->addAsset($asset);
+        }
 
         return $this;
     }

@@ -68,7 +68,7 @@ interface BaseProductInterface
      *
      * @param array $assets
      */
-    function mergeAssets(array $assets);
+    function mergeAssets($assets);
 
     /**
      * Remove an asset from the collection
@@ -82,7 +82,7 @@ interface BaseProductInterface
      *
      * @param array $assets
      */
-    function setAssets(array $assets);
+    function setAssets($assets);
 
     /**
      *
