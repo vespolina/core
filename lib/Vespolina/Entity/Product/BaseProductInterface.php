@@ -9,7 +9,7 @@
 
 namespace Vespolina\Entity\Product;
 
-use Vespolina\Entity\Asset\MediaInterface;
+use Vespolina\Media\MediaInterface;
 use Vespolina\Entity\Brand\BrandInterface;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\AttributeInterface;
