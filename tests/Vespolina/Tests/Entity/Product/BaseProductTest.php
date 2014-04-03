@@ -231,21 +231,6 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $sizeGroup->addOption($sizeSmall);
     }
 
-    public function testPrice()
-    {
-        $product = new Product();
-
-        $product->setPrice(4);
-        $this->assertSame(4, $product->getPrice(), 'the unit price should be the default set and get');
-        $this->assertSame(4, $product->getPrice('unit'));
-
-        $product->setPrice(24, 'unit');
-        $this->assertSame(24, $product->getPrice());
-        $this->assertSame(24, $product->getPrice('unit'));
-
-        $this->assertNull($product->getPrice('does_not_exist'), 'a non existent price type should return null');
-    }
-
     public function testVariations()
     {
         $product = new VariationProduct();

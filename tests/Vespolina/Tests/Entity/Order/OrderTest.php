@@ -30,7 +30,7 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('james bond', $order->getCustomer()->getName());
     }
 
-    public function testPrice()
+    public function testTotalPrice()
     {
         $order = new Order();
         $this->assertSame(0, $order->getPrice(), 'the total price should start out as 0');
@@ -48,6 +48,5 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(70, $order->getTotalPrice(), 'the Total price should not have been changed');
         $this->assertSame(70, $order->getPrice('total'), 'the Total price should not have been change');
         $this->assertSame(70, $order->getPrice(), 'the Total price should not have been change');
-        $this->assertSame(105, $order->getPrice('something special'), 'the specific type should be returned');
     }
 }

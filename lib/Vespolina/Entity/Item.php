@@ -37,7 +37,7 @@ class Item implements ItemInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -47,7 +47,51 @@ class Item implements ItemInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     */
+    public function clearPrices()
+    {
+        $this->prices = array();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrice($type = 'unit')
+    {
+        foreach ($this->prices as $price) {
+            if ($price['type'] == $type) {
+                return $price['value'];
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrices()
+    {
+        return $this->prices;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function mergePrices($prices)
+    {
+        foreach ($prices as $price) {
+            $this->setPrice($price['value'], $price['type']);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function setPrice($value, $type = 'unit')
     {
@@ -64,17 +108,13 @@ class Item implements ItemInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getPrice($type = 'unit')
+    public function setPrices($prices)
     {
-        foreach ($this->prices as $price) {
-            if ($price['type'] == $type) {
-                return $price['value'];
-            }
-        }
+        $this->clearPrices();
 
-        return null;
+        return $this->mergePrices($prices);
     }
 
     protected function setQuantity($quantity)

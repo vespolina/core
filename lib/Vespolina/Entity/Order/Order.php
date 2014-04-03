@@ -22,6 +22,11 @@ class Order extends BaseOrder implements OrderInterface
     protected $internalNotes;
     protected $transaction;
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function setBillingAgreements($billingAgreements)
     {
         $this->billingAgreements = $billingAgreements;

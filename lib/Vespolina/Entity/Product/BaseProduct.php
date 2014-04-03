@@ -49,9 +49,11 @@ abstract class BaseProduct implements BaseProductInterface
 
     public function __construct()
     {
-        $this->brands = array();
-        $this->descriptions = array();
-        $this->prices = array();
+        $this->brands = [];
+        $this->descriptions = [];
+        $this->prices = [
+            ['type' => 'unit', 'value' => 0],
+        ];
     }
 
     public function getId()
@@ -67,17 +69,7 @@ abstract class BaseProduct implements BaseProductInterface
         if (!$this->assets) {
             $this->clearAssets();
         }
-        $found = false;
-        foreach ($this->assets as $existingAsset) {
-            if ($asset == $existingAsset) {
-                $found = true;
-                break;
-            }
-        }
-
-        if (!$found) {
-            $this->assets[] = $asset;
-        }
+        $this->assets[] = $asset;
 
         return $this;
     }
@@ -455,14 +447,27 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @param $prices
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setPrices($prices)
+    public function clearPrices()
     {
-        $this->prices = $prices;
+        $this->prices = array();
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice($type = 'unit')
+    {
+        foreach ($this->prices as $price) {
+            if ($price['type'] == $type) {
+                return $price['value'];
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -471,6 +476,19 @@ abstract class BaseProduct implements BaseProductInterface
     public function getPrices()
     {
         return $this->prices;
+    }
+
+    /**
+     * @param $prices
+     * @return $this
+     */
+    public function mergePrices($prices)
+    {
+        foreach ($prices as $price) {
+            $this->setPrice($price['value'], $price['type']);
+        }
+
+        return $this;
     }
 
     /**
@@ -493,17 +511,14 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @return mixed
+     * @param $prices
+     * @return $this
      */
-    public function getPrice($type = 'unit')
+    public function setPrices($prices)
     {
-        foreach ($this->prices as $price) {
-            if ($price['type'] == $type) {
-                return $price['value'];
-            }
-        }
+        $this->clearPrices();
 
-        return null;
+        return $this->mergePrices($prices);
     }
 
     /**
