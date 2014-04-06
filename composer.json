@@ -16,13 +16,11 @@
         "doctrine/common": "*",
         "pimple/pimple": "*",
         "merk/dough": "*",
-        "phpunit/phpunit": "3.7.*",
-        "vespolina/media": "dev-master"
+        "phpunit/phpunit": "3.7.*"
     },
     "suggest": {
         "doctrine/common": "*",
-        "pimple/pimple": "*",
-        "vespolina/media": "dev-master"
+        "pimple/pimple": "*"
     },
     "autoload": {
         "psr-0": {
