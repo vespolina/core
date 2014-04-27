@@ -391,7 +391,7 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function getPrices()
     {
-        return $this->prices;
+        return (array) $this->prices;
     }
 
     /**
