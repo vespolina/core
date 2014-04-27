@@ -67,20 +67,4 @@ class Option implements OptionInterface
     {
         return $this->type;
     }
-
-    /*
-     * @inheritdoc
-     */
-    public function setUpcharge($upcharge)
-    {
-        $this->upcharge = $upcharge;
-    }
-
-    /*
-     * @inheritdoc
-     */
-    public function getUpcharge()
-    {
-        return $this->upcharge;
-    }
 }

@@ -55,15 +55,4 @@ interface OptionInterface
      * @return string
      */
     function getType();
-
-    /**
-     * Set an upcharge cost
-     * @param $upcharge
-     */
-    function setUpcharge($upcharge);
-
-    /*
-     * Return the upcharge for this item
-     */
-    function getUpcharge();
 }
