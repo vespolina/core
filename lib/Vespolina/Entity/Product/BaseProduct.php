@@ -526,7 +526,11 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function getTaxonomy($name)
     {
-
+        foreach ($this->taxonomies as $taxonomy) {
+            if ($taxonomy->getName() == $name) {
+                return $taxonomy;
+            }
+        }
 
         return null;
     }
