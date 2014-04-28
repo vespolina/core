@@ -20,3 +20,21 @@ Option
    public function setIndex($index);
    public function getIndex();
    ```
+
+OptionGroup
+-----------
+ * The `name` property and corredsponding methods have been changed to `type` to Option
+
+   Before:
+
+   ```
+   public function setName($name);
+   public function getName();
+   ```
+   
+   After:
+   
+   ```
+   public function setType($type);
+   public function getType();
+   ```
