@@ -38,7 +38,7 @@ class VariationProductTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($product->hasVariations());
         $variations = $product->getVariations();
         $this->assertCount(2, $variations);
-        $this->assertInstanceof('VariationProduct', $variations['variant1']);
+        $this->assertInstanceof('Vespolina\Tests\Entity\Product\VariationProduct', $variations['variant1']);
     }
 
     protected function createProduct()

@@ -211,33 +211,34 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
 
         $colorGroup = new OptionGroup();
-        $colorBlue = $this->createOption('blue', 'color', 'colorBlue');
-        $colorGreen = $this->createOption('green', 'color', 'colorGreen');
-        $colorRed = $this->createOption('red', 'color', 'colorRed');
+        $colorBlue = $this->createOption('Blue', 'blue', 'color', 'colorBlue');
+        $colorGreen = $this->createOption('Green', 'green', 'color', 'colorGreen');
+        $colorRed = $this->createOption('Red', 'red', 'color', 'colorRed');
         $colorGroup->addOption($colorBlue);
         $colorGroup->addOption($colorGreen);
         $colorGroup->addOption($colorRed);
 
         $materialGroup = new OptionGroup();
-        $materialCotton = $this->createOption('cotton', 'material', 'materialCotton');
-        $materialSmall = $this->createOption('polyester', 'material', 'materialSmall');
+        $materialCotton = $this->createOption('Cotton', 'cotton', 'material', 'materialCotton');
+        $materialSmall = $this->createOption('Polyester', 'polyester', 'material', 'materialSmall');
         $materialGroup->addOption($materialCotton);
         $materialGroup->addOption($materialSmall);
 
         $sizeGroup = new OptionGroup();
-        $sizeLarge = $this->createOption('large', 'size', 'sizeLarge');
-        $sizeSmall = $this->createOption('small', 'size', 'sizeSmall');
+        $sizeLarge = $this->createOption('Large', 'large', 'size', 'sizeLarge');
+        $sizeSmall = $this->createOption('Small', 'small', 'size', 'sizeSmall');
         $sizeGroup->addOption($sizeLarge);
         $sizeGroup->addOption($sizeSmall);
     }
 
-    protected function createOption($display, $type, $value)
+    protected function createOption($display, $name, $type, $index)
     {
         $option = new Option();
 
-        $option->setType($type);
         $option->setDisplay($display);
-        $option->setValue($value);
+        $option->setIndex($index);
+        $option->setName($name);
+        $option->setType($type);
 
         return $option;
     }
