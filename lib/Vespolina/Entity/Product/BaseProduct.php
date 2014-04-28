@@ -475,7 +475,7 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function getPrices()
     {
-        return $this->prices;
+        return (array) $this->prices;
     }
 
     /**
@@ -620,7 +620,11 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function getTaxonomy($name)
     {
-
+        foreach ($this->taxonomies as $taxonomy) {
+            if ($taxonomy->getName() == $name) {
+                return $taxonomy;
+            }
+        }
 
         return null;
     }

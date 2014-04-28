@@ -17,24 +17,9 @@ use Vespolina\Entity\Product\OptionInterface;
 class Option implements OptionInterface
 {
     protected $display;
+    protected $index;
+    protected $name;
     protected $type;
-    protected $value;
-    protected $upcharge;
-
-    /*
-     * @inheritdoc
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
-    /*
-     * @inheritdoc
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
 
     /*
      * @inheritdoc
@@ -42,6 +27,8 @@ class Option implements OptionInterface
     public function setDisplay($display)
     {
         $this->display = $display;
+
+        return $this;
     }
 
     /*
@@ -55,9 +42,46 @@ class Option implements OptionInterface
     /*
      * @inheritdoc
      */
+    public function setIndex($index)
+    {
+        $this->index = $index;
+
+        return $this;
+    }
+    /*
+     * @inheritdoc
+     */
+    public function getIndex()
+    {
+        return $this->index;
+    }
+
+    /*
+     * @inheritdoc
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /*
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return $this;
+    }
+
+    /*
+     * @inheritdoc
+     */
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /*
@@ -66,21 +90,5 @@ class Option implements OptionInterface
     public function getType()
     {
         return $this->type;
-    }
-
-    /*
-     * @inheritdoc
-     */
-    public function setUpcharge($upcharge)
-    {
-        $this->upcharge = $upcharge;
-    }
-
-    /*
-     * @inheritdoc
-     */
-    public function getUpcharge()
-    {
-        return $this->upcharge;
     }
 }
