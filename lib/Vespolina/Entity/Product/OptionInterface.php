@@ -15,44 +15,65 @@ namespace Vespolina\Entity\Product;
 interface OptionInterface
 {
     /**
-     * Set the assigned value for this option. ie, RD, LG
-     *
-     * @param string $value
-     */
-    function setValue($value);
-
-    /**
-     * Return the option value
-     *
-     * @return string
-     */
-    function getValue();
-
-    /**
-     * Set the displayed name for this option. ie, red, large
+     * Set the displayed name for this option.
+     * ie, Red, Large
      *
      * @param string $display
+     * @return $this
      */
-    function setDisplay($display);
+    public function setDisplay($display);
 
     /**
      * Return the display name of the option
      *
      * @return string
      */
-    function getDisplay();
+    public function getDisplay();
+    /**
+     * Set the assigned value for this option. May or not be descriptive, used for identifying
+     * this option in a group.
+     * ie, red, large, abcedf
+     *
+     * @param string $index
+     * @return $this
+     */
+    public function setIndex($index);
 
     /**
-     * Set the group type of option. ie color, size It corrisponds with a type in an OptionGroup
+     * Return the option value
+     *
+     * @return string
+     */
+    public function getIndex();
+
+    /**
+     * Set the name of this option. The name is generally shorter in length than the display.
+     * ie, RD, L
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name);
+
+    /**
+     * Return the name of this option.
+     *
+     * @return string
+     */
+    public function getName();
+    /**
+     * Set the group type of option. It corresponds with a type in an OptionGroup
+     * ie color, size
      *
      * @param string $type
+     * @return $this
      */
-    function setType($type);
+    public function setType($type);
 
     /**
      * Return the group type of option
      *
      * @return string
      */
-    function getType();
+    public function getType();
 }
