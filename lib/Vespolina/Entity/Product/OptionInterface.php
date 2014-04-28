@@ -61,6 +61,7 @@ interface OptionInterface
      * @return string
      */
     public function getName();
+
     /**
      * Set the group type of option. It corresponds with a type in an OptionGroup
      * ie color, size

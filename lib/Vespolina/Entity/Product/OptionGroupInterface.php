@@ -17,72 +17,81 @@ interface OptionGroupInterface
     /**
      * Add a option to this product options node.
      *
-     * @param Vespolina\Entity\Product\OptionInterface $option
+     * @param OptionInterface $option
      */
-    function addOption(OptionInterface $option);
+    public function addOption(OptionInterface $option);
 
     /**
      * Add an array of OptionInterface objects to the option group
      *
-     * @param array $options
+     * @param OptionInterface[] $options
      */
-    function addOptions(array $options);
+    public function addOptions(array $options);
 
     /**
      * Clear all options from this product options
      */
-    function clearOptions();
+    public function clearOptions();
 
     /**
-     * Return a specific option by value
+     * Return a specific option by index
      *
-     * @param string $value
+     * @param string $index
      *
-     * @return Vespolina\Entity\Product\OptionInterface
+     * @return OptionInterface|null
      */
-    function getOption($value);
+    public function getOption($index);
+
+    /**
+     * Return a specific option by the display
+     *
+     * @param string $display
+     *
+     * @return OptionInterface|null
+     */
+    public function getOptionByDisplay($display);
 
     /**
      * Return a specific option by the name
      *
-     * @param string $display
+     * @param string $name
      *
-     * @return Vespolina\Entity\Product\OptionInterface or null
+     * @return OptionInterface|null
      */
-    function getOptionByDisplay($display);
+//    public function getOptionByName($name);
 
     /**
      * Return all the options for this type
      *
-     * @return array of Vespolina\Entity\Product\OptionInterface
+     * @return OptionInterface[]
      */
-    function getOptions();
+    public function getOptions();
 
     /**
      * Add a collection of options
      *
-     * @param array $options
+     * @param OptionInterface[]
      */
-    function setOptions($options);
+    public function setOptions($options);
 
     /**
-     * Remove a option from this product options set
+     * Remove a option from this option group
      *
-     * @param Vespolina\Entity\Product\OptionInterface $option
+     * @param OptionInterface $option
      */
-    function removeOption(OptionInterface $option);
+    public function removeOption(OptionInterface $option);
 
     /**
-     * Set the name of the option group
+     * Set the type of the option group
      *
-     * @param string $name
+     * @param string $type
      */
-    function setName($name);
+    public function setType($type);
 
     /**
-     * Return the name of the option group
+     * Return the type of the option group
      *
-     * @return string $name
+     * @return string $type
      */
-    function getName();
+    public function getType();
 }

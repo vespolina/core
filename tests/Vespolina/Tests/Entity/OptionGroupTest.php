@@ -17,9 +17,9 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
 {
     public function testAddOptions()
     {
-        $colorRed = $this->createOption('red', 'color', 'colorRed');
+        $colorRed = $this->createOption('Red', 'red', 'color', 'colorRed');
 
-        $sizeXl = $this->createOption('extra large', 'size', 'sizeXl');
+        $sizeXl = $this->createOption('Extra Large', 'XL', 'size', 'sizeXl');
 
         $og = new OptionGroup();
 
@@ -28,8 +28,8 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             'color',
-            $og->getName(),
-            'if the name is not set, the name should be set to the type of the Option'
+            $og->getType(),
+            'if the type is not set, the name should be set to the type of the Option'
         );
 
         $this->assertSame(
@@ -40,11 +40,11 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             $colorRed,
-            $og->getOptionByDisplay('red'),
+            $og->getOptionByDisplay('Red'),
             'the name of the option node should be set to the value'
         );
 
-        $noTypeGreen = $this->createOption('green', null, 'colorGreen');
+        $noTypeGreen = $this->createOption('Green', 'green', null, 'colorGreen');
         $og->addOption($noTypeGreen);
 
         $this->assertSame(
@@ -62,7 +62,7 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('UnexpectedValueException', 'All OptionsNodes in this type must be color');
         $og->addOption($sizeXl);
 
-        $noTypeBlue = $this->createOption('blue', null, 'colorBlue');
+        $noTypeBlue = $this->createOption('Blue', 'blue', null, 'colorBlue');
         $og = new OptionGroup();
         // DO NOT SET THE NAME IN THE GROUP!
         $this->setExpectedException('UnexpectedValueException', 'The OptionGroup must have the name set or the Option must have the group type set');
@@ -72,7 +72,7 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
     public function testHandleOptions()
     {
         $og = new OptionGroup();
-        $colorRed = $this->createOption('red', 'color', 'colorRed');
+        $colorRed = $this->createOption('Red', 'red', 'color', 'colorRed');
 
         $og->addOption($colorRed);
         $this->assertCount(1, $og->getOptions());
@@ -81,7 +81,7 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
         $og->clearOptions();
         $this->assertEmpty($og->getOptions());
 
-        $colorBlue = $this->createOption('blue', 'color', 'colorBlue');
+        $colorBlue = $this->createOption('Blue', 'blue', 'color', 'colorBlue');
         $options = array($colorRed, $colorBlue);
 
         $og->setOptions($options);
@@ -91,20 +91,21 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $og->getOptions());
         $this->assertNull($og->getOption('colorBlue'));
 
-        $colorGreen = $this->createOption('green', 'color', 'colorGreen');
+        $colorGreen = $this->createOption('Green', 'green', 'color', 'colorGreen');
         $options = array($colorGreen, $colorBlue);
 
         $og->addOptions($options);
         $this->assertCount(3, $og->getOptions());
     }
 
-    protected function createOption($display, $type, $value)
+    protected function createOption($display, $name, $type, $index)
     {
         $option = new Option();
 
-        $option->setType($type);
         $option->setDisplay($display);
-        $option->setValue($value);
+        $option->setIndex($index);
+        $option->setName($name);
+        $option->setType($type);
 
         return $option;
     }
