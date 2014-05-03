@@ -16,40 +16,56 @@ use Vespolina\Entity\Product\OptionGroupInterface;
  */
 class OptionGroup implements OptionGroupInterface
 {
-    protected $options;
-    protected $name;
     protected $display;
+    protected $options;
     protected $required;
+    protected $type;
 
     public function __construct()
     {
         $this->options = array();
     }
 
-    /*
-     * @inheritdoc
+    /**
+     * {@inheritdoc}
+     */
+    public function setDisplay($display)
+    {
+        $this->display = $display;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDisplay()
+    {
+        return $this->display;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function addOption(OptionInterface $option)
     {
         $optionType = $option->getType();
-        if (!$this->name && !$optionType) {
-            throw new \UnexpectedValueException('The OptionGroup must have the name set or the Option must have the group type set');
+        if (!$this->type && !$optionType) {
+            throw new \UnexpectedValueException('The OptionGroup must have the type set or the Option must have the group type set');
         }
         if (!$optionType) {
-            $option->setType($this->name);
+            $option->setType($this->type);
         }
-        if (!$this->name) {
-            $this->name = $optionType;
+        if (!$this->type) {
+            $this->type = $optionType;
         }
-        if ($this->name != $option->getType()) {
-            throw new \UnexpectedValueException(sprintf('All OptionsNodes in this type must be %s', $this->name));
+        if ($this->type != $option->getType()) {
+            throw new \UnexpectedValueException(sprintf('All OptionsNodes in this type must be %s', $this->type));
         }
-        $value = $option->getValue();
-        $this->options[$value] = $option;
+        $index = $option->getIndex();
+        $this->options[$index] = $option;
     }
 
-    /*
-     * @inheritdoc
+    /**
+     * {@inheritdoc}
      */
     public function addOptions(array $options)
     {
@@ -59,7 +75,7 @@ class OptionGroup implements OptionGroupInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function clearOptions()
     {
@@ -67,15 +83,15 @@ class OptionGroup implements OptionGroupInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getOption($value)
+    public function getOption($index)
     {
-        return isset($this->options[$value]) ? $this->options[$value] : null;
+        return isset($this->options[$index]) ? $this->options[$index] : null;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getOptionByDisplay($display)
     {
@@ -88,7 +104,7 @@ class OptionGroup implements OptionGroupInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getOptions()
     {
@@ -96,7 +112,7 @@ class OptionGroup implements OptionGroupInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setOptions($options)
     {
@@ -107,49 +123,45 @@ class OptionGroup implements OptionGroupInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function removeOption(OptionInterface $option)
     {
-        $value = $option->getValue();
-        if (isset($this->options[$value])) {
-            unset($this->options[$value]);
+        $index = $option->getIndex();
+        if (isset($this->options[$index])) {
+            unset($this->options[$index]);
         }
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setDisplay($display)
-    {
-        $this->display = $display;
-    }
-
-    public function getDisplay()
-    {
-        return $this->display;
-    }
-
     public function setRequired($required)
     {
         $this->required = $required;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRequired()
     {
         return $this->required;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
