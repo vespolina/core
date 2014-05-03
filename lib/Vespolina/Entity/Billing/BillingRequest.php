@@ -20,11 +20,11 @@ class BillingRequest extends PaymentRequest implements BillingRequestInterface
      * A typical billing request flow will be:
      *  1) initial state
      *  2) pending: billing request is ready to be executed when the time has come
-     *  3) paid: the payment was succesfull
+     *  3) paid: the payment was successful
      *  4) closed: post processing have been executed (eg. notifications)
      *
      *  After (2) it's possible that a clerk blocks the billing request temporarily or
-     * cancels the billing request.
+     *  cancels the billing request.
      *
      */
 

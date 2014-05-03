@@ -16,8 +16,6 @@ class BillingAgreementTest extends \PHPUnit_Framework_TestCase
         $billingAgreement = new BillingAgreement();
         $this->assertTrue($billingAgreement->getActive());
         $this->assertEquals(0, $billingAgreement->getNumberCyclesBilled());
-
-
     }
 
     public function testSetCurrentCycleComplete()
@@ -40,6 +38,12 @@ class BillingAgreementTest extends \PHPUnit_Framework_TestCase
         $billingAgreement->setInitialBillingDate(new \DateTime('2012-12-29'));
         $billingAgreement->setBillingInterval('+1 month');
         $billingAgreement->setNumberCyclesBilled(1);
+    }
+
+    public function testGetNextBillingDate()
+    {
+        $agreement = new BillingAgreement();
+
     }
 
     /**

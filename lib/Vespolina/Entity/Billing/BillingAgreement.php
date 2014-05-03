@@ -47,11 +47,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this->id;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setBilledToDate(\DateTime $billedToDate)
     {
         $this->billedToDate = $billedToDate;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBilledToDate()
     {
         return $this->billedToDate;
@@ -75,6 +81,9 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setActive($active)
     {
         $this->active = $active;
@@ -82,11 +91,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getActive()
     {
         return $this->active;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setBillingAmount($billingAmount)
     {
         $this->billingAmount = $billingAmount;
@@ -94,11 +109,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBillingAmount()
     {
         return $this->billingAmount;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setBillingCycles($billingCycles)
     {
         $this->billingCycles = $billingCycles;
@@ -106,11 +127,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBillingCycles()
     {
         return $this->billingCycles;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setBillingInterval($billingInterval)
     {
         $this->billingInterval = $billingInterval;
@@ -118,13 +145,16 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBillingInterval()
     {
         return $this->billingInterval;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCreatedAt()
     {
@@ -132,7 +162,7 @@ class BillingAgreement implements BillingAgreementInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -140,13 +170,16 @@ class BillingAgreement implements BillingAgreementInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function computeNextCycle()
     {
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function dateFromOffset(\DateTime $start, $offset)
     {
         $returnDate = clone $start;
@@ -163,6 +196,9 @@ class BillingAgreement implements BillingAgreementInterface
         return $returnDate;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setInitialBillingDate(\DateTime $initialBillingDate)
     {
         $this->initialBillingDate = $initialBillingDate;
@@ -170,11 +206,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getInitialBillingDate()
     {
         return $this->initialBillingDate;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
@@ -182,11 +224,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOrder()
     {
         return $this->order;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setOrderItems($items)
     {
         $this->orderItems = $items;
@@ -194,16 +242,25 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getOrderItems()
     {
         return $this->orderItems;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addOrderItem(ItemInterface $item)
     {
         $this->orderItems->add($item);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setCustomer(PartnerInterface $customer)
     {
         $this->customer = $customer;
@@ -211,11 +268,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCustomer()
     {
         return $this->customer;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
     {
         $this->paymentProfile = $paymentProfile;
@@ -223,11 +286,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPaymentProfile()
     {
         return $this->paymentProfile;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setNumberCyclesBilled($numberCyclesBilled)
     {
         $this->numberCyclesBilled = $numberCyclesBilled;
@@ -235,11 +304,17 @@ class BillingAgreement implements BillingAgreementInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getNumberCyclesBilled()
     {
         return $this->numberCyclesBilled;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function increaseNumberCyclesBilled()
     {
         $this->numberCyclesBilled++;
@@ -248,7 +323,7 @@ class BillingAgreement implements BillingAgreementInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
@@ -256,7 +331,7 @@ class BillingAgreement implements BillingAgreementInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getUpdatedAt()
     {
@@ -264,7 +339,7 @@ class BillingAgreement implements BillingAgreementInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setGenerateRequestOffset($generateRequestOffset)
     {
@@ -278,7 +353,7 @@ class BillingAgreement implements BillingAgreementInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getGenerateRequestOffset()
     {
