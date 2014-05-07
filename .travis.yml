@@ -3,6 +3,7 @@ language: php
 php:
   - 5.4
   - 5.5
+  - hhvm
 
 before_script:
   - composer install --dev
@@ -12,3 +13,7 @@ script:
 
 notifications:
   irc:   "irc.freenode.org#vespolina"
+  
+matrix:
+  allow_failures:
+    - php: hhvm
