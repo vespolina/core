@@ -14,13 +14,14 @@ class Transaction implements TransactionInterface
     protected $credit;
     protected $debit;
     protected $id;
+    protected $note;
     protected $paymentProfile;
     protected $paymentRequest;
     protected $posted;
     protected $reference;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -28,7 +29,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setCredit($credit)
     {
@@ -38,7 +39,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCredit()
     {
@@ -46,7 +47,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setDebit($debit)
     {
@@ -56,7 +57,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getDebit()
     {
@@ -64,7 +65,25 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function setPaymentProfile(PaymentProfileInterface $paymentProfile)
     {
@@ -74,7 +93,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPaymentProfile()
     {
@@ -82,21 +101,17 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set the paymentRequest
-     *
-     * @param mixed $paymentRequest
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setPaymentRequest($paymentRequest)
+    public function setPaymentRequest(PaymentRequestInterface $paymentRequest)
     {
         $this->paymentRequest = $paymentRequest;
+
         return $this;
     }
 
     /**
-     * Return the paymentRequest
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getPaymentRequest()
     {
@@ -104,7 +119,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setPosted(\DateTime $posted)
     {
@@ -114,7 +129,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPosted()
     {
@@ -122,10 +137,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Set the reference
-     *
-     * @param string $reference
-     * @return $this
+     * {@inheritdoc}
      */
     public function setReference($reference)
     {
@@ -135,9 +147,7 @@ class Transaction implements TransactionInterface
     }
 
     /**
-     * Return the reference
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getReference()
     {
