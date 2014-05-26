@@ -220,11 +220,11 @@ interface BaseProductInterface
     function getName();
 
     /**
-     * Remove an options set from the product
+     * Remove an options type from the product
      *
      * @param string
      */
-    function removeOptionGroup($name);
+    function removeOptionType($type);
 
     /**
      * Set the options of the product to an option set

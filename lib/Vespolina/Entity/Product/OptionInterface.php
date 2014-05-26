@@ -29,6 +29,7 @@ interface OptionInterface
      * @return string
      */
     public function getDisplay();
+
     /**
      * Set the assigned value for this option. May or not be descriptive, used for identifying
      * this option in a group.

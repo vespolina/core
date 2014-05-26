@@ -206,31 +206,6 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $product->getAllMedia());
     }
 
-    public function testOptionMatrix()
-    {
-        $product = $this->getMockForAbstractClass('Vespolina\Entity\Product\BaseProduct');
-
-        $colorGroup = new OptionGroup();
-        $colorBlue = $this->createOption('Blue', 'blue', 'color', 'colorBlue');
-        $colorGreen = $this->createOption('Green', 'green', 'color', 'colorGreen');
-        $colorRed = $this->createOption('Red', 'red', 'color', 'colorRed');
-        $colorGroup->addOption($colorBlue);
-        $colorGroup->addOption($colorGreen);
-        $colorGroup->addOption($colorRed);
-
-        $materialGroup = new OptionGroup();
-        $materialCotton = $this->createOption('Cotton', 'cotton', 'material', 'materialCotton');
-        $materialSmall = $this->createOption('Polyester', 'polyester', 'material', 'materialSmall');
-        $materialGroup->addOption($materialCotton);
-        $materialGroup->addOption($materialSmall);
-
-        $sizeGroup = new OptionGroup();
-        $sizeLarge = $this->createOption('Large', 'large', 'size', 'sizeLarge');
-        $sizeSmall = $this->createOption('Small', 'small', 'size', 'sizeSmall');
-        $sizeGroup->addOption($sizeLarge);
-        $sizeGroup->addOption($sizeSmall);
-    }
-
     protected function createOption($display, $name, $type, $index)
     {
         $option = new Option();
@@ -242,9 +217,4 @@ class BaseProductTest extends \PHPUnit_Framework_TestCase
 
         return $option;
     }
-}
-
-class VariationProduct extends BaseProduct
-{
-
 }

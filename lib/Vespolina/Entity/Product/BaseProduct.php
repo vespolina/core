@@ -51,6 +51,7 @@ abstract class BaseProduct implements BaseProductInterface
     {
         $this->brands = [];
         $this->descriptions = [];
+        $this->optionGroups = [];
         $this->prices = [
             ['type' => 'unit', 'value' => 0],
         ];
@@ -394,17 +395,13 @@ abstract class BaseProduct implements BaseProductInterface
     }
 
     /**
-     * @inheritdoc
+     * @param string $type
      */
-    public function removeOptionGroup($group)
+    public function removeOptionType($type)
     {
-        if ($group instanceof OptionGroupInterface) {
-            $group = $group->getName();
-        }
-        foreach ($this->options as $key => $option) {
-            if ($option->getName() == $group) {
-                $this->options->remove($key);
-                $this->identifiers = new ArrayCollection();
+        foreach ($this->optionsGroups as $key => $optionGroup) {
+            if ($optionGroup->getType() == $type) {
+                unset($this->optionGroups[$key]);
 
                 return $this;
             }
@@ -413,18 +410,9 @@ abstract class BaseProduct implements BaseProductInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function setOptions($optionGroups)
+    public function setOptions($options)
     {
-        $this->clearOptions();
-        $this->options = new ArrayCollection;
-        foreach ($optionGroups as $optionGroup) {
-            $this->options->add($optionGroup);
-        }
-
-        return $this;
+        throw new \Exception('setOptions is not implemented');
     }
 
     /**
@@ -432,8 +420,7 @@ abstract class BaseProduct implements BaseProductInterface
      */
     public function clearOptions()
     {
-       $this->options = array();
-       $this->identifiers = array();
+        $this->optionGroups = [];
 
         return $this;
     }
@@ -441,9 +428,33 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @inheritdoc
      */
-    public function getOptions()
+    public function getOptions($type = null)
     {
-        return $this->options;
+        $options = [];
+        foreach ($this->optionGroups as $optionGroup) {
+            if ($type && $optionGroup->getType() == $type) {
+                return $optionGroup->getOptions();
+            }
+            $options = array_merge($options, (array) $optionGroup->getOptions());
+        }
+
+        return $options;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getOptionsArray($type = null)
+    {
+        $options = [];
+        foreach ($this->optionGroups as $optionGroup) {
+            if ($type && $optionGroup->getType() == $type) {
+                return $optionGroup->getOptionsArray();
+            }
+            $options[$optionGroup->getType()] = $optionGroup->getOptionsArray();
+        }
+
+        return $options;
     }
 
     /**
