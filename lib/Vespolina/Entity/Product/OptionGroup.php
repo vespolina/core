@@ -9,12 +9,10 @@
 
 namespace Vespolina\Entity\Product;
 
-use Vespolina\Entity\Product\OptionGroupInterface;
-
 /**
  * @author Richard D Shank <richard@vespolina.org>
  */
-class OptionGroup implements OptionGroupInterface
+class OptionGroup
 {
     protected $display;
     protected $options;
@@ -109,6 +107,19 @@ class OptionGroup implements OptionGroupInterface
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptionsArray()
+    {
+        $options = [];
+        foreach ($this->options as $option) {
+            $options[$option->getIndex()] = $option->getDisplay();
+        }
+
+        return $options;
     }
 
     /**

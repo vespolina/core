@@ -98,6 +98,23 @@ class OptionGroupTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(3, $og->getOptions());
     }
 
+    public function testGetOptionsArray()
+    {
+        $colorGroup = new OptionGroup();
+        $colorBlue = $this->createOption('Blue', 'blue', 'color', 'colorBlue');
+        $colorGreen = $this->createOption('Green', 'green', 'color', 'colorGreen');
+        $colorRed = $this->createOption('Red', 'red', 'color', 'colorRed');
+        $colorGroup->addOption($colorBlue);
+        $colorGroup->addOption($colorGreen);
+        $colorGroup->addOption($colorRed);
+        $expected = [
+            'colorBlue' => 'Blue',
+            'colorGreen' => 'Green',
+            'colorRed' => 'Red',
+        ];
+        $this->assertEquals($expected, $colorGroup->getOptionsArray());
+    }
+
     protected function createOption($display, $name, $type, $index)
     {
         $option = new Option();

@@ -12,7 +12,6 @@ namespace Vespolina\Entity\Product;
 use Vespolina\Entity\Identifier\IdentifierInterface;
 use Vespolina\Entity\Product\BaseProduct;
 use Vespolina\Entity\Product\OptionInterface;
-use Vespolina\Entity\Product\OptionGroupInterface;
 use Vespolina\Entity\Product\ProductInterface;
 
 /**
@@ -26,6 +25,30 @@ class Product extends BaseProduct implements ProductInterface
     public function equals(ProductInterface $product)
     {
         return ($this->id == $product->getId());
+    }
+
+    /**
+     * @param OptionInterface $option
+     * @return $this
+     */
+    public function addOption(OptionInterface $option)
+    {
+        $type = $option->getType();
+        $optionGroup = null;
+        /** @var OptionGroup $curGroup */
+        foreach ($this->optionGroups as $curGroup) {
+            if ($curGroup->getType() == $type) {
+                $optionGroup = $curGroup;
+            }
+        }
+        if (!$optionGroup) {
+            $optionGroup = new OptionGroup();
+            $optionGroup->setType($type);
+            $this->optionGroups[] = $optionGroup;
+        }
+        $optionGroup->addOption($option);
+
+        return $this;
     }
 
     /**
@@ -44,20 +67,6 @@ class Product extends BaseProduct implements ProductInterface
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getOptionSet($target)
-    {
-        foreach ($this->identifiers as $optionSet) {
-            if (!count(array_diff_assoc($optionSet->getOptions(), $target))) {
-                return $optionSet;
-            }
-        }
-
-        return null;
     }
 
     /**
