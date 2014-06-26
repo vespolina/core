@@ -93,16 +93,4 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         ];
         $this->assertEquals($expected, $options, 'all product options of size type should be returned');
     }
-
-    protected function createOption($type, $index, $display = null, $name = null)
-    {
-        $option = new Option();
-
-        $option->setDisplay($display);
-        $option->setIndex($index);
-        $option->setName($name);
-        $option->setType($type);
-
-        return $option;
-    }
 }

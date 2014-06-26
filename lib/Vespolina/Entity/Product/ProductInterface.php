@@ -70,13 +70,4 @@ interface ProductInterface extends BaseProductInterface
      * @return slug
      */
     function getSlug();
-
-    /**
-     * Check the passed options to make sure it is a valid combination
-     *
-     * @param array $options
-     *
-     * @return boolean
-     */
-    function validateOptions(array $options);
 }
