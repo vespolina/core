@@ -31,9 +31,20 @@ class Product extends BaseProduct implements ProductInterface
      * @param OptionInterface $option
      * @return $this
      */
-    public function addOption(OptionInterface $option)
+    public function setOption($type, $index, $display = null, $name = null)
     {
-        $type = $option->getType();
+        $option = new Option();
+        $option->setType($type);
+        $option->setIndex($index);
+        if ($display === null) {
+            $display = $index;
+        }
+        $option->setDisplay($display);
+        if ($name === null) {
+            $name = $display;
+        }
+        $option->setName($name);
+
         $optionGroup = null;
         /** @var OptionGroup $curGroup */
         foreach ($this->optionGroups as $curGroup) {
