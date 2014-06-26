@@ -52,22 +52,15 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     {
         $product = new Product();
 
-        $colorBlue = $this->createOption('Blue', 'blue', 'color', 'colorBlue');
-        $colorGreen = $this->createOption('Green', 'green', 'color', 'colorGreen');
-        $colorRed = $this->createOption('Red', 'red', 'color', 'colorRed');
-        $product->addOption($colorBlue);
-        $product->addOption($colorGreen);
-        $product->addOption($colorRed);
+        $product->setOption('color', 'colorBlue', 'Blue', 'blue');
+        $product->setOption('color', 'colorGreen', 'Green', 'green');
+        $product->setOption('color', 'colorRed', 'Red', 'red');
 
-        $materialCotton = $this->createOption('Cotton', 'cotton', 'material', 'materialCotton');
-        $materialSmall = $this->createOption('Polyester', 'polyester', 'material', 'materialSmall');
-        $product->addOption($materialCotton);
-        $product->addOption($materialSmall);
+        $product->setOption('material', 'materialCotton', 'Cotton', 'cotton');
+        $product->setOption('material', 'materialSmall', 'Polyester', 'polyester');
 
-        $sizeLarge = $this->createOption('Large', 'large', 'size', 'sizeLarge');
-        $sizeSmall = $this->createOption('Small', 'small', 'size', 'sizeSmall');
-        $product->addOption($sizeLarge);
-        $product->addOption($sizeSmall);
+        $product->setOption('size', 'sizeLarge', 'Large', 'large');
+        $product->setOption('size', 'sizeSmall', 'Small', 'small');
 
         $options = $product->getOptions();
         $this->assertCount(7, $options, 'all product options should be returned');
@@ -101,7 +94,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $options, 'all product options of size type should be returned');
     }
 
-    protected function createOption($display, $name, $type, $index)
+    protected function createOption($type, $index, $display = null, $name = null)
     {
         $option = new Option();
 
