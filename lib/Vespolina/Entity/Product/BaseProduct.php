@@ -706,11 +706,16 @@ abstract class BaseProduct implements BaseProductInterface
         return (bool) count($this->variations);
     }
 
+    /**
+     * @param $label
+     * @return Product
+     */
     public function useVariation($label)
     {
         if (!isset($this->variations[$label])) {
             $class = get_class($this);
             $this->variations[$label] = new $class();
+            $this->variations[$label]->setParent($this);
         }
 
         return $this->variations[$label];
