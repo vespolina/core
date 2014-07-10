@@ -27,37 +27,50 @@ class Product extends BaseProduct implements ProductInterface
         return ($this->id == $product->getId());
     }
 
+    public function getOption($type, $index)
+    {
+        $options = $this->getOptions($type);
+        /** @var Option $option */
+        foreach ($options as $option) {
+            if ($option->getIndex() == $index) {
+                return $option;
+            }
+        }
+    }
+
     /**
      * @param OptionInterface $option
      * @return $this
      */
     public function setOption($type, $index, $display = null, $name = null)
     {
-        $option = new Option();
-        $option->setType($type);
-        $option->setIndex($index);
-        if ($display === null) {
-            $display = $index;
+        if ($parent = $this->getParent()) {
+            return $this->setVariationOption($parent, $type, $index, $display, $name);
         }
-        $option->setDisplay($display);
-        if ($name === null) {
-            $name = $display;
-        }
-        $option->setName($name);
+        if (!$option = $this->getOption($type, $index)) {
+            $option = new Option();
+            $option->setType($type);
+            $option->setIndex($index);
 
-        $optionGroup = null;
-        /** @var OptionGroup $curGroup */
-        foreach ($this->optionGroups as $curGroup) {
-            if ($curGroup->getType() == $type) {
-                $optionGroup = $curGroup;
+            if ($display === null) {
+                $display = $index;
+            }
+            $option->setDisplay($display);
+
+            if ($name === null) {
+                $name = $display;
+            }
+            $option->setName($name);
+        } else {
+            if ($display !== null) {
+                $option->setDisplay($display);
+            }
+
+            if ($name !== null) {
+                $option->setName($name);
             }
         }
-        if (!$optionGroup) {
-            $optionGroup = new OptionGroup();
-            $optionGroup->setType($type);
-            $this->optionGroups[] = $optionGroup;
-        }
-        $optionGroup->addOption($option);
+        $this->addOptionToGroup($option);
 
         return $this;
     }
@@ -87,5 +100,43 @@ class Product extends BaseProduct implements ProductInterface
     {
         // todo: actually validate, for now return true, just to prevent breaking things
         return true;
+    }
+
+    protected function addOptionToGroup(OptionInterface $option)
+    {
+        $type = $option->getType();
+        $optionGroup = null;
+        /** @var OptionGroup $curGroup */
+        foreach ($this->optionGroups as $curGroup) {
+            if ($curGroup->getType() == $type) {
+                $optionGroup = $curGroup;
+            }
+        }
+        if (!$optionGroup) {
+            $optionGroup = new OptionGroup();
+            $optionGroup->setType($type);
+            $this->optionGroups[] = $optionGroup;
+        }
+
+        $optionGroup->addOption($option);
+    }
+
+    protected function setVariationOption($parent, $type, $index, $display = null, $name = null)
+    {
+        if ($option = $parent->getOption($type, $index)) {
+            if ($display) {
+                $option->setDisplay($display);
+            }
+            if ($name) {
+                $option->setName($name);
+            }
+        } else {
+            $parent->setOption($type, $index, $display, $name);
+            $option = $parent->getOption($type, $index);
+        }
+
+        $this->addOptionToGroup($option);
+
+        return $this;
     }
 }

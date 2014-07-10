@@ -71,7 +71,7 @@ class Option implements OptionInterface
      */
     public function getName()
     {
-        return $this;
+        return $this->name;
     }
 
     /*

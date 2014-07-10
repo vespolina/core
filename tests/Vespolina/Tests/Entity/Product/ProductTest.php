@@ -68,6 +68,9 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(3, $options, 'all product options of color type should be returned');
         $this->assertInstanceOf('Vespolina\Entity\Product\Option', array_shift($options), 'a Option object should be returned');
 
+        $blue = $product->getOption('color', 'colorBlue');
+        $this->assertInstanceOf('Vespolina\Entity\Product\Option', $blue, 'the single option object should have been returned');
+
         $options = $product->getOptionsArray();
         $expected = [
             'color' => [
@@ -92,17 +95,39 @@ class ProductTest extends \PHPUnit_Framework_TestCase
             'sizeSmall' => 'Small',
         ];
         $this->assertEquals($expected, $options, 'all product options of size type should be returned');
+
+
+        $product->setOption('color', 'colorBlue', 'NewBlue', 'newblue');
+        $newBlue = $product->getOption('color', 'colorBlue');
+        $this->assertSame('NewBlue', $newBlue->getDisplay(), 'the display should have changed');
+        $this->assertSame('newblue', $newBlue->getName(), 'the display should have changed');
+        $this->assertSame(spl_object_hash($blue), spl_object_hash($newBlue), 'the object should be the same');
+
+        return $product;
     }
 
-    protected function createOption($type, $index, $display = null, $name = null)
+    /**
+     * @depends testOptions
+     */
+    public function testSetOptionsInVariation($product)
     {
-        $option = new Option();
+        $variation = $product->useVariation('variant1');
+        $variation->setOption('materialCotton', 'materialCotton', 'Cotton', 'cotton');
+        $options = $variation->getOptions();
+        $this->assertCount(1, $options, 'the product variation should only return the options set for it');
 
-        $option->setDisplay($display);
-        $option->setIndex($index);
-        $option->setName($name);
-        $option->setType($type);
+        $variation->setOption('size', 'sizeSmall');
+        $productOption = $product->getOption('size', 'sizeSmall');
+        $variationOption = $product->getOption('size', 'sizeSmall');
+        $this->assertEquals($productOption, $variationOption, 'a partial product variation should match the parent option');
 
-        return $option;
+        $variation->setOption('color', 'colorBlue', 'Blue', 'blue');
+        $option = $product->getOption('color', 'colorBlue');
+        $this->assertSame('blue', $option->getName(), 'the change in values should be reflected in the parent');
+        $this->assertSame('Blue', $option->getDisplay(), 'the change in values should be reflected in the parent');
+
+        $productOption = $product->getOption('size', 'sizeMedium');
+        $variationOption = $product->getOption('size', 'sizeMedium');
+        $this->assertEquals($productOption, $variationOption, 'a partial product variation should match the parent option');
     }
 }
