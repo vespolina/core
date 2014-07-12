@@ -59,11 +59,21 @@ interface ProductInterface extends BaseProductInterface
     function removeAttribute($type);
 
     /**
+     * @param string $type
+     * @param string $index
+     * @param string|null $display
+     * @param string|null $name
+     *
+     * @return $this
+     */
+    public function setOption($type, $index, $display = null, $name = null);
+
+    /**
      * Set the product slug
      *
      * @param $slug
      */
-    function setSlug($slug);
+    public function setSlug($slug);
 
     /**
      * Get the product slug.

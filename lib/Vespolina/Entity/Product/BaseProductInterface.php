@@ -361,6 +361,34 @@ interface BaseProductInterface
     function getType();
 
     /**
+     * Return the variations
+     *
+     * @return mixed
+     */
+    public function getVariations();
+
+    /**
+     * Check if this product has variations
+     *
+     * @return boolean
+     */
+    public function hasVariations();
+
+    /**
+     * @param $label
+     *
+     * @return ProductInterface
+     */
+    public function useVariation($label);
+
+    /**
+     * Get the parent product if this is a variation
+     *
+     * @return ProductInterface
+     */
+    public function getParent();
+
+    /**
      * Return the cart creation date
      *
      * @return
