@@ -39,8 +39,7 @@ class Product extends BaseProduct implements ProductInterface
     }
 
     /**
-     * @param OptionInterface $option
-     * @return $this
+     * {@inheritdoc}
      */
     public function setOption($type, $index, $display = null, $name = null)
     {

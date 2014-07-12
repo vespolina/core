@@ -715,7 +715,10 @@ abstract class BaseProduct implements BaseProductInterface
         if (!isset($this->variations[$label])) {
             $class = get_class($this);
             $this->variations[$label] = new $class();
-            $this->variations[$label]->setParent($this);
+            $rp = new \ReflectionProperty($class, 'parent');
+            $rp->setAccessible(true);
+            $rp->setValue($this->variations[$label], $this);
+            $rp->setAccessible(false);
         }
 
         return $this->variations[$label];
@@ -724,13 +727,6 @@ abstract class BaseProduct implements BaseProductInterface
     public function getParent()
     {
         return $this->parent;
-    }
-
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
     }
 
     /**
