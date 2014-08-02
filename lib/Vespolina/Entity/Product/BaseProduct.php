@@ -435,10 +435,15 @@ abstract class BaseProduct implements BaseProductInterface
             if ($type && $optionGroup->getType() == $type) {
                 return $optionGroup->getOptions();
             }
-            $options = array_merge($options, (array) $optionGroup->getOptions());
+            $options[$optionGroup->getType()] = $optionGroup->getOptions();
         }
 
         return $options;
+    }
+
+    public function getOptionGroups()
+    {
+        return $this->optionGroups;
     }
 
     /**
@@ -470,15 +475,45 @@ abstract class BaseProduct implements BaseProductInterface
     /**
      * @return mixed
      */
-    public function getPrice($type = 'unit')
+    public function getPrice($type = 'unit', $strategy = 'lowest')
     {
+        $value = null;
         foreach ($this->prices as $price) {
             if ($price['type'] == $type) {
-                return $price['value'];
+                $value = $price['value'];
             }
         }
 
-        return null;
+        if (!$value && $type == 'unit' && $this->hasVariations()) {
+            switch($strategy) {
+                case 'lowest':
+
+                    foreach ($this->getVariations() as $variation) {
+                        $price = $variation->getPrice();
+                        if ($price < $value || $value == 0) {
+                            $value = $price;
+                        }
+                    }
+
+                    break;
+                case 'range':
+                    $prices = [];
+                    foreach ($this->getVariations() as $variation) {
+                        $prices[] = $variation->getPrice();
+                    }
+                    sort($prices);
+                    $lastPrice = count($prices) - 1;
+                    if ($prices[0] != $prices[$lastPrice]) {
+                        $value = [$prices[0], $prices[$lastPrice]];
+                    } else {
+                        $value = $prices[0];
+                    }
+
+                    break;
+            }
+        }
+
+        return $value;
     }
 
     /**
